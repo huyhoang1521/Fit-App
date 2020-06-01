@@ -10,6 +10,6 @@ class App extends StatelessWidget {
             appBar: AppBar(
               title: Text("Fit App"),
             ),
-            body: Center(child: Text("Hello World!"))));
+            body: Center(child: Text("Hello World!!"))));
   }
 }
