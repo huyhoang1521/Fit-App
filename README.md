@@ -1,4 +1,4 @@
-# fit_app
+# Fit App
 
 A new Flutter project.
 
