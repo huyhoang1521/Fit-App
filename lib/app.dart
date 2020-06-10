@@ -1,3 +1,4 @@
+import 'package:fit_app/tabsystem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
@@ -5,11 +6,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Fit App",
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text("Fit App"),
-            ),
-            body: Center(child: Text("Yeeaahhhh!!"))));
+      theme: ThemeData(
+          // Use the old theme but apply the following three changes
+          textTheme: Theme.of(context).textTheme.apply(
+              fontFamily: 'Open Sans',
+              bodyColor: Colors.black,
+              displayColor: Colors.black)),
+      home: TabSystem(),
+    );
   }
 }
