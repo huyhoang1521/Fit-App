@@ -1,6 +1,7 @@
 import 'package:fit_app/WorkoutRoutinePage.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/ProfilePage.dart';
+import 'package:fit_app/OverviewPage.dart';
 
 class TabSystem extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _TabSystemState extends State<TabSystem> {
           ),
           body: TabBarView(children: [
             WorkOutR(),
-            Icon(Icons.games),
+            Overview(),
             ProfilePage(),
           ]),
           backgroundColor: Colors.white,
