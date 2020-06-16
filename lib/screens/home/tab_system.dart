@@ -1,14 +1,10 @@
 import 'workout_routine.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/tabsystem.dart
-import 'package:fit_app/ProfilePage.dart';
-import 'package:fit_app/OverviewPage.dart';
-=======
+import 'package:fit_app/screens/home/overview_page.dart';
+import 'profile.dart';
 import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
-import 'profile.dart';
 import '../../constants.dart';
->>>>>>> 00d246b462ad2303464f8de0c7fe004d6b3e2ebb:lib/screens/home/tab_system.dart
 
 class TabSystem extends StatefulWidget {
   @override
