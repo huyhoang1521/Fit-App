@@ -21,6 +21,7 @@ class _OverviewState extends State<Overview> {
           center: Column(children: <Widget>[
             Container(
               child: new Image.asset('assets/images/OAC.jpg'),
+              alignment: Alignment.center,
               width: 100,
               height: 100,
             ),

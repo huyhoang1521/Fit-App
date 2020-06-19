@@ -1,7 +1,12 @@
 import 'dart:ui';
-
+import 'package:fit_app/components/text_field_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import '../../constants.dart';
+import '../../components/rounded_button.dart';
+import '../../components/rounded_image_button.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -10,159 +15,124 @@ class ProfilePage extends StatefulWidget {
   }
 }
 
-class Strength extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _StrengthState();
-  }
-}
-
-class Hypertrophy extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _HypertrophyState();
-  }
-}
-
 final myUsername = TextEditingController(text: 'NICKY P');
 final myBirthDate = TextEditingController(text: '09/21/1997');
 final myWeight = TextEditingController(text: 'None of your god dam business');
 final myHeight = TextEditingController(text: '214 cm');
-bool pressAttention = false;
-bool strengthSelected = false;
-bool hypertrophySelected = false;
+String name = "NickyP";
+double weight = 159.5;
+TextEditingController weightController = TextEditingController();
+
+bool strength = false;
+bool hypertrophy = false;
+bool weightLoss = false;
+bool planche = false;
+bool oneArmChinUp = false;
+bool handStandPushup = false;
+bool backLever = false;
+bool frontLever = false;
+bool oneArmPushUp = false;
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return ListView(padding: const EdgeInsets.all(8), children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.deepPurpleAccent[200],
+      TextFieldContainer(
+        child: Row(children: [
+          Icon(
+            Icons.person,
+            color: kPrimaryColor,
           ),
-          width: 100,
-          child: Row(
-            children: [
-              Text(
-                '  Name: ',
-                style: TextStyle(color: Colors.white),
-              ),
-              new Flexible(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                  ),
-                  controller: myUsername,
-                  style: TextStyle(color: Colors.white),
-                  // textAlign: TextAlign.left,
-                ),
-              ),
-            ],
+          SizedBox(width: 10),
+          Text(
+            'Name: ',
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
           ),
-        ),
+          new Flexible(
+            child: TextFormField(
+              controller: TextEditingController()..text = name,
+              onChanged: (text) => {},
+              decoration: InputDecoration(
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ]),
       ),
-      Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.deepPurpleAccent,
+      TextFieldContainer(
+        child: Row(children: [
+          Icon(
+            Icons.person,
+            color: kPrimaryColor,
           ),
-          width: 100,
-          child: Row(
-            children: [
-              Text(
-                '  BirthDate: ',
-                style: TextStyle(color: Colors.white),
-              ),
-              new Flexible(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                  ),
-                  controller: myBirthDate,
-                  style: TextStyle(color: Colors.white),
-                  // textAlign: TextAlign.left,
-                ),
-              ),
-            ],
+          SizedBox(width: 10),
+          Text(
+            'Weight: ',
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
           ),
-        ),
+          new Flexible(
+            child: new TextField(
+              onChanged: (value) {
+                name = value;
+              },
+              decoration: new InputDecoration(
+                border: InputBorder.none,
+              ),
+              keyboardType: TextInputType.numberWithOptions(),
+              inputFormatters: <TextInputFormatter>[
+                WhitelistingTextInputFormatter.digitsOnly
+              ], // Only numbers can be entered
+            ),
+          ),
+        ]),
       ),
-      Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.deepPurpleAccent,
+      TextFieldContainer(
+        child: Row(children: [
+          Icon(
+            Icons.person,
+            color: kPrimaryColor,
           ),
-          width: 100,
-          child: Row(
-            children: [
-              Text(
-                '  Weight: ',
-                style: TextStyle(color: Colors.white),
-              ),
-              new Flexible(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                  ),
-                  controller: myWeight,
-                  style: TextStyle(color: Colors.white),
-                  // textAlign: TextAlign.left,
-                ),
-              ),
-            ],
+          SizedBox(width: 10),
+          Text(
+            'Height: ',
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
           ),
-        ),
+          new Flexible(
+            child: TextField(
+              controller: TextEditingController()..text = name,
+              onChanged: (text) => {},
+              decoration: InputDecoration(
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ]),
       ),
-      Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.deepPurpleAccent,
+      TextFieldContainer(
+        child: Row(children: [
+          Icon(
+            Icons.person,
+            color: kPrimaryColor,
           ),
-          width: 100,
-          child: Row(
-            children: [
-              Text(
-                '  Height: ',
-                style: TextStyle(color: Colors.white),
-              ),
-              new Flexible(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                  ),
-                  controller: myHeight,
-                  style: TextStyle(color: Colors.white),
-                  // textAlign: TextAlign.left,
-                ),
-              ),
-            ],
+          SizedBox(width: 10),
+          Text(
+            'Birth Date: ',
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
           ),
-        ),
+          new Flexible(
+            child: TextFormField(
+              controller: TextEditingController()..text = name,
+              onChanged: (text) => {},
+              decoration: InputDecoration(
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ]),
       ),
       Text(
         'Workout Goals:',
-        style: TextStyle(fontSize: 25),
+        style: TextStyle(fontSize: 25, color: kPrimaryColor),
       ),
       GridView.count(
           primary: false,
@@ -172,148 +142,136 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisCount: 2,
           shrinkWrap: true,
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.deepPurpleAccent,
-              ),
-              child: Column(children: <Widget>[
-                RaisedButton(
-                    padding: const EdgeInsets.all(0),
-                    child: Image.asset('assets/images/OAC.jpg'),
-                    onPressed: () {}),
-                Spacer(),
-                Text(
-                  'One Arm Pull Up',
-                  style: TextStyle(fontSize: 17),
-                ),
-              ]),
+            RoundedImageButton(
+              color: oneArmChinUp ? kPrimaryColor : kPrimaryLightColor,
+              image: 'assets/images/OAC.jpg',
+              press: () {
+                /*...*/
+                setState(() {
+                  oneArmChinUp = !oneArmChinUp;
+                  frontLever = false;
+                  backLever = false;
+                });
+              },
+              text: "One Arm Chin Up",
+              textSize: 17,
             ),
-            Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.deepPurpleAccent,
-                ),
-                child: Text('Planche')),
-            Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.deepPurpleAccent,
-                ),
-                child: Text('Back Lever')),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.deepPurpleAccent,
-              ),
-              child: Text('Front Lever'),
+            RoundedImageButton(
+              color: planche ? kPrimaryColor : kPrimaryLightColor,
+              image: 'assets/images/FullPlanche.jpg',
+              press: () {
+                /*...*/
+                setState(() {
+                  planche = !planche;
+                  handStandPushup = false;
+                  oneArmPushUp = false;
+                });
+              },
+              text: "Planche",
+              textSize: 17,
             ),
-            Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.deepPurpleAccent,
-                ),
-                child: Text('Handstand PushUp')),
-            Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.deepPurpleAccent,
-                ),
-                child: Text('One Arm Push Up')),
+            RoundedImageButton(
+              color: backLever ? kPrimaryColor : kPrimaryLightColor,
+              image: 'assets/images/BackLever.jpg',
+              press: () {
+                /*...*/
+                setState(() {
+                  backLever = !backLever;
+                  frontLever = false;
+                  oneArmChinUp = false;
+                });
+              },
+              text: "Back Lever",
+              textSize: 17,
+            ),
+            RoundedImageButton(
+              color: oneArmPushUp ? kPrimaryColor : kPrimaryLightColor,
+              image: 'assets/images/OneArmPushUp.jpeg',
+              press: () {
+                /*...*/
+                setState(() {
+                  oneArmPushUp = !oneArmPushUp;
+                  handStandPushup = false;
+                  planche = false;
+                });
+              },
+              text: "One Arm Push Up",
+              textSize: 17,
+            ),
+            RoundedImageButton(
+              color: frontLever ? kPrimaryColor : kPrimaryLightColor,
+              image: 'assets/images/FrontLever.jpg',
+              press: () {
+                /*...*/
+                setState(() {
+                  frontLever = !frontLever;
+                  oneArmChinUp = false;
+                  backLever = false;
+                });
+              },
+              text: "Front Lever",
+              textSize: 17,
+            ),
+            RoundedImageButton(
+              color: handStandPushup ? kPrimaryColor : kPrimaryLightColor,
+              image: 'assets/images/HandStandRollout.jpeg',
+              press: () {
+                /*...*/
+                setState(() {
+                  handStandPushup = !handStandPushup;
+                  planche = false;
+                  oneArmPushUp = false;
+                });
+              },
+              text: "Handstand Push-Up",
+              textSize: 17,
+            ),
           ]),
-      Text('Fitness Goal'),
-      Row(
+      Text(
+        'Fitness Goal',
+        style: TextStyle(color: kPrimaryColor, fontSize: 25),
+      ),
+      Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Strength(),
-          Hypertrophy(),
-          Container(
-            child: RaisedButton(
-              // color: Colors.deepPurpleAccent,
-              child: Text('Weight Loss',
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              color: pressAttention ? Colors.grey : Colors.deepPurpleAccent,
-              onPressed: () => setState(() => pressAttention = !pressAttention),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              //color: Colors.deepPurpleAccent,
-            ),
-          ),
+          RoundedButton(
+              text: "Strength",
+              textColor: strength ? Colors.white : kPrimaryColor,
+              color: strength ? kPrimaryColor : kPrimaryLightColor,
+              press: () {
+                /*...*/
+                setState(() {
+                  strength = !strength;
+                  hypertrophy = false;
+                  weightLoss = false;
+                });
+              }),
+          RoundedButton(
+              text: "Hypertrophy",
+              textColor: hypertrophy ? Colors.white : kPrimaryColor,
+              color: hypertrophy ? kPrimaryColor : kPrimaryLightColor,
+              press: () {
+                /*...*/
+                setState(() {
+                  hypertrophy = !hypertrophy;
+                  strength = false;
+                  weightLoss = false;
+                });
+              }),
+          RoundedButton(
+              text: "Weight Loss",
+              textColor: weightLoss ? Colors.white : kPrimaryColor,
+              color: weightLoss ? kPrimaryColor : kPrimaryLightColor,
+              press: () {
+                /*...*/
+                setState(() {
+                  weightLoss = !weightLoss;
+                  strength = false;
+                  hypertrophy = false;
+                });
+              }),
         ],
       ),
     ]);
-  }
-}
-
-class _StrengthState extends State<Strength> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-          // color: Colors.deepPurpleAccent,
-          child: Text('Strength',
-              style: TextStyle(
-                color: Colors.white,
-              )),
-          color: pressAttention ? Colors.grey : Colors.deepPurpleAccent,
-          onPressed: () {
-            setState(() => pressAttention = !pressAttention);
-          }),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        //color: Colors.deepPurpleAccent,
-      ),
-    );
-  }
-}
-
-class _HypertrophyState extends State<Hypertrophy> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        // color: Colors.deepPurpleAccent,
-        child: Text('Hypertrophy',
-            style: TextStyle(
-              color: Colors.white,
-            )),
-        color: strengthSelected ? Colors.grey : Colors.deepPurpleAccent,
-        onPressed: () => setState(() => pressAttention = !pressAttention),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        //color: Colors.deepPurpleAccent,
-      ),
-    );
-  }
-}
-
-void doSomething(String buttonName) {
-  if (buttonName == "Strength") {
-    if (pressAttention = false) {
-      strengthSelected = true;
-      pressAttention = true;
-    } else {
-      pressAttention = false;
-      strengthSelected = false;
-    }
-  }
-  if (buttonName == 'Hypertrophy') {
-    if (pressAttention = false) {
-      hypertrophySelected = true;
-      pressAttention = true;
-    } else {
-      pressAttention = false;
-      hypertrophySelected = false;
-    }
   }
 }
