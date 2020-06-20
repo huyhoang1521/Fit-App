@@ -12,11 +12,13 @@ class App extends StatelessWidget {
       auth: AuthService(),
       child: MaterialApp(
         theme: ThemeData(
-            // Use the old theme but apply the following three changes
-            textTheme: Theme.of(context).textTheme.apply(
+          // Use the old theme but apply the following three changes
+          textTheme: Theme.of(context).textTheme.apply(
                 fontFamily: 'Open Sans',
-                bodyColor: Colors.black,
-                displayColor: Colors.black)),
+                //  bodyColor: kPrimaryLightColor,
+                displayColor: Colors.black,
+              ),
+        ),
         home: HomeController(),
         routes: <String, WidgetBuilder>{
           '/signUp': (BuildContext context) =>
