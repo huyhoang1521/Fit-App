@@ -19,22 +19,73 @@ class _OverviewState extends State<Overview> {
         elevation: 5,
         backgroundColor: kPrimaryColor,
       ),
-      body: ListView(
+      body: GridView.count(
+        primary: false,
+        padding: const EdgeInsets.all(0),
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 15,
+        crossAxisCount: 2,
+        shrinkWrap: true,
         children: <Widget>[
           new CircularPercentIndicator(
-            radius: 300.0,
+            radius: 165.0,
             lineWidth: 10.0,
             percent: .5,
-            center: Column(children: <Widget>[
-              Container(
-                child: new Image.asset('assets/images/OAC.jpg'),
-                alignment: Alignment.center,
-                width: 100,
-                height: 100,
-              ),
-              new Text("50%"),
-            ]),
-            progressColor: Colors.green,
+            center: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: new Image.asset('assets/images/OAC.jpg')),
+                    alignment: Alignment.bottomCenter,
+                    width: 100,
+                    height: 100,
+                  ),
+                  new Text("50%"),
+                ]),
+            progressColor: kPrimaryColor,
+          ),
+          new CircularPercentIndicator(
+            radius: 165.0,
+            lineWidth: 8.0,
+            percent: .35,
+            center: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: new Image.asset('assets/images/BackLever.jpg'),
+                    alignment: Alignment.bottomCenter,
+                    width: 100,
+                    height: 100,
+                  ),
+                  new Text("35%"),
+                ]),
+            progressColor: kPrimaryColor,
+          ),
+          new CircularPercentIndicator(
+            radius: 165.0,
+            lineWidth: 8.0,
+            percent: .35,
+            progressColor: kPrimaryColor,
+            center: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(35),
+                  child: new Image.asset(
+                    'assets/images/BackLever.jpg',
+                    width: 75,
+                    height: 100,
+                  ),
+                ),
+                Text(
+                  'Back lever',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
+            ),
           ),
         ],
       ),

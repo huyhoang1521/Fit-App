@@ -6,6 +6,8 @@ import 'package:fit_app/widgets/provider_widget.dart';
 import '../../components/drawer_button.dart';
 import 'package:fit_app/screens/home/overview_page.dart';
 import 'profile.dart';
+import 'recovery/recovery_page.dart';
+import 'settings/settings.dart';
 
 class WorkOutR extends StatefulWidget {
   @override
@@ -99,17 +101,7 @@ class _WorkOutRState extends State<WorkOutR> {
                   press: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Overview()),
-                    );
-                  }),
-              DrawerButton(
-                  icon: Icons.supervised_user_circle,
-                  text: "Reminder",
-                  color: kPrimaryLightColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Overview()),
+                      MaterialPageRoute(builder: (context) => Recovery()),
                     );
                   }),
               DrawerButton(
@@ -119,7 +111,7 @@ class _WorkOutRState extends State<WorkOutR> {
                   press: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                      MaterialPageRoute(builder: (context) => Settings()),
                     );
                   }),
             ],
