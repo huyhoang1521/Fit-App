@@ -1,60 +1,114 @@
+import 'package:fit_app/screens/form/general.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../../widgets/provider_widget.dart';
 import '../../components/rounded_input_field.dart';
 import '../../components/rounded_button.dart';
 import '../../components/rounded_password_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../models/User.dart';
 import '../../constants.dart';
 
 enum AuthFormType { signIn, signUp }
 
 class Welcome extends StatefulWidget {
+  final db = Firestore.instance;
   final AuthFormType authFormType;
+  final User user;
 
-  Welcome({Key key, @required this.authFormType}) : super(key: key);
+  Welcome({Key key, @required this.authFormType, this.user}) : super(key: key);
 
   @override
-  _WelcomeState createState() => _WelcomeState(authFormType: this.authFormType);
+  _WelcomeState createState() =>
+      _WelcomeState(authFormType: this.authFormType, user: this.user);
 }
 
 class _WelcomeState extends State<Welcome> {
+  final User user;
   AuthFormType authFormType;
 
-  _WelcomeState({this.authFormType});
+  _WelcomeState({this.authFormType, this.user});
 
   final formKey = GlobalKey<FormState>();
-  String _firstName, _lastName, _email, _password;
+  String _firstName, _lastName, _email, _password, _warning;
 
   void switchFormState(String state) {
     formKey.currentState.reset();
     if (state == "signUp") {
-      setState(() {
-        authFormType = AuthFormType.signUp;
-      });
+      if (this.mounted) {
+        setState(() {
+          authFormType = AuthFormType.signUp;
+        });
+      }
+    } else if (state == 'home') {
+      if (context == null) {
+        print("context state is null");
+      }
+      Navigator.of(context).pop();
     } else {
-      setState(() {
-        authFormType = AuthFormType.signIn;
-      });
+      if (this.mounted) {
+        setState(() {
+          authFormType = AuthFormType.signIn;
+        });
+      }
     }
   }
 
-  void submit() async {
+  bool validate() {
     final form = formKey.currentState;
     form.save();
-    try {
-      final auth = Provider.of(context).auth;
-      if (authFormType == AuthFormType.signIn) {
-        String uid = await auth.signInWithEmailAndPassword(_email, _password);
-        print("Signed In with ID $uid");
-        Navigator.of(context).pushReplacementNamed('/home');
-      } else {
-        String uid = await auth.createUserWithEmailAndPassword(
-            _email, _password, _firstName, _lastName);
-        print("Signed up with New ID $uid");
-        Navigator.of(context).pushReplacementNamed('/general');
+    if (form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void setVars() {
+    user.firstName = _firstName;
+    user.lastName = _lastName;
+    user.email = _email;
+  }
+
+  void submit() async {
+    if (validate()) {
+      try {
+        final auth = Provider.of(context).auth;
+        switch (authFormType) {
+          case AuthFormType.signIn:
+            try {
+              await auth.signInWithEmailAndPassword(_email, _password);
+              Navigator.of(context).pushReplacementNamed('/home');
+            } catch (error) {
+              print(error);
+            }
+            break;
+
+          case AuthFormType.signUp:
+            try {
+              await auth.createUserWithEmailAndPassword(
+                  _email, _password, (_firstName + _lastName));
+              setVars();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => General(user: user)),
+              );
+              //Navigator.of(context).pushReplacementNamed('/general');
+            } catch (error1) {
+              print(error1);
+            }
+
+            break;
+        }
+      } catch (error2) {
+        print(error2);
+        if (this.mounted) {
+          setState(() {
+            _warning = error2.message;
+          });
+        }
       }
-    } catch (e) {
-      print(e);
     }
   }
 
@@ -90,6 +144,46 @@ class _WelcomeState extends State<Welcome> {
     );
   }
 
+  Widget showAlert() {
+    if (_warning != null) {
+      return Container(
+        color: Colors.amberAccent,
+        width: double.infinity,
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.error_outline),
+            ),
+            Expanded(
+              child: AutoSizeText(
+                _warning,
+                maxLines: 3,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  if (this.mounted) {
+                    setState(() {
+                      _warning = null;
+                    });
+                  }
+                },
+              ),
+            )
+          ],
+        ),
+      );
+    }
+    return SizedBox(
+      height: 0,
+    );
+  }
+
   AutoSizeText buildHeaderText() {
     String _headerText = "Welcome";
     return AutoSizeText(
@@ -115,9 +209,11 @@ class _WelcomeState extends State<Welcome> {
           padding: EdgeInsets.all(2.0),
           onPressed: () {
             /*...*/
-            setState(() {
-              switchFormState("signUp");
-            });
+            if (this.mounted) {
+              setState(() {
+                switchFormState("signUp");
+              });
+            }
           },
           child: Text(
             "Sign Up",
@@ -134,9 +230,11 @@ class _WelcomeState extends State<Welcome> {
           highlightColor: Colors.transparent,
           padding: EdgeInsets.all(4.0),
           onPressed: () {
-            setState(() {
-              switchFormState("signIn");
-            });
+            if (this.mounted) {
+              setState(() {
+                switchFormState("signIn");
+              });
+            }
           },
           child: Text(
             "Sign In",
@@ -154,9 +252,7 @@ class _WelcomeState extends State<Welcome> {
     if (authFormType == AuthFormType.signUp) {
       textFields.add(
         RoundedInputField(
-          hintText: "First Name",
-          onChanged: (value) => _firstName = value,
-        ),
+            hintText: "First Name", onChanged: (value) => _firstName = value),
       );
       textFields.add(SizedBox(height: 10));
       textFields.add(
