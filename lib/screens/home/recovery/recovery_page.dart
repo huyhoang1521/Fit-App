@@ -2,7 +2,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import '../../../constants.dart';
-import 'package:fit_app/screens/home/recovery/widgets/recovery_checkblock.dart';
+import 'package:fit_app/screens/home/recovery/widgets/recovery_checkBlock.dart';
 import 'package:flutter/animation.dart';
 
 class Recovery extends StatefulWidget {
@@ -85,7 +85,7 @@ class _RecoveryState extends State<Recovery>
       appBar: AppBar(
         title: Text('Fit For Life'),
         elevation: 5,
-        backgroundColor: kPrimaryColor,
+        //  backgroundColor: kPrimaryColor,
       ),
       body: ListView(
         primary: false,
@@ -95,13 +95,30 @@ class _RecoveryState extends State<Recovery>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              color: kPrimaryLightColor,
+              padding: EdgeInsets.all(11),
+              decoration: BoxDecoration(
+                  color: kPrimaryLightColor,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ]),
               child: Text(
-                'Are you maximizing your gains?',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                'Maximize your gains!',
+                style: TextStyle(
+                  fontSize: 31,
+                  //fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
           ),
+          SizedBox(height: 25),
           RecoveryCheckBlock(
               text: 'Fully Hydrated',
               icon: Icons.location_searching,
@@ -168,6 +185,7 @@ class _RecoveryState extends State<Recovery>
             percent: percentDaily,
             progressColor: kPrimaryColor,
             animation: true,
+            animateFromLastPercent: true,
             animationDuration: 1000,
             center: Column(
               mainAxisAlignment: MainAxisAlignment.end,

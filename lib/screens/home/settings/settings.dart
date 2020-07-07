@@ -1,5 +1,9 @@
+import 'package:fit_app/components/themes/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../constants.dart';
+import 'package:fit_app/constants.dart';
+import 'dart:ui';
 
 class Settings extends StatefulWidget {
   @override
@@ -40,7 +44,16 @@ class _SettingsState extends State<Settings> {
                 });
               },
             ),
-          ])
+          ]),
+          Consumer<ThemeNotifier>(
+            builder: (context, notifier, child) => SwitchListTile(
+              title: Text("Dark Mode"),
+              onChanged: (val) {
+                notifier.toggleTheme();
+              },
+              value: notifier.darkTheme,
+            ),
+          ),
         ],
       ),
     );

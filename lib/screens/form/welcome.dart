@@ -42,7 +42,7 @@ class _WelcomeState extends State<Welcome> {
     final form = formKey.currentState;
     form.save();
     try {
-      final auth = Provider.of(context).auth;
+      final auth = ProviderWidget.of(context).auth;
       if (authFormType == AuthFormType.signIn) {
         String uid = await auth.signInWithEmailAndPassword(_email, _password);
         print("Signed In with ID $uid");
