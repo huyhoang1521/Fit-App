@@ -57,6 +57,7 @@ class _WelcomeState extends State<Welcome> {
   bool validate() {
     final form = formKey.currentState;
     form.save();
+
     if (form.validate()) {
       form.save();
       return true;
@@ -74,7 +75,7 @@ class _WelcomeState extends State<Welcome> {
   void submit() async {
     if (validate()) {
       try {
-        final auth = Provider.of(context).auth;
+        final auth = ProviderWidget.of(context).auth;
         switch (authFormType) {
           case AuthFormType.signIn:
             try {

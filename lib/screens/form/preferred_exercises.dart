@@ -205,8 +205,9 @@ class _PreferredExercises extends State<PreferredExercises> {
                       press: () async {
                         setVars();
                         // save data to fiebase
-                        final uid =
-                            await Provider.of(context).auth.getCurrentUID();
+                        final uid = await ProviderWidget.of(context)
+                            .auth
+                            .getCurrentUID();
                         await db
                             .collection("userData")
                             .document(uid)

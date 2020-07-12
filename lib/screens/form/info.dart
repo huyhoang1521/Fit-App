@@ -1,4 +1,3 @@
-import 'package:fit_app/components/custom_text_field.dart';
 import 'package:fit_app/constants.dart';
 import 'package:fit_app/screens/form/sign_up.dart';
 import 'package:flutter/cupertino.dart';

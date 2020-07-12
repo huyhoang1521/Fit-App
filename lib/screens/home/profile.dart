@@ -1,8 +1,7 @@
 import 'dart:ui';
-import 'package:fit_app/components/text_field_container.dart';
+import 'package:fit_app/components/profile_info_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import '../../constants.dart';
 import '../../components/rounded_button.dart';
@@ -15,14 +14,11 @@ class ProfilePage extends StatefulWidget {
   }
 }
 
-final myUsername = TextEditingController(text: 'NICKY P');
-final myBirthDate = TextEditingController(text: '09/21/1997');
-final myWeight = TextEditingController(text: 'None of your god dam business');
-final myHeight = TextEditingController(text: '214 cm');
+// Need to be pulled/updated from users database
 String name = "NickyP";
-double weight = 159.5;
-TextEditingController weightController = TextEditingController();
+String weight = '159.5';
 
+// Used to Select users workout goals
 bool strength = false;
 bool hypertrophy = false;
 bool weightLoss = false;
@@ -38,107 +34,51 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fit For Life'),
+        title: Text('Get Fit With Nick!'),
         elevation: 5,
         backgroundColor: kPrimaryColor,
       ),
       body: ListView(padding: const EdgeInsets.all(8), children: <Widget>[
-        TextFieldContainer(
-          child: Row(children: [
-            Icon(
-              Icons.person,
-              color: kPrimaryColor,
-            ),
-            SizedBox(width: 10),
-            Text(
-              'Name: ',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
-            ),
-            new Flexible(
-              child: TextFormField(
-                controller: TextEditingController()..text = name,
-                onChanged: (text) => {},
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-          ]),
+        Image.asset('assets/images/selfCare.jpg'),
+        SizedBox(height: 20),
+        ProfileTextBox(
+          text: 'Name: ',
+          icon: Icons.person_outline,
+          userData: name,
         ),
-        TextFieldContainer(
-          child: Row(children: [
-            Icon(
-              Icons.person,
-              color: kPrimaryColor,
-            ),
-            SizedBox(width: 10),
-            Text(
-              'Weight: ',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
-            ),
-            new Flexible(
-              child: new TextField(
-                onChanged: (value) {
-                  name = value;
-                },
-                decoration: new InputDecoration(
-                  border: InputBorder.none,
-                ),
-                keyboardType: TextInputType.numberWithOptions(),
-                inputFormatters: <TextInputFormatter>[
-                  WhitelistingTextInputFormatter.digitsOnly
-                ], // Only numbers can be entered
-              ),
-            ),
-          ]),
+        ProfileTextBox(
+          text: 'Weight: ',
+          icon: Icons.confirmation_number,
+          userData: weight,
         ),
-        TextFieldContainer(
-          child: Row(children: [
-            Icon(
-              Icons.person,
-              color: kPrimaryColor,
-            ),
-            SizedBox(width: 10),
-            Text(
-              'Height: ',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
-            ),
-            new Flexible(
-              child: TextField(
-                controller: TextEditingController()..text = name,
-                onChanged: (text) => {},
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-          ]),
+        ProfileTextBox(
+          text: 'Height: ',
+          icon: Icons.update,
+          userData: name,
         ),
-        TextFieldContainer(
-          child: Row(children: [
-            Icon(
-              Icons.person,
-              color: kPrimaryColor,
-            ),
-            SizedBox(width: 10),
-            Text(
-              'Birth Date: ',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w200),
-            ),
-            new Flexible(
-              child: TextFormField(
-                controller: TextEditingController()..text = name,
-                onChanged: (text) => {},
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-          ]),
+        ProfileTextBox(
+          text: 'Birth Date: ',
+          icon: Icons.cake,
+          userData: name,
         ),
+        SizedBox(height: 20),
         Text(
-          'Workout Goals:',
+          'Desired Skills:',
           style: TextStyle(fontSize: 25, color: kPrimaryColor),
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              'Pull',
+              style: TextStyle(fontSize: 18, color: kPrimaryColor),
+            ),
+            Text(
+              'Push',
+              style: TextStyle(fontSize: 18, color: kPrimaryColor),
+            ),
+          ],
         ),
         GridView.count(
             primary: false,

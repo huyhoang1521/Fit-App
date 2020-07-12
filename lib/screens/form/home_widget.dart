@@ -27,7 +27,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             icon: Icon(Icons.undo),
             onPressed: () async {
               try {
-                AuthService auth = Provider.of(context).auth;
+                AuthService auth = ProviderWidget.of(context).auth;
                 await auth.signOut();
                 print("Signed Out!");
               } catch (e) {

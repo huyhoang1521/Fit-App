@@ -30,13 +30,13 @@ class _WorkOutRState extends State<WorkOutR> {
       appBar: AppBar(
         title: Text('Fit For Life'),
         elevation: 5,
-        backgroundColor: kPrimaryColor,
+        // backgroundColor: kPrimaryColor,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.undo),
             onPressed: () async {
               try {
-                AuthService auth = Provider.of(context).auth;
+                AuthService auth = ProviderWidget.of(context).auth;
                 await auth.signOut();
                 print("Signed Out!");
               } catch (e) {
@@ -118,21 +118,23 @@ class _WorkOutRState extends State<WorkOutR> {
           ),
         ),
       ),
-      body: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 10.0),
-          child: RoundedButton(
-            color: kPrimaryColor,
-            textColor: Colors.white,
-            press: () {
-              Routine();
-            },
-            text: 'Start Workout',
-            //onLongPress: ,
+      body: Column(children: [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: RoundedButton(
+              //  color: kPrimaryColor,
+              textColor: Colors.white,
+              press: () {
+                Routine();
+              },
+              text: 'Start Workout',
+              //onLongPress: ,
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }

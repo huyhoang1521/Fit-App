@@ -46,7 +46,7 @@ class _SignUp extends State<SignUp> {
 
   void submit() async {
     try {
-      final auth = Provider.of(context).auth;
+      final auth = ProviderWidget.of(context).auth;
       setVars();
       print("_email " + _email);
       print("_firstName " + _firstName);
