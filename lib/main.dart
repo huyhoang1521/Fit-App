@@ -1,3 +1,4 @@
+import 'package:fit_app/algorithms/workout_constructor.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/screens/home/tab_system.dart';
 import 'package:fit_app/services/auth_service.dart';
@@ -7,6 +8,7 @@ import 'components/themes/theme.dart';
 import 'screens/form/welcome.dart';
 import 'screens/form/general.dart';
 import 'screens/form/first_view.dart';
+import 'algorithms/workout_constructor.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
 class HomeController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    WorkoutConstructor().pushQuery(context);
     final AuthService auth = ProviderWidget.of(context).auth;
     return StreamBuilder<String>(
       stream: auth.onAuthStateChanged,

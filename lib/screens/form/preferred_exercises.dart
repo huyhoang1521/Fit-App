@@ -209,10 +209,9 @@ class _PreferredExercises extends State<PreferredExercises> {
                             .auth
                             .getCurrentUID();
                         await db
-                            .collection("userData")
+                            .collection("Users")
                             .document(uid)
-                            .collection("User")
-                            .add(user.toJson());
+                            .setData(user.toJson());
                         Navigator.of(context)
                             .popUntil((route) => route.isFirst);
                       },
