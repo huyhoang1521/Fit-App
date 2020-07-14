@@ -3,29 +3,27 @@ import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import '../../constants.dart';
 import '../../models/user.dart';
-import 'length.dart';
+import 'equipment.dart';
 
-class Goal extends StatefulWidget {
+class Length extends StatefulWidget {
   final User user;
 
-  const Goal({Key key, this.user}) : super(key: key);
+  const Length({Key key, this.user}) : super(key: key);
   @override
-  _Goal createState() => new _Goal(user: this.user);
+  _Length createState() => new _Length(user: this.user);
 }
 
-class _Goal extends State<Goal> {
+class _Length extends State<Length> {
   final User user;
-  _Goal({this.user});
-  String _goal;
+  _Length({this.user});
+  String _length;
   bool strength = false;
   bool hypertrophy = false;
   bool weightLoss = false;
 
   void setVars() {
-    print("fist name is " + user.firstName);
-    print("goal is " + _goal);
-    user.goal = _goal;
-    print("goal is " + _goal);
+    user.length = _length;
+    print("length is " + _length);
   }
 
   @override
@@ -64,14 +62,13 @@ class _Goal extends State<Goal> {
                 SizedBox(height: _height * .02),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                      "Now that we have your information, lets make your workout routine! What is your primary goal? This can be changed later.",
+                  child: Text("What length do you want your workout?",
                       style: TextStyle(fontSize: 18),
                       textAlign: TextAlign.left),
                 ),
                 SizedBox(height: _height * .03),
                 RoundedButton(
-                    text: "Strength",
+                    text: "Short (40 min)",
                     textColor: strength ? Colors.white : kPrimaryColor,
                     color: strength ? kPrimaryColor : kPrimaryLightColor,
                     press: () {
@@ -81,12 +78,12 @@ class _Goal extends State<Goal> {
                         hypertrophy = false;
                         weightLoss = false;
                       });
-                      _goal = "Strength";
-                      print(_goal);
+                      _length = "Short";
+                      print(_length);
                     }),
                 SizedBox(height: _height * .02),
                 RoundedButton(
-                    text: "Hypertrophy",
+                    text: "Long (1 hour)",
                     textColor: hypertrophy ? Colors.white : kPrimaryColor,
                     color: hypertrophy ? kPrimaryColor : kPrimaryLightColor,
                     press: () {
@@ -96,24 +93,10 @@ class _Goal extends State<Goal> {
                         strength = false;
                         weightLoss = false;
                       });
-                      _goal = "Hypertrophy";
-                      print(_goal);
+                      _length = "Long";
+                      print(_length);
                     }),
                 SizedBox(height: _height * .02),
-                RoundedButton(
-                    text: "Weight Loss",
-                    textColor: weightLoss ? Colors.white : kPrimaryColor,
-                    color: weightLoss ? kPrimaryColor : kPrimaryLightColor,
-                    press: () {
-                      /*...*/
-                      setState(() {
-                        weightLoss = !weightLoss;
-                        strength = false;
-                        hypertrophy = false;
-                      });
-                      _goal = "Weight Loss";
-                      print(_goal);
-                    }),
                 SizedBox(height: _height * .02),
                 Expanded(
                   child: Align(
@@ -127,7 +110,7 @@ class _Goal extends State<Goal> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Length(user: user)),
+                              builder: (context) => Equipment(user: user)),
                         );
                       },
                     ),
