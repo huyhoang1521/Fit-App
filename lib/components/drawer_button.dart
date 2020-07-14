@@ -4,7 +4,7 @@ import '../constants.dart';
 class DrawerButton extends StatelessWidget {
   final String text;
   final Function press;
-  final Color color, textColor;
+  final Color color;
   final IconData icon;
   const DrawerButton({
     Key key,
@@ -12,7 +12,6 @@ class DrawerButton extends StatelessWidget {
     this.press,
     this.icon,
     this.color = kPrimaryColor,
-    this.textColor = Colors.white,
   }) : super(key: key);
 
   @override
@@ -29,7 +28,7 @@ class DrawerButton extends StatelessWidget {
             SizedBox(width: 40),
             Text(
               text,
-              style: TextStyle(color: Colors.black),
+              style: Theme.of(context).textTheme.button,
             ),
           ],
         ),

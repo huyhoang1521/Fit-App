@@ -4,6 +4,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import '../../../constants.dart';
 import 'package:fit_app/screens/home/recovery/widgets/recovery_checkBlock.dart';
 import 'package:flutter/animation.dart';
+import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 
 class Recovery extends StatefulWidget {
   @override
@@ -95,33 +96,37 @@ class _RecoveryState extends State<Recovery>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              padding: EdgeInsets.all(11),
-              decoration: BoxDecoration(
-                  color: kPrimaryLightColor,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+              //padding: EdgeInsets.all(11),
+//              decoration: BoxDecoration(
+//                  color: kPrimaryLightColor,
+//                  borderRadius: BorderRadius.circular(5),
+//                  boxShadow: [
+//                    BoxShadow(
+//                      color: Colors.grey.withOpacity(0.5),
+//                      spreadRadius: 5,
+//                      blurRadius: 7,
+//                      offset: Offset(0, 3), // changes position of shadow
+//                    ),
+//                  ]),
+              child: Opacity(
+                opacity: 0.85,
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    'Maximize your gains!',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontStyle: FontStyle.italic,
                     ),
-                  ]),
-              child: Text(
-                'Maximize your gains!',
-                style: TextStyle(
-                  fontSize: 31,
-                  //fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
             ),
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 15),
           RecoveryCheckBlock(
               text: 'Fully Hydrated',
-              icon: Icons.location_searching,
+              icon: CustomIcons.hydration,
               value: hydration,
               onChanged: (bool value) {
                 hydration = value;
@@ -129,7 +134,7 @@ class _RecoveryState extends State<Recovery>
               }),
           RecoveryCheckBlock(
               text: 'Daily Active Rest',
-              icon: Icons.wb_sunny,
+              icon: CustomIcons.active__1_,
               value: activeRest,
               onChanged: (bool value) {
                 activeRest = value;
@@ -145,40 +150,43 @@ class _RecoveryState extends State<Recovery>
               }),
           RecoveryCheckBlock(
               text: '5 minutes of stretching',
-              icon: Icons.stop,
+              icon: CustomIcons.stretching,
               value: stretch,
               onChanged: (bool value) {
                 stretch = value;
                 checkCheck(value);
               }),
-          AnimatedBuilder(
-              animation: percent,
-              builder: (context, child) {
-                return CircularPercentIndicator(
-                  radius: 180.0,
-                  lineWidth: 12.0,
-                  percent: percent.value,
-                  progressColor: kPrimaryColor,
-                  center: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(35),
-                        child: new Icon(
-                          Icons.battery_charging_full,
-                        ),
-                      ),
-                      Text(
-                        '% to optimal recovery',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 75,
-                      ),
-                    ],
-                  ),
-                );
-              }),
+          SizedBox(
+            height: 15,
+          ),
+//          AnimatedBuilder(
+//              animation: percent,
+//              builder: (context, child) {
+//                return CircularPercentIndicator(
+//                  radius: 180.0,
+//                  lineWidth: 12.0,
+//                  percent: percent.value,
+//                  progressColor: kPrimaryColor,
+//                  center: Column(
+//                    mainAxisAlignment: MainAxisAlignment.end,
+//                    children: [
+//                      ClipRRect(
+//                        borderRadius: BorderRadius.circular(35),
+//                        child: new Icon(
+//                          Icons.battery_charging_full,
+//                        ),
+//                      ),
+//                      Text(
+//                        '% to optimal recovery',
+//                        style: TextStyle(color: Colors.black),
+//                      ),
+//                      SizedBox(
+//                        height: 75,
+//                      ),
+//                    ],
+//                  ),
+//                );
+//              }),
           CircularPercentIndicator(
             radius: 180.0,
             lineWidth: 12.0,

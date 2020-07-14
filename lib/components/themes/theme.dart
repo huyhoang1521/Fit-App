@@ -3,22 +3,45 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fit_app/constants.dart';
 
 ThemeData light = ThemeData(
-    brightness: Brightness.light,
-    primarySwatch: colorCustom,
-    accentColor: kPrimaryLightColor,
-    scaffoldBackgroundColor: Color(0xfff1f1f1),
-    buttonTheme: ButtonThemeData(
-      buttonColor: colorCustom,
-      textTheme:
-          ButtonTextTheme.primary, //  <-- this auto selects the right color
-    )
-    // toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.white),
-    );
+  brightness: Brightness.light,
+  primarySwatch: colorCustom,
+  accentColor: kPrimaryLightColor,
+  scaffoldBackgroundColor: Color(0xfff1f1f1),
+  canvasColor: Colors.white,
+  buttonTheme: ButtonThemeData(
+    buttonColor: colorCustom,
+    textTheme:
+        ButtonTextTheme.primary, //  <-- this auto selects the right color
+  ),
+  // toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.white),
+  textTheme: TextTheme(
+    //to use ex: style: Theme.of(context).textTheme.headline1
+    button: TextStyle(color: Colors.black),
+    headline1: TextStyle(
+        fontSize: 31,
+        fontFamily: 'Montserrat',
+        fontStyle: FontStyle.italic,
+        color: Colors.black),
+    headline6: TextStyle(color: kPrimaryColor, fontSize: 26.0),
+    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+  ),
+);
 
 ThemeData dark = ThemeData(
   brightness: Brightness.dark,
   primarySwatch: colorCustom,
   accentColor: lightColorCustom,
+  canvasColor: Colors.black12,
+  buttonTheme: ButtonThemeData(
+    buttonColor: lightColorCustom,
+    textTheme:
+        ButtonTextTheme.primary, //  <-- this auto selects the right color
+  ),
+  textTheme: TextTheme(
+    button: TextStyle(color: Colors.grey),
+    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+  ),
 );
 
 class ThemeNotifier extends ChangeNotifier {

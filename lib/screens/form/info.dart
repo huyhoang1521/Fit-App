@@ -22,7 +22,7 @@ class _Info extends State<Info> {
 
   DateTime _dateTime = DateTime.now();
   var txt = TextEditingController();
-  String _dob;
+  // String _dob;
   int _weight;
 
   void setVars() {

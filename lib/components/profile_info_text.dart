@@ -18,7 +18,7 @@ class ProfileTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 5),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size.width * 0.8,
       decoration: BoxDecoration(
@@ -27,9 +27,9 @@ class ProfileTextBox extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: Offset(0, 2), // changes position of shadow
             ),
           ]),
       child: Row(children: [

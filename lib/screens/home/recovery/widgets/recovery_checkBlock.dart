@@ -28,7 +28,7 @@ class RecoveryCheckBlock extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: Colors.white,
+          color: Theme.of(context).canvasColor,
           boxShadow: [
             BoxShadow(
               color: Colors.grey,

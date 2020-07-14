@@ -1,10 +1,11 @@
+import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../components/rounded_button.dart';
 import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
 import '../../components/drawer_button.dart';
-import 'package:fit_app/screens/home/overview_page.dart';
+import 'package:fit_app/screens/home/Overview/overview_page.dart';
 import 'profile.dart';
 import 'recovery/recovery_page.dart';
 import 'settings/settings.dart';
@@ -47,75 +48,70 @@ class _WorkOutRState extends State<WorkOutR> {
         ],
       ),
       drawer: Drawer(
-        child: Container(
-          color: kPrimaryLightColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Colors.black,
-                      // kPrimaryLightColor,
-                      kPrimaryColor,
-                    ],
-                  ),
-                ),
-                child: Image.asset('assets/images/example_logo.jpeg'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            DrawerHeader(
+              padding: EdgeInsets.only(
+                bottom: 10,
               ),
-              DrawerButton(
-                  icon: Icons.access_alarms,
-                  text: "Workout",
-                  color: kPrimaryLightColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => WorkOutR()),
-                    );
-                  }),
-              DrawerButton(
-                  icon: Icons.person,
-                  text: "Profile",
-                  color: kPrimaryLightColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
-                    );
-                  }),
-              DrawerButton(
-                  icon: Icons.supervised_user_circle,
-                  text: "Progress",
-                  color: kPrimaryLightColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Overview()),
-                    );
-                  }),
-              DrawerButton(
-                  icon: Icons.supervised_user_circle,
-                  text: "Recovery Booster",
-                  color: kPrimaryLightColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Recovery()),
-                    );
-                  }),
-              DrawerButton(
-                  icon: Icons.person,
-                  text: "Settings",
-                  color: kPrimaryLightColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Settings()),
-                    );
-                  }),
-            ],
-          ),
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+              ),
+              child: Image.asset('assets/images/example_logo.jpeg'),
+            ),
+            DrawerButton(
+                icon: CustomIcons.health_fitness,
+                text: "Workout",
+                color: Theme.of(context).canvasColor,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WorkOutR()),
+                  );
+                }),
+            DrawerButton(
+                icon: Icons.person,
+                text: "Profile",
+                color: Theme.of(context).canvasColor,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                }),
+            DrawerButton(
+                icon: CustomIcons.healthy,
+                text: "Progress",
+                color: Theme.of(context).canvasColor,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Overview()),
+                  );
+                }),
+            DrawerButton(
+                icon: CustomIcons.recovery_percentage,
+                text: "Recovery Booster",
+                color: Theme.of(context).canvasColor,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Recovery()),
+                  );
+                }),
+            DrawerButton(
+                icon: Icons.settings,
+                text: "Settings",
+                color: Theme.of(context).canvasColor,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
+                  );
+                }),
+          ],
         ),
       ),
       body: Column(children: [
