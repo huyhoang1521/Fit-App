@@ -6,7 +6,7 @@ import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
 import '../../components/drawer_button.dart';
 import 'package:fit_app/screens/home/Overview/overview_page.dart';
-import 'profile.dart';
+import 'Profile/profile.dart';
 import 'recovery/recovery_page.dart';
 import 'settings/settings.dart';
 

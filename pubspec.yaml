@@ -80,6 +80,9 @@ flutter:
     - family:  CustomIconspt2
       fonts:
         - asset: assets/icons/CustomIconspt2.ttf
+    - family:  SIcons
+      fonts:
+        - asset: assets/icons/SIcons.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

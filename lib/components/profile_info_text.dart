@@ -40,11 +40,12 @@ class ProfileTextBox extends StatelessWidget {
         SizedBox(width: 10),
         Text(
           text,
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+          style: Theme.of(context).textTheme.bodyText2,
         ),
         new Flexible(
           child: TextFormField(
             controller: TextEditingController()..text = userData,
+            style: Theme.of(context).textTheme.bodyText1,
             onChanged: (text) => {},
             decoration: InputDecoration(
               border: InputBorder.none,

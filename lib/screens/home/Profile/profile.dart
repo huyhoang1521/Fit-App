@@ -1,12 +1,11 @@
 import 'dart:ui';
-import 'package:fit_app/components/profile_info_text.dart';
-import 'package:fit_app/components/themes/icons/custom_iconspt2_icons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_app/screens/home/Profile/prof_InfoPull.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../constants.dart';
-import '../../components/rounded_button.dart';
-import '../../components/rounded_image_button.dart';
+import '../../../constants.dart';
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -19,6 +18,9 @@ class ProfilePage extends StatefulWidget {
 // Need to be pulled/updated from users database
 String name = "NickyP";
 String weight = '159.5';
+String hyp = '';
+String str = '';
+String wei = '';
 
 // Used to Select users workout goals
 bool strength = false;
@@ -32,6 +34,17 @@ bool frontLever = false;
 bool oneArmPushUp = false;
 bool selected = false;
 
+//Pulling from specific user data
+var userData = Firestore.instance.collection("Users").document("uid").get();
+
+Future<DocumentSnapshot> getUserInfo() async {
+  var firebaseUser = await FirebaseAuth.instance.currentUser();
+  return await Firestore.instance
+      .collection("Users")
+      .document(firebaseUser.uid)
+      .get();
+}
+
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
@@ -43,43 +56,13 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: kPrimaryColor,
       ),
       body: ListView(padding: const EdgeInsets.all(4), children: <Widget>[
-        Text(
-          'Profile Info:',
-          style: TextStyle(
-            fontSize: 31,
-            fontFamily: 'Montserrat',
-            fontStyle: FontStyle.italic,
-          ),
-        ),
+        Text('Profile Info:', style: Theme.of(context).textTheme.headline1),
         SizedBox(height: 10),
-        ProfileTextBox(
-          text: 'Name: ',
-          icon: Icons.person_outline,
-          userData: name,
-        ),
-        ProfileTextBox(
-          text: 'Weight: ',
-          icon: CustomIcons.weight,
-          userData: weight,
-        ),
-        ProfileTextBox(
-          text: 'Height: ',
-          icon: CustomIcons.height,
-          userData: name,
-        ),
-        ProfileTextBox(
-          text: 'Birth Date: ',
-          icon: Icons.cake,
-          userData: name,
-        ),
+        ProfileInfo(),
         SizedBox(height: 20),
-        Text(
-          'Desired Skills:',
-          style: TextStyle(fontSize: 25, color: kPrimaryColor),
-        ),
-        SizedBox(height: 10),
-        Text('Pull:', style: Theme.of(context).textTheme.headline1),
-        SizedBox(height: 35),
+        Text('Primary Pull Goal:',
+            style: Theme.of(context).textTheme.headline1),
+        SizedBox(height: 30),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -92,8 +75,15 @@ class _ProfilePageState extends State<ProfilePage> {
             //width: 300.0,
             height: 100, //selected ? 50.0 : 60.0,
             decoration: BoxDecoration(
-              color: frontLever ? kPrimaryColor : kPrimaryLightColor,
-            ),
+                color: frontLever ? kPrimaryColor : kPrimaryLightColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -111,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        SizedBox(height: 25),
+        SizedBox(height: 10),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -124,8 +114,15 @@ class _ProfilePageState extends State<ProfilePage> {
             //width: 300.0,
             height: 100, //selected ? 50.0 : 60.0,
             decoration: BoxDecoration(
-              color: oneArmChinUp ? kPrimaryColor : kPrimaryLightColor,
-            ),
+                color: oneArmChinUp ? kPrimaryColor : kPrimaryLightColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -143,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        SizedBox(height: 25),
+        SizedBox(height: 10),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -156,8 +153,15 @@ class _ProfilePageState extends State<ProfilePage> {
             //width: 300.0,
             height: 100, //selected ? 50.0 : 60.0,
             decoration: BoxDecoration(
-              color: backLever ? kPrimaryColor : kPrimaryLightColor,
-            ),
+                color: backLever ? kPrimaryColor : kPrimaryLightColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -176,7 +180,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         SizedBox(height: 35),
-        Text('Push:', style: Theme.of(context).textTheme.headline1),
+        Text('Primary Push Goal:',
+            style: Theme.of(context).textTheme.headline1),
         SizedBox(height: 35),
         GestureDetector(
           onTap: () {
@@ -273,109 +278,10 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        FlatButton(
-          color: cream,
-          onPressed: () {
-            /*...*/
-            setState(() {
-              oneArmChinUp = !oneArmChinUp;
-              frontLever = false;
-              backLever = false;
-            });
-          },
-          child: Image.asset(
-            'assets/images/planche2.png',
-            width: 250,
-          ),
-        ),
-        RoundedImageButton(
-          color: oneArmChinUp ? kPrimaryColor : cream,
-          buttonColor: oneArmChinUp ? kPrimaryColor : cream,
-          image: 'assets/images/planche2.png',
-          press: () {
-            /*...*/
-            setState(() {
-              oneArmChinUp = !oneArmChinUp;
-              frontLever = false;
-              backLever = false;
-            });
-          },
-          text: "One Arm Chin Up",
-          textSize: 17,
-        ),
-        RoundedImageButton(
-          color: planche ? kPrimaryColor : cream,
-          image: 'assets/images/FullPlanche.jpg',
-          press: () {
-            /*...*/
-            setState(() {
-              planche = !planche;
-              handStandPushup = false;
-              oneArmPushUp = false;
-            });
-          },
-          text: "Planche",
-          textSize: 17,
-        ),
-        RoundedImageButton(
-          color: backLever ? kPrimaryColor : kPrimaryLightColor,
-          image: 'assets/images/BackLever.jpg',
-          press: () {
-            /*...*/
-            setState(() {
-              backLever = !backLever;
-              frontLever = false;
-              oneArmChinUp = false;
-            });
-          },
-          text: "Back Lever",
-          textSize: 17,
-        ),
-        RoundedImageButton(
-          color: oneArmPushUp ? kPrimaryColor : kPrimaryLightColor,
-          image: 'assets/images/OneArmPushUp.jpeg',
-          press: () {
-            /*...*/
-            setState(() {
-              oneArmPushUp = !oneArmPushUp;
-              handStandPushup = false;
-              planche = false;
-            });
-          },
-          text: "One Arm Push Up",
-          textSize: 17,
-        ),
-        RoundedImageButton(
-          color: frontLever ? kPrimaryColor : kPrimaryLightColor,
-          image: 'assets/images/FrontLever.jpg',
-          press: () {
-            /*...*/
-            setState(() {
-              frontLever = !frontLever;
-              oneArmChinUp = false;
-              backLever = false;
-            });
-          },
-          text: "Front Lever",
-          textSize: 17,
-        ),
-        RoundedImageButton(
-          color: handStandPushup ? kPrimaryColor : kPrimaryLightColor,
-          image: 'assets/images/HandStandRollout.jpeg',
-          press: () {
-            /*...*/
-            setState(() {
-              handStandPushup = !handStandPushup;
-              planche = false;
-              oneArmPushUp = false;
-            });
-          },
-          text: "Handstand Push-Up",
-          textSize: 17,
-        ),
+        SizedBox(height: 35),
         Text(
           'Fitness Goal',
-          style: TextStyle(color: kPrimaryColor, fontSize: 25),
+          style: Theme.of(context).textTheme.headline1,
         ),
         SizedBox(
           height: 20,
@@ -389,9 +295,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   setState(() {
                     if (strength == false) {
                       strength = !strength;
+                      str = 'Strength';
                     }
                     hypertrophy = false;
                     weightLoss = false;
+                    hyp = '';
+                    wei = '';
                   });
                 },
                 child: AnimatedContainer(
@@ -405,12 +314,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Strength',
+                        '$str',
                         style: TextStyle(
                           color: strength ? Colors.white : kPrimaryColor,
                         ),
                       ),
-                      //   Icon(CustomIcons.strength),
+                      Icon(CustomIcons.stretching),
                     ],
                   ),
                 ),
@@ -420,9 +329,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   setState(() {
                     if (hypertrophy == false) {
                       hypertrophy = !hypertrophy;
+                      hyp = 'Hypertrophy';
                     }
                     strength = false;
                     weightLoss = false;
+                    str = '';
+                    wei = '';
                   });
                 },
                 child: AnimatedContainer(
@@ -436,12 +348,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Hypertrophy',
+                        '$hyp',
                         style: TextStyle(
                           color: hypertrophy ? Colors.white : kPrimaryColor,
                         ),
                       ),
-                      //  Icon(CustomIcons.hypertrophy),
+                      Icon(CustomIcons.active__1_),
                     ],
                   ),
                 ),
@@ -451,9 +363,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   setState(() {
                     if (weightLoss == false) {
                       weightLoss = !weightLoss;
+                      wei = 'Weight Loss';
                     }
                     strength = false;
                     hypertrophy = false;
+                    hyp = '';
+                    str = '';
                   });
                 },
                 child: AnimatedContainer(
@@ -467,12 +382,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Weight Loss',
+                        '$wei',
                         style: TextStyle(
                           color: weightLoss ? Colors.white : kPrimaryColor,
                         ),
                       ),
-                      //   Icon(CustomIconspt2.weight),
+                      Icon(CustomIcons.rest),
                     ],
                   ),
                 ),

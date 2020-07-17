@@ -24,16 +24,13 @@ class _OverviewState extends State<Overview> {
         child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                'Progress of Progressions',
-              ),
+            Text(
+              'Progress',
+              style: Theme.of(context).textTheme.headline1,
             ),
             SizedBox(
               height: 10,
             ),
-            Text('One Arm Chin Up:'),
             new CircularPercentIndicator(
               radius: 165.0,
               lineWidth: 10.0,
@@ -80,9 +77,8 @@ class _OverviewState extends State<Overview> {
                   ]),
               progressColor: kPrimaryColor,
             ),
-            Text('Back Lever:'),
             new CircularPercentIndicator(
-              radius: 135.0,
+              radius: 165.0,
               lineWidth: 8.0,
               percent: .35,
               center: Column(
@@ -99,9 +95,8 @@ class _OverviewState extends State<Overview> {
                   ]),
               progressColor: kPrimaryColor,
             ),
-            Text('Back Lever:'),
             new CircularPercentIndicator(
-              radius: 110.0,
+              radius: 165.0,
               lineWidth: 8.0,
               percent: .35,
               progressColor: kPrimaryColor,

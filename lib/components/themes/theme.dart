@@ -16,14 +16,26 @@ ThemeData light = ThemeData(
   // toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.white),
   textTheme: TextTheme(
     //to use ex: style: Theme.of(context).textTheme.headline1
-    button: TextStyle(color: Colors.black),
+    button: TextStyle(color: colorCustom),
     headline1: TextStyle(
         fontSize: 31,
+        fontFamily: 'Hind',
+        color: kPrimaryColor,
+        fontWeight: FontWeight.normal),
+    headline2: TextStyle(
+        fontSize: 31,
         fontFamily: 'Montserrat',
-        fontStyle: FontStyle.italic,
-        color: Colors.black),
+        fontStyle: FontStyle.normal,
+        color: colorCustom),
     headline6: TextStyle(color: kPrimaryColor, fontSize: 26.0),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+    bodyText1:
+        TextStyle(color: kPrimaryColor, fontSize: 14.0, fontFamily: 'Hind'),
+    bodyText2: TextStyle(
+      color: kPrimaryColor,
+      fontSize: 14.0,
+      fontFamily: 'Montserrat',
+      fontStyle: FontStyle.italic,
+    ),
   ),
 );
 

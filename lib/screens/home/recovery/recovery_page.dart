@@ -96,18 +96,6 @@ class _RecoveryState extends State<Recovery>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              //padding: EdgeInsets.all(11),
-//              decoration: BoxDecoration(
-//                  color: kPrimaryLightColor,
-//                  borderRadius: BorderRadius.circular(5),
-//                  boxShadow: [
-//                    BoxShadow(
-//                      color: Colors.grey.withOpacity(0.5),
-//                      spreadRadius: 5,
-//                      blurRadius: 7,
-//                      offset: Offset(0, 3), // changes position of shadow
-//                    ),
-//                  ]),
               child: Opacity(
                 opacity: 0.85,
                 child: FittedBox(
@@ -157,7 +145,7 @@ class _RecoveryState extends State<Recovery>
                 checkCheck(value);
               }),
           SizedBox(
-            height: 15,
+            height: 25,
           ),
 //          AnimatedBuilder(
 //              animation: percent,
@@ -188,7 +176,7 @@ class _RecoveryState extends State<Recovery>
 //                );
 //              }),
           CircularPercentIndicator(
-            radius: 180.0,
+            radius: 200.0,
             lineWidth: 12.0,
             percent: percentDaily,
             progressColor: kPrimaryColor,
