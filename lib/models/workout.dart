@@ -1,15 +1,20 @@
 class Workout {
+  String uid;
   String length;
-  int type;
-  List<int> exercises;
-  int restTime;
+  String goal;
+  List<String> exercises;
+  double restTime;
+  String coolDown;
 
-  Workout(this.length, this.type, this.exercises, this.restTime);
+  Workout(this.uid, this.length, this.goal, this.exercises, this.restTime,
+      this.coolDown);
 
   Map<String, dynamic> toJson() => {
+        'uid': uid,
         'length': length,
-        'type': type,
+        'goal': goal,
         'exercises': exercises,
         'restTime': restTime,
+        'coolDown': coolDown
       };
 }
