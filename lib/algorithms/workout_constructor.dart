@@ -3,115 +3,197 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/provider_widget.dart';
 import 'package:flutter/material.dart';
 
+final db = Firestore.instance;
+List<String> pushList;
+List<String> pullList;
+List<String> pushHorizontalList;
+List<String> pushVerticalList;
+List<String> pullHorizontalList;
+List<String> pullVerticalList;
+List<String> legsExerciseList;
+List<String> exercises;
+String userId;
+String length;
+String goal;
+double restTime;
+String coolDown;
+
 class WorkoutConstructor {
-  var age;
-  var length;
-  var weight; // long vs short
-  var goal; // hyper vs strength
-  var push;
-  var verticalPush;
-  var horizontalPush;
-  var pull;
-  var verticalPull;
-  var horizontalPull;
-
-  final Workout workout = new Workout(null, null, null, null);
-
-  // Calls all functions for push
-  void pushQuery(BuildContext context) {
-    List<String> pushExerciseList = new List();
-    pushExerciseList = pushExercises(pushExerciseList);
-    createWorkout(context, pushExerciseList);
-  }
-
-  /* 
-   * Returns a list of exercises that are of type Push
-   * Starts by querying the database for push exercises
-   * Order them by id and add them to a list
-  */
-  List<String> pushExercises(List<String> pushExerciseList) {
-    pushExerciseList = new List();
-
-    // Query database for push exercises
-    Firestore.instance
-        .collection('Exercise General')
-        .where('type', isEqualTo: 'Push')
-        .orderBy('id', descending: true)
-        .getDocuments()
-        .then((QuerySnapshot docs) {
-      print("returning list of push workouts");
-      print("length of push workouts list is " +
-          docs.documents.length.toString());
-
-      // Add exercises to the list
-      if (docs.documents.isNotEmpty) {
-        for (int i = 0; i < docs.documents.length; i++) {
-          if (!pushExerciseList.contains(docs.documents[i].data.toString())) {
-            pushExerciseList.add(docs.documents[i].data.toString());
-            print("pushworkouts[" +
-                i.toString() +
-                "] = " +
-                pushExerciseList[i].toString());
-          }
-        }
-      }
-    });
-    return pushExerciseList;
-  }
-
   /* 
   * Creates a workout using the user fields
   * Finds the user id and uses it to query the database
-  * Assigns the push exercise to the push variable
-  * If the length is Short(40 min), only assign the user 1 push
-  * If the length is long(1 hour), a vertical and horizontal push query must be implemented
+  * Assigns the exercise to the corresponding list
+  * If the length is short (40 min), only assign the user 1 push and 1 pull
+  * If the length is long (1 hour), assigns a vertical and horizontal for push and pull
+  * Once the exercises have been added, the rest time and cool down is set
+  * After the workout data has been set, a Workout object is created and inialized with the data
+  * Finally, it stores the information into Firebase, using the object data
   */
-  void createWorkout(
-      BuildContext context, List<String> pushExerciseList) async {
-    // Get user id
+  void createWorkout(BuildContext context) async {
     final uid = await ProviderWidget.of(context).auth.getCurrentUID();
-    print("uid: " + uid.toString());
+    userId = uid;
 
-    // Find user by id
     final user = Firestore.instance.collection('Users').document(uid);
-    user.get().then((userData) {
-      goal = userData.data['goal'];
-      length = userData.data['length'];
-      print("goal is: " + goal);
-      print("length is: " + length);
 
-      // Assign exercises based on user fields
-      if (goal == "Strength") {
-        if (length == "Short") {
-          // 1 push
-          push = pushExerciseList[0];
-          print("push asigned for short workout is: " + push);
-          // 1 pull
-          // 1 leg
-          // 3 min rest
-        } else {
-          // 1 horizontal push
-          // 1 vertical push
-          // 1 horizontal pull
-          // 1 vertical pull
-          // 1 leg
-          // 3 min rest
+    user.get().then((userData) {
+      length = userData.data['length'];
+      goal = userData.data['goal'];
+    }).whenComplete(() async {
+      exercises = new List();
+      if (length == "Short") {
+        pushList = new List();
+        pushList = await getExercises("Push", '');
+
+        if (pushList.isNotEmpty) {
+          exercises.add(pushList[0]);
+          print(
+              "-------------- PUSH ELEMENT ADDED TO EXERCISE ARRAY --------------");
+          print(pushList[0]);
+          print("");
+        }
+
+        pullList = new List();
+        pullList = await getExercises("Pull", '');
+
+        if (pullList.isNotEmpty) {
+          exercises.add(pullList[0]);
+          print(
+              "-------------- PULL ELEMENT ADDED TO EXERCISE ARRAY --------------");
+          print(pullList[0]);
+          print("");
         }
       } else {
-        if (length == "Short") {
-          // 1 push
-          // 1 pull
-          // 1 leg
-          // 1.5 min rest
-        } else {
-          // 1 horizontal push
-          // 1 vertical push
-          // 1 horizontal pull
-          // 1 vertical pull
-          // 1 leg
-          // 1.5 min rest
+        pushHorizontalList = new List();
+        pushHorizontalList = await getExercises("Push", 'Horizontal');
+
+        if (pushHorizontalList.isNotEmpty) {
+          exercises.add(pushHorizontalList[0]);
+          print(
+              "--------- PUSH HORIZONTAL ELEMENT ADDED TO EXERCISE ARRAY ---------");
+
+          print(pushHorizontalList[0]);
+          print("");
+        }
+
+        pushVerticalList = new List();
+        pushVerticalList = await getExercises("Push", 'Vertical');
+
+        if (pushVerticalList.isNotEmpty) {
+          exercises.add(pushVerticalList[0]);
+          print(
+              "---------- PUSH VERTICAL ELEMENT ADDED TO EXERCISE ARRAY ----------");
+
+          print(pushVerticalList[0]);
+          print("");
+        }
+
+        pullHorizontalList = new List();
+        pullHorizontalList = await getExercises("Pull", 'Horizontal');
+
+        if (pullHorizontalList.isNotEmpty) {
+          exercises.add(pullHorizontalList[0]);
+          print(
+              "--------- PULL HORIZONTAL ELEMENT ADDED TO EXERCISE ARRAY ---------");
+          print(pullHorizontalList[0]);
+          print("");
+        }
+
+        pullVerticalList = new List();
+        pullVerticalList = await getExercises("Pull", 'Vertical');
+
+        if (pullVerticalList.isNotEmpty) {
+          exercises.add(pullVerticalList[0]);
+          print(
+              "---------- PULL VERTICAL ELEMENT ADDED TO EXERCISE ARRAY ----------");
+          print(pullVerticalList[0]);
+          print("");
         }
       }
+
+      legsExerciseList = new List();
+      legsExerciseList = await getExercises("Legs", '');
+
+      if (legsExerciseList.isNotEmpty) {
+        exercises.add(legsExerciseList[0]);
+        print(
+            "-------------- LEGS ELEMENT ADDED TO EXERCISE ARRAY --------------");
+        print(legsExerciseList[0]);
+        print("");
+      }
+
+      if (goal == "Strength") {
+        // 3 min rest
+        restTime = 3;
+      } else {
+        // 1.5 min rest
+        restTime = 1.5;
+      }
+
+      // cool down
+      coolDown = "Cool Down";
     });
+
+    await Future.delayed(Duration(seconds: 1));
+    final Workout workout =
+        new Workout(userId, length, goal, exercises, restTime, coolDown);
+    await db.collection("Workouts").document(uid).setData(workout.toJson());
+  }
+
+  /* 
+   * Returns a list of exercises that are of the desired type
+   * Starts by checking the length of the workout (short vs long)
+   * It then queries the database for exercises of the desired type and position
+   * The query orders them by ascending id
+   * If the query is succesful, the data is added to a list and returned
+  */
+  Future<List<String>> getExercises(String type, String position) async {
+    List<String> exerciseList = new List();
+    if (position == '') {
+      await db
+          .collection('Exercise General')
+          .where('type', isEqualTo: type)
+          .orderBy('id', descending: false)
+          .getDocuments()
+          .then((QuerySnapshot docs) {
+        if (docs.documents.isNotEmpty) {
+          exerciseList = addToList(exerciseList, docs, type);
+        }
+      });
+    } else {
+      await db
+          .collection('Exercise General')
+          .where('type', isEqualTo: type)
+          .where('position', isEqualTo: position)
+          .orderBy('id', descending: false)
+          .getDocuments()
+          .then((QuerySnapshot docs) {
+        if (docs.documents.isNotEmpty) {
+          exerciseList = addToList(exerciseList, docs, type);
+        }
+      });
+    }
+    return exerciseList;
+  }
+
+  /* 
+   * Adds exercises of the desired type to a list
+   * Loops though the data from the QuerySnapshot and adds each element to a list
+   * Returns the list when completed
+  */
+  List<String> addToList(
+      List<String> exerciseList, QuerySnapshot docs, String type) {
+    print("--------------------------- FROM QUERY ---------------------------");
+    for (int i = 0; i < docs.documents.length; i++) {
+      if (!exerciseList.contains(docs.documents[i].data.toString())) {
+        exerciseList.add(docs.documents[i].data.toString());
+        print(type +
+            " workouts[" +
+            i.toString() +
+            "] = " +
+            exerciseList[i].toString());
+      }
+    }
+    print("");
+    return exerciseList;
   }
 }
