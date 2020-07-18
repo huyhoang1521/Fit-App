@@ -16,8 +16,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 // Need to be pulled/updated from users database
-String name = "NickyP";
-String weight = '159.5';
 String hyp = '';
 String str = '';
 String wei = '';
@@ -286,115 +284,125 @@ class _ProfilePageState extends State<ProfilePage> {
         SizedBox(
           height: 20,
         ),
-        FittedBox(
-          fit: BoxFit.fitWidth,
-          child: Row(
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (strength == false) {
-                      strength = !strength;
-                      str = 'Strength';
-                    }
-                    hypertrophy = false;
-                    weightLoss = false;
-                    hyp = '';
-                    wei = '';
-                  });
-                },
-                child: AnimatedContainer(
-                  width: strength ? 225.0 : _fitWidth,
-                  height: 50.0,
-                  duration: Duration(milliseconds: 750),
-                  decoration: BoxDecoration(
-                      color: strength ? kPrimaryColor : kPrimaryLightColor,
-                      borderRadius: BorderRadiusDirectional.circular(40)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$str',
-                        style: TextStyle(
-                          color: strength ? Colors.white : kPrimaryColor,
+        FutureBuilder(
+            future: getUserInfo(),
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              return FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (strength == false) {
+                            strength = !strength;
+                            str = 'Strength';
+                          }
+                          hypertrophy = false;
+                          weightLoss = false;
+                          hyp = '';
+                          wei = '';
+                        });
+                      },
+                      child: AnimatedContainer(
+                        width: strength ? 225.0 : _fitWidth,
+                        height: 50.0,
+                        duration: Duration(milliseconds: 750),
+                        decoration: BoxDecoration(
+                            color:
+                                strength ? kPrimaryColor : kPrimaryLightColor,
+                            borderRadius: BorderRadiusDirectional.circular(40)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '$str',
+                              style: TextStyle(
+                                color: strength ? Colors.white : kPrimaryColor,
+                              ),
+                            ),
+                            Icon(CustomIcons.stretching),
+                          ],
                         ),
                       ),
-                      Icon(CustomIcons.stretching),
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (hypertrophy == false) {
-                      hypertrophy = !hypertrophy;
-                      hyp = 'Hypertrophy';
-                    }
-                    strength = false;
-                    weightLoss = false;
-                    str = '';
-                    wei = '';
-                  });
-                },
-                child: AnimatedContainer(
-                  width: hypertrophy ? 225.0 : _fitWidth,
-                  height: 50.0,
-                  duration: Duration(milliseconds: 750),
-                  decoration: BoxDecoration(
-                      color: hypertrophy ? kPrimaryColor : kPrimaryLightColor,
-                      borderRadius: BorderRadiusDirectional.circular(40)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$hyp',
-                        style: TextStyle(
-                          color: hypertrophy ? Colors.white : kPrimaryColor,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (hypertrophy == false) {
+                            hypertrophy = !hypertrophy;
+                            hyp = 'Hypertrophy';
+                          }
+                          strength = false;
+                          weightLoss = false;
+                          str = '';
+                          wei = '';
+                        });
+                      },
+                      child: AnimatedContainer(
+                        width: hypertrophy ? 225.0 : _fitWidth,
+                        height: 50.0,
+                        duration: Duration(milliseconds: 750),
+                        decoration: BoxDecoration(
+                            color: hypertrophy
+                                ? kPrimaryColor
+                                : kPrimaryLightColor,
+                            borderRadius: BorderRadiusDirectional.circular(40)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '$hyp',
+                              style: TextStyle(
+                                color:
+                                    hypertrophy ? Colors.white : kPrimaryColor,
+                              ),
+                            ),
+                            Icon(CustomIcons.active__1_),
+                          ],
                         ),
                       ),
-                      Icon(CustomIcons.active__1_),
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (weightLoss == false) {
-                      weightLoss = !weightLoss;
-                      wei = 'Weight Loss';
-                    }
-                    strength = false;
-                    hypertrophy = false;
-                    hyp = '';
-                    str = '';
-                  });
-                },
-                child: AnimatedContainer(
-                  width: weightLoss ? 225.0 : _fitWidth,
-                  height: 50.0,
-                  duration: Duration(milliseconds: 750),
-                  decoration: BoxDecoration(
-                      color: weightLoss ? kPrimaryColor : kPrimaryLightColor,
-                      borderRadius: BorderRadiusDirectional.circular(40)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$wei',
-                        style: TextStyle(
-                          color: weightLoss ? Colors.white : kPrimaryColor,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (weightLoss == false) {
+                            weightLoss = !weightLoss;
+                            wei = 'Weight Loss';
+                          }
+                          strength = false;
+                          hypertrophy = false;
+                          hyp = '';
+                          str = '';
+                        });
+                      },
+                      child: AnimatedContainer(
+                        width: weightLoss ? 225.0 : _fitWidth,
+                        height: 50.0,
+                        duration: Duration(milliseconds: 750),
+                        decoration: BoxDecoration(
+                            color:
+                                weightLoss ? kPrimaryColor : kPrimaryLightColor,
+                            borderRadius: BorderRadiusDirectional.circular(40)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '$wei',
+                              style: TextStyle(
+                                color:
+                                    weightLoss ? Colors.white : kPrimaryColor,
+                              ),
+                            ),
+                            Icon(CustomIcons.rest),
+                          ],
                         ),
                       ),
-                      Icon(CustomIcons.rest),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ),
+              );
+            }),
       ]),
     );
   }
