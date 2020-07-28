@@ -1,6 +1,6 @@
+import 'package:fit_app/screens/home/Overview/overview_button.dart';
 import 'package:fit_app/screens/home/Overview/prog_page.dart';
-import 'package:flutter/rendering.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
@@ -11,9 +11,14 @@ class Overview extends StatefulWidget {
   }
 }
 
+bool pressed = false;
+
+Color green = const Color.fromRGBO(30, 201, 116, 1.0);
+
 class _OverviewState extends State<Overview> {
   @override
   Widget build(BuildContext context) {
+    double _fitWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text('Fit For Life'),
@@ -21,102 +26,72 @@ class _OverviewState extends State<Overview> {
         backgroundColor: kPrimaryColor,
       ),
       body: Center(
-        child: ListView(
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'Progress',
+              'Progress Goals',
               style: Theme.of(context).textTheme.headline1,
             ),
             SizedBox(
-              height: 10,
+              height: titleDiv,
             ),
-            new CircularPercentIndicator(
-              radius: 165.0,
-              lineWidth: 10.0,
-              percent: .5,
-              center: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: GestureDetector(
-                        child: Stack(alignment: Alignment.center, children: [
-                          Container(
-                            decoration: new BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: new DecorationImage(
-                                fit: BoxFit.fitHeight,
-                                colorFilter: new ColorFilter.mode(
-                                    Colors.black.withOpacity(0.4),
-                                    BlendMode.dstATop),
-                                image: AssetImage('assets/images/OAC.jpg'),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            '50%',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ]),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProgressPage()),
-                          );
-                        },
-                      ),
-                      alignment: Alignment.bottomCenter,
-                      width: 100,
-                      height: 100,
-                    ),
-                  ]),
-              progressColor: kPrimaryColor,
+            OverViewButton(
+              text: 'One Arm Chin-up',
+              percentText: '50%',
+              percent: 0.5,
+              image: 'assets/images/OAC.jpg',
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProgressPage()),
+                );
+              },
             ),
-            new CircularPercentIndicator(
-              radius: 165.0,
-              lineWidth: 8.0,
-              percent: .35,
-              center: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: new Image.asset('assets/images/BackLever.jpg'),
-                      alignment: Alignment.bottomCenter,
-                      width: 100,
-                      height: 100,
-                    ),
-                    new Text("35%"),
-                  ]),
-              progressColor: kPrimaryColor,
+            OverViewButton(
+              text: 'Handstand Push-up',
+              percentText: '90%',
+              percent: 0.9,
+              image: 'assets/images/HandStandRollout.jpeg',
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProgressPage()),
+                );
+              },
             ),
-            new CircularPercentIndicator(
-              radius: 165.0,
-              lineWidth: 8.0,
-              percent: .35,
-              progressColor: kPrimaryColor,
-              center: Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(35),
-                    child: new Image.asset(
-                      'assets/images/BackLever.jpg',
-                      width: 75,
-                      height: 100,
-                    ),
-                  ),
-                  Text(
-                    'Back lever',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
+            Stack(children: [
+              OverViewButton(
+                text: 'Back Lever',
+                percentText: '30%',
+                percent: 0.3,
+                image: 'assets/images/BackLever.jpg',
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProgressPage()),
+                  );
+                },
               ),
-            ),
+              AnimatedContainer(
+                color: kPrimaryLightColor,
+                duration: Duration(seconds: 2),
+                width: pressed ? .88 * _fitWidth : 0,
+                height: 160,
+              ),
+              Positioned(
+                bottom: 10,
+                right: 10,
+                child: IconButton(
+                  icon: Icon(Icons.more_horiz, color: kPrimaryColor),
+                  onPressed: () {
+                    setState(() {
+                      pressed = !pressed;
+                    });
+                  },
+                ),
+              ),
+            ]),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
+import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
+import 'package:fit_app/screens/home/stopwatch.dart';
 import 'package:flutter/material.dart';
-import '../../constants.dart';
 import '../../components/rounded_button.dart';
 import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
@@ -57,12 +58,12 @@ class _WorkOutRState extends State<WorkOutR> {
                 bottom: 10,
               ),
               decoration: BoxDecoration(
-                color: kPrimaryColor,
+                color: Colors.black,
               ),
-              child: Image.asset('assets/images/example_logo.jpeg'),
+              child: Image.asset('assets/images/logotest2.png'),
             ),
             DrawerButton(
-                icon: CustomIcons.health_fitness,
+                icon: Iconicks.generated__1_,
                 text: "Workout",
                 color: Theme.of(context).canvasColor,
                 press: () {
@@ -82,7 +83,7 @@ class _WorkOutRState extends State<WorkOutR> {
                   );
                 }),
             DrawerButton(
-                icon: CustomIcons.healthy,
+                icon: Iconicks.prog1,
                 text: "Progress",
                 color: Theme.of(context).canvasColor,
                 press: () {
@@ -130,6 +131,7 @@ class _WorkOutRState extends State<WorkOutR> {
             ),
           ),
         ),
+        StopWatch(),
       ]),
     );
   }
