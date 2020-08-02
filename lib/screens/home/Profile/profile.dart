@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/rounded_image_button.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/Profile/prof_InfoPull.dart';
+import 'package:fit_app/screens/home/Profile/prof_Info_pull.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -33,8 +33,10 @@ bool frontLever = false;
 bool oneArmPushUp = false;
 bool selected = false;
 
+String uuid;
+
 //Pulling from specific user data
-var userData = Firestore.instance.collection("Users").document("uid").get();
+final userData = Firestore.instance.collection("Users");
 
 Future<DocumentSnapshot> getUserInfo() async {
   var firebaseUser = await FirebaseAuth.instance.currentUser();
@@ -42,33 +44,26 @@ Future<DocumentSnapshot> getUserInfo() async {
       .collection("Users")
       .document(firebaseUser.uid)
       .get()
-      .then((userData) {
-    goal = userData.data['goal'];
+      .then((newData) {
+    goal = newData.data['goal'];
+    uuid = firebaseUser.uid;
   }).whenComplete(() async {
-    if (goal == "Strength") {
+    if (goal == "Strength" && strength == false) {
       strength = !strength;
-      hypertrophy = false;
-      weightLoss = false;
-      hyp = '';
       str = 'Strength';
-      wei = '';
-    } else if (goal == "Hypertrophy") {
-      strength = false;
+    } else if (goal == "Hypertrophy" && hypertrophy == false) {
       hypertrophy = !hypertrophy;
-      weightLoss = false;
       hyp = 'Hypertrophy';
-      str = '';
-      wei = '';
-    } else {
-      strength = false;
-      hypertrophy = false;
+    } else if (goal == "Weight Loss" && weightLoss == false) {
       weightLoss = !weightLoss;
-      hyp = '';
-      str = '';
       wei = 'Weight Loss';
     }
     print("goal is " + goal);
   });
+}
+
+Future<void> updateGoal(String goal) async {
+  await userData.document(uuid).updateData({"goal": goal});
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -187,6 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
+                        updateGoal('Strength');
                         setState(() {
                           if (strength == false) {
                             strength = !strength;
@@ -223,6 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        updateGoal('Hypertrophy').then((value) => null);
                         setState(() {
                           if (hypertrophy == false) {
                             hypertrophy = !hypertrophy;
@@ -262,6 +259,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
+                          updateGoal('Weight Loss');
                           if (weightLoss == false) {
                             weightLoss = !weightLoss;
                             wei = 'Weight Loss';
@@ -270,6 +268,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           hypertrophy = false;
                           hyp = '';
                           str = '';
+                          print(weightLoss);
                         });
                       },
                       child: AnimatedContainer(

@@ -10,7 +10,7 @@ List<String> pushHorizontalList;
 List<String> pushVerticalList;
 List<String> pullHorizontalList;
 List<String> pullVerticalList;
-List<String> legsExerciseList;
+List<String> legsList;
 List<String> exercises;
 String userId;
 String length;
@@ -110,14 +110,14 @@ class WorkoutConstructor {
         }
       }
 
-      legsExerciseList = new List();
-      legsExerciseList = await getExercises("Legs", '');
+      legsList = new List();
+      legsList = await getExercises("Legs", '');
 
-      if (legsExerciseList.isNotEmpty) {
-        exercises.add(legsExerciseList[0]);
+      if (legsList.isNotEmpty) {
+        exercises.add(legsList[0]);
         print(
             "-------------- LEGS ELEMENT ADDED TO EXERCISE ARRAY --------------");
-        print(legsExerciseList[0]);
+        print(legsList[0]);
         print("");
       }
 
