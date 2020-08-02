@@ -41,7 +41,10 @@ class RecoveryCheckBlock extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(icon),
-            Text(text),
+            Text(
+              text,
+              style: Theme.of(context).textTheme.headline3,
+            ),
             Checkbox(
               checkColor: kPrimaryLightColor,
               activeColor: kPrimaryColor,

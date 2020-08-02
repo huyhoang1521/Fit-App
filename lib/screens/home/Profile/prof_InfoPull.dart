@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
+import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/components/profile_info_text.dart';
+import 'package:fit_app/screens/home/Profile/profile_info_text.dart';
 
 class ProfileInfo extends StatefulWidget {
   @override
@@ -44,9 +45,13 @@ class _ProfileInfoState extends State<ProfileInfo> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ProfileTextBox(
-              text: 'Name: ', //document['firstName'],
+              text: 'Name: ',
               icon: Icons.person_outline,
               userData: snapshot.data.data['firstName'],
+//              press:
+//              setState(() {
+//                snapshot.data.data['firstName'] = userData;
+//              }),
             ),
             ProfileTextBox(
               text: 'Weight: ',
@@ -60,7 +65,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
             ),
             ProfileTextBox(
               text: 'Birth Date: ',
-              icon: Icons.cake,
+              icon: Iconicks.birthday2,
               userData: snapshot.data.data['dob'],
             ),
           ],
