@@ -72,15 +72,15 @@ flutter:
         - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
           style: italic
         - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
-  #      - asset: fonts/Montserrat/Montserrat-ExtraBold.ttf
+          #      - asset: fonts/Montserrat/Montserrat-ExtraBold.ttf
           style: normal
-    - family:  CustomIcons
+    - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
-    - family:  CustomIconspt2
+    - family: CustomIconspt2
       fonts:
         - asset: assets/icons/CustomIconspt2.ttf
-    - family:  SIcons
+    - family: SIcons
       fonts:
         - asset: assets/icons/SIcons.ttf
   #   - family: Trajan Pro

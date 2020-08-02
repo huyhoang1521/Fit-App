@@ -24,10 +24,12 @@ class _Info extends State<Info> {
   var txt = TextEditingController();
   //String _dob;
   int _weight;
+  int _userHeight;
 
   void setVars() {
     user.dob = txt.text;
     user.weight = _weight;
+    user.height = _userHeight;
   }
 
   Widget datetime() {
@@ -98,6 +100,43 @@ class _Info extends State<Info> {
                     txt.text = _dateTime.toString();
                   },
                 ),
+                CustomPressField(
+                  hintText: "Height",
+                  control: txt,
+                  press: () {
+                    print("tapped");
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext builder) {
+                          return CupertinoPicker(
+                            children: <Widget>[
+                              Text(
+                                "TextWidget",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "TextWidget",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                "TextWidget",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                            itemExtent: 50, //height of each item
+                            looping: true,
+                            onSelectedItemChanged: (int index) {
+                              //selectitem = index;
+                            },
+                          );
+                        });
+                    txt.text = _dateTime.toString();
+                  },
+                ),
+                CustomNumberField(
+                    hintText: "Height",
+                    keyboard: TextInputType.number,
+                    onChanged: (value) => _userHeight = int.parse(value)),
                 CustomNumberField(
                     hintText: "Weight",
                     keyboard: TextInputType.number,
