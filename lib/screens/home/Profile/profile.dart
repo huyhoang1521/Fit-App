@@ -41,7 +41,34 @@ Future<DocumentSnapshot> getUserInfo() async {
   return await Firestore.instance
       .collection("Users")
       .document(firebaseUser.uid)
-      .get();
+      .get()
+      .then((userData) {
+    goal = userData.data['goal'];
+  }).whenComplete(() async {
+    if (goal == "Strength") {
+      strength = !strength;
+      hypertrophy = false;
+      weightLoss = false;
+      hyp = '';
+      str = 'Strength';
+      wei = '';
+    } else if (goal == "Hypertrophy") {
+      strength = false;
+      hypertrophy = !hypertrophy;
+      weightLoss = false;
+      hyp = 'Hypertrophy';
+      str = '';
+      wei = '';
+    } else {
+      strength = false;
+      hypertrophy = false;
+      weightLoss = !weightLoss;
+      hyp = '';
+      str = '';
+      wei = 'Weight Loss';
+    }
+    print("goal is " + goal);
+  });
 }
 
 class _ProfilePageState extends State<ProfilePage> {

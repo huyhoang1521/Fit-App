@@ -5,6 +5,8 @@ import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/screens/home/Profile/profile_info_text.dart';
 
+String goal;
+
 class ProfileInfo extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
