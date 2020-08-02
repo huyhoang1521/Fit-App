@@ -5,6 +5,11 @@ import '../../../constants.dart';
 import 'package:fit_app/constants.dart';
 import 'dart:ui';
 
+// Used to Select users workout goals
+bool strength = false;
+bool hypertrophy = false;
+bool weightLoss = false;
+
 class Settings extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -47,6 +52,7 @@ class _SettingsState extends State<Settings> {
           ]),
           Consumer<ThemeNotifier>(
             builder: (context, notifier, child) => SwitchListTile(
+              activeColor: kPrimaryColor,
               title: Text("Dark Mode"),
               onChanged: (val) {
                 notifier.toggleTheme();

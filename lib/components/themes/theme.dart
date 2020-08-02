@@ -60,6 +60,7 @@ ThemeData dark = ThemeData(
   primarySwatch: colorCustom,
   accentColor: lightColorCustom,
   canvasColor: Colors.black12,
+  scaffoldBackgroundColor: Colors.black12,
   buttonTheme: ButtonThemeData(
     buttonColor: lightColorCustom,
     textTheme:

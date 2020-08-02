@@ -1,8 +1,8 @@
-import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/rounded_image_button.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
+import 'package:fit_app/screens/home/Profile/fitness_goal.dart';
 import 'package:fit_app/screens/home/Profile/prof_InfoPull.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +16,10 @@ class ProfilePage extends StatefulWidget {
   }
 }
 
-// Need to be pulled/updated from users database
-String hyp = '';
-String str = '';
-String wei = '';
-
 // Used to Select users workout goals
-bool strength = false;
-bool hypertrophy = false;
-bool weightLoss = false;
+bool _strength = false;
+bool _hypertrophy = false;
+bool _weightLoss = false;
 bool planche = false;
 bool oneArmChinUp = false;
 bool handStandPushup = false;
@@ -44,10 +39,13 @@ Future<DocumentSnapshot> getUserInfo() async {
       .get();
 }
 
+void setWeightloss() async {
+  _weightLoss = true;
+}
+
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    double _fitWidth = (MediaQuery.of(context).size.width) / 3;
     return Scaffold(
       appBar: AppBar(
         title: Text('Get Fit With Nick!'),
@@ -78,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: oneArmChinUp ? Colors.white : kPrimaryColor,
           buttonColor: oneArmChinUp ? kPrimaryColor : kPrimaryLightColor,
           text: 'One Arm Chin Up',
-          image: 'assets/images/OpenImg.png',
+          image: 'assets/images/pullup_up.png',
           press: () {
             setState(() {
               oneArmChinUp = !oneArmChinUp;
@@ -153,128 +151,92 @@ class _ProfilePageState extends State<ProfilePage> {
         FutureBuilder(
             future: getUserInfo(),
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-              return FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (strength == false) {
-                            strength = !strength;
-                            str = 'Strength';
-                          }
-                          hypertrophy = false;
-                          weightLoss = false;
-                          hyp = '';
-                          wei = '';
-                        });
-                      },
-                      child: AnimatedContainer(
-                        width: strength ? 225.0 : _fitWidth,
-                        height: 55.0,
-                        duration: Duration(milliseconds: 750),
-                        decoration: BoxDecoration(
-                            color:
-                                strength ? kPrimaryColor : kPrimaryLightColor,
-                            borderRadius: BorderRadiusDirectional.circular(40)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '$str',
-                              style: TextStyle(
-                                color: strength ? Colors.white : kPrimaryColor,
-                              ),
-                            ),
-                            SizedBox(width: strength ? 10 : 0),
-                            Icon(Iconicks.strength1_1),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (hypertrophy == false) {
-                            hypertrophy = !hypertrophy;
-                            hyp = 'Hypertrophy';
-                          }
-                          strength = false;
-                          weightLoss = false;
-                          str = '';
-                          wei = '';
-                        });
-                      },
-                      child: AnimatedContainer(
-                        width: hypertrophy ? 225.0 : _fitWidth,
-                        height: 55.0,
-                        duration: Duration(milliseconds: 750),
-                        decoration: BoxDecoration(
-                            color: hypertrophy
-                                ? kPrimaryColor
-                                : kPrimaryLightColor,
-                            borderRadius: BorderRadiusDirectional.circular(40)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '$hyp',
-                              style: TextStyle(
-                                color:
-                                    hypertrophy ? Colors.white : kPrimaryColor,
-                              ),
-                            ),
-                            SizedBox(width: hypertrophy ? 10 : 0),
-                            Icon(Iconicks.bodybuilder2),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (weightLoss == false) {
-                            weightLoss = !weightLoss;
-                            wei = 'Weight Loss';
-                          }
-                          strength = false;
-                          hypertrophy = false;
-                          hyp = '';
-                          str = '';
-                        });
-                      },
-                      child: AnimatedContainer(
-                        width: weightLoss ? 225.0 : _fitWidth,
-                        height: 55.0,
-                        duration: Duration(milliseconds: 750),
-                        decoration: BoxDecoration(
-                            color:
-                                weightLoss ? kPrimaryColor : kPrimaryLightColor,
-                            borderRadius: BorderRadiusDirectional.circular(40)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '$wei',
-                              style: TextStyle(
-                                color:
-                                    weightLoss ? Colors.white : kPrimaryColor,
-                              ),
-                            ),
-                            SizedBox(width: weightLoss ? 10 : 0),
-                            Icon(Iconicks.wl2),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              if (!snapshot.hasData) return Text("Loading");
+              if (snapshot.data.data['goal'] == 'Strength') setStrength();
+              //setState(() {
+//                strength = true;
+//              hypertrophy = false;
+//              weightLoss = false;
+              //  });
+              if (snapshot.data.data['goal'] == 'Hypertrophy') setHypertrophy();
+              // setState(() {
+//                strength = false;
+//              hypertrophy = true;
+//              weightLoss = false;
+              //  });
+              if (snapshot.data.data['goal'] == 'Weight Loss') setWeightloss();
+              //  setState(() {
+//                strength = false;
+//              hypertrophy = false;
+//              weightLoss = true;
+              //   });
+
+              return Column(
+                children: [
+                  Text(snapshot.data.data['goal']),
+                  Row(children: [
+                    FitnessGoal(
+                        goal: _strength,
+                        icon: Iconicks.strength1_1,
+                        text: 'Strength',
+                        press: () {
+                          setState(() {
+                            if (_strength == false) {
+                              _strength = !_strength;
+                              //snapshot.data.data['goal'] = 'Strength';
+                            }
+                            _weightLoss = false;
+                            _hypertrophy = false;
+                          });
+                        }),
+                    FitnessGoal(
+                        goal: _hypertrophy,
+                        icon: Iconicks.bodybuilder2,
+                        text: 'Hypertrophy',
+                        press: () {
+                          setState(() {
+                            if (_hypertrophy == false) {
+                              _hypertrophy = !_hypertrophy;
+                            }
+                            _weightLoss = false;
+                            _strength = false;
+                          });
+                        }),
+                    FitnessGoal(
+                        goal: _weightLoss,
+                        icon: Iconicks.wl2,
+                        text: 'Weight Loss',
+                        press: () {
+                          setState(() {
+                            if (_weightLoss == false) {
+                              _weightLoss = !_weightLoss;
+                            }
+                            _hypertrophy = false;
+                            _strength = false;
+                          });
+                        }),
+                  ]),
+                ],
               );
             }),
         SizedBox(height: newSect),
       ]),
     );
   }
+}
+
+void setHypertrophy() async {
+  // setState(() {
+  _strength = false;
+  _hypertrophy = true;
+  _weightLoss = false;
+  //  });
+}
+
+void setStrength() async {
+  //setState(() {
+  _strength = true;
+  _hypertrophy = false;
+  _weightLoss = false;
+  //  });
 }

@@ -204,7 +204,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                       text: "Finish",
                       press: () async {
                         setVars();
-                        // save data to fiebase
+                        // save data to firebase
                         final uid = await ProviderWidget.of(context)
                             .auth
                             .getCurrentUID();

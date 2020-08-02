@@ -61,7 +61,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
             ProfileTextBox(
               text: 'Height: ',
               icon: CustomIcons.height,
-              userData: snapshot.data.data['firstName'],
+              userData: snapshot.data.data['weight'].toString(),
             ),
             ProfileTextBox(
               text: 'Birth Date: ',

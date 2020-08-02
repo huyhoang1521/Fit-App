@@ -75,12 +75,84 @@ class _OverviewState extends State<Overview> {
               ),
               AnimatedContainer(
                 color: kPrimaryLightColor,
-                duration: Duration(seconds: 2),
+                duration: Duration(seconds: 1),
                 width: pressed ? .88 * _fitWidth : 0,
                 height: 160,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: GestureDetector(
+                            child: Container(
+                              height: 30,
+                              width: .75 * _fitWidth,
+                              decoration: BoxDecoration(
+                                  color: kPrimaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                              child: Center(
+                                child: Text(
+                                  'Back Lever',
+                                  style: TextStyle(color: kPrimaryLightColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: GestureDetector(
+                            child: Container(
+                              height: 30,
+                              width: .75 * _fitWidth,
+                              decoration: BoxDecoration(
+                                  color: kPrimaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                              child: Center(
+                                child: Text(
+                                  'Front Lever',
+                                  style: TextStyle(color: kPrimaryLightColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: GestureDetector(
+                            child: Container(
+                              height: 30,
+                              width: .75 * _fitWidth,
+                              decoration: BoxDecoration(
+                                  color: kPrimaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                              child: Center(
+                                child: Text(
+                                  'One Arm Pull Up',
+                                  style: TextStyle(color: kPrimaryLightColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Positioned(
-                bottom: 10,
+                top: 10,
                 right: 10,
                 child: IconButton(
                   icon: Icon(Icons.more_horiz, color: kPrimaryColor),

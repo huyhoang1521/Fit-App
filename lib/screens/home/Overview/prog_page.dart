@@ -58,10 +58,6 @@ class _ProgressPageState extends State<ProgressPage> {
                         percent: .5,
                         progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text(
-                          '50%',
-                          style: Theme.of(context).textTheme.headline3,
-                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -73,10 +69,6 @@ class _ProgressPageState extends State<ProgressPage> {
                         percent: .35,
                         progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text(
-                          '35%',
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -86,8 +78,6 @@ class _ProgressPageState extends State<ProgressPage> {
                         percent: .9,
                         progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text("90%",
-                            style: Theme.of(context).textTheme.headline3),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -149,7 +139,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       LinearPercentIndicator(
                         percent: .99,
-                        progressColor: green1,
+                        progressColor: kPrimaryColor,
                         lineHeight: 15,
                       ),
                       Padding(
@@ -161,9 +151,8 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       LinearPercentIndicator(
                         percent: .9,
-                        progressColor: green1,
+                        progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text("90%"),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

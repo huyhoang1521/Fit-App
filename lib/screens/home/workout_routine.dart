@@ -1,5 +1,7 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
+import 'package:fit_app/screens/home/Profile/profile_test_page.dart';
+import 'package:fit_app/screens/home/Routine.dart';
 import 'package:fit_app/screens/home/stopwatch.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
@@ -15,13 +17,6 @@ class WorkOutR extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _WorkOutRState();
-  }
-}
-
-class Routine extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _RoutineState();
   }
 }
 
@@ -124,7 +119,10 @@ class _WorkOutRState extends State<WorkOutR> {
               //  color: kPrimaryColor,
               textColor: Colors.white,
               press: () {
-                Routine();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RoutinePage()),
+                );
               },
               text: 'Start Workout',
               //onLongPress: ,
@@ -132,19 +130,19 @@ class _WorkOutRState extends State<WorkOutR> {
           ),
         ),
         StopWatch(),
+        RoundedButton(
+          //  color: kPrimaryColor,
+          textColor: Colors.white,
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileTest()),
+            );
+          },
+          text: 'TEST PAGE',
+          //onLongPress: ,
+        ),
       ]),
-    );
-  }
-}
-
-class _RoutineState extends State<Routine> {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Text('Exercise num'),
-        Icon(Icons.contact_phone),
-      ],
     );
   }
 }
