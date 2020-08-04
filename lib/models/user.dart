@@ -3,6 +3,7 @@ class User {
   String lastName;
   String email;
   String dob;
+  int height;
   int weight;
   String goal;
   String length;
@@ -20,6 +21,7 @@ class User {
       this.length,
       this.equipment,
       this.prefferedExercises,
+      this.height,
       this.progressions);
 
   Map<String, dynamic> toJson() => {
@@ -27,6 +29,7 @@ class User {
         'lastName': lastName,
         'email': email,
         'dob': dob,
+        'height': height,
         'weight': weight,
         'goal': goal,
         'length': length,

@@ -5,6 +5,8 @@ import '../../../constants.dart';
 import 'package:fit_app/screens/home/recovery/widgets/recovery_checkBlock.dart';
 import 'package:flutter/animation.dart';
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
+import 'package:confetti/confetti.dart';
+import 'dart:math';
 
 class Recovery extends StatefulWidget {
   @override
@@ -29,6 +31,13 @@ class _RecoveryState extends State<Recovery>
 
   //Animation Controller for progress bar
   // Slowly fills bar instead of instantaneous
+
+  ConfettiController _controllerCenterLeft;
+  ConfettiController _controllerCenter;
+  ConfettiController _controllerCenterRight;
+  ConfettiController _controllerTopCenter;
+  ConfettiController _controllerBottomCenter;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +51,17 @@ class _RecoveryState extends State<Recovery>
         // Empty setState because the updated value is already in the animation field
         setState(() {});
       });
+    _controllerCenter =
+        ConfettiController(duration: const Duration(seconds: 2));
+    _controllerCenterRight =
+        ConfettiController(duration: const Duration(seconds: 2));
+    _controllerTopCenter =
+        ConfettiController(duration: const Duration(seconds: 2));
+    _controllerBottomCenter =
+        ConfettiController(duration: const Duration(seconds: 2));
+    _controllerCenterLeft =
+        ConfettiController(duration: const Duration(seconds: 2));
+    super.initState();
   }
 
   //Calling current %boxes checked
@@ -65,6 +85,7 @@ class _RecoveryState extends State<Recovery>
         setState(() {
           percentDaily += 0.25;
           setNewPosition();
+          cannonCheck(percentDaily);
         });
       } else
         setState(() {
@@ -74,10 +95,21 @@ class _RecoveryState extends State<Recovery>
     });
   }
 
+  cannonCheck(percentDaily) {
+    if (percentDaily == 1.00) {
+      _controllerCenterRight.play();
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
     animController.dispose();
+    _controllerCenterLeft.dispose();
+    _controllerCenter.dispose();
+    _controllerCenterRight.dispose();
+    _controllerTopCenter.dispose();
+    _controllerBottomCenter.dispose();
   }
 
   @override
@@ -88,120 +120,218 @@ class _RecoveryState extends State<Recovery>
         elevation: 5,
         //  backgroundColor: kPrimaryColor,
       ),
-      body: ListView(
-        primary: false,
-        padding: const EdgeInsets.all(0),
-        shrinkWrap: true,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: Opacity(
-                opacity: 0.85,
-                child: FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(
-                    'Maximize your gains!',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontStyle: FontStyle.italic,
+      body: Stack(
+        children: [
+          Column(
+//        primary: false,
+//        padding: const EdgeInsets.all(0),
+//        shrinkWrap: true,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  child: Opacity(
+                    opacity: 0.85,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        'Maximize your gains!',
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-          SizedBox(height: 15),
-          RecoveryCheckBlock(
-              text: 'Fully Hydrated',
-              icon: CustomIcons.hydration,
-              value: hydration,
-              onChanged: (bool value) {
-                hydration = value;
-                checkCheck(value);
-              }),
-          RecoveryCheckBlock(
-              text: 'Daily Active Rest',
-              icon: CustomIcons.active__1_,
-              value: activeRest,
-              onChanged: (bool value) {
-                activeRest = value;
-                checkCheck(value);
-              }),
-          RecoveryCheckBlock(
-              text: '~ 8 Hours of sleep',
-              icon: Icons.snooze,
-              value: sleep,
-              onChanged: (bool value) {
-                sleep = value;
-                checkCheck(value);
-              }),
-          RecoveryCheckBlock(
-              text: '5 minutes of stretching',
-              icon: CustomIcons.stretching,
-              value: stretch,
-              onChanged: (bool value) {
-                stretch = value;
-                checkCheck(value);
-              }),
-          SizedBox(
-            height: 25,
-          ),
-//          AnimatedBuilder(
-//              animation: percent,
-//              builder: (context, child) {
-//                return CircularPercentIndicator(
-//                  radius: 180.0,
-//                  lineWidth: 12.0,
-//                  percent: percent.value,
-//                  progressColor: kPrimaryColor,
-//                  center: Column(
-//                    mainAxisAlignment: MainAxisAlignment.end,
-//                    children: [
-//                      ClipRRect(
-//                        borderRadius: BorderRadius.circular(35),
-//                        child: new Icon(
-//                          Icons.battery_charging_full,
-//                        ),
-//                      ),
-//                      Text(
-//                        '% to optimal recovery',
-//                        style: TextStyle(color: Colors.black),
-//                      ),
-//                      SizedBox(
-//                        height: 75,
-//                      ),
-//                    ],
-//                  ),
-//                );
-//              }),
-          CircularPercentIndicator(
-            radius: 200.0,
-            lineWidth: 12.0,
-            percent: percentDaily,
-            progressColor: kPrimaryColor,
-            animation: true,
-            animateFromLastPercent: true,
-            animationDuration: 1000,
-            center: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(35),
-                  child: new Icon(
-                    Icons.battery_charging_full,
+              SizedBox(height: 15),
+              RecoveryCheckBlock(
+                  text: 'Fully Hydrated',
+                  icon: CustomIcons.hydration,
+                  value: hydration,
+                  onChanged: (bool value) {
+                    hydration = value;
+                    checkCheck(value);
+                  }),
+              RecoveryCheckBlock(
+                  text: 'Daily Active Rest',
+                  icon: CustomIcons.active__1_,
+                  value: activeRest,
+                  onChanged: (bool value) {
+                    activeRest = value;
+                    checkCheck(value);
+                  }),
+              RecoveryCheckBlock(
+                  text: '~ 8 Hours of sleep',
+                  icon: Icons.snooze,
+                  value: sleep,
+                  onChanged: (bool value) {
+                    sleep = value;
+                    checkCheck(value);
+                  }),
+              RecoveryCheckBlock(
+                  text: '5 minutes of stretching',
+                  icon: CustomIcons.stretching,
+                  value: stretch,
+                  onChanged: (bool value) {
+                    stretch = value;
+                    checkCheck(value);
+                  }),
+              SizedBox(
+                height: 25,
+              ),
+              CircularPercentIndicator(
+                radius: 200.0,
+                lineWidth: 12.0,
+                percent: percentDaily,
+                progressColor: kPrimaryColor,
+                animation: true,
+                animateFromLastPercent: true,
+                animationDuration: 1000,
+                center: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(35),
+                        child: new Icon(
+                          Icons.battery_charging_full,
+                          size: 40,
+                        ),
+                      ),
+                      Text(
+                        '%',
+                        style: TextStyle(fontSize: 30, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
-                Text(
-                  '% to optimal recovery',
-                  style: TextStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: 75,
-                ),
-              ],
+              )
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ConfettiWidget(
+              confettiController: _controllerCenterLeft,
+              blastDirection: -pi / 4,
+              // radial value - RIGHT
+              emissionFrequency: 0.6,
+              minimumSize: const Size(10, 10),
+              // set the minimum potential size for the confetti (width, height)
+              maximumSize: const Size(50, 50),
+              // set the maximum potential size for the confetti (width, height)
+              numberOfParticles: 1,
+              gravity: 0.1,
             ),
-          )
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: ConfettiWidget(
+              confettiController: _controllerCenter,
+              blastDirectionality: BlastDirectionality.explosive,
+              emissionFrequency: 0.6,
+              minimumSize: const Size(10, 10),
+              // set the minimum potential size for the confetti (width, height)
+              maximumSize: const Size(50, 50),
+              // set the maximum potential size for the confetti (width, height)
+              numberOfParticles: 1,
+              gravity: 0.1,
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: ConfettiWidget(
+              confettiController: _controllerCenterRight,
+              blastDirection: pi, // radial value - LEFT
+              particleDrag: 0.05, // apply drag to the confetti
+              emissionFrequency: 0.05, // how often it should emit
+              numberOfParticles: 20, // number of particles to emit
+              gravity: 0.05, // gravity - or fall speed
+              shouldLoop: false,
+              colors: const [
+                Colors.green,
+                Colors.blue,
+                Colors.pink
+              ], // manually specify the colors to be used
+            ),
+          ),
+//          Align(
+//            alignment: Alignment.centerRight,
+//            child: FlatButton(
+//              child: Icon(Iconicks.generated),
+//              onPressed: () {
+//                _controllerCenterRight.play();
+//              },
+//            ),
+//          ),
+//
+//          //CENTER LEFT - Emit right
+//          Align(
+//            alignment: Alignment.centerLeft,
+//            child: ConfettiWidget(
+//              confettiController: _controllerCenterLeft,
+//              blastDirection: 0, // radial value - RIGHT
+//              emissionFrequency: 0.6,
+//              minimumSize: const Size(10,
+//                  10), // set the minimum potential size for the confetti (width, height)
+//              maximumSize: const Size(50,
+//                  50), // set the maximum potential size for the confetti (width, height)
+//              numberOfParticles: 1,
+//              gravity: 0.1,
+//            ),
+//          ),
+//          Align(
+//            alignment: Alignment.centerLeft,
+//            child: FlatButton(
+//              child: Icon(Iconicks.generated),
+//              onPressed: () {
+//                _controllerCenterLeft.play();
+//              },
+//            ),
+//          ),
+//
+//          //TOP CENTER - shoot down
+//          Align(
+//            alignment: Alignment.topCenter,
+//            child: ConfettiWidget(
+//              confettiController: _controllerTopCenter,
+//              blastDirection: pi / 2,
+//              maxBlastForce: 5, // set a lower max blast force
+//              minBlastForce: 2, // set a lower min blast force
+//              emissionFrequency: 0.05,
+//              numberOfParticles: 50, // a lot of particles at once
+//              gravity: 1,
+//            ),
+//          ),
+//          Align(
+//            alignment: Alignment.topCenter,
+//            child: FlatButton(
+//              child: Icon(Iconicks.generated),
+//              onPressed: () {
+//                _controllerTopCenter.play();
+//              },
+//            ),
+//          ),
+//          //BOTTOM CENTER
+//          Align(
+//            alignment: Alignment.bottomCenter,
+//            child: ConfettiWidget(
+//              confettiController: _controllerBottomCenter,
+//              blastDirection: -pi / 2,
+//              emissionFrequency: 0.01,
+//              numberOfParticles: 20,
+//              maxBlastForce: 100,
+//              minBlastForce: 80,
+//              gravity: 0.3,
+//            ),
+//          ),
+//          Align(
+//            alignment: Alignment.bottomCenter,
+//            child: FlatButton(
+//              child: Icon(Iconicks.generated),
+//              onPressed: () {
+//                _controllerBottomCenter.play();
+//              },
+//            ),
+//          ),
         ],
       ),
     );

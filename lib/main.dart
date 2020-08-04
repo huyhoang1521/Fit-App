@@ -4,9 +4,8 @@ import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
 import 'package:provider/provider.dart';
 import 'components/themes/theme.dart';
-import 'screens/form/welcome.dart';
-import 'screens/form/general.dart';
 import 'screens/form/first_view.dart';
+import 'screens/form/sign_in.dart';
 //import 'screens/test.dart';
 
 void main() => runApp(MyApp());
@@ -24,12 +23,8 @@ class MyApp extends StatelessWidget {
               theme: notifier.darkTheme ? dark : light,
               home: HomeController(),
               routes: <String, WidgetBuilder>{
-                '/signUp': (BuildContext context) =>
-                    Welcome(authFormType: AuthFormType.signUp),
-                '/signIn': (BuildContext context) =>
-                    Welcome(authFormType: AuthFormType.signIn),
+                '/signIn': (BuildContext context) => SignIn(),
                 '/home': (BuildContext context) => HomeController(),
-                '/general': (BuildContext context) => General(),
               },
             );
           },

@@ -8,6 +8,7 @@ ThemeData light = ThemeData(
   accentColor: kPrimaryLightColor,
   scaffoldBackgroundColor: Color(0xfff1f1f1),
   canvasColor: Colors.white,
+  unselectedWidgetColor: Colors.black,
   buttonTheme: ButtonThemeData(
     buttonColor: colorCustom,
     textTheme:
@@ -19,22 +20,37 @@ ThemeData light = ThemeData(
     button: TextStyle(color: colorCustom),
     headline1: TextStyle(
         fontSize: 31,
-        fontFamily: 'Hind',
+        fontFamily: 'OpenSans',
         color: kPrimaryColor,
         fontWeight: FontWeight.normal),
     headline2: TextStyle(
-        fontSize: 31,
+        fontSize: 26,
+        fontFamily: 'Montserrat',
+        fontStyle: FontStyle.normal,
+        color: colorCustom),
+    headline4: TextStyle(
+        fontSize: 20,
         fontFamily: 'Montserrat',
         fontStyle: FontStyle.normal,
         color: colorCustom),
     headline6: TextStyle(color: kPrimaryColor, fontSize: 26.0),
-    bodyText1:
-        TextStyle(color: kPrimaryColor, fontSize: 14.0, fontFamily: 'Hind'),
+    headline3: TextStyle(
+      color: Colors.black,
+      fontSize: 14.0,
+      fontFamily: 'Montserrat',
+      fontStyle: FontStyle.normal,
+      //fontWeight: FontWeight.bold
+    ),
+    bodyText1: TextStyle(
+        color: kPrimaryColor,
+        fontSize: 14.0,
+        fontFamily: 'Montserrat',
+        fontStyle: FontStyle.normal),
     bodyText2: TextStyle(
       color: kPrimaryColor,
       fontSize: 14.0,
-      fontFamily: 'Montserrat',
-      fontStyle: FontStyle.italic,
+      fontFamily: 'OpenSans',
+      fontStyle: FontStyle.normal,
     ),
   ),
 );
@@ -50,10 +66,19 @@ ThemeData dark = ThemeData(
         ButtonTextTheme.primary, //  <-- this auto selects the right color
   ),
   textTheme: TextTheme(
-    button: TextStyle(color: Colors.grey),
-    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-  ),
+      button: TextStyle(color: Colors.grey),
+      headline1: TextStyle(
+          fontSize: 31,
+          fontFamily: 'OpenSans',
+          color: Colors.grey,
+          fontWeight: FontWeight.normal),
+      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      bodyText2: TextStyle(
+        color: kPrimaryColor,
+        fontSize: 14.0,
+        fontFamily: 'OpenSans',
+        fontStyle: FontStyle.normal,
+      )),
 );
 
 class ThemeNotifier extends ChangeNotifier {

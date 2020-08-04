@@ -51,12 +51,6 @@ class FirstView extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => SignUp(user: user)),
                     );
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Welcome(
-                              authFormType: AuthFormType.signUp, user: user)),
-                    );*/
                   },
                 ),
                 SizedBox(height: _height * 0.05),

@@ -31,6 +31,10 @@ dependencies:
   cloud_firestore:
   firebase_auth:
 
+  confetti: ^0.5.2
+
+  stop_watch_timer:
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
@@ -71,16 +75,34 @@ flutter:
         - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
         - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
           style: italic
-        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
-  #      - asset: fonts/Montserrat/Montserrat-ExtraBold.ttf
+        #        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+        #          style: normal
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
           style: normal
-    - family:  CustomIcons
+    #        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+    #          style: semiBold
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/Open_Sans/OpenSans-Regular.ttf
+          style: normal
+        - asset: assets/fonts/Open_Sans/OpenSans-Italic.ttf
+          style: italic
+
+    - family: Strength
+      fonts:
+        - asset: assets/icons/Strength.ttf
+
+    - family: Iconicks
+      fonts:
+        - asset: assets/icons/Iconicks.ttf
+
+    - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
-    - family:  CustomIconspt2
+    - family: CustomIconspt2
       fonts:
         - asset: assets/icons/CustomIconspt2.ttf
-    - family:  SIcons
+    - family: SIcons
       fonts:
         - asset: assets/icons/SIcons.ttf
   #   - family: Trajan Pro

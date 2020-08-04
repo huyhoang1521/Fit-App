@@ -4,6 +4,10 @@ const kPrimaryColor = Color(0xFF6F35A5);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 const cream = Color(0xfff1f1f1);
 
+//Consistent Spacing
+const double newSect = 25;
+const double titleDiv = 15;
+
 Map<int, Color> color = {
   50: Color.fromRGBO(132, 62, 166, .1),
   100: Color.fromRGBO(132, 62, 166, .2),

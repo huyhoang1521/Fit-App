@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../../../constants.dart';
 
 class ProfileTextBox extends StatelessWidget {
   final String text;
   final IconData icon;
   final String userData;
+  final Function press;
   const ProfileTextBox({
     Key key,
     this.text,
     this.icon,
     this.userData,
+    this.press,
   }) : super(key: key);
 
   // final controller = TextEditingController(text: 'NickyP');
@@ -45,8 +47,8 @@ class ProfileTextBox extends StatelessWidget {
         new Flexible(
           child: TextFormField(
             controller: TextEditingController()..text = userData,
-            style: Theme.of(context).textTheme.bodyText1,
-            onChanged: (text) => {},
+            style: Theme.of(context).textTheme.bodyText2,
+            onChanged: (text) => {press},
             decoration: InputDecoration(
               border: InputBorder.none,
             ),
