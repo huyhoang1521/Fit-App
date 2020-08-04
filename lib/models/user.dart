@@ -8,9 +8,19 @@ class User {
   String length;
   String equipment;
   String prefferedExercises;
+  List<int> progressions = new List(19);
 
-  User(this.firstName, this.lastName, this.email, this.dob, this.weight,
-      this.goal, this.length, this.equipment, this.prefferedExercises);
+  User(
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.dob,
+      this.weight,
+      this.goal,
+      this.length,
+      this.equipment,
+      this.prefferedExercises,
+      this.progressions);
 
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
@@ -21,6 +31,7 @@ class User {
         'goal': goal,
         'length': length,
         'equipment': equipment,
-        'prefferedExercises': prefferedExercises
+        'prefferedExercises': prefferedExercises,
+        'progressions': progressions
       };
 }
