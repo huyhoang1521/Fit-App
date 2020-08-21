@@ -1,6 +1,7 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
 import 'package:fit_app/screens/home/stopwatch.dart';
+import 'package:fit_app/screens/workout/start_workout.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'package:fit_app/services/auth_service.dart';
@@ -124,7 +125,10 @@ class _WorkOutRState extends State<WorkOutR> {
               //  color: kPrimaryColor,
               textColor: Colors.white,
               press: () {
-                Routine();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StartWorkout()),
+                );
               },
               text: 'Start Workout',
               //onLongPress: ,
