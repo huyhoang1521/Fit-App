@@ -124,9 +124,6 @@ class _RecoveryState extends State<Recovery>
       body: Stack(
         children: [
           Column(
-//        primary: false,
-//        padding: const EdgeInsets.all(0),
-//        shrinkWrap: true,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -200,7 +197,7 @@ class _RecoveryState extends State<Recovery>
                       ),
                       Text(
                         '%',
-                        style: TextStyle(fontSize: 30, color: Colors.black),
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                     ],
                   ),

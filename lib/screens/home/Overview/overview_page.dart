@@ -1,5 +1,6 @@
 import 'package:fit_app/screens/home/Overview/overview_button.dart';
 import 'package:fit_app/screens/home/Overview/prog_page.dart';
+import 'package:fit_app/screens/home/Overview/skill_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
@@ -12,35 +13,91 @@ class Overview extends StatefulWidget {
 }
 
 bool pressed = false;
+bool pressed1 = false;
+
+bool op1 = false;
+bool op2 = false;
+bool op3 = false;
+
+//Initial Values will be preferred Exercise from Firebase
+String text1;
+String text2;
+//Initial Value should be highest percent of all exercises
+String text3 = 'Back Lever';
+
+String bL = 'Back Lever';
+String fL = 'Front Lever';
+String oAC = 'One Arm Chin Up';
 
 Color green = const Color.fromRGBO(30, 201, 116, 1.0);
 
-class _OverviewState extends State<Overview> {
+Widget _myAnimatedWidget = OverViewButton(
+  text: 'Back Lever',
+  percentText: '30%',
+  percent: 0.3,
+  image: 'assets/images/BackLever.jpg',
+  press: () {
+//    Navigator.push(
+//      context,
+//      MaterialPageRoute(builder: (context) => ProgressPage()),
+//    );
+  },
+);
+
+class _OverviewState extends State<Overview>
+    with SingleTickerProviderStateMixin {
+//  AnimationController _controller;
+//  Animation<Offset> _offsetAnimation;
+//
+//  @override
+//  void initState() {
+//    super.initState();
+//    _controller = AnimationController(
+//      duration: const Duration(seconds: 2),
+//      vsync: this,
+//    ); //..repeat(reverse: false);
+//    _offsetAnimation = Tween<Offset>(
+//      begin: Offset.zero,
+//      end: const Offset(1.5, 0.0),
+//    ).animate(CurvedAnimation(
+//      parent: _controller,
+//      curve: Curves.linearToEaseOut,
+//    ));
+//  }
+//
+//  @override
+//  void dispose() {
+//    super.dispose();
+//    _controller.dispose();
+//  }
+
   @override
   Widget build(BuildContext context) {
     double _fitWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fit For Life'),
+        title: Text('Fit With Nick'),
         elevation: 5,
-        backgroundColor: kPrimaryColor,
       ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
-              'Progress Goals',
-              style: Theme.of(context).textTheme.headline1,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: Text(
+                'Progress Goals',
+                style: Theme.of(context).textTheme.headline1,
+              ),
             ),
             SizedBox(
               height: titleDiv,
             ),
             OverViewButton(
               text: 'One Arm Chin-up',
-              percentText: '50%',
+              percentText: '',
               percent: 0.5,
-              image: 'assets/images/OAC.jpg',
+              image: 'assets/images/BackLever.jpg',
               press: () {
                 Navigator.push(
                   context,
@@ -48,24 +105,24 @@ class _OverviewState extends State<Overview> {
                 );
               },
             ),
-            OverViewButton(
-              text: 'Handstand Push-up',
-              percentText: '90%',
-              percent: 0.9,
-              image: 'assets/images/HandStandRollout.jpeg',
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProgressPage()),
-                );
-              },
-            ),
+//            OverViewButton(
+//              text: 'Handstand Push-up',
+//              percentText: '90%',
+//              percent: 0.9,
+//              image: 'assets/images/HandStandRollout.jpeg',
+//              press: () {
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(builder: (context) => ProgressPage()),
+//                );
+//              },
+//            ),
             Stack(children: [
               OverViewButton(
                 text: 'Back Lever',
-                percentText: '30%',
+                percentText: '',
                 percent: 0.3,
-                image: 'assets/images/BackLever.jpg',
+                image: 'assets/images/pullup_up.png',
                 press: () {
                   Navigator.push(
                     context,
@@ -76,7 +133,7 @@ class _OverviewState extends State<Overview> {
               AnimatedContainer(
                 color: kPrimaryLightColor,
                 duration: Duration(seconds: 1),
-                width: pressed ? .88 * _fitWidth : 0,
+                width: pressed1 ? .88 * _fitWidth : 0,
                 height: 160,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -155,7 +212,10 @@ class _OverviewState extends State<Overview> {
                 top: 10,
                 right: 10,
                 child: IconButton(
-                  icon: Icon(Icons.more_horiz, color: kPrimaryColor),
+                  icon: Icon(
+                    Icons.more_horiz,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   onPressed: () {
                     setState(() {
                       pressed = !pressed;
@@ -164,6 +224,126 @@ class _OverviewState extends State<Overview> {
                 ),
               ),
             ]),
+            Stack(children: [
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(
+                    child: child,
+                    scale: animation,
+                  );
+                },
+                child: _myAnimatedWidget,
+              ),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.more_horiz,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      pressed = !pressed;
+                      if (pressed == true) {
+                        _myAnimatedWidget = SkillButton(
+                          option1: oAC,
+                          option2: fL,
+                          option3: bL,
+                          op1: op1,
+                          op2: op2,
+                          op3: op3,
+                          press1: () {
+                            setState(() {
+                              op1 = true;
+                              op2 = false;
+                              op3 = false;
+                              pressed = !pressed;
+                              text3 = oAC;
+                              _myAnimatedWidget = OverViewButton(
+                                text: text3,
+                                percentText: '',
+                                percent: 0.3,
+                                image: 'assets/images/pullup_up.png',
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProgressPage()),
+                                  );
+                                },
+                              );
+                            });
+                          },
+                          press2: () {
+                            setState(() {
+                              op1 = false;
+                              op2 = true;
+                              op3 = false;
+                              pressed = !pressed;
+                              text3 = fL;
+                              _myAnimatedWidget = OverViewButton(
+                                text: text3,
+                                percentText: '',
+                                percent: 0.3,
+                                image: 'assets/images/pullup_up.png',
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProgressPage()),
+                                  );
+                                },
+                              );
+                            });
+                          },
+                          press3: () {
+                            setState(() {
+                              op1 = false;
+                              op2 = false;
+                              op3 = true;
+                              pressed = !pressed;
+                              text3 = bL;
+                              _myAnimatedWidget = OverViewButton(
+                                text: text3,
+                                percentText: '',
+                                percent: 0.3,
+                                image: 'assets/images/pullup_up.png',
+                                press: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProgressPage()),
+                                  );
+                                },
+                              );
+                            });
+                          },
+                        );
+                      }
+                      if (pressed == false) {
+                        setState(() {
+                          _myAnimatedWidget = OverViewButton(
+                            text: text3,
+                            percentText: '',
+                            percent: 0.3,
+                            image: 'assets/images/pullup_up.png',
+                            press: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProgressPage()),
+                              );
+                            },
+                          );
+                        });
+                      }
+                    });
+                  },
+                ),
+              ),
+            ])
           ],
         ),
       ),

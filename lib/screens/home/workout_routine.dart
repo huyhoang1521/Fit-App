@@ -1,8 +1,6 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/Profile/profile_test_page.dart';
-import 'package:fit_app/screens/home/Routine.dart';
-import 'package:fit_app/screens/home/stopwatch.dart';
+import 'package:fit_app/screens/home/routine.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'package:fit_app/services/auth_service.dart';
@@ -25,7 +23,7 @@ class _WorkOutRState extends State<WorkOutR> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fit For Life'),
+        title: Text('Fit With Nick'),
         elevation: 5,
         // backgroundColor: kPrimaryColor,
         actions: <Widget>[
@@ -55,7 +53,10 @@ class _WorkOutRState extends State<WorkOutR> {
               decoration: BoxDecoration(
                 color: Colors.black,
               ),
-              child: Image.asset('assets/images/logotest2.png'),
+              child: Image.asset(
+                'assets/images/logos 4 v4.png',
+                color: Theme.of(context).primaryColor,
+              ),
             ),
             DrawerButton(
                 icon: Iconicks.generated__1_,
@@ -116,8 +117,8 @@ class _WorkOutRState extends State<WorkOutR> {
           child: Padding(
             padding: EdgeInsets.only(bottom: 10.0),
             child: RoundedButton(
-              //  color: kPrimaryColor,
-              textColor: Colors.white,
+              color: Theme.of(context).accentColor,
+              //textColor: Colors.white,
               press: () {
                 Navigator.push(
                   context,
@@ -129,19 +130,21 @@ class _WorkOutRState extends State<WorkOutR> {
             ),
           ),
         ),
-        StopWatch(),
-        RoundedButton(
-          //  color: kPrimaryColor,
-          textColor: Colors.white,
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileTest()),
-            );
-          },
-          text: 'TEST PAGE',
-          //onLongPress: ,
-        ),
+        //StopWatch(),
+
+        // TEST PAGE USE IS FOR TESTING ONLY
+//        RoundedButton(
+//          color: Theme.of(context).accentColor,
+//          //textColor: Colors.white,
+//          press: () {
+//            Navigator.push(
+//              context,
+//              MaterialPageRoute(builder: (context) => VideoDemo()),
+//            );
+//          },
+//          text: 'TEST PAGE',
+//          //onLongPress: ,
+//        ),
       ]),
     );
   }

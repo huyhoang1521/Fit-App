@@ -6,49 +6,26 @@ import '../../widgets/provider_widget.dart';
 import '../../components/rounded_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../components/custom_password.dart';
-import '../../models/user.dart';
-import 'info.dart';
 
-class SignUp extends StatefulWidget {
-  final User user;
+class SignIn extends StatefulWidget {
   final db = Firestore.instance;
 
-  SignUp({Key key, this.user}) : super(key: key);
+  SignIn({Key key}) : super(key: key);
 
   @override
-  _SignUp createState() => _SignUp(user: this.user);
+  _SignIn createState() => _SignIn();
 }
 
-class _SignUp extends State<SignUp> {
-  final User user;
-
-  _SignUp({this.user});
-
+class _SignIn extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
-  String _firstName, _lastName, _email, _password;
-
-  void setVars() {
-    user.firstName = _firstName;
-    user.lastName = _lastName;
-    user.email = _email;
-  }
+  String _email, _password;
 
   void submit() async {
     try {
       final auth = ProviderWidget.of(context).auth;
-      setVars();
+      await auth.signInWithEmailAndPassword(_email, _password);
       print("_email " + _email);
-      print("_firstName " + _firstName);
-      print("_lastName " + _lastName);
-      await auth.createUserWithEmailAndPassword(
-          _email, _password, (_firstName + _lastName));
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Info(user: user)),
-      );
-      //Navigator.of(context).pushReplacementNamed('/general');
-
+      Navigator.of(context).pushReplacementNamed('/home');
     } catch (error) {
       print(error);
     }
@@ -89,12 +66,6 @@ class _SignUp extends State<SignUp> {
                     textAlign: TextAlign.center),
                 SizedBox(height: _height * .025),
                 CustomTextField(
-                    hintText: "First Name",
-                    onChanged: (value) => _firstName = value),
-                CustomTextField(
-                    hintText: "Last Name",
-                    onChanged: (value) => _lastName = value),
-                CustomTextField(
                     hintText: "Email", onChanged: (value) => _email = value),
                 CustomPassword(
                     hintText: "Password",
@@ -110,7 +81,7 @@ class _SignUp extends State<SignUp> {
                 Expanded(
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: RoundedButton(text: "Next", press: submit),
+                    child: RoundedButton(text: "Sign In", press: submit),
                   ),
                 ),
               ],

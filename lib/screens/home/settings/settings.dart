@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../constants.dart';
 import 'package:fit_app/constants.dart';
-import 'dart:ui';
 
 // Used to Select users workout goals
 bool strength = false;
@@ -27,33 +26,45 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: Text('Fit For Life'),
         elevation: 5,
-        backgroundColor: kPrimaryColor,
       ),
       body: Column(
         children: [
           Text(
             'Settings',
-            style: TextStyle(
-              fontSize: 20,
-              fontStyle: FontStyle.italic,
-            ),
+            style: Theme.of(context).textTheme.headline1,
           ),
-          Row(children: [
-            Text('Reminder'),
-            Switch(
-              activeColor: kPrimaryColor,
-              value: reminder,
-              onChanged: (bool value) {
-                setState(() {
-                  reminder = value;
-                });
-              },
+          SwitchListTile(
+            activeColor: kPrimaryColor,
+            title: Text(
+              'Reminder',
+              style: Theme.of(context).textTheme.bodyText1,
             ),
-          ]),
+            onChanged: (bool value) {
+              setState(() {
+                reminder = value;
+              });
+            },
+            value: reminder,
+          ),
+//          Row(children: [
+//            Text('Reminder'),
+//            Switch(
+//              activeColor: kPrimaryColor,
+//              value: reminder,
+//              onChanged: (bool value) {
+//                setState(() {
+//                  reminder = value;
+//                });
+//              },
+//            ),
+//          ]),
           Consumer<ThemeNotifier>(
             builder: (context, notifier, child) => SwitchListTile(
               activeColor: kPrimaryColor,
-              title: Text("Dark Mode"),
+              title: Text(
+                "Dark Mode",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               onChanged: (val) {
                 notifier.toggleTheme();
               },

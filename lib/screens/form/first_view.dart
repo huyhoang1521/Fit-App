@@ -43,20 +43,14 @@ class FirstView extends StatelessWidget {
                   text: "Get Started",
                   textColor: kPrimaryColor,
                   press: () {
-                    final User user = new User(
-                        null, null, null, null, null, null, null, null, null);
+                    final User user = new User(null, null, null, null, null,
+                        null, null, null, null, null);
 
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => SignUp(user: user)),
                     );
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Welcome(
-                              authFormType: AuthFormType.signUp, user: user)),
-                    );*/
                   },
                 ),
                 SizedBox(height: _height * 0.05),

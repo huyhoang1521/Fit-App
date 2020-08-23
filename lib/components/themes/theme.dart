@@ -3,11 +3,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fit_app/constants.dart';
 
 ThemeData light = ThemeData(
+  appBarTheme: AppBarTheme(
+    color: kPrimaryColor,
+    elevation: 10,
+  ),
   brightness: Brightness.light,
+  primaryColor: colorCustom,
   primarySwatch: colorCustom,
-  accentColor: kPrimaryLightColor,
+  accentColor: Colors.white, //kPrimaryLightColor,
   scaffoldBackgroundColor: Color(0xfff1f1f1),
-  canvasColor: Colors.white,
+  canvasColor: Color(0xfff1f1f1), //Colors.white,
   unselectedWidgetColor: Colors.black,
   buttonTheme: ButtonThemeData(
     buttonColor: colorCustom,
@@ -33,6 +38,7 @@ ThemeData light = ThemeData(
         fontFamily: 'Montserrat',
         fontStyle: FontStyle.normal,
         color: colorCustom),
+    headline5: TextStyle(color: Colors.black, fontSize: 30),
     headline6: TextStyle(color: kPrimaryColor, fontSize: 26.0),
     headline3: TextStyle(
       color: Colors.black,
@@ -56,26 +62,64 @@ ThemeData light = ThemeData(
 );
 
 ThemeData dark = ThemeData(
+  appBarTheme: AppBarTheme(
+    color: Color(0xFF272727),
+    elevation: 10,
+    textTheme: TextTheme(
+      headline6: TextStyle(
+          fontSize: 20,
+          fontFamily: 'Montserrat',
+          fontStyle: FontStyle.normal,
+          color: darkText),
+    ),
+  ),
+  primaryColor: kPrimaryLightColor,
   brightness: Brightness.dark,
   primarySwatch: colorCustom,
-  accentColor: lightColorCustom,
-  canvasColor: Colors.black12,
-  scaffoldBackgroundColor: Colors.black12,
+  accentColor: Color(0xFF202020), //darkPrimaryColor,
+  canvasColor: Color(0xFF272727), //Colors.black87,
+  scaffoldBackgroundColor: darkBackground, //Colors.black12,
+  iconTheme: IconThemeData(
+    color: kPrimaryLightColor,
+  ),
   buttonTheme: ButtonThemeData(
-    buttonColor: lightColorCustom,
+    buttonColor: Color(0xFF272727),
     textTheme:
         ButtonTextTheme.primary, //  <-- this auto selects the right color
   ),
   textTheme: TextTheme(
-      button: TextStyle(color: Colors.grey),
+      button: TextStyle(color: darkText),
       headline1: TextStyle(
           fontSize: 31,
           fontFamily: 'OpenSans',
-          color: Colors.grey,
+          color: darkText,
           fontWeight: FontWeight.normal),
-      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      headline2: TextStyle(
+          fontSize: 26,
+          fontFamily: 'Montserrat',
+          fontStyle: FontStyle.normal,
+          color: darkText),
+      headline3: TextStyle(
+        color: darkText,
+        fontSize: 14.0,
+        fontFamily: 'Montserrat',
+        fontStyle: FontStyle.normal,
+        //fontWeight: FontWeight.bold
+      ),
+      headline4: TextStyle(
+          fontSize: 20,
+          fontFamily: 'Montserrat',
+          fontStyle: FontStyle.normal,
+          color: darkText),
+      headline5: TextStyle(color: Colors.grey, fontSize: 30),
+      headline6: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
+      bodyText1: TextStyle(
+          color: darkText,
+          fontSize: 14.0,
+          fontFamily: 'Montserrat',
+          fontStyle: FontStyle.normal),
       bodyText2: TextStyle(
-        color: kPrimaryColor,
+        color: darkText,
         fontSize: 14.0,
         fontFamily: 'OpenSans',
         fontStyle: FontStyle.normal,

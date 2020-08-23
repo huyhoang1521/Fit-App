@@ -24,7 +24,10 @@ class DrawerButton extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            Icon(icon),
+            Icon(
+              icon,
+              color: Theme.of(context).primaryColor,
+            ),
             SizedBox(width: 40),
             Text(
               text,
