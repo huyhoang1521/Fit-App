@@ -44,7 +44,7 @@ class FirstView extends StatelessWidget {
                   textColor: kPrimaryColor,
                   press: () {
                     final User user = new User(null, null, null, null, null,
-                        null, null, null, null, null);
+                        null, null, null, null, null, null);
 
                     Navigator.push(
                       context,

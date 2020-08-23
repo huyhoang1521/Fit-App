@@ -15,6 +15,7 @@ List<String> exercises;
 String userId;
 String length;
 String goal;
+List<int> progressions;
 double restTime;
 String coolDown;
 
@@ -38,6 +39,7 @@ class WorkoutConstructor {
     user.get().then((userData) {
       length = userData.data['length'];
       goal = userData.data['goal'];
+      progressions = userData.data['progressions'];
     }).whenComplete(() async {
       exercises = new List();
       if (length == "Short") {
@@ -196,4 +198,27 @@ class WorkoutConstructor {
     print("");
     return exerciseList;
   }
+
+  /*
+   * Creates a list of exercise specific ID's
+   * In: 
+   * exerciseList - list of exercise general IDs for workout 
+   * progressions - user's levels for each exercise general
+   * Out: 
+   * res -  list of exercise specific IDs generated 
+   * in the same order as exercise list
+   */
+  List<int> generateID(List<int> exerciseList, List<int> progressions) {
+    List<int> res = new List(exerciseList.length);
+    for (int i = 0; i < res.length; i++) {
+      int generalID = exerciseList[i];
+      int level = progressions[generalID];
+      //Generate specific ID by "concatenating" generalID to their level
+      int specificID = (generalID * 100) + level;
+      res[i] = specificID;
+    }
+    return res;
+  }
+
+  //TODO
 }
