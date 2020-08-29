@@ -19,16 +19,15 @@ class OverViewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     double _textWidth = (MediaQuery.of(context).size.width) / 3;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       child: GestureDetector(
         onTap: press,
         child: Container(
-          width: size.width,
+          //width: size.width,
           decoration: BoxDecoration(
-              color: kPrimaryLightColor,
+              color: Theme.of(context).accentColor, //kPrimaryLightColor,
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
@@ -64,9 +63,9 @@ class OverViewButton extends StatelessWidget {
                               shape: BoxShape.circle,
                               image: new DecorationImage(
                                 fit: BoxFit.fitHeight,
-                                colorFilter: new ColorFilter.mode(
-                                    Colors.black.withOpacity(0.4),
-                                    BlendMode.dstATop),
+//                                colorFilter: new ColorFilter.mode(
+//                                    Colors.black.withOpacity(0.6),
+//                                    BlendMode.dstATop),
                                 image: AssetImage(image),
                               ),
                             ),
@@ -88,7 +87,7 @@ class OverViewButton extends StatelessWidget {
               ),
               Icon(
                 Icons.arrow_forward_ios,
-                color: kPrimaryColor,
+                color: Theme.of(context).primaryColor,
               ),
             ],
           ),

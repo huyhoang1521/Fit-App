@@ -54,13 +54,13 @@ class _RecoveryState extends State<Recovery>
     _controllerCenter =
         ConfettiController(duration: const Duration(seconds: 2));
     _controllerCenterRight =
-        ConfettiController(duration: const Duration(seconds: 2));
+        ConfettiController(duration: const Duration(seconds: 1));
     _controllerTopCenter =
         ConfettiController(duration: const Duration(seconds: 2));
     _controllerBottomCenter =
         ConfettiController(duration: const Duration(seconds: 2));
     _controllerCenterLeft =
-        ConfettiController(duration: const Duration(seconds: 2));
+        ConfettiController(duration: const Duration(seconds: 1));
     super.initState();
   }
 
@@ -98,6 +98,7 @@ class _RecoveryState extends State<Recovery>
   cannonCheck(percentDaily) {
     if (percentDaily == 1.00) {
       _controllerCenterRight.play();
+      _controllerCenterLeft.play();
     }
   }
 
@@ -123,9 +124,6 @@ class _RecoveryState extends State<Recovery>
       body: Stack(
         children: [
           Column(
-//        primary: false,
-//        padding: const EdgeInsets.all(0),
-//        shrinkWrap: true,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -199,7 +197,7 @@ class _RecoveryState extends State<Recovery>
                       ),
                       Text(
                         '%',
-                        style: TextStyle(fontSize: 30, color: Colors.black),
+                        style: Theme.of(context).textTheme.headline5,
                       ),
                     ],
                   ),
@@ -213,43 +211,37 @@ class _RecoveryState extends State<Recovery>
               confettiController: _controllerCenterLeft,
               blastDirection: -pi / 4,
               // radial value - RIGHT
-              emissionFrequency: 0.6,
-              minimumSize: const Size(10, 10),
+              emissionFrequency: 0.8,
+              // minimumSize: const Size(10, 10),
               // set the minimum potential size for the confetti (width, height)
-              maximumSize: const Size(50, 50),
+              // maximumSize: const Size(50, 50),
               // set the maximum potential size for the confetti (width, height)
-              numberOfParticles: 1,
-              gravity: 0.1,
+              numberOfParticles: 2,
+              particleDrag: 0.05,
+              gravity: 0.05,
+              shouldLoop: false,
+              colors: const [
+                kPrimaryColor,
+                kPrimaryLightColor,
+                Colors.white,
+              ],
             ),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: ConfettiWidget(
-              confettiController: _controllerCenter,
-              blastDirectionality: BlastDirectionality.explosive,
-              emissionFrequency: 0.6,
-              minimumSize: const Size(10, 10),
-              // set the minimum potential size for the confetti (width, height)
-              maximumSize: const Size(50, 50),
-              // set the maximum potential size for the confetti (width, height)
-              numberOfParticles: 1,
-              gravity: 0.1,
-            ),
-          ),
+
           Align(
             alignment: Alignment.centerRight,
             child: ConfettiWidget(
               confettiController: _controllerCenterRight,
-              blastDirection: pi, // radial value - LEFT
+              blastDirection: 5 * pi / 4, // radial value - LEFT
               particleDrag: 0.05, // apply drag to the confetti
-              emissionFrequency: 0.05, // how often it should emit
-              numberOfParticles: 20, // number of particles to emit
+              emissionFrequency: 0.8, // how often it should emit
+              numberOfParticles: 2, // number of particles to emit
               gravity: 0.05, // gravity - or fall speed
               shouldLoop: false,
               colors: const [
-                Colors.green,
-                Colors.blue,
-                Colors.pink
+                kPrimaryColor,
+                kPrimaryLightColor,
+                Colors.white,
               ], // manually specify the colors to be used
             ),
           ),

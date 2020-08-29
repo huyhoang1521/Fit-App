@@ -21,7 +21,7 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Get Fit With Nick!'),
+        title: Text('Get Fit Don' "'" 't Quit!'),
         elevation: 5,
         backgroundColor: kPrimaryColor,
       ),
@@ -31,7 +31,7 @@ class _ProgressPageState extends State<ProgressPage> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: kPrimaryLightColor,
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -52,46 +52,46 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Handstand'),
+                        child: Text(
+                          'Handstand',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
                       ),
                       LinearPercentIndicator(
                         percent: .5,
                         progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text(
-                          '50%',
-                          style: Theme.of(context).textTheme.headline3,
-                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Tuck Planche',
+                          'Tuck Planche,',
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                       ),
                       LinearPercentIndicator(
                         percent: .35,
                         progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text(
-                          '35%',
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('PushUps'),
+                        child: Text(
+                          'PushUps',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
                       ),
                       LinearPercentIndicator(
                         percent: .9,
                         progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text("90%",
-                            style: Theme.of(context).textTheme.headline3),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Whatevers'),
+                        child: Text(
+                          'Whatevers',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
                       ),
                       LinearPercentIndicator(
                         percent: _whateverProg,
@@ -109,7 +109,7 @@ class _ProgressPageState extends State<ProgressPage> {
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
-                  color: kPrimaryLightColor,
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -149,7 +149,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       LinearPercentIndicator(
                         percent: .99,
-                        progressColor: green1,
+                        progressColor: kPrimaryColor,
                         lineHeight: 15,
                       ),
                       Padding(
@@ -161,9 +161,8 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       LinearPercentIndicator(
                         percent: .9,
-                        progressColor: green1,
+                        progressColor: kPrimaryColor,
                         lineHeight: 15,
-                        center: Text("90%"),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

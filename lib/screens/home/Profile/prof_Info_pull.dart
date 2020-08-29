@@ -1,78 +1,79 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
+import 'package:fit_app/screens/home/Profile/profile_test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/screens/home/Profile/profile_info_text.dart';
 
 String goal;
+String fullName = '$firstName $lastName';
 
-class ProfileInfo extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _ProfileInfoState();
-  }
-}
+class ProfileInfo extends StatelessWidget {
+  final String userData, firstName, lastName, dob;
+  final int weight, height;
+  final bool lock;
+  final Function onChangeFN, onChangeLN, onChangeW, onChangeH, onChangeD;
+  final TextEditingController nameController,
+      weightController,
+      heightController,
+      dobController;
+  const ProfileInfo({
+    Key key,
+    this.lock,
+    this.nameController,
+    this.weightController,
+    this.heightController,
+    this.dobController,
+    this.userData,
+    this.firstName,
+    this.lastName,
+    this.dob,
+    this.height,
+    this.weight,
+    this.onChangeFN,
+    this.onChangeLN,
+    this.onChangeW,
+    this.onChangeH,
+    this.onChangeD,
+  }) : super(key: key);
 
-Future<DocumentSnapshot> getUserInfo() async {
-  var firebaseUser = await FirebaseAuth.instance.currentUser();
-  return await Firestore.instance
-      .collection("Users")
-      .document(firebaseUser.uid)
-      .get();
-}
-
-class _ProfileInfoState extends State<ProfileInfo> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getUserInfo(),
-      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (!snapshot.hasData)
-          return Text("Loading");
-        else if (snapshot.hasError) {
-          Column(children: [
-            Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Error: ${snapshot.error}'),
-            )
-          ]);
-        }
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ProfileTextBox(
-              text: 'Name: ',
-              icon: Icons.person_outline,
-              userData: snapshot.data.data['firstName'],
-//              press:
-//              setState(() {
-//                snapshot.data.data['firstName'] = userData;
-//              }),
-            ),
-            ProfileTextBox(
-              text: 'Weight: ',
-              icon: CustomIcons.weight,
-              userData: snapshot.data.data["weight"].toString(),
-            ),
-            ProfileTextBox(
-              text: 'Height: ',
-              icon: CustomIcons.height,
-              userData: snapshot.data.data['firstName'],
-            ),
-            ProfileTextBox(
-              text: 'Birth Date: ',
-              icon: Iconicks.birthday2,
-              userData: snapshot.data.data['dob'],
-            ),
-          ],
-        );
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ProfileTextBox(
+          text: 'Name: ',
+          icon: Icons.person_outline,
+          userData: firstName,
+          press: onChangeFN,
+          controller: nameController,
+          enabled: lock,
+        ),
+        ProfileTextBox(
+          text: 'Weight: ',
+          icon: CustomIcons.weight,
+          userData: weight.toString(),
+          press: onChangeLN,
+          controller: weightController,
+          enabled: lock,
+        ),
+        ProfileTextBox(
+          text: 'Height: ',
+          icon: CustomIcons.height,
+          userData: height.toString(),
+          press: onChangeH,
+          controller: heightController,
+          enabled: lock,
+        ),
+        ProfileTextBox(
+          text: 'Birth Date: ',
+          icon: Iconicks.birthday2,
+          userData: dob,
+          press: onChangeD,
+          controller: dobController,
+          enabled: lock,
+        ),
+      ],
     );
   }
 }

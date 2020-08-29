@@ -1,6 +1,5 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/stopwatch.dart';
 import 'package:fit_app/screens/workout/start_workout.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
@@ -19,19 +18,12 @@ class WorkOutR extends StatefulWidget {
   }
 }
 
-class Routine extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _RoutineState();
-  }
-}
-
 class _WorkOutRState extends State<WorkOutR> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fit For Life'),
+        title: Text('Fit With Nick'),
         elevation: 5,
         // backgroundColor: kPrimaryColor,
         actions: <Widget>[
@@ -61,7 +53,10 @@ class _WorkOutRState extends State<WorkOutR> {
               decoration: BoxDecoration(
                 color: Colors.black,
               ),
-              child: Image.asset('assets/images/logotest2.png'),
+              child: Image.asset(
+                'assets/images/logos 4 v4.png',
+                color: Theme.of(context).primaryColor,
+              ),
             ),
             DrawerButton(
                 icon: Iconicks.generated__1_,
@@ -122,11 +117,12 @@ class _WorkOutRState extends State<WorkOutR> {
           child: Padding(
             padding: EdgeInsets.only(bottom: 10.0),
             child: RoundedButton(
-              //  color: kPrimaryColor,
-              textColor: Colors.white,
+              color: Theme.of(context).accentColor,
+              //textColor: Colors.white,
               press: () {
                 Navigator.push(
                   context,
+                  //   MaterialPageRoute(builder: (context) => RoutinePage()),
                   MaterialPageRoute(builder: (context) => StartWorkout()),
                 );
               },
@@ -135,20 +131,22 @@ class _WorkOutRState extends State<WorkOutR> {
             ),
           ),
         ),
-        StopWatch(),
-      ]),
-    );
-  }
-}
+        //StopWatch(),
 
-class _RoutineState extends State<Routine> {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Text('Exercise num'),
-        Icon(Icons.contact_phone),
-      ],
+        // TEST PAGE USE IS FOR TESTING ONLY
+//        RoundedButton(
+//          color: Theme.of(context).accentColor,
+//          //textColor: Colors.white,
+//          press: () {
+//            Navigator.push(
+//              context,
+//              MaterialPageRoute(builder: (context) => VideoDemo()),
+//            );
+//          },
+//          text: 'TEST PAGE',
+//          //onLongPress: ,
+//        ),
+      ]),
     );
   }
 }
