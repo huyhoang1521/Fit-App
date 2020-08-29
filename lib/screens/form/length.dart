@@ -51,73 +51,69 @@ class _Length extends State<Length> {
         height: _height,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: _height * .05),
-                Text("Set your goal",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center),
-                SizedBox(height: _height * .02),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25),
-                  child: Text("What length do you want your workout?",
-                      style: TextStyle(fontSize: 18),
-                      textAlign: TextAlign.left),
-                ),
-                SizedBox(height: _height * .03),
-                RoundedButton(
-                    text: "Short (40 min)",
-                    textColor: strength ? Colors.white : kPrimaryColor,
-                    color: strength ? kPrimaryColor : kPrimaryLightColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("Length",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center),
+              SizedBox(height: _height * .02),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 25),
+                child: Text("What length do you want your workout?",
+                    style: TextStyle(fontSize: 18), textAlign: TextAlign.left),
+              ),
+              SizedBox(height: _height * .03),
+              RoundedButton(
+                  text: "Short (40 min)",
+                  textColor: strength ? Colors.white : kPrimaryColor,
+                  color: strength ? kPrimaryColor : kPrimaryLightColor,
+                  press: () {
+                    /*...*/
+                    setState(() {
+                      strength = !strength;
+                      hypertrophy = false;
+                      weightLoss = false;
+                    });
+                    _length = "Short";
+                    print(_length);
+                  }),
+              SizedBox(height: _height * .02),
+              RoundedButton(
+                  text: "Long (1 hour)",
+                  textColor: hypertrophy ? Colors.white : kPrimaryColor,
+                  color: hypertrophy ? kPrimaryColor : kPrimaryLightColor,
+                  press: () {
+                    /*...*/
+                    setState(() {
+                      hypertrophy = !hypertrophy;
+                      strength = false;
+                      weightLoss = false;
+                    });
+                    _length = "Long";
+                    print(_length);
+                  }),
+              SizedBox(height: _height * .02),
+              SizedBox(height: _height * .02),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: RoundedButton(
+                    text: "Next",
                     press: () {
-                      /*...*/
-                      setState(() {
-                        strength = !strength;
-                        hypertrophy = false;
-                        weightLoss = false;
-                      });
-                      _length = "Short";
-                      print(_length);
-                    }),
-                SizedBox(height: _height * .02),
-                RoundedButton(
-                    text: "Long (1 hour)",
-                    textColor: hypertrophy ? Colors.white : kPrimaryColor,
-                    color: hypertrophy ? kPrimaryColor : kPrimaryLightColor,
-                    press: () {
-                      /*...*/
-                      setState(() {
-                        hypertrophy = !hypertrophy;
-                        strength = false;
-                        weightLoss = false;
-                      });
-                      _length = "Long";
-                      print(_length);
-                    }),
-                SizedBox(height: _height * .02),
-                SizedBox(height: _height * .02),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: RoundedButton(
-                      text: "Next",
-                      press: () {
-                        print("Before Next");
-                        setVars();
-                        print("After Next");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Equipment(user: user)),
-                        );
-                      },
-                    ),
+                      print("Before Next");
+                      setVars();
+                      print("After Next");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Equipment(user: user)),
+                      );
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

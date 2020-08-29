@@ -3,7 +3,7 @@ class User {
   String lastName;
   String email;
   String dob;
-  int height;
+  String height;
   int weight;
   String goal;
   String length;
