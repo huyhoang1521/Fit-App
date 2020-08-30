@@ -42,6 +42,7 @@ dependencies:
   flutter_svg: ^0.17.4
   auto_size_text: ^2.0.2
   flutter_datetime_picker: ^1.2.5
+  intl:
 
 dev_dependencies:
   flutter_test:

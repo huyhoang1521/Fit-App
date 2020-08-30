@@ -79,42 +79,39 @@ class _SignUp extends State<SignUp> {
         height: _height,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: _height * .05),
-                Text("Create your account",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center),
-                SizedBox(height: _height * .025),
-                CustomTextField(
-                    hintText: "First Name",
-                    onChanged: (value) => _firstName = value),
-                CustomTextField(
-                    hintText: "Last Name",
-                    onChanged: (value) => _lastName = value),
-                CustomTextField(
-                    hintText: "Email", onChanged: (value) => _email = value),
-                CustomPassword(
-                    hintText: "Password",
-                    onChanged: (value) => _password = value),
-                SizedBox(height: _height * .04),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                      "By signing up, you agree to the Terms of Services and Privacy Policy, including Cookie Use. Others will be able to find you by email or phone number when provided.",
-                      style: TextStyle(fontSize: 15),
-                      textAlign: TextAlign.left),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("Create your account",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center),
+              SizedBox(height: _height * .025),
+              CustomTextField(
+                  hintText: "First Name",
+                  onChanged: (value) => _firstName = value),
+              CustomTextField(
+                  hintText: "Last Name",
+                  onChanged: (value) => _lastName = value),
+              CustomTextField(
+                  hintText: "Email", onChanged: (value) => _email = value),
+              CustomPassword(
+                  hintText: "Password",
+                  onChanged: (value) => _password = value),
+              SizedBox(height: _height * .04),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 25),
+                child: Text(
+                    "By signing up, you agree to the Terms of Services and Privacy Policy, including Cookie Use. Others will be able to find you by email or phone number when provided.",
+                    style: TextStyle(fontSize: 15),
+                    textAlign: TextAlign.left),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: RoundedButton(text: "Next", press: submit),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: RoundedButton(text: "Next", press: submit),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

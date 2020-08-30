@@ -2,22 +2,27 @@ import '../models/workout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/provider_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'warmup.dart';
 
 final db = Firestore.instance;
-List<String> pushList;
-List<String> pullList;
-List<String> pushHorizontalList;
-List<String> pushVerticalList;
-List<String> pullHorizontalList;
-List<String> pullVerticalList;
-List<String> legsList;
-List<String> exercises;
+List<int> pushList;
+List<int> pullList;
+List<int> pushHorizontalList;
+List<int> pushVerticalList;
+List<int> pullHorizontalList;
+List<int> pullVerticalList;
+List<int> legsList;
+List<int> exercises;
+List<int> warmup;
 String userId;
 String length;
 String goal;
 List<int> progressions;
 double restTime;
-String coolDown;
+int coolDown;
+String date;
+double age;
 
 class WorkoutConstructor {
   /* 
@@ -39,8 +44,13 @@ class WorkoutConstructor {
     user.get().then((userData) {
       length = userData.data['length'];
       goal = userData.data['goal'];
+      date = userData.data['dob'];
       progressions = userData.data['progressions'];
     }).whenComplete(() async {
+      getAge();
+      WarmUp warmUp = new WarmUp(age);
+      warmup = warmUp.createWarmUp();
+
       exercises = new List();
       if (length == "Short") {
         pushList = new List();
@@ -132,12 +142,12 @@ class WorkoutConstructor {
       }
 
       // cool down
-      coolDown = "Cool Down";
+      coolDown = 2;
     });
 
     await Future.delayed(Duration(seconds: 1));
-    final Workout workout =
-        new Workout(userId, length, goal, exercises, restTime, coolDown);
+    final Workout workout = new Workout(
+        userId, length, goal, exercises, warmup, restTime, coolDown);
     await db.collection("Workouts").document(uid).setData(workout.toJson());
   }
 
@@ -148,8 +158,8 @@ class WorkoutConstructor {
    * The query orders them by ascending id
    * If the query is succesful, the data is added to a list and returned
   */
-  Future<List<String>> getExercises(String type, String position) async {
-    List<String> exerciseList = new List();
+  Future<List<int>> getExercises(String type, String position) async {
+    List<int> exerciseList = new List();
     if (position == '') {
       await db
           .collection('Exercise General')
@@ -182,12 +192,11 @@ class WorkoutConstructor {
    * Loops though the data from the QuerySnapshot and adds each element to a list
    * Returns the list when completed
   */
-  List<String> addToList(
-      List<String> exerciseList, QuerySnapshot docs, String type) {
+  List<int> addToList(List<int> exerciseList, QuerySnapshot docs, String type) {
     print("--------------------------- FROM QUERY ---------------------------");
     for (int i = 0; i < docs.documents.length; i++) {
-      if (!exerciseList.contains(docs.documents[i].data.toString())) {
-        exerciseList.add(docs.documents[i].data.toString());
+      if (!exerciseList.contains(docs.documents[i].data['id'])) {
+        exerciseList.add(docs.documents[i].data['id']);
         print(type +
             " workouts[" +
             i.toString() +
@@ -197,6 +206,15 @@ class WorkoutConstructor {
     }
     print("");
     return exerciseList;
+  }
+
+  void getAge() {
+    //DateTime dateTime = DateTime.parse(date);
+    print(date);
+    DateTime dateTime = new DateFormat("MM-dd-yyyy").parse(date);
+    final date2 = DateTime.now();
+    age = (date2.difference(dateTime).inDays / 365);
+    print("age is: " + age.toString());
   }
 
   /*
