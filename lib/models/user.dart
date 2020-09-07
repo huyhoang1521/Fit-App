@@ -8,7 +8,8 @@ class User {
   String goal;
   String length;
   String equipment;
-  String prefferedExercises;
+  String primaryPushGoal;
+  String primaryPullGoal;
   List<int> progressions = new List(19);
 
   User(
@@ -20,7 +21,8 @@ class User {
       this.goal,
       this.length,
       this.equipment,
-      this.prefferedExercises,
+      this.primaryPushGoal,
+      this.primaryPullGoal,
       this.height,
       this.progressions);
 
@@ -34,7 +36,8 @@ class User {
         'goal': goal,
         'length': length,
         'equipment': equipment,
-        'prefferedExercises': prefferedExercises,
+        'primaryPushGoal': primaryPushGoal,
+        'primaryPullGoal': primaryPullGoal,
         'progressions': progressions
       };
 }

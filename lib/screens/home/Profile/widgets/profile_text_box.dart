@@ -40,29 +40,31 @@ class ProfileTextBox extends StatelessWidget {
                 offset: Offset(0, 2), // changes position of shadow
               ),
             ]),
-        child: Row(children: [
-          Icon(
-            icon,
-            color: Theme.of(context).primaryColor,
-          ),
-          SizedBox(width: 10),
-          Text(
-            text,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-          new Flexible(
-            child: TextFormField(
-              enabled: enabled,
-              controller:
-                  controller, //TextEditingController()..text = userData,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Theme.of(context).primaryColor,
+            ),
+            SizedBox(width: 10),
+            Text(
+              text,
               style: Theme.of(context).textTheme.bodyText2,
-              onChanged: press,
-              decoration: InputDecoration(
-                border: InputBorder.none,
+            ),
+            new Flexible(
+              child: TextFormField(
+                enabled: enabled,
+                controller:
+                    controller, //TextEditingController()..text = userData,
+                style: Theme.of(context).textTheme.bodyText2,
+                onChanged: press,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:fit_app/screens/form/equipment.dart';
 import 'package:flutter/material.dart';
+import '../../components/rounded_preferred_button.dart';
 import '../../components/rounded_button.dart';
 import '../../constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,7 +19,8 @@ class PreferredExercises extends StatefulWidget {
 class _PreferredExercises extends State<PreferredExercises> {
   final User user;
   _PreferredExercises({this.user});
-  String _prefferedExercises;
+  String _primaryPushGoal;
+  String _primaryPullGoal;
   final db = Firestore.instance;
 
   bool exercise1 = false;
@@ -29,7 +31,8 @@ class _PreferredExercises extends State<PreferredExercises> {
   bool exercise6 = false;
 
   void setVars() {
-    user.prefferedExercises = _prefferedExercises;
+    user.primaryPushGoal = _primaryPushGoal;
+    user.primaryPullGoal = _primaryPullGoal;
   }
 
   @override
@@ -56,35 +59,36 @@ class _PreferredExercises extends State<PreferredExercises> {
       body: Container(
         width: _width,
         height: _height,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 33),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Preffered exercises",
+              Text("Preferred exercises",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center),
-              SizedBox(height: _height * .025),
+              SizedBox(height: _height * .02),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 45),
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                     "With enough time and effort, anything is possible. What high level exercises sound like fun to work toward?",
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left),
               ),
+              SizedBox(height: _height * .02),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: _height * .02),
                         Text("Push",
                             style: TextStyle(fontSize: 18),
                             textAlign: TextAlign.center),
                         SizedBox(height: _height * .02),
-                        RoundedButton(
-                            text: "One Arm Push Up",
+                        RoundedPreferredButton(
+                            text: "One-Arm Push-Up",
                             textColor: exercise1 ? Colors.white : kPrimaryColor,
                             color:
                                 exercise1 ? kPrimaryColor : kPrimaryLightColor,
@@ -93,11 +97,10 @@ class _PreferredExercises extends State<PreferredExercises> {
                               setState(() {
                                 exercise1 = !exercise1;
                               });
-                              _prefferedExercises = "OAPu";
-                              print(
-                                  "_prefferedExercises " + _prefferedExercises);
+                              _primaryPushGoal = "One-Arm Push-Up";
+                              print("_primaryPushGoal " + _primaryPushGoal);
                             }),
-                        RoundedButton(
+                        RoundedPreferredButton(
                             text: "Planche",
                             textColor: exercise2 ? Colors.white : kPrimaryColor,
                             color:
@@ -107,12 +110,11 @@ class _PreferredExercises extends State<PreferredExercises> {
                               setState(() {
                                 exercise2 = !exercise2;
                               });
-                              _prefferedExercises = "Planche";
-                              print(
-                                  "_prefferedExercises " + _prefferedExercises);
+                              _primaryPushGoal = "Planche";
+                              print("_primaryPushGoal " + _primaryPushGoal);
                             }),
-                        RoundedButton(
-                            text: "Hand Stand Push Up",
+                        RoundedPreferredButton(
+                            text: "Handstand Push-Up",
                             textColor: exercise3 ? Colors.white : kPrimaryColor,
                             color:
                                 exercise3 ? kPrimaryColor : kPrimaryLightColor,
@@ -121,24 +123,22 @@ class _PreferredExercises extends State<PreferredExercises> {
                               setState(() {
                                 exercise3 = !exercise3;
                               });
-                              _prefferedExercises = "HSPu";
-                              print(
-                                  "_prefferedExercises " + _prefferedExercises);
+                              _primaryPushGoal = "Handstand Push-Up";
+                              print("_primaryPushGoal " + _primaryPushGoal);
                             }),
                       ],
                     ),
                   ),
-                  SizedBox(width: 45),
+                  SizedBox(width: 40),
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: _height * .02),
                         Text("Pull",
                             style: TextStyle(fontSize: 18),
                             textAlign: TextAlign.center),
                         SizedBox(height: _height * .02),
-                        RoundedButton(
-                            text: "One Arm Chin Up",
+                        RoundedPreferredButton(
+                            text: "One-Arm Chin-Up",
                             textColor: exercise4 ? Colors.white : kPrimaryColor,
                             color:
                                 exercise4 ? kPrimaryColor : kPrimaryLightColor,
@@ -147,12 +147,11 @@ class _PreferredExercises extends State<PreferredExercises> {
                               setState(() {
                                 exercise4 = !exercise4;
                               });
-                              _prefferedExercises = "OAC";
-                              print(
-                                  "_prefferedExercises " + _prefferedExercises);
+                              _primaryPullGoal = "One-Arm Chin-Up";
+                              print("_primaryPullGoal " + _primaryPullGoal);
                             }),
-                        RoundedButton(
-                            text: "FL",
+                        RoundedPreferredButton(
+                            text: "Front Lever",
                             textColor: exercise5 ? Colors.white : kPrimaryColor,
                             color:
                                 exercise5 ? kPrimaryColor : kPrimaryLightColor,
@@ -161,12 +160,11 @@ class _PreferredExercises extends State<PreferredExercises> {
                               setState(() {
                                 exercise5 = !exercise5;
                               });
-                              _prefferedExercises = "Front Lever";
-                              print(
-                                  "_prefferedExercises " + _prefferedExercises);
+                              _primaryPullGoal = "Front Lever";
+                              print("_primaryPullGoal " + _primaryPullGoal);
                             }),
-                        RoundedButton(
-                            text: "BL",
+                        RoundedPreferredButton(
+                            text: "Back Lever",
                             textColor: exercise6 ? Colors.white : kPrimaryColor,
                             color:
                                 exercise6 ? kPrimaryColor : kPrimaryLightColor,
@@ -175,9 +173,8 @@ class _PreferredExercises extends State<PreferredExercises> {
                               setState(() {
                                 exercise6 = !exercise6;
                               });
-                              _prefferedExercises = "Back Lever";
-                              print(
-                                  "_prefferedExercises " + _prefferedExercises);
+                              _primaryPullGoal = "Back Lever";
+                              print("_primaryPullGoal " + _primaryPullGoal);
                             }),
                       ],
                     ),
