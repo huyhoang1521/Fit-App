@@ -71,7 +71,7 @@ class _Equipment extends State<Equipment> {
                     _equipment = "Rings";
                     print("_equipment " + _equipment);
                   }),
-              SizedBox(height: _height * .02),
+              SizedBox(height: _height * .01),
               RoundedButton(
                   text: "Pull-Up Bar",
                   textColor: pullUpBar ? Colors.white : kPrimaryColor,
@@ -84,7 +84,7 @@ class _Equipment extends State<Equipment> {
                     _equipment = "Pull-Up Bar";
                     print("_equipment " + _equipment);
                   }),
-              SizedBox(height: _height * .02),
+              SizedBox(height: _height * .01),
               RoundedButton(
                   text: "Weights",
                   textColor: weights ? Colors.white : kPrimaryColor,

@@ -39,9 +39,9 @@ class _Info extends State<Info> {
   void setHeightList() {
     for (int i = 3; i < 8; i++) {
       for (int x = 0; x < 12; x++) {
-        heightList.add(
-            Center(child: Text(i.toString() + "'" + x.toString() + "\"\"")));
-        heightStringList.add(i.toString() + "'" + x.toString() + "\"\"");
+        heightList
+            .add(Center(child: Text(i.toString() + "'" + x.toString() + "\"")));
+        heightStringList.add(i.toString() + "'" + x.toString() + "\"");
       }
     }
   }
@@ -111,7 +111,7 @@ class _Info extends State<Info> {
               Text("More Information",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center),
-              SizedBox(height: _height * .025),
+              SizedBox(height: _height * .02),
               CustomPressField(
                 hintText: "Date of Birth",
                 control: dobController,

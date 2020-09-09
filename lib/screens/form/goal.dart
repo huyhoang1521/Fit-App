@@ -67,7 +67,7 @@ class _Goal extends State<Goal> {
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.left),
               ),
-              SizedBox(height: _height * .03),
+              SizedBox(height: _height * .02),
               RoundedButton(
                   text: "Strength",
                   textColor: strength ? Colors.white : kPrimaryColor,
@@ -82,7 +82,7 @@ class _Goal extends State<Goal> {
                     _goal = "Strength";
                     print(_goal);
                   }),
-              SizedBox(height: _height * .02),
+              SizedBox(height: _height * .01),
               RoundedButton(
                   text: "Hypertrophy",
                   textColor: hypertrophy ? Colors.white : kPrimaryColor,
@@ -97,7 +97,7 @@ class _Goal extends State<Goal> {
                     _goal = "Hypertrophy";
                     print(_goal);
                   }),
-              SizedBox(height: _height * .02),
+              SizedBox(height: _height * .01),
               RoundedButton(
                   text: "Weight Loss",
                   textColor: weightLoss ? Colors.white : kPrimaryColor,
@@ -112,16 +112,13 @@ class _Goal extends State<Goal> {
                     _goal = "Weight Loss";
                     print(_goal);
                   }),
-              SizedBox(height: _height * .02),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: RoundedButton(
                     text: "Next",
                     press: () {
-                      print("Before Next");
                       setVars();
-                      print("After Next");
                       Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/rounded_image_button.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/Profile/fitness_goal.dart';
-import 'package:fit_app/screens/home/Profile/prof_Info_pull.dart';
+import 'package:fit_app/screens/home/Profile/widgets/fitness_goal.dart';
+import 'package:fit_app/screens/home/Profile/profile_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -33,7 +33,7 @@ String uuid;
 String firstName;
 String controllerFN;
 String lastName;
-int height;
+String height;
 int weight;
 String dob;
 String oAC = 'assets/images/OpenImg.png';
@@ -147,8 +147,7 @@ class _ProfileTestState extends State<ProfileTest> {
                   nameController: TextEditingController()..text = firstName,
                   weightController: TextEditingController()
                     ..text = weight.toString(),
-                  heightController: TextEditingController()
-                    ..text = height.toString(),
+                  heightController: TextEditingController()..text = height,
                   dobController: TextEditingController()..text = dob,
                   firstName: firstName,
                   lastName: lastName,

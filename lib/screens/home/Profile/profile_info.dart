@@ -2,14 +2,15 @@ import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
 import 'package:fit_app/screens/home/Profile/profile_test_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/screens/home/Profile/profile_info_text.dart';
+import 'package:fit_app/screens/home/Profile/widgets/profile_text_box.dart';
 
 String goal;
 String fullName = '$firstName $lastName';
 
 class ProfileInfo extends StatelessWidget {
   final String userData, firstName, lastName, dob;
-  final int weight, height;
+  final int weight;
+  final String height;
   final bool lock;
   final Function onChangeFN, onChangeLN, onChangeW, onChangeH, onChangeD;
   final TextEditingController nameController,
@@ -60,7 +61,7 @@ class ProfileInfo extends StatelessWidget {
         ProfileTextBox(
           text: 'Height: ',
           icon: CustomIcons.height,
-          userData: height.toString(),
+          userData: height,
           press: onChangeH,
           controller: heightController,
           enabled: lock,
