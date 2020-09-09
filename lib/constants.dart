@@ -4,7 +4,7 @@ const kPrimaryColor = Color(0xFF6F35A5);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
 const cream = Color(0xfff1f1f1);
 const darkPrimaryColor = Color(0xFF272727);
-const darkBackground = Color(0xF121212);
+const darkBackground = Color(0xFF141414); //Color(0xFF151515);
 const darkText = kPrimaryLightColor; //Colors.grey;
 
 //Consistent Spacing

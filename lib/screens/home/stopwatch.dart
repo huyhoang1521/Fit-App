@@ -24,6 +24,9 @@ class _StopwatchState extends State<StopWatch> {
     await _stopWatchTimer.dispose(); // Need to call dispose function.
   }
 
+  IconData pause = Icons.pause_circle_filled;
+  IconData play = Icons.play_circle_filled;
+
   // initialize variables
   bool startispressed = true;
   bool stopispressed = true;
@@ -82,35 +85,63 @@ class _StopwatchState extends State<StopWatch> {
 
   @override
   Widget build(BuildContext context) {
+    double height = (MediaQuery.of(context).size.height);
     return Container(
+      height: .75 * height,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             child: Text(
               stoptimetodisplay,
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headline5,
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                  color: Colors.green,
-                  disabledColor: kPrimaryLightColor,
-                  child: Text('Start'),
-                  onPressed: startispressed ? startstopwatch : null),
-              RaisedButton(
-                  color: Colors.red,
-                  disabledColor: kPrimaryLightColor,
-                  child: Text('Stop'),
-                  onPressed: stopispressed ? null : stopstopwatch),
-              RaisedButton(
-                  color: Colors.blue,
-                  disabledColor: kPrimaryLightColor,
-                  child: Text('Reset'),
-                  onPressed: resetispressed ? null : resetstopwatch),
+              IconButton(
+                icon: Icon(Icons.fast_rewind),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                iconSize: 75,
+                color: kPrimaryColor,
+              ),
+              IconButton(
+                icon: Icon(startispressed ? play : pause),
+                color: kPrimaryColor,
+                onPressed: startispressed ? startstopwatch : stopstopwatch,
+                iconSize: 75,
+              ),
+              IconButton(
+                icon: Icon(Icons.fast_forward),
+                onPressed: () {}, //resetispressed ? null : resetstopwatch,
+                iconSize: 75,
+                color: kPrimaryColor,
+              ),
             ],
           ),
+//          Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: [
+//              RaisedButton(
+//                  color: Colors.green,
+//                  disabledColor: kPrimaryLightColor,
+//                  child: Text('Start'),
+//                  onPressed: startispressed ? startstopwatch : null),
+//              RaisedButton(
+//                  color: Colors.red,
+//                  disabledColor: kPrimaryLightColor,
+//                  child: Text('Stop'),
+//                  onPressed: stopispressed ? null : stopstopwatch),
+//              RaisedButton(
+//                  color: Colors.blue,
+//                  disabledColor: kPrimaryLightColor,
+//                  child: Text('Reset'),
+//                  onPressed: resetispressed ? null : resetstopwatch),
+//            ],
+//          ),
         ],
       ),
     );

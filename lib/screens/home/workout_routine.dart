@@ -1,5 +1,6 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
+import 'package:fit_app/screens/workout/routine.dart';
 import 'package:fit_app/screens/workout/start_workout.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
@@ -25,7 +26,6 @@ class _WorkOutRState extends State<WorkOutR> {
       appBar: AppBar(
         title: Text('Fit With Nick'),
         elevation: 5,
-        // backgroundColor: kPrimaryColor,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.undo),
@@ -111,42 +111,44 @@ class _WorkOutRState extends State<WorkOutR> {
           ],
         ),
       ),
-      body: Column(children: [
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: RoundedButton(
-              color: Theme.of(context).accentColor,
-              //textColor: Colors.white,
-              press: () {
-                Navigator.push(
-                  context,
-                  //   MaterialPageRoute(builder: (context) => RoutinePage()),
-                  MaterialPageRoute(builder: (context) => StartWorkout()),
-                );
-              },
-              text: 'Start Workout',
-              //onLongPress: ,
-            ),
-          ),
-        ),
-        //StopWatch(),
-
-        // TEST PAGE USE IS FOR TESTING ONLY
-//        RoundedButton(
-//          color: Theme.of(context).accentColor,
-//          //textColor: Colors.white,
-//          press: () {
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(builder: (context) => VideoDemo()),
-//            );
-//          },
-//          text: 'TEST PAGE',
-//          //onLongPress: ,
-//        ),
-      ]),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RoundedButton(
+                  color: Theme.of(context).accentColor,
+                  //textColor: Colors.white,
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RoutinePage()),
+                      //MaterialPageRoute(builder: (context) => StartWorkout()),
+                    );
+                  },
+                  text: 'Start Workout (UI)',
+                  //onLongPress: ,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RoundedButton(
+                  color: Theme.of(context).accentColor,
+                  //textColor: Colors.white,
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => StartWorkout()),
+                    );
+                  },
+                  text: 'Start Workout (Firebase)',
+                  //onLongPress: ,
+                ),
+              ),
+            ]),
+      ),
     );
   }
 }

@@ -6,8 +6,10 @@ class RoundedImageButton extends StatelessWidget {
   final Function press;
   final Color color, buttonColor;
   final String image;
+  final double offset;
   const RoundedImageButton({
     Key key,
+    this.offset,
     this.text,
     this.press,
     this.color,
@@ -30,10 +32,10 @@ class RoundedImageButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 4,
-                  offset: Offset(0, 2), // changes position of shadow
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 0,
+                  blurRadius: 0,
+                  offset: Offset(offset, 2), // changes position of shadow
                 ),
               ]),
           child: Row(

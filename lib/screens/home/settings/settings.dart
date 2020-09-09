@@ -1,4 +1,5 @@
 import 'package:fit_app/components/themes/theme.dart';
+import 'package:fit_app/screens/home/settings/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../constants.dart';
@@ -33,31 +34,20 @@ class _SettingsState extends State<Settings> {
             'Settings',
             style: Theme.of(context).textTheme.headline1,
           ),
-          SwitchListTile(
-            activeColor: kPrimaryColor,
-            title: Text(
-              'Reminder',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-            onChanged: (bool value) {
-              setState(() {
-                reminder = value;
-              });
-            },
-            value: reminder,
-          ),
-//          Row(children: [
-//            Text('Reminder'),
-//            Switch(
-//              activeColor: kPrimaryColor,
-//              value: reminder,
-//              onChanged: (bool value) {
-//                setState(() {
-//                  reminder = value;
-//                });
-//              },
+          Alarm(),
+//          SwitchListTile(
+//            activeColor: kPrimaryColor,
+//            title: Text(
+//              'Reminder',
+//              style: Theme.of(context).textTheme.bodyText1,
 //            ),
-//          ]),
+//            onChanged: (bool value) {
+//              setState(() {
+//                reminder = value;
+//              });
+//            },
+//            value: reminder,
+//          ),
           Consumer<ThemeNotifier>(
             builder: (context, notifier, child) => SwitchListTile(
               activeColor: kPrimaryColor,

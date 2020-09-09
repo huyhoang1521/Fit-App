@@ -30,16 +30,17 @@ class ProfileTextBox extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         width: size.width * 0.8,
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 2,
-                offset: Offset(0, 2), // changes position of shadow
-              ),
-            ]),
+          color: Theme.of(context).accentColor,
+          borderRadius: BorderRadius.circular(5),
+//            boxShadow: [
+//              BoxShadow(
+//                color: Colors.grey.withOpacity(0.5),
+//                spreadRadius: 2, //2
+//                blurRadius: 3, //2,
+//                offset: Offset(0, 2), // changes position of shadow
+//              ),
+//            ]
+        ),
         child: Row(children: [
           Icon(
             icon,

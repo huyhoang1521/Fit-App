@@ -38,7 +38,11 @@ ThemeData light = ThemeData(
         fontFamily: 'Montserrat',
         fontStyle: FontStyle.normal,
         color: colorCustom),
-    headline5: TextStyle(color: Colors.black, fontSize: 30),
+    headline5: TextStyle(
+        fontSize: 55,
+        fontFamily: 'OpenSans',
+        color: kPrimaryColor,
+        fontWeight: FontWeight.normal),
     headline6: TextStyle(color: kPrimaryColor, fontSize: 26.0),
     headline3: TextStyle(
       color: Colors.black,
@@ -63,7 +67,7 @@ ThemeData light = ThemeData(
 
 ThemeData dark = ThemeData(
   appBarTheme: AppBarTheme(
-    color: Color(0xFF272727),
+    color: darkBackground, //Color(0xFF272727),
     elevation: 10,
     textTheme: TextTheme(
       headline6: TextStyle(
@@ -73,12 +77,14 @@ ThemeData dark = ThemeData(
           color: darkText),
     ),
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(),
   primaryColor: kPrimaryLightColor,
   brightness: Brightness.dark,
   primarySwatch: colorCustom,
-  accentColor: Color(0xFF202020), //darkPrimaryColor,
+  accentColor: Color(0xFF191919), //darkPrimaryColor,
   canvasColor: Color(0xFF272727), //Colors.black87,
   scaffoldBackgroundColor: darkBackground, //Colors.black12,
+  //shadowColor: darkBackground,
   iconTheme: IconThemeData(
     color: kPrimaryLightColor,
   ),
@@ -111,7 +117,11 @@ ThemeData dark = ThemeData(
           fontFamily: 'Montserrat',
           fontStyle: FontStyle.normal,
           color: darkText),
-      headline5: TextStyle(color: Colors.grey, fontSize: 30),
+      headline5: TextStyle(
+          fontSize: 55,
+          fontFamily: 'OpenSans',
+          color: darkText,
+          fontWeight: FontWeight.normal),
       headline6: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
       bodyText1: TextStyle(
           color: darkText,

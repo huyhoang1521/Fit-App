@@ -185,6 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: Theme.of(context).textTheme.headline1),
                         SizedBox(height: titleDiv),
                         RoundedImageButton(
+                          offset: 5,
                           color: frontLever ? Colors.white : kPrimaryColor,
                           buttonColor: frontLever
                               ? Theme.of(context).primaryColor
@@ -203,10 +204,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         RoundedImageButton(
+                          offset: oneArmChinUp ? 4 : 0,
                           color: oneArmChinUp ? Colors.white : kPrimaryColor,
-                          buttonColor: oneArmChinUp
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context).accentColor,
+                          buttonColor: Theme.of(context).accentColor,
+//                          oneArmChinUp
+//                              ? Theme.of(context).primaryColor
+//                              : Theme.of(context).accentColor,
                           text: 'One Arm Chin Up',
                           image: oneArmChinUp ? oACD : oACU,
                           press: () {
@@ -221,6 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         RoundedImageButton(
+                          offset: 5,
                           color: backLever ? Colors.white : kPrimaryColor,
                           buttonColor: backLever
                               ? Theme.of(context).primaryColor
@@ -243,6 +247,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: Theme.of(context).textTheme.headline1),
                         SizedBox(height: titleDiv),
                         RoundedImageButton(
+                          offset: 5,
                           color: planche
                               ? Colors.white
                               : Theme.of(context).primaryColor,
@@ -260,6 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         RoundedImageButton(
+                          offset: 5,
                           color: handStandPushup
                               ? Colors.white
                               : Theme.of(context).primaryColor,
@@ -277,6 +283,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         RoundedImageButton(
+                          offset: 5,
                           color: oneArmPushUp
                               ? Colors.white
                               : Theme.of(context).primaryColor,

@@ -1,5 +1,6 @@
+import 'package:fit_app/screens/workout/rest.dart';
+import 'package:fit_app/screens/workout/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/constants.dart';
 
 class RoutinePage extends StatefulWidget {
   RoutinePage() : super();
@@ -161,33 +162,55 @@ class _RoutinePageState extends State<RoutinePage> {
 //                  ),
 //                )),
 //          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.fast_rewind),
-                onPressed: () {},
-                iconSize: 75,
-                color: kPrimaryColor,
-              ),
-              IconButton(
-                icon: Icon(pressed ? pause : play),
-                color: kPrimaryColor,
-                onPressed: () {
-                  setState(() {
-                    pressed = !pressed;
-                  });
-                },
-                iconSize: 75,
-              ),
-              IconButton(
-                icon: Icon(Icons.fast_forward),
-                onPressed: () {},
-                iconSize: 75,
-                color: kPrimaryColor,
-              ),
-            ],
+          Buttons(
+            enabled: pressed,
+            rWPressed: () {},
+            fFPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RestPage()),
+                //MaterialPageRoute(builder: (context) => StartWorkout()),
+              );
+            },
+            pPPressed: () {
+              setState(() {
+                pressed = !pressed;
+              });
+            },
           ),
+//          Row(
+//            mainAxisAlignment: MainAxisAlignment.center,
+//            children: [
+//              IconButton(
+//                icon: Icon(Icons.fast_rewind),
+//                onPressed: () {},
+//                iconSize: 75,
+//                color: kPrimaryColor,
+//              ),
+//              IconButton(
+//                icon: Icon(pressed ? pause : play),
+//                color: kPrimaryColor,
+//                onPressed: () {
+//                  setState(() {
+//                    pressed = !pressed;
+//                  });
+//                },
+//                iconSize: 75,
+//              ),
+//              IconButton(
+//                icon: Icon(Icons.fast_forward),
+//                onPressed: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => RestPage()),
+//                    //MaterialPageRoute(builder: (context) => StartWorkout()),
+//                  );
+//                },
+//                iconSize: 75,
+//                color: kPrimaryColor,
+//              ),
+//            ],
+//          ),
         ],
       ),
     );
