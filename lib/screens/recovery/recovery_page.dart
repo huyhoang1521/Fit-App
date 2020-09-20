@@ -1,8 +1,8 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import '../../../constants.dart';
-import 'package:fit_app/screens/home/recovery/widgets/recovery_checkBlock.dart';
+import 'package:fit_app/components/constants.dart';
+import 'widgets/recovery_checkBlock.dart';
 import 'package:flutter/animation.dart';
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:confetti/confetti.dart';

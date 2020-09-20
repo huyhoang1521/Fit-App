@@ -1,8 +1,8 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/Profile/profile_test_page.dart';
+import 'profile_test_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/screens/home/Profile/widgets/profile_text_box.dart';
+import 'widgets/profile_text_box.dart';
 
 String goal;
 String fullName = '$firstName $lastName';

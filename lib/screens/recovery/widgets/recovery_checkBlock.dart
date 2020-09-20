@@ -1,5 +1,5 @@
+import 'package:fit_app/components/constants.dart';
 import 'package:flutter/material.dart';
-import '../../../../constants.dart';
 
 class RecoveryCheckBlock extends StatelessWidget {
   final String text;

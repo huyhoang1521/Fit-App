@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'custom_container.dart';
-import '../constants.dart';
+import 'constants.dart';
 
 class CustomNumberField extends StatelessWidget {
   final String hintText;
   final ValueChanged<String> onChanged;
   final TextInputType keyboard;
+  final TextEditingController txt;
   const CustomNumberField({
     Key key,
     this.hintText,
     this.onChanged,
     this.keyboard,
+    this.txt,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class CustomNumberField extends StatelessWidget {
     return CustomContainer(
       child: TextField(
         onChanged: onChanged,
+        controller: txt,
         cursorColor: kPrimaryColor,
         keyboardType: keyboard,
         decoration: InputDecoration(

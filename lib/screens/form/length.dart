@@ -1,7 +1,7 @@
+import 'package:fit_app/components/constants.dart';
 import 'package:fit_app/screens/form/info.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
-import '../../constants.dart';
 import '../../models/user.dart';
 import 'equipment.dart';
 

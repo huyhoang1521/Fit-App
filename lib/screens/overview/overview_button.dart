@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fit_app/constants.dart';
+import 'package:fit_app/components/constants.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class OverViewButton extends StatelessWidget {

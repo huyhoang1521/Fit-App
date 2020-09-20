@@ -1,10 +1,10 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/Profile/widgets/profile_text_box.dart';
+import '../widgets/profile_text_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../models/user.dart';
+import '../../../models/user.dart';
 
 class TextFieldInfo extends StatefulWidget {
   final User user;

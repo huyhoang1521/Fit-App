@@ -1,8 +1,8 @@
+import 'package:fit_app/components/constants.dart';
 import 'package:fit_app/screens/form/goal.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'preferred_exercises.dart';
-import '../../constants.dart';
 import '../../models/user.dart';
 
 class Equipment extends StatefulWidget {
