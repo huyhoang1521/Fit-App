@@ -100,7 +100,7 @@ class _NewProfileState extends State<NewProfile> {
               ),
               TextFieldInfo(user: user, fullName: fullName),
               SizedBox(height: newSect),
-              Goals(user: user),
+              //Goals(user: user),
               SizedBox(height: newSect),
               MainGoal(user: user),
             ],
