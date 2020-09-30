@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/rounded_image_button.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/Profile/widgets/fitness_goal.dart';
-import 'package:fit_app/screens/home/Profile/profile_info.dart';
+import 'widgets/fitness_goal.dart';
+import 'profile_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../constants.dart';
+import 'package:fit_app/components/constants.dart';
 
 class Profile extends StatefulWidget {
   @override

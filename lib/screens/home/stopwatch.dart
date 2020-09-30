@@ -1,4 +1,4 @@
-import 'package:fit_app/constants.dart';
+import 'package:fit_app/components/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'dart:async';

@@ -1,4 +1,4 @@
-import 'package:fit_app/constants.dart';
+import 'package:fit_app/components/constants.dart';
 import 'package:fit_app/screens/form/first_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

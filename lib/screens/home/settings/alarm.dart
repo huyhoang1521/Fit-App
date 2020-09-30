@@ -1,5 +1,5 @@
-import 'package:fit_app/constants.dart';
-import 'package:fit_app/screens/home/workout_routine.dart';
+import 'package:fit_app/components/constants.dart';
+import 'package:fit_app/screens/home/workout_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';

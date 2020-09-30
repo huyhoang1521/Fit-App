@@ -1,4 +1,4 @@
-import 'workout_routine.dart';
+import 'workout_overview.dart';
 import 'package:flutter/material.dart';
 import '../../algorithms/workout_constructor.dart';
 

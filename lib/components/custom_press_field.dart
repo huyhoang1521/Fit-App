@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'custom_container.dart';
-import '../constants.dart';
+import 'constants.dart';
 
 class CustomPressField extends StatelessWidget {
   final String hintText;

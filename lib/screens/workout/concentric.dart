@@ -2,15 +2,15 @@ import 'package:fit_app/screens/workout/rest.dart';
 import 'package:fit_app/screens/workout/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
-class RoutinePage extends StatefulWidget {
-  RoutinePage() : super();
+class Concentric extends StatefulWidget {
+  Concentric() : super();
   @override
-  _RoutinePageState createState() => _RoutinePageState();
+  _ConcentricState createState() => _ConcentricState();
 }
 
 @override
 State<StatefulWidget> createState() {
-  return _RoutinePageState();
+  return _ConcentricState();
 }
 
 IconData pause = Icons.pause_circle_filled;
@@ -18,7 +18,7 @@ IconData play = Icons.play_circle_filled;
 IconData button = play;
 bool pressed = false;
 
-class _RoutinePageState extends State<RoutinePage> {
+class _ConcentricState extends State<Concentric> {
   @override
   Widget build(BuildContext context) {
     double width = (MediaQuery.of(context).size.width);

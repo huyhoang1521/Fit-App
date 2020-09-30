@@ -3,12 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../constants.dart';
+import 'package:fit_app/components/constants.dart';
 import 'edit.dart';
 import 'text_field_info.dart';
 import 'main_goal.dart';
-import 'goals.dart';
-import '../../../../models/user.dart';
+import '../../../models/user.dart';
 
 class NewProfile extends StatefulWidget {
   @override
@@ -35,6 +34,9 @@ Future<void> getUserInfo() async {
       .get()
       .then((newData) {
     user.goal = newData.data['goal'];
+    user.email = newData.data['email'];
+    user.length = newData.data['length'];
+    user.equipment = newData.data['equipment'];
     user.primaryPushGoal = newData.data['primaryPushGoal'];
     user.primaryPullGoal = newData.data['primaryPullGoal'];
     user.firstName = newData.data['firstName'];

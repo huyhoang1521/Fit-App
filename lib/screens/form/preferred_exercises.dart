@@ -1,8 +1,8 @@
+import 'package:fit_app/components/constants.dart';
 import 'package:fit_app/screens/form/equipment.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_preferred_button.dart';
 import '../../components/rounded_button.dart';
-import '../../constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../widgets/provider_widget.dart';
 import '../../models/user.dart';

@@ -1,17 +1,17 @@
 import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
-import 'package:fit_app/screens/workout/routine.dart';
+import 'package:fit_app/screens/workout/concentric.dart';
 import 'package:fit_app/screens/workout/start_workout.dart';
+import 'package:fit_app/screens/workout/test_page.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
 import '../../components/drawer_button.dart';
-import 'package:fit_app/screens/home/Overview/overview_page.dart';
-import 'Profile/profile.dart';
-import 'Profile/newProfile/new_profile.dart';
-import 'recovery/recovery_page.dart';
-import 'settings/settings.dart';
+import '../Overview/overview_page.dart';
+import '../Profile/new/new_profile.dart';
+import '../recovery/recovery_page.dart';
+import '../settings/settings.dart';
 
 class WorkOutR extends StatefulWidget {
   @override
@@ -120,12 +120,28 @@ class _WorkOutRState extends State<WorkOutR> {
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RoundedButton(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).buttonColor,
                   //textColor: Colors.white,
                   press: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RoutinePage()),
+                      MaterialPageRoute(builder: (context) => TestPage()),
+                      //MaterialPageRoute(builder: (context) => StartWorkout()),
+                    );
+                  },
+                  text: 'Workout Test Page',
+                  //onLongPress: ,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RoundedButton(
+                  color: Theme.of(context).buttonColor,
+                  //textColor: Colors.white,
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Concentric()),
                       //MaterialPageRoute(builder: (context) => StartWorkout()),
                     );
                   },
@@ -136,7 +152,7 @@ class _WorkOutRState extends State<WorkOutR> {
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RoundedButton(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).buttonColor,
                   //textColor: Colors.white,
                   press: () {
                     Navigator.push(

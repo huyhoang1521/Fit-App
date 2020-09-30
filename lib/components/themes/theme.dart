@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fit_app/constants.dart';
+import '../constants.dart';
 
 ThemeData light = ThemeData(
   appBarTheme: AppBarTheme(
@@ -14,8 +14,9 @@ ThemeData light = ThemeData(
   scaffoldBackgroundColor: Color(0xfff1f1f1),
   canvasColor: Color(0xfff1f1f1), //Colors.white,
   unselectedWidgetColor: Colors.black,
+  buttonColor: kPrimaryColor,
   buttonTheme: ButtonThemeData(
-    buttonColor: colorCustom,
+    buttonColor: kPrimaryColor,
     textTheme:
         ButtonTextTheme.primary, //  <-- this auto selects the right color
   ),
@@ -89,7 +90,7 @@ ThemeData dark = ThemeData(
     color: kPrimaryLightColor,
   ),
   buttonTheme: ButtonThemeData(
-    buttonColor: Color(0xFF272727),
+    buttonColor: kPrimaryColor,
     textTheme:
         ButtonTextTheme.primary, //  <-- this auto selects the right color
   ),

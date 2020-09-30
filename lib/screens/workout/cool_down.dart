@@ -2,28 +2,29 @@ import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
 import 'package:fit_app/screens/workout/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:quiver/async.dart';
 
-class RestPage extends StatefulWidget {
-  RestPage() : super();
+class CoolDown extends StatefulWidget {
+  CoolDown() : super();
   @override
-  _RestPageState createState() => _RestPageState();
+  _CoolDownState createState() => _CoolDownState();
 }
 
 @override
 State<StatefulWidget> createState() {
-  return _RestPageState();
+  return _CoolDownState();
 }
 
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;
-//bool _pressed = false;
 
-class _RestPageState extends State<RestPage> {
+class _CoolDownState extends State<CoolDown> {
   int _start = 10;
   int _current = 10;
   bool _pressed = false;
+  num _elapsedTime = 0;
 
   void startTimer() {
     CountdownTimer countDownTimer = new CountdownTimer(
@@ -36,6 +37,7 @@ class _RestPageState extends State<RestPage> {
       if (_pressed == true) {
         setState(() {
           _current = _start - duration.elapsed.inSeconds;
+          _elapsedTime = duration.elapsed.inSeconds;
         });
       } else {
         sub.pause();
@@ -55,9 +57,11 @@ class _RestPageState extends State<RestPage> {
     });
   }
 
+  String stretchName = 'Downward Dog';
+
   @override
   Widget build(BuildContext context) {
-    // double width = (MediaQuery.of(context).size.width);
+    double width = (MediaQuery.of(context).size.width);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -80,13 +84,42 @@ class _RestPageState extends State<RestPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              'Rest',
-              style: Theme.of(context).textTheme.headline5,
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).accentColor,
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2), // changes position of shadow
+                        ),
+                      ]),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text('$stretchName',
+                          style: Theme.of(context).textTheme.headline2),
+                    ),
+                  )),
             ),
-            Text(
-              "$_current",
-              style: Theme.of(context).textTheme.headline5,
+            Flexible(
+              child: Image.asset(
+                'assets/images/pullup_up.png',
+              ),
+            ),
+            CircularPercentIndicator(
+              radius: width * 0.3,
+              lineWidth: 10.0,
+              progressColor: Theme.of(context).primaryColor,
+              percent: _elapsedTime / _start,
+              center: Text(
+                "$_current",
+                style: Theme.of(context).textTheme.headline5,
+              ),
             ),
             Buttons(
               enabled: _pressed,

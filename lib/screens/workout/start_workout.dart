@@ -1,6 +1,6 @@
 import 'package:fit_app/widgets/provider_widget.dart';
 import 'package:flutter/material.dart';
-import '../../constants.dart';
+import 'package:fit_app/components/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StartWorkout extends StatelessWidget {

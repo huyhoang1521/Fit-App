@@ -1,9 +1,9 @@
-import 'package:fit_app/screens/home/Overview/overview_button.dart';
-import 'package:fit_app/screens/home/Overview/prog_page.dart';
-import 'package:fit_app/screens/home/Overview/skill_viewer.dart';
+import '../Overview/overview_button.dart';
+import '../Overview/prog_page.dart';
+import '../Overview/skill_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../constants.dart';
+import 'package:fit_app/components/constants.dart';
 
 class Overview extends StatefulWidget {
   @override

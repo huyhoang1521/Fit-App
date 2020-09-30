@@ -3,7 +3,7 @@ import 'package:fit_app/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../constants.dart';
+import '../../../components/constants.dart';
 
 class Goals extends StatefulWidget {
   final User user;
