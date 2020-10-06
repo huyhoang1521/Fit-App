@@ -64,7 +64,7 @@ class _RestPageState extends State<RestPage> {
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Theme.of(context).shadowColor,
               spreadRadius: 2,
               blurRadius: 4,
               offset: Offset(0, 2),

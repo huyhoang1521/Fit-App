@@ -79,7 +79,9 @@ class _NewProfileState extends State<NewProfile> {
                       child: Text(
                         edit,
                         style: TextStyle(
-                          color: editButton ? Colors.white : kPrimaryColor,
+                          color: editButton
+                              ? Colors.white
+                              : Theme.of(context).primaryColor,
                         ),
                         //Theme.of(context).textTheme.bodyText1,
                       ),

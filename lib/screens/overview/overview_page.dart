@@ -36,41 +36,11 @@ Widget _myAnimatedWidget = OverViewButton(
   percentText: '30%',
   percent: 0.3,
   image: 'assets/images/BackLever.jpg',
-  press: () {
-//    Navigator.push(
-//      context,
-//      MaterialPageRoute(builder: (context) => ProgressPage()),
-//    );
-  },
+  press: () {},
 );
 
 class _OverviewState extends State<Overview>
     with SingleTickerProviderStateMixin {
-//  AnimationController _controller;
-//  Animation<Offset> _offsetAnimation;
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//    _controller = AnimationController(
-//      duration: const Duration(seconds: 2),
-//      vsync: this,
-//    ); //..repeat(reverse: false);
-//    _offsetAnimation = Tween<Offset>(
-//      begin: Offset.zero,
-//      end: const Offset(1.5, 0.0),
-//    ).animate(CurvedAnimation(
-//      parent: _controller,
-//      curve: Curves.linearToEaseOut,
-//    ));
-//  }
-//
-//  @override
-//  void dispose() {
-//    super.dispose();
-//    _controller.dispose();
-//  }
-
   @override
   Widget build(BuildContext context) {
     double _fitWidth = MediaQuery.of(context).size.width;
@@ -105,18 +75,6 @@ class _OverviewState extends State<Overview>
                 );
               },
             ),
-//            OverViewButton(
-//              text: 'Handstand Push-up',
-//              percentText: '90%',
-//              percent: 0.9,
-//              image: 'assets/images/HandStandRollout.jpeg',
-//              press: () {
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => ProgressPage()),
-//                );
-//              },
-//            ),
             Stack(children: [
               OverViewButton(
                 text: 'Back Lever',

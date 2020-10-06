@@ -28,7 +28,7 @@ class _ConcentricState extends State<Concentric> {
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Theme.of(context).shadowColor,
               spreadRadius: 2,
               blurRadius: 4,
               offset: Offset(0, 2),
@@ -53,7 +53,7 @@ class _ConcentricState extends State<Concentric> {
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: Theme.of(context).shadowColor,
                         spreadRadius: 2,
                         blurRadius: 4,
                         offset: Offset(0, 2), // changes position of shadow
@@ -86,7 +86,7 @@ class _ConcentricState extends State<Concentric> {
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Theme.of(context).shadowColor,
                             spreadRadius: 2,
                             blurRadius: 4,
                             offset: Offset(0, 2), // changes position of shadow
@@ -114,7 +114,7 @@ class _ConcentricState extends State<Concentric> {
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Theme.of(context).shadowColor,
                             spreadRadius: 2,
                             blurRadius: 4,
                             offset: Offset(0, 2), // changes position of shadow
@@ -135,33 +135,6 @@ class _ConcentricState extends State<Concentric> {
               ),
             ],
           ),
-//          Padding(
-//            padding: const EdgeInsets.all(4.0),
-//            child: Container(
-//                width: .9 * width,
-//                decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.circular(5),
-//                    boxShadow: [
-//                      BoxShadow(
-//                        color: Colors.grey.withOpacity(0.5),
-//                        spreadRadius: 2,
-//                        blurRadius: 4,
-//                        offset: Offset(0, 2), // changes position of shadow
-//                      ),
-//                    ]),
-//                child: Padding(
-//                  padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-//                  child: Row(
-//                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                    children: [
-//                      Text('Set:',
-//                          style: Theme.of(context).textTheme.headline2),
-//                      Text('2', style: Theme.of(context).textTheme.headline2),
-//                    ],
-//                  ),
-//                )),
-//          ),
           Buttons(
             enabled: pressed,
             rWPressed: () {},
@@ -178,39 +151,6 @@ class _ConcentricState extends State<Concentric> {
               });
             },
           ),
-//          Row(
-//            mainAxisAlignment: MainAxisAlignment.center,
-//            children: [
-//              IconButton(
-//                icon: Icon(Icons.fast_rewind),
-//                onPressed: () {},
-//                iconSize: 75,
-//                color: kPrimaryColor,
-//              ),
-//              IconButton(
-//                icon: Icon(pressed ? pause : play),
-//                color: kPrimaryColor,
-//                onPressed: () {
-//                  setState(() {
-//                    pressed = !pressed;
-//                  });
-//                },
-//                iconSize: 75,
-//              ),
-//              IconButton(
-//                icon: Icon(Icons.fast_forward),
-//                onPressed: () {
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(builder: (context) => RestPage()),
-//                    //MaterialPageRoute(builder: (context) => StartWorkout()),
-//                  );
-//                },
-//                iconSize: 75,
-//                color: kPrimaryColor,
-//              ),
-//            ],
-//          ),
         ],
       ),
     );

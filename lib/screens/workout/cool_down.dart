@@ -68,7 +68,8 @@ class _CoolDownState extends State<CoolDown> {
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Theme.of(context)
+                  .shadowColor, //Colors.grey.withOpacity(0.75),
               spreadRadius: 2,
               blurRadius: 4,
               offset: Offset(0, 2),
@@ -92,7 +93,7 @@ class _CoolDownState extends State<CoolDown> {
                       borderRadius: BorderRadius.circular(5),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Theme.of(context).shadowColor,
                           spreadRadius: 2,
                           blurRadius: 4,
                           offset: Offset(0, 2), // changes position of shadow

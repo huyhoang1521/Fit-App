@@ -31,7 +31,7 @@ class RecoveryCheckBlock extends StatelessWidget {
           color: Theme.of(context).canvasColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
+              color: Theme.of(context).shadowColor,
               offset: Offset(0.0, 1.0), //(x,y)
               blurRadius: 5.0,
             ),

@@ -123,7 +123,9 @@ class _ProfileState extends State<Profile> {
                       child: Text(
                         edit,
                         style: TextStyle(
-                          color: editButton ? Colors.white : kPrimaryColor,
+                          color: editButton
+                              ? Colors.white
+                              : Theme.of(context).primaryColor,
                         ), //Theme.of(context).textTheme.bodyText1,
                       ),
                       color: editButton

@@ -30,7 +30,7 @@ class _IsometricState extends State<Isometric> {
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Theme.of(context).shadowColor,
               spreadRadius: 2,
               blurRadius: 4,
               offset: Offset(0, 2),
@@ -53,7 +53,7 @@ class _IsometricState extends State<Isometric> {
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: Theme.of(context).shadowColor,
                         spreadRadius: 2,
                         blurRadius: 4,
                         offset: Offset(0, 2), // changes position of shadow
@@ -82,7 +82,7 @@ class _IsometricState extends State<Isometric> {
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Theme.of(context).shadowColor,
                             spreadRadius: 2,
                             blurRadius: 4,
                             offset: Offset(0, 2), // changes position of shadow
@@ -108,7 +108,7 @@ class _IsometricState extends State<Isometric> {
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
+                              color: Theme.of(context).shadowColor,
                               spreadRadius: 2,
                               blurRadius: 4,
                               offset:

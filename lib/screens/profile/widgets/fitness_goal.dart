@@ -31,7 +31,7 @@ class FitnessGoal extends StatelessWidget {
             borderRadius: BorderRadiusDirectional.circular(5),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Theme.of(context).shadowColor,
                 spreadRadius: 2,
                 blurRadius: 2,
                 offset: Offset(0, 2), // changes position of shadow
@@ -46,6 +46,9 @@ class FitnessGoal extends StatelessWidget {
             child: Icon(
               icon,
               size: 40,
+              color: goal
+                  ? Theme.of(context).accentColor
+                  : Theme.of(context).primaryColor,
             ),
           ),
           //SizedBox(width: goal ? 5 : 0),

@@ -34,19 +34,6 @@ class _SettingsState extends State<Settings> {
             style: Theme.of(context).textTheme.headline1,
           ),
           Alarm(),
-//          SwitchListTile(
-//            activeColor: kPrimaryColor,
-//            title: Text(
-//              'Reminder',
-//              style: Theme.of(context).textTheme.bodyText1,
-//            ),
-//            onChanged: (bool value) {
-//              setState(() {
-//                reminder = value;
-//              });
-//            },
-//            value: reminder,
-//          ),
           Consumer<ThemeNotifier>(
             builder: (context, notifier, child) => SwitchListTile(
               activeColor: kPrimaryColor,

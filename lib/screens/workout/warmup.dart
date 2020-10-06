@@ -28,7 +28,7 @@ class _WarmUpState extends State<WarmUp> {
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Theme.of(context).shadowColor,
               spreadRadius: 2,
               blurRadius: 4,
               offset: Offset(0, 2),
@@ -51,7 +51,7 @@ class _WarmUpState extends State<WarmUp> {
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: Theme.of(context).shadowColor,
                         spreadRadius: 2,
                         blurRadius: 4,
                         offset: Offset(0, 2), // changes position of shadow
@@ -80,7 +80,7 @@ class _WarmUpState extends State<WarmUp> {
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Theme.of(context).shadowColor,
                             spreadRadius: 2,
                             blurRadius: 4,
                             offset: Offset(0, 2), // changes position of shadow
@@ -106,7 +106,7 @@ class _WarmUpState extends State<WarmUp> {
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
+                              color: Theme.of(context).shadowColor,
                               spreadRadius: 2,
                               blurRadius: 4,
                               offset:

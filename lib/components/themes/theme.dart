@@ -3,9 +3,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 
 ThemeData light = ThemeData(
+  shadowColor: Colors.grey.withOpacity(0.75),
   appBarTheme: AppBarTheme(
     color: kPrimaryColor,
     elevation: 10,
+    iconTheme: IconThemeData(
+      color: Color(0xfff1f1f1),
+    ),
+  ),
+  iconTheme: IconThemeData(
+    color: Color(0xfff1f1f1),
   ),
   brightness: Brightness.light,
   primaryColor: colorCustom,
@@ -67,7 +74,11 @@ ThemeData light = ThemeData(
 );
 
 ThemeData dark = ThemeData(
+  shadowColor: darkBackground,
   appBarTheme: AppBarTheme(
+    iconTheme: IconThemeData(
+      color: kPrimaryLightColor,
+    ),
     color: darkBackground, //Color(0xFF272727),
     elevation: 10,
     textTheme: TextTheme(
@@ -82,7 +93,7 @@ ThemeData dark = ThemeData(
   primaryColor: kPrimaryLightColor,
   brightness: Brightness.dark,
   primarySwatch: colorCustom,
-  accentColor: Color(0xFF191919), //darkPrimaryColor,
+  accentColor: Color(0xFF272727), //Color(0xFF191919), //darkPrimaryColor,
   canvasColor: Color(0xFF272727), //Colors.black87,
   scaffoldBackgroundColor: darkBackground, //Colors.black12,
   //shadowColor: darkBackground,

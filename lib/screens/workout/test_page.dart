@@ -2,6 +2,7 @@ import 'package:fit_app/components/rounded_button.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
+import 'package:fit_app/screens/workout/start_workout.dart';
 import 'package:fit_app/screens/workout/warmup.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class _TestPageState extends State<TestPage> {
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.75),
+              color: Theme.of(context).shadowColor,
               spreadRadius: 2,
               blurRadius: 4,
               offset: Offset(0, 2),
@@ -40,15 +41,45 @@ class _TestPageState extends State<TestPage> {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: ListView(
           children: [
             Text(
-              'Exercise Pages',
+              'Exercise Test Pages',
               style: Theme.of(context).textTheme.headline1,
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(2.0),
+              child: RoundedButton(
+                color: Theme.of(context).buttonColor,
+                //textColor: Colors.white,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Concentric()),
+                    //MaterialPageRoute(builder: (context) => StartWorkout()),
+                  );
+                },
+                text: 'Start Workout (UI)',
+                //onLongPress: ,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(2.0),
+              child: RoundedButton(
+                color: Theme.of(context).buttonColor,
+                //textColor: Colors.white,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => StartWorkout()),
+                  );
+                },
+                text: 'Start Workout (Firebase)',
+                //onLongPress: ,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(2.0),
               child: RoundedButton(
                 color: Theme.of(context).buttonColor,
                 //textColor: Colors.white,
@@ -64,7 +95,7 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(2.0),
               child: RoundedButton(
                 color: Theme.of(context).buttonColor,
                 //textColor: Colors.white,
@@ -80,7 +111,7 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(2.0),
               child: RoundedButton(
                 color: Theme.of(context).buttonColor,
                 //textColor: Colors.white,
@@ -96,7 +127,7 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(2.0),
               child: RoundedButton(
                 color: Theme.of(context).buttonColor,
                 //textColor: Colors.white,
@@ -112,7 +143,7 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(2.0),
               child: RoundedButton(
                 color: Theme.of(context).buttonColor,
                 //textColor: Colors.white,

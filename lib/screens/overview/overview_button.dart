@@ -31,7 +31,7 @@ class OverViewButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: Theme.of(context).shadowColor,
                   spreadRadius: 2,
                   blurRadius: 4,
                   offset: Offset(0, 2), // changes position of shadow
