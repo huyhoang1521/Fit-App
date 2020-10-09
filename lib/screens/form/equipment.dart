@@ -3,10 +3,10 @@ import 'package:fit_app/screens/form/goal.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'preferred_exercises.dart';
-import '../../models/user.dart';
+import '../../models/fit_user.dart';
 
 class Equipment extends StatefulWidget {
-  final User user;
+  final FitUser user;
 
   const Equipment({Key key, this.user}) : super(key: key);
   @override
@@ -14,7 +14,7 @@ class Equipment extends StatefulWidget {
 }
 
 class _Equipment extends State<Equipment> {
-  final User user;
+  final FitUser user;
   _Equipment({this.user});
   String _equipment;
   bool rings = false;

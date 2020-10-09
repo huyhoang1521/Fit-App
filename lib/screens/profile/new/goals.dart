@@ -1,12 +1,12 @@
 import 'package:fit_app/components/rounded_image_button.dart';
-import 'package:fit_app/models/user.dart';
+import 'package:fit_app/models/fit_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../../components/constants.dart';
 
 class Goals extends StatefulWidget {
-  final User user;
+  final FitUser user;
 
   const Goals({Key key, this.user}) : super(key: key);
   @override
@@ -14,7 +14,7 @@ class Goals extends StatefulWidget {
 }
 
 class _Goals extends State<Goals> {
-  final User user;
+  final FitUser user;
 
   _Goals({this.user});
 

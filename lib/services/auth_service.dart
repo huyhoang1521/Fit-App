@@ -3,37 +3,38 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Stream<String> get onAuthStateChanged => _firebaseAuth.onAuthStateChanged.map(
-        (FirebaseUser user) => user?.uid,
+  Stream<String> get onAuthStateChanged => _firebaseAuth.authStateChanges().map(
+        (User user) => user?.uid,
       );
 
   // GET UID
   Future<String> getCurrentUID() async {
-    return (await _firebaseAuth.currentUser()).uid;
+    return _firebaseAuth.currentUser.uid;
   }
 
   Future<String> getCurrentName() async {
-    return (await _firebaseAuth.currentUser()).displayName;
+    return _firebaseAuth.currentUser.displayName;
   }
 
   // Email & Password Sign Up
   Future<String> createUserWithEmailAndPassword(
       String email, String password, String name) async {
-    final currentUser = await _firebaseAuth.createUserWithEmailAndPassword(
+    final currentUser = await _firebaseAuth
+        .createUserWithEmailAndPassword(
       email: email,
       password: password,
-    );
+    )
+        .catchError((e) {
+      print(e.details); // code, message, details
+    });
 
     // Update the username
     await updateUserName(name, currentUser.user);
     return currentUser.user.uid;
   }
 
-  Future updateUserName(String name, FirebaseUser currentUser) async {
-    var userUpdateInfo = UserUpdateInfo();
-    userUpdateInfo.displayName = name;
-    await currentUser.updateProfile(userUpdateInfo);
-    await currentUser.reload();
+  Future updateUserName(String name, User currentUser) async {
+    await currentUser.updateProfile(displayName: name);
   }
 
   // Email & Password Sign In
@@ -57,10 +58,10 @@ class AuthService {
 
   Future convertUserWithEmail(
       String email, String password, String name) async {
-    final currentUser = await _firebaseAuth.currentUser();
+    final currentUser = _firebaseAuth.currentUser;
 
     final credential =
-        EmailAuthProvider.getCredential(email: email, password: password);
+        EmailAuthProvider.credential(email: email, password: password);
     await currentUser.linkWithCredential(credential);
     await updateUserName(name, currentUser);
   }

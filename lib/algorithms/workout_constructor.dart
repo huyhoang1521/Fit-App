@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'warmup.dart';
 
-final db = Firestore.instance;
+final db = FirebaseFirestore.instance;
 List<int> pushList;
 List<int> pullList;
 List<int> pushHorizontalList;
@@ -39,13 +39,13 @@ class WorkoutConstructor {
     final uid = await ProviderWidget.of(context).auth.getCurrentUID();
     userId = uid;
 
-    final user = Firestore.instance.collection('Users').document(uid);
+    final user = FirebaseFirestore.instance.collection('Users').doc(uid);
 
     user.get().then((userData) {
-      length = userData.data['length'];
-      goal = userData.data['goal'];
-      date = userData.data['dob'];
-      progressions = userData.data['progressions'];
+      length = userData.data()['length'];
+      goal = userData.data()['goal'];
+      date = userData.data()['dob'];
+      progressions = userData.data()['progressions'];
     }).whenComplete(() async {
       getAge();
       WarmUp warmUp = new WarmUp(age);
@@ -148,7 +148,7 @@ class WorkoutConstructor {
     await Future.delayed(Duration(seconds: 1));
     final Workout workout = new Workout(
         userId, length, goal, exercises, warmup, restTime, coolDown);
-    await db.collection("Workouts").document(uid).setData(workout.toJson());
+    await db.collection("Workouts").doc(uid).set(workout.toJson());
   }
 
   /* 
@@ -165,9 +165,9 @@ class WorkoutConstructor {
           .collection('Exercise General')
           .where('type', isEqualTo: type)
           .orderBy('id', descending: false)
-          .getDocuments()
+          .get()
           .then((QuerySnapshot docs) {
-        if (docs.documents.isNotEmpty) {
+        if (docs.docs.isNotEmpty) {
           exerciseList = addToList(exerciseList, docs, type);
         }
       });
@@ -177,9 +177,9 @@ class WorkoutConstructor {
           .where('type', isEqualTo: type)
           .where('position', isEqualTo: position)
           .orderBy('id', descending: false)
-          .getDocuments()
+          .get()
           .then((QuerySnapshot docs) {
-        if (docs.documents.isNotEmpty) {
+        if (docs.docs.isNotEmpty) {
           exerciseList = addToList(exerciseList, docs, type);
         }
       });
@@ -194,9 +194,9 @@ class WorkoutConstructor {
   */
   List<int> addToList(List<int> exerciseList, QuerySnapshot docs, String type) {
     print("--------------------------- FROM QUERY ---------------------------");
-    for (int i = 0; i < docs.documents.length; i++) {
-      if (!exerciseList.contains(docs.documents[i].data['id'])) {
-        exerciseList.add(docs.documents[i].data['id']);
+    for (int i = 0; i < docs.docs.length; i++) {
+      if (!exerciseList.contains(docs.docs[i].data()['id'])) {
+        exerciseList.add(docs.docs[i].data()['id']);
         print(type +
             " workouts[" +
             i.toString() +
@@ -237,6 +237,4 @@ class WorkoutConstructor {
     }
     return res;
   }
-
-  //TODO
 }

@@ -121,6 +121,9 @@ class StartWorkout extends StatelessWidget {
 
   Future<DocumentSnapshot> getWorkout(BuildContext context) async {
     final uid = await ProviderWidget.of(context).auth.getCurrentUID();
-    return await Firestore.instance.collection("Workouts").document(uid).get();
+    return await FirebaseFirestore.instance
+        .collection("Workouts")
+        .doc(uid)
+        .get();
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import '../../components/custom_press_field.dart';
 import '../../components/custom_number_field.dart';
-import '../../models/user.dart';
+import '../../models/fit_user.dart';
 import 'goal.dart';
 
 List<Widget> heightList = new List();
@@ -13,7 +13,7 @@ List<String> heightStringList = new List();
 String dobString = "";
 
 class Info extends StatefulWidget {
-  final User user;
+  final FitUser user;
 
   const Info({Key key, this.user}) : super(key: key);
   @override
@@ -21,7 +21,7 @@ class Info extends StatefulWidget {
 }
 
 class _Info extends State<Info> {
-  final User user;
+  final FitUser user;
   _Info({this.user});
 
   DateTime _dateTime = DateTime.now();

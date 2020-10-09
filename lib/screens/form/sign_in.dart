@@ -8,7 +8,7 @@ import '../../components/custom_text_field.dart';
 import '../../components/custom_password.dart';
 
 class SignIn extends StatefulWidget {
-  final db = Firestore.instance;
+  final db = FirebaseFirestore.instance;
 
   SignIn({Key key}) : super(key: key);
 

@@ -5,10 +5,10 @@ import '../../components/rounded_preferred_button.dart';
 import '../../components/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../widgets/provider_widget.dart';
-import '../../models/user.dart';
+import '../../models/fit_user.dart';
 
 class PreferredExercises extends StatefulWidget {
-  final User user;
+  final FitUser user;
 
   const PreferredExercises({Key key, this.user}) : super(key: key);
 
@@ -17,11 +17,11 @@ class PreferredExercises extends StatefulWidget {
 }
 
 class _PreferredExercises extends State<PreferredExercises> {
-  final User user;
+  final FitUser user;
   _PreferredExercises({this.user});
   String _primaryPushGoal;
   String _primaryPullGoal;
-  final db = Firestore.instance;
+  final db = FirebaseFirestore.instance;
 
   bool exercise1 = false;
   bool exercise2 = false;
@@ -191,10 +191,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                       // save data to fiebase
                       final uid =
                           await ProviderWidget.of(context).auth.getCurrentUID();
-                      await db
-                          .collection("Users")
-                          .document(uid)
-                          .setData(user.toJson());
+                      await db.collection("Users").doc(uid).set(user.toJson());
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     },
                   ),

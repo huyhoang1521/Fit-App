@@ -6,10 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../../components/custom_text_field.dart';
-import '../../../models/user.dart';
+import '../../../models/fit_user.dart';
 
 class Edit extends StatefulWidget {
-  final User user;
+  final FitUser user;
   final String uuid;
 
   const Edit({Key key, this.user, this.uuid}) : super(key: key);
@@ -18,8 +18,8 @@ class Edit extends StatefulWidget {
 }
 
 class _Edit extends State<Edit> {
-  final userData = Firestore.instance.collection("Users");
-  final User user;
+  final userData = FirebaseFirestore.instance.collection("Users");
+  final FitUser user;
   final String uuid;
   TextEditingController firstNameText = new TextEditingController();
   TextEditingController lastNameText = new TextEditingController();
@@ -93,7 +93,7 @@ class _Edit extends State<Edit> {
   _Edit({this.user, this.uuid});
 
   Future<void> updateUserData() async {
-    await userData.document(uuid).updateData({
+    await userData.doc(uuid).update({
       "firstName": _firstName,
       "lastName": _lastName,
       "dob": _dob,

@@ -6,30 +6,44 @@ import 'package:provider/provider.dart';
 import 'components/themes/theme.dart';
 import 'screens/form/first_view.dart';
 import 'screens/form/sign_in.dart';
-//import 'screens/test.dart';
+// Import the firebase_core plugin
+import 'package:firebase_core/firebase_core.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProviderWidget(
-      auth: AuthService(),
-      child: ChangeNotifierProvider(
-        create: (_) => ThemeNotifier(),
-        child: Consumer<ThemeNotifier>(
-          builder: (context, ThemeNotifier notifier, child) {
-            return MaterialApp(
-              theme: notifier.darkTheme ? dark : light,
-              home: HomeController(),
-              routes: <String, WidgetBuilder>{
-                '/signIn': (BuildContext context) => SignIn(),
-                '/home': (BuildContext context) => HomeController(),
-              },
-            );
-          },
-        ),
-      ),
+    return FutureBuilder(
+      // Initialize FlutterFire
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {}
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return ProviderWidget(
+            auth: AuthService(),
+            child: ChangeNotifierProvider(
+              create: (_) => ThemeNotifier(),
+              child: Consumer<ThemeNotifier>(
+                builder: (context, ThemeNotifier notifier, child) {
+                  return MaterialApp(
+                    theme: notifier.darkTheme ? dark : light,
+                    home: HomeController(),
+                    routes: <String, WidgetBuilder>{
+                      '/signIn': (BuildContext context) => SignIn(),
+                      '/home': (BuildContext context) => HomeController(),
+                    },
+                  );
+                },
+              ),
+            ),
+          );
+        }
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
     );
   }
 }

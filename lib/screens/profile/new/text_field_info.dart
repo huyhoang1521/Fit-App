@@ -4,10 +4,10 @@ import '../widgets/profile_text_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../models/user.dart';
+import '../../../models/fit_user.dart';
 
 class TextFieldInfo extends StatefulWidget {
-  final User user;
+  final FitUser user;
   final String fullName;
 
   const TextFieldInfo({Key key, this.user, this.fullName}) : super(key: key);
@@ -17,7 +17,7 @@ class TextFieldInfo extends StatefulWidget {
 }
 
 class _TextFieldInfo extends State<TextFieldInfo> {
-  final User user;
+  final FitUser user;
   final String fullName;
 
   _TextFieldInfo({this.user, this.fullName});

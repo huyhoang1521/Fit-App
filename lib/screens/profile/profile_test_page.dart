@@ -40,22 +40,22 @@ String oAC = 'assets/images/OpenImg.png';
 String prefExer;
 
 //Pulling from specific user data
-final userData = Firestore.instance.collection("Users");
+final userData = FirebaseFirestore.instance.collection("Users");
 
 Future<DocumentSnapshot> getUserInfo() async {
-  var firebaseUser = await FirebaseAuth.instance.currentUser();
-  return await Firestore.instance
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  return await FirebaseFirestore.instance
       .collection("Users")
-      .document(firebaseUser.uid)
+      .doc(firebaseUser.uid)
       .get()
       .then((newData) {
-    goal = newData.data['goal'];
-    prefExer = newData.data['prefferedExercises'];
-    firstName = newData.data['firstName'];
-    lastName = newData.data['lastName'];
-    height = newData.data['height'];
-    weight = newData.data['weight'];
-    dob = newData.data['dob'];
+    goal = newData.data()['goal'];
+    prefExer = newData.data()['prefferedExercises'];
+    firstName = newData.data()['firstName'];
+    lastName = newData.data()['lastName'];
+    height = newData.data()['height'];
+    weight = newData.data()['weight'];
+    dob = newData.data()['dob'];
     uuid = firebaseUser.uid;
   }).whenComplete(() async {
     if (goal == "Strength" && _strength == false) {
@@ -78,18 +78,18 @@ Future<DocumentSnapshot> getUserInfo() async {
 }
 
 Future<void> updateGoal(String goal) async {
-  await userData.document(uuid).updateData({"goal": goal});
+  await userData.doc(uuid).update({"goal": goal});
 }
 
 Future<void> updatePullGoal(String prefExer) async {
-  await userData.document(uuid).updateData({"prefferedExercises": prefExer});
+  await userData.doc(uuid).update({"prefferedExercises": prefExer});
 }
 
 Future<void> updateText(String firstName, lastName, weight, dob) async {
-  await userData.document(uuid).updateData({"firstName": firstName});
-  await userData.document(uuid).updateData({"lastName": lastName});
-  await userData.document(uuid).updateData({"weight": weight});
-  await userData.document(uuid).updateData({"dob": dob});
+  await userData.doc(uuid).update({"firstName": firstName});
+  await userData.doc(uuid).update({"lastName": lastName});
+  await userData.doc(uuid).update({"weight": weight});
+  await userData.doc(uuid).update({"dob": dob});
 }
 
 class _ProfileTestState extends State<ProfileTest> {

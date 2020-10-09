@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-final db = Firestore.instance;
+final db = FirebaseFirestore.instance;
 List<int> warmupList;
 int amountOfExercises;
 
@@ -23,9 +23,9 @@ class WarmUp {
         .collection('Warmups')
         .where('category', isEqualTo: category)
         .orderBy('id', descending: false)
-        .getDocuments()
+        .get()
         .then((QuerySnapshot docs) {
-      if (docs.documents.isNotEmpty) {
+      if (docs.docs.isNotEmpty) {
         amountOfExercises = determineAmount(docs, category);
         addToList(docs, amountOfExercises);
       }
@@ -68,8 +68,8 @@ class WarmUp {
   void addToList(QuerySnapshot docs, int amount) {
     List<int> shuffledList = new List();
     for (int i = 0; i < amount; i++) {
-      if (!shuffledList.contains(docs.documents[i].data['id'])) {
-        shuffledList.add(docs.documents[i].data['id']);
+      if (!shuffledList.contains(docs.docs[i].data()['id'])) {
+        shuffledList.add(docs.docs[i].data()['id']);
       }
     }
     shuffledList.shuffle();

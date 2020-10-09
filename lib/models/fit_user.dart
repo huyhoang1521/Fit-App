@@ -1,4 +1,4 @@
-class User {
+class FitUser {
   String firstName;
   String lastName;
   String email;
@@ -12,7 +12,7 @@ class User {
   String primaryPullGoal;
   List<int> progressions = new List(19);
 
-  User(
+  FitUser(
       this.firstName,
       this.lastName,
       this.email,

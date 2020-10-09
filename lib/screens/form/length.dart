@@ -2,11 +2,11 @@ import 'package:fit_app/components/constants.dart';
 import 'package:fit_app/screens/form/info.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
-import '../../models/user.dart';
+import '../../models/fit_user.dart';
 import 'equipment.dart';
 
 class Length extends StatefulWidget {
-  final User user;
+  final FitUser user;
 
   const Length({Key key, this.user}) : super(key: key);
   @override
@@ -14,7 +14,7 @@ class Length extends StatefulWidget {
 }
 
 class _Length extends State<Length> {
-  final User user;
+  final FitUser user;
   _Length({this.user});
   String _length;
   bool strength = false;

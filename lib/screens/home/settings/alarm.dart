@@ -47,9 +47,9 @@ class _AlarmState extends State<Alarm> {
         );
   }
 
-  void _waitTillTime() async {
+  /*void _waitTillTime() async {
     _showNotification();
-  }
+  }*/
 
   Future<void> _demoNotification() async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
@@ -69,6 +69,7 @@ class _AlarmState extends State<Alarm> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     initializationSettingsAndroid =

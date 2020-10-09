@@ -3,7 +3,7 @@ import 'package:fit_app/components/constants.dart';
 import 'package:fit_app/components/rounded_create_button.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import '../../models/user.dart';
+import '../../models/fit_user.dart';
 import 'sign_up.dart';
 
 class FirstView extends StatelessWidget {
@@ -43,8 +43,8 @@ class FirstView extends StatelessWidget {
                 text: "Create account",
                 textColor: kPrimaryColor,
                 press: () {
-                  final User user = new User(null, null, null, null, null, null,
-                      null, null, null, null, null, null);
+                  final FitUser user = new FitUser(null, null, null, null, null,
+                      null, null, null, null, null, null, null);
 
                   Navigator.push(
                     context,

@@ -6,12 +6,12 @@ import '../../widgets/provider_widget.dart';
 import '../../components/rounded_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../components/custom_password.dart';
-import '../../models/user.dart';
+import '../../models/fit_user.dart';
 import 'info.dart';
 
 class SignUp extends StatefulWidget {
-  final User user;
-  final db = Firestore.instance;
+  final FitUser user;
+  final db = FirebaseFirestore.instance;
 
   SignUp({Key key, this.user}) : super(key: key);
 
@@ -20,7 +20,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUp extends State<SignUp> {
-  final User user;
+  final FitUser user;
 
   _SignUp({this.user});
 
