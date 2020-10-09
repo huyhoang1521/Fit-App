@@ -35,6 +35,7 @@ class AuthService {
 
   Future updateUserName(String name, User currentUser) async {
     await currentUser.updateProfile(displayName: name);
+    await currentUser.reload();
   }
 
   // Email & Password Sign In
