@@ -1,3 +1,4 @@
+import 'package:fit_app/screens/home/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/components/constants.dart';
@@ -12,19 +13,12 @@ class ProgressPage extends StatefulWidget {
 
 double _whateverProg = 1.00;
 Color green1 = const Color.fromRGBO(30, 201, 116, 1.0);
-//Color green2 = const Color.fromRGBO(65, 242, 95, .95);
-//Color green3 = const Color.fromRGBO(45, 166, 106, 1.0);
-//Color green4 = const Color.fromRGBO(57, 212, 49, 0.83);
 
 class _ProgressPageState extends State<ProgressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Get Fit Don' "'" 't Quit!'),
-        elevation: 5,
-        backgroundColor: kPrimaryColor,
-      ),
+      appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(13.0),
         child: Column(
@@ -95,7 +89,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       LinearPercentIndicator(
                         percent: _whateverProg,
-                        progressColor: green1,
+                        progressColor: kPrimaryColor, //green1,
                         lineHeight: 15,
                         center: Text(
                           "100%",
@@ -173,7 +167,7 @@ class _ProgressPageState extends State<ProgressPage> {
                       ),
                       LinearPercentIndicator(
                         percent: 1.00,
-                        progressColor: green1,
+                        progressColor: kPrimaryColor, //green1,
                         lineHeight: 15,
                         center: Text("100%",
                             style: Theme.of(context).textTheme.headline3),

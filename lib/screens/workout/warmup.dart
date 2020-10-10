@@ -1,3 +1,4 @@
+import 'package:fit_app/screens/home/custom_appbar.dart';
 import 'package:fit_app/screens/workout/rest.dart';
 import 'package:fit_app/screens/workout/widgets/buttons.dart';
 import 'package:flutter/material.dart';
@@ -23,23 +24,7 @@ class _WarmUpState extends State<WarmUp> {
   Widget build(BuildContext context) {
     double width = (MediaQuery.of(context).size.width);
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).shadowColor,
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            )
-          ]),
-          child: AppBar(
-            title: Text('Fit For Life'),
-            elevation: 10,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

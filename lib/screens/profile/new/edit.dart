@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_app/components/custom_number_field.dart';
 import 'package:fit_app/components/custom_press_field.dart';
 import 'package:fit_app/components/rounded_button.dart';
+import 'package:fit_app/screens/home/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -148,10 +149,7 @@ class _Edit extends State<Edit> {
     final _screenHeight = MediaQuery.of(context).size.height;
     setHeightList();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fit With Nick!'),
-        elevation: 5,
-      ),
+      appBar: CustomAppBar(),
       body: Container(
         width: _screenWidth,
         height: _screenHeight,

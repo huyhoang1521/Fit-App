@@ -1,4 +1,6 @@
 import 'package:fit_app/components/themes/theme.dart';
+import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/drawer.dart';
 import 'package:fit_app/screens/home/settings/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,10 +25,8 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fit For Life'),
-        elevation: 5,
-      ),
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
       body: Column(
         children: [
           Text(

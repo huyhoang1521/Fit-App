@@ -1,4 +1,5 @@
 import 'package:fit_app/components/rounded_button.dart';
+import 'package:fit_app/screens/home/custom_appbar.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
@@ -23,23 +24,7 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).shadowColor,
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            )
-          ]),
-          child: AppBar(
-            title: Text('Fit For Life'),
-            elevation: 10,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Center(
         child: ListView(
           children: [

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -57,10 +59,8 @@ class _NewProfileState extends State<NewProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fit With Nick!'),
-        elevation: 5,
-      ),
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
       body: FutureBuilder(
         future: getUserInfo(),
         builder: (context, snapshot) {
@@ -83,7 +83,6 @@ class _NewProfileState extends State<NewProfile> {
                               ? Colors.white
                               : Theme.of(context).primaryColor,
                         ),
-                        //Theme.of(context).textTheme.bodyText1,
                       ),
                       color: editButton
                           ? kPrimaryColor

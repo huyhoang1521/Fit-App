@@ -1,3 +1,5 @@
+import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/drawer.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -116,11 +118,8 @@ class _RecoveryState extends State<Recovery>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fit For Life'),
-        elevation: 5,
-        //  backgroundColor: kPrimaryColor,
-      ),
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
       body: Stack(
         children: [
           Column(

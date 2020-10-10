@@ -1,6 +1,5 @@
 import 'package:fit_app/widgets/provider_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/components/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StartWorkout extends StatelessWidget {
@@ -8,20 +7,12 @@ class StartWorkout extends StatelessWidget {
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
+
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.of(context).popUntil((route) => route.isFirst);
-          },
-        ),
       ),
       body: Container(
         width: _width,

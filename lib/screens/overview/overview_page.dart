@@ -1,3 +1,5 @@
+import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/drawer.dart';
 import '../Overview/overview_button.dart';
 import '../Overview/prog_page.dart';
 import '../Overview/skill_viewer.dart';
@@ -45,10 +47,8 @@ class _OverviewState extends State<Overview>
   Widget build(BuildContext context) {
     double _fitWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fit With Nick'),
-        elevation: 5,
-      ),
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

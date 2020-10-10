@@ -1,3 +1,4 @@
+import 'package:fit_app/screens/home/custom_appbar.dart';
 import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
 import 'package:fit_app/screens/workout/widgets/buttons.dart';
@@ -59,23 +60,7 @@ class _RestPageState extends State<RestPage> {
   Widget build(BuildContext context) {
     // double width = (MediaQuery.of(context).size.width);
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).shadowColor,
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            )
-          ]),
-          child: AppBar(
-            title: Text('Fit For Life'),
-            elevation: 10,
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
