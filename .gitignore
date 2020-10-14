@@ -54,4 +54,6 @@ ios/Podfile.lock
 
 Podfile.lock
 
+pubspec.lock
+
 .vscode
