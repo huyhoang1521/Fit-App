@@ -37,9 +37,9 @@ class _SignUp extends State<SignUp> {
     try {
       final auth = ProviderWidget.of(context).auth;
       setVars();
-      print("_email " + _email);
-      print("_firstName " + _firstName);
-      print("_lastName " + _lastName);
+      print("Email: " + _email);
+      print("First Name :" + _firstName);
+      print("Last Name: " + _lastName);
       await auth.createUserWithEmailAndPassword(
           _email, _password, (_firstName + _lastName));
 
@@ -56,22 +56,12 @@ class _SignUp extends State<SignUp> {
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
+
     return Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.transparent,
-        bottomOpacity: 0.0,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FirstView()));
-          },
-        ),
-      ),
+          backgroundColor: Colors.transparent,
+          bottomOpacity: 0.0,
+          elevation: 0.0),
       body: Container(
         width: _width,
         height: _height,

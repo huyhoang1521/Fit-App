@@ -1,5 +1,3 @@
-import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/screens/form/first_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../widgets/provider_widget.dart';
@@ -24,7 +22,7 @@ class _SignIn extends State<SignIn> {
     try {
       final auth = ProviderWidget.of(context).auth;
       await auth.signInWithEmailAndPassword(_email, _password);
-      print("_email " + _email);
+      print("Email " + _email);
       Navigator.of(context).pushReplacementNamed('/home');
     } catch (error) {
       print(error);
@@ -35,22 +33,11 @@ class _SignIn extends State<SignIn> {
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
     return Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.transparent,
-        bottomOpacity: 0.0,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FirstView()));
-          },
-        ),
-      ),
+          backgroundColor: Colors.transparent,
+          bottomOpacity: 0.0,
+          elevation: 0.0),
       body: Container(
         width: _width,
         height: _height,

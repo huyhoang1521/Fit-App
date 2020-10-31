@@ -1,5 +1,4 @@
 import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/screens/form/info.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import '../../models/fit_user.dart';
@@ -22,31 +21,20 @@ class _Goal extends State<Goal> {
   bool weightLoss = false;
 
   void setVars() {
-    print("fist name is " + user.firstName);
-    print("goal is " + _goal);
     user.goal = _goal;
-    print("goal is " + _goal);
+    print("Goal: " + _goal);
   }
 
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
+
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Info()));
-          },
-        ),
       ),
       body: Container(
         width: _width,
@@ -80,7 +68,6 @@ class _Goal extends State<Goal> {
                       weightLoss = false;
                     });
                     _goal = "Strength";
-                    print(_goal);
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -95,7 +82,6 @@ class _Goal extends State<Goal> {
                       weightLoss = false;
                     });
                     _goal = "Hypertrophy";
-                    print(_goal);
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -110,7 +96,6 @@ class _Goal extends State<Goal> {
                       hypertrophy = false;
                     });
                     _goal = "Weight Loss";
-                    print(_goal);
                   }),
               Expanded(
                 child: Align(

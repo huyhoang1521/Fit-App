@@ -1,5 +1,3 @@
-import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/screens/form/sign_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
@@ -34,6 +32,9 @@ class _Info extends State<Info> {
     user.dob = dobController.text;
     user.weight = _weight;
     user.height = heightController.text;
+    print("Date of Birth: " + dobString);
+    print("Height: " + heightController.text);
+    print("Weight: " + _weight.toString());
   }
 
   void setHeightList() {
@@ -67,7 +68,7 @@ class _Info extends State<Info> {
             day.toString() +
             "-" +
             newdate.year.toString();
-        print(dobString);
+
         _dateTime = newdate;
         dobController.text = dobString;
       },
@@ -84,21 +85,11 @@ class _Info extends State<Info> {
     final _height = MediaQuery.of(context).size.height;
     setHeightList();
 
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SignUp(user: user)));
-          },
-        ),
       ),
       body: Container(
         width: _width,

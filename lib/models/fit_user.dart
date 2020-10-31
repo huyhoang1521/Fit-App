@@ -10,7 +10,7 @@ class FitUser {
   String equipment;
   String primaryPushGoal;
   String primaryPullGoal;
-  List<int> progressions = new List(19);
+  List<int> progressions;
 
   FitUser(
       this.firstName,

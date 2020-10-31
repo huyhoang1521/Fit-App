@@ -2,7 +2,7 @@ class Workout {
   String uid;
   String length;
   String goal;
-  List<int> exercises;
+  List<Map<String, int>> exercises;
   List<int> warmup;
   double restTime;
   int coolDown;

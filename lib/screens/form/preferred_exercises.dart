@@ -1,11 +1,15 @@
+import 'package:fit_app/algorithms/create_workout.dart';
 import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/screens/form/equipment.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_preferred_button.dart';
 import '../../components/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../widgets/provider_widget.dart';
 import '../../models/fit_user.dart';
+
+Future callWorkout() async {
+  CreateWorkout().createWorkout();
+}
 
 class PreferredExercises extends StatefulWidget {
   final FitUser user;
@@ -33,6 +37,29 @@ class _PreferredExercises extends State<PreferredExercises> {
   void setVars() {
     user.primaryPushGoal = _primaryPushGoal;
     user.primaryPullGoal = _primaryPullGoal;
+    user.progressions = [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+    ];
+    print("Primary Push Goal " + _primaryPushGoal);
+    print("Primary Pull Goal " + _primaryPullGoal);
   }
 
   @override
@@ -40,21 +67,11 @@ class _PreferredExercises extends State<PreferredExercises> {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
 
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Equipment(user: user)));
-          },
-        ),
       ),
       body: Container(
         width: _width,
@@ -98,7 +115,6 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 exercise1 = !exercise1;
                               });
                               _primaryPushGoal = "One-Arm Push-Up";
-                              print("_primaryPushGoal " + _primaryPushGoal);
                             }),
                         RoundedPreferredButton(
                             text: "Planche",
@@ -111,7 +127,6 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 exercise2 = !exercise2;
                               });
                               _primaryPushGoal = "Planche";
-                              print("_primaryPushGoal " + _primaryPushGoal);
                             }),
                         RoundedPreferredButton(
                             text: "Handstand Push-Up",
@@ -124,7 +139,6 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 exercise3 = !exercise3;
                               });
                               _primaryPushGoal = "Handstand Push-Up";
-                              print("_primaryPushGoal " + _primaryPushGoal);
                             }),
                       ],
                     ),
@@ -148,7 +162,6 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 exercise4 = !exercise4;
                               });
                               _primaryPullGoal = "One-Arm Chin-Up";
-                              print("_primaryPullGoal " + _primaryPullGoal);
                             }),
                         RoundedPreferredButton(
                             text: "Front Lever",
@@ -161,7 +174,6 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 exercise5 = !exercise5;
                               });
                               _primaryPullGoal = "Front Lever";
-                              print("_primaryPullGoal " + _primaryPullGoal);
                             }),
                         RoundedPreferredButton(
                             text: "Back Lever",
@@ -174,7 +186,6 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 exercise6 = !exercise6;
                               });
                               _primaryPullGoal = "Back Lever";
-                              print("_primaryPullGoal " + _primaryPullGoal);
                             }),
                       ],
                     ),
@@ -192,6 +203,8 @@ class _PreferredExercises extends State<PreferredExercises> {
                       final uid =
                           await ProviderWidget.of(context).auth.getCurrentUID();
                       await db.collection("Users").doc(uid).set(user.toJson());
+                      await Future.delayed(Duration(seconds: 1));
+                      await callWorkout();
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     },
                   ),

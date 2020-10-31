@@ -1,6 +1,6 @@
 import 'workout_overview.dart';
 import 'package:flutter/material.dart';
-import '../../algorithms/workout_constructor.dart';
+import '../../algorithms/create_workout.dart';
 
 class TabSystem extends StatefulWidget {
   @override
@@ -10,21 +10,19 @@ class TabSystem extends StatefulWidget {
 class _TabSystemState extends State<TabSystem> {
   @override
   void initState() {
-    print("in constructor");
     super.initState();
 
-    Future.delayed(Duration.zero, () {
-      callWorkout(context);
-    });
+    /*Future.delayed(Duration.zero, () {
+      callWorkout();
+    });*/
   }
 
-  Future callWorkout(BuildContext context) async {
-    WorkoutConstructor().createWorkout(context);
+  Future callWorkout() async {
+    CreateWorkout().createWorkout();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("in build");
     return WorkOutR();
   }
 }

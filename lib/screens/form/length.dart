@@ -1,5 +1,4 @@
 import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/screens/form/info.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import '../../models/fit_user.dart';
@@ -23,28 +22,19 @@ class _Length extends State<Length> {
 
   void setVars() {
     user.length = _length;
-    print("length is " + _length);
+    print("Length: " + _length);
   }
 
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
+
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Info()));
-          },
-        ),
       ),
       body: Container(
         width: _width,
@@ -76,7 +66,6 @@ class _Length extends State<Length> {
                       weightLoss = false;
                     });
                     _length = "Short";
-                    print(_length);
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -91,7 +80,6 @@ class _Length extends State<Length> {
                       weightLoss = false;
                     });
                     _length = "Long";
-                    print(_length);
                   }),
               Expanded(
                 child: Align(

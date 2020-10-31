@@ -1,5 +1,4 @@
 import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/screens/form/goal.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'preferred_exercises.dart';
@@ -23,27 +22,19 @@ class _Equipment extends State<Equipment> {
 
   void setVars() {
     user.equipment = _equipment;
+    print("Equipment " + _equipment);
   }
 
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    const IconData arrow_back_ios =
-        IconData(0xe5e0, fontFamily: 'MaterialIcons', matchTextDirection: true);
+
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(arrow_back_ios),
-          color: kPrimaryColor,
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Goal(user: user)));
-          },
-        ),
       ),
       body: Container(
         width: _width,
@@ -69,7 +60,6 @@ class _Equipment extends State<Equipment> {
                       rings = !rings;
                     });
                     _equipment = "Rings";
-                    print("_equipment " + _equipment);
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -82,7 +72,6 @@ class _Equipment extends State<Equipment> {
                       pullUpBar = !pullUpBar;
                     });
                     _equipment = "Pull-Up Bar";
-                    print("_equipment " + _equipment);
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -95,7 +84,6 @@ class _Equipment extends State<Equipment> {
                       weights = !weights;
                     });
                     _equipment = "Weights";
-                    print("_equipment " + _equipment);
                   }),
               Expanded(
                 child: Align(
