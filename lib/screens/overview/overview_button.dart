@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fit_app/components/constants.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class OverViewButton extends StatelessWidget {
+class OverviewButton extends StatelessWidget {
   final String text, percentText;
   final Function press;
   final String image;
   final double percent;
 
-  const OverViewButton({
+  const OverviewButton({
     Key key,
     this.text,
     this.percent,

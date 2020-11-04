@@ -6,15 +6,19 @@ import '../../models/fit_user.dart';
 
 class Equipment extends StatefulWidget {
   final FitUser user;
+  final String password;
 
-  const Equipment({Key key, this.user}) : super(key: key);
+  const Equipment({Key key, this.user, this.password}) : super(key: key);
+
   @override
   _Equipment createState() => new _Equipment(user: this.user);
 }
 
 class _Equipment extends State<Equipment> {
   final FitUser user;
-  _Equipment({this.user});
+  final String password;
+  _Equipment({this.user, this.password});
+
   String _equipment;
   bool rings = false;
   bool pullUpBar = false;
@@ -95,8 +99,8 @@ class _Equipment extends State<Equipment> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                PreferredExercises(user: user)),
+                            builder: (context) => PreferredExercises(
+                                user: user, password: password)),
                       );
                     },
                   ),

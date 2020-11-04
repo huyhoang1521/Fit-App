@@ -13,7 +13,7 @@ class Warmup {
   double age;
 
   // In the constructor
-  Warmup(this.age);
+  Warmup([this.age]);
 
   /* 
   * Class for warmup
@@ -84,6 +84,20 @@ class Warmup {
 
     print(category + " amount is " + amount.toString());
     return amount;
+  }
+
+  Future<DocumentSnapshot> getWarmup(int id) async {
+    DocumentSnapshot warmup;
+    await db
+        .collection('Warmups')
+        .where('id', isEqualTo: id)
+        .limit(1)
+        .get()
+        .then((snapshot) {
+      warmup = snapshot.docs[0];
+    });
+
+    return warmup;
   }
 
   void addToList(List<dynamic> categoryList, int amount) {

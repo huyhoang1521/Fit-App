@@ -2,11 +2,11 @@ import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
 import 'package:fit_app/screens/home/workout_overview.dart';
 import 'package:fit_app/screens/overview/overview_page.dart';
-import 'package:fit_app/screens/profile/new/new_profile.dart';
+import 'package:fit_app/screens/profile/profile.dart';
 import 'package:fit_app/screens/recovery/recovery_page.dart';
 import 'package:fit_app/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
-import '../../components/drawer_button.dart';
+import '../../../components/drawer_button.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WorkOutR()),
+                  MaterialPageRoute(builder: (context) => WorkoutOverview()),
                 );
               }),
           DrawerButton(
@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewProfile()),
+                  MaterialPageRoute(builder: (context) => Profile()),
                 );
               }),
           DrawerButton(

@@ -12,7 +12,7 @@ class Progressions {
   var uid;
   List<int> userProgressions = new List();
 // In the constructor
-  Progressions(this.userDoc, this.uid, this.userProgressions);
+  Progressions([this.userDoc, this.uid, this.userProgressions]);
 
   Future<void> updateProgression(List<int> progressions) async {
     await userDoc.update({"progressions": progressions});
@@ -32,6 +32,20 @@ class Progressions {
       }
     });
     return progressionID;
+  }
+
+  Future<DocumentSnapshot> getProgressionByID(int id) async {
+    DocumentSnapshot prog;
+    await db
+        .collection('Progressions')
+        .where('id', isEqualTo: id)
+        .limit(1)
+        .get()
+        .then((snapshot) {
+      prog = snapshot.docs[0];
+    });
+
+    return prog;
   }
 
   Future<int> getMaxLevelProgression(int exerciseID) async {
@@ -54,7 +68,7 @@ class Progressions {
     if (userProgressions.isEmpty) {
       print('PROGRESSIONS LIST IS EMPTY');
     } else {
-      String str = "PROG LIST: ";
+      String str = "PROGRESSIONS LIST: ";
       for (int i = 0; i < userProgressions.length; i++) {
         if (i == 0) {
           str += "[" + userProgressions[i].toString() + ", ";

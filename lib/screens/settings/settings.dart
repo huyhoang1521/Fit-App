@@ -1,6 +1,6 @@
 import 'package:fit_app/components/themes/theme.dart';
-import 'package:fit_app/screens/home/custom_appbar.dart';
-import 'package:fit_app/screens/home/drawer.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/drawer.dart';
 import 'package:fit_app/screens/home/settings/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

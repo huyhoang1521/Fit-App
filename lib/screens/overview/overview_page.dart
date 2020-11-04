@@ -1,6 +1,6 @@
-import 'package:fit_app/screens/home/custom_appbar.dart';
-import 'package:fit_app/screens/home/drawer.dart';
-import '../Overview/overview_button.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/drawer.dart';
+import 'overview_button.dart';
 import '../Overview/prog_page.dart';
 import '../Overview/skill_viewer.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +33,7 @@ String oAC = 'One Arm Chin Up';
 
 Color green = const Color.fromRGBO(30, 201, 116, 1.0);
 
-Widget _myAnimatedWidget = OverViewButton(
+Widget _myAnimatedWidget = OverviewButton(
   text: 'Back Lever',
   percentText: '30%',
   percent: 0.3,
@@ -63,7 +63,7 @@ class _OverviewState extends State<Overview>
             SizedBox(
               height: titleDiv,
             ),
-            OverViewButton(
+            OverviewButton(
               text: 'One Arm Chin-up',
               percentText: '',
               percent: 0.5,
@@ -76,7 +76,7 @@ class _OverviewState extends State<Overview>
               },
             ),
             Stack(children: [
-              OverViewButton(
+              OverviewButton(
                 text: 'Back Lever',
                 percentText: '',
                 percent: 0.3,
@@ -219,7 +219,7 @@ class _OverviewState extends State<Overview>
                               op3 = false;
                               pressed = !pressed;
                               text3 = oAC;
-                              _myAnimatedWidget = OverViewButton(
+                              _myAnimatedWidget = OverviewButton(
                                 text: text3,
                                 percentText: '',
                                 percent: 0.3,
@@ -241,7 +241,7 @@ class _OverviewState extends State<Overview>
                               op3 = false;
                               pressed = !pressed;
                               text3 = fL;
-                              _myAnimatedWidget = OverViewButton(
+                              _myAnimatedWidget = OverviewButton(
                                 text: text3,
                                 percentText: '',
                                 percent: 0.3,
@@ -263,7 +263,7 @@ class _OverviewState extends State<Overview>
                               op3 = true;
                               pressed = !pressed;
                               text3 = bL;
-                              _myAnimatedWidget = OverViewButton(
+                              _myAnimatedWidget = OverviewButton(
                                 text: text3,
                                 percentText: '',
                                 percent: 0.3,
@@ -282,7 +282,7 @@ class _OverviewState extends State<Overview>
                       }
                       if (pressed == false) {
                         setState(() {
-                          _myAnimatedWidget = OverViewButton(
+                          _myAnimatedWidget = OverviewButton(
                             text: text3,
                             percentText: '',
                             percent: 0.3,

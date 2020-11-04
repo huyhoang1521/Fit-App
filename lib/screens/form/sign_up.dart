@@ -35,17 +35,15 @@ class _SignUp extends State<SignUp> {
 
   void submit() async {
     try {
-      final auth = ProviderWidget.of(context).auth;
       setVars();
       print("Email: " + _email);
       print("First Name :" + _firstName);
       print("Last Name: " + _lastName);
-      await auth.createUserWithEmailAndPassword(
-          _email, _password, (_firstName + _lastName));
 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Info(user: user)),
+        MaterialPageRoute(
+            builder: (context) => Info(user: user, password: _password)),
       );
     } catch (error) {
       print(error);
