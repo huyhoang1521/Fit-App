@@ -1,5 +1,5 @@
 import 'package:fit_app/components/rounded_button.dart';
-import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
@@ -7,7 +7,7 @@ import 'package:fit_app/screens/workout/start_workout.dart';
 import 'package:fit_app/screens/workout/warmup.dart';
 import 'package:flutter/material.dart';
 
-import 'concentric.dart';
+import '../workout/concentric.dart';
 
 class TestPage extends StatefulWidget {
   TestPage() : super();

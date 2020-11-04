@@ -1,4 +1,4 @@
-import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
 import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
 import 'package:fit_app/screens/workout/widgets/buttons.dart';

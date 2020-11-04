@@ -13,8 +13,10 @@ Future callWorkout() async {
 
 class PreferredExercises extends StatefulWidget {
   final FitUser user;
+  final String password;
 
-  const PreferredExercises({Key key, this.user}) : super(key: key);
+  const PreferredExercises({Key key, this.user, this.password})
+      : super(key: key);
 
   @override
   _PreferredExercises createState() => new _PreferredExercises(user: this.user);
@@ -22,7 +24,9 @@ class PreferredExercises extends StatefulWidget {
 
 class _PreferredExercises extends State<PreferredExercises> {
   final FitUser user;
-  _PreferredExercises({this.user});
+  final String password;
+  _PreferredExercises({this.user, this.password});
+
   String _primaryPushGoal;
   String _primaryPullGoal;
   final db = FirebaseFirestore.instance;
@@ -199,9 +203,16 @@ class _PreferredExercises extends State<PreferredExercises> {
                     text: "Finish",
                     press: () async {
                       setVars();
-                      // save data to fiebase
+
+                      // create user account
+                      final auth = ProviderWidget.of(context).auth;
+                      await auth.createUserWithEmailAndPassword(user.email,
+                          password, (user.firstName + user.lastName));
+
+                      // save user data to fiebase
                       final uid =
                           await ProviderWidget.of(context).auth.getCurrentUID();
+                      await Future.delayed(Duration(seconds: 1));
                       await db.collection("Users").doc(uid).set(user.toJson());
                       await Future.delayed(Duration(seconds: 1));
                       await callWorkout();

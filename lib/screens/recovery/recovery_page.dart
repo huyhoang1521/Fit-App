@@ -1,5 +1,5 @@
-import 'package:fit_app/screens/home/custom_appbar.dart';
-import 'package:fit_app/screens/home/app_drawer.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/drawer.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';

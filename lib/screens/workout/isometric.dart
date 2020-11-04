@@ -1,4 +1,4 @@
-import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
 import 'package:fit_app/screens/workout/rest.dart';
 import 'package:fit_app/screens/workout/widgets/buttons.dart';
 import 'package:flutter/material.dart';

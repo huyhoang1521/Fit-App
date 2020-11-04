@@ -1,4 +1,4 @@
-import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/components/constants.dart';

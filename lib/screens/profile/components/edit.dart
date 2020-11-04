@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_app/components/custom_number_field.dart';
 import 'package:fit_app/components/custom_press_field.dart';
 import 'package:fit_app/components/rounded_button.dart';
-import 'package:fit_app/screens/home/custom_appbar.dart';
+import 'package:fit_app/screens/home/components/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

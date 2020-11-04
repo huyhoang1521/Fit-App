@@ -87,7 +87,7 @@ class _AlarmState extends State<Alarm> {
       debugPrint('Notification payload: $payload');
     }
     await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => WorkOutR()));
+        context, MaterialPageRoute(builder: (context) => WorkoutOverview()));
   }
 
   Future onDidReceiveLocalNotification(
@@ -103,8 +103,10 @@ class _AlarmState extends State<Alarm> {
                   child: Text('Ok'),
                   onPressed: () async {
                     Navigator.of(context, rootNavigator: true).pop();
-                    await Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WorkOutR()));
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WorkoutOverview()));
                   },
                 )
               ],

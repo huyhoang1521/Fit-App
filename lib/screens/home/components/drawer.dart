@@ -6,7 +6,7 @@ import 'package:fit_app/screens/profile/profile.dart';
 import 'package:fit_app/screens/recovery/recovery_page.dart';
 import 'package:fit_app/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
-import '../../components/drawer_button.dart';
+import '../../../components/drawer_button.dart';
 
 class AppDrawer extends StatelessWidget {
   @override

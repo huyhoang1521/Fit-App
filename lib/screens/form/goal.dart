@@ -6,15 +6,18 @@ import 'length.dart';
 
 class Goal extends StatefulWidget {
   final FitUser user;
+  final String password;
 
-  const Goal({Key key, this.user}) : super(key: key);
+  const Goal({Key key, this.user, this.password}) : super(key: key);
   @override
   _Goal createState() => new _Goal(user: this.user);
 }
 
 class _Goal extends State<Goal> {
   final FitUser user;
-  _Goal({this.user});
+  final String password;
+  _Goal({this.user, this.password});
+
   String _goal;
   bool strength = false;
   bool hypertrophy = false;
@@ -107,7 +110,8 @@ class _Goal extends State<Goal> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Length(user: user)),
+                            builder: (context) =>
+                                Length(user: user, password: password)),
                       );
                     },
                   ),

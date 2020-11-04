@@ -1,6 +1,6 @@
 import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
 import 'package:fit_app/models/fit_user.dart';
-import '../widgets/fitness_goal.dart';
+import 'fitness_goal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

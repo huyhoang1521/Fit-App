@@ -33,7 +33,8 @@ String userDob;
   */
 class CreateWorkout {
   void createWorkout() async {
-    print("User ID is " + uid);
+    print("CREATING WORKOUT");
+    print("User ID: " + uid);
 
     userDoc.get().then((DocumentSnapshot userData) {
       if (userData.exists) {
@@ -77,7 +78,7 @@ class CreateWorkout {
     dateTime = new DateFormat("MM-dd-yyyy").parse(userDob);
     final date2 = DateTime.now();
     age = (date2.difference(dateTime).inDays / 365);
-    print("age is: " + age.toString());
+    print("Age: " + age.toString());
     //}
   }
 }
