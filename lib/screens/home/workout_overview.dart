@@ -1,16 +1,10 @@
-import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
-import 'package:fit_app/components/themes/icons/iconicks_icons.dart';
+import 'package:fit_app/screens/home/app_drawer.dart';
 import 'package:fit_app/screens/workout/test_page.dart';
 import 'package:fit_app/screens/workout/workout_summary.dart';
 import 'package:flutter/material.dart';
 import '../../components/rounded_button.dart';
 import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
-import '../../components/drawer_button.dart';
-import '../Overview/overview_page.dart';
-import '../Profile/new/new_profile.dart';
-import '../recovery/recovery_page.dart';
-import '../settings/settings.dart';
 
 class WorkOutR extends StatefulWidget {
   @override
@@ -42,76 +36,7 @@ class _WorkOutRState extends State<WorkOutR> {
           )
         ],
       ),
-      drawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            DrawerHeader(
-              padding: EdgeInsets.only(
-                bottom: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black,
-              ),
-              child: Image.asset(
-                'assets/images/logos 4 v4.png',
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            DrawerButton(
-                icon: Iconicks.generated__1_,
-                text: "Workout",
-                color: Theme.of(context).canvasColor,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WorkOutR()),
-                  );
-                }),
-            DrawerButton(
-                icon: Icons.person,
-                text: "Profile",
-                color: Theme.of(context).canvasColor,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NewProfile()),
-                  );
-                }),
-            DrawerButton(
-                icon: Iconicks.prog1,
-                text: "Progress",
-                color: Theme.of(context).canvasColor,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Overview()),
-                  );
-                }),
-            DrawerButton(
-                icon: CustomIcons.recovery_percentage,
-                text: "Recovery Booster",
-                color: Theme.of(context).canvasColor,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Recovery()),
-                  );
-                }),
-            DrawerButton(
-                icon: Icons.settings,
-                text: "Settings",
-                color: Theme.of(context).canvasColor,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Settings()),
-                  );
-                }),
-          ],
-        ),
-      ),
+      drawer: AppDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

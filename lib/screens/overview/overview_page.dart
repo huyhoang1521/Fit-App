@@ -1,5 +1,5 @@
 import 'package:fit_app/screens/home/custom_appbar.dart';
-import 'package:fit_app/screens/home/drawer.dart';
+import 'package:fit_app/screens/home/app_drawer.dart';
 import '../Overview/overview_button.dart';
 import '../Overview/prog_page.dart';
 import '../Overview/skill_viewer.dart';
