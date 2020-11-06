@@ -29,10 +29,11 @@ class _WorkoutNavigatorState extends State<WorkoutNavigator> {
       return WarmUp(workout: workout);
     } else if (push) {
       return WarmUp(workout: workout);
-    } else if (coolDown) {
-      return WarmUp(workout: workout);
     } else {
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      return WarmUp(workout: workout);
     }
+    /*else {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    }*/
   }
 }

@@ -1,8 +1,8 @@
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'progress_goal.dart';
-import '../Overview/prog_page.dart';
-import '../Overview/skill_button.dart';
+import 'progress_page.dart';
+import 'package:fit_app/components/progress/skill_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/components/themes/constants.dart';

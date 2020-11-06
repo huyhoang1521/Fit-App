@@ -8,7 +8,7 @@ import 'package:fit_app/screens/home/workout_summary.dart';
 import 'package:fit_app/screens/workout/workout_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/services/auth_service.dart';
-import 'package:fit_app/widgets/provider_widget.dart';
+import 'package:fit_app/components/general/provider/provider_widget.dart';
 
 UserWorkout workout;
 final User user = auth.currentUser;
