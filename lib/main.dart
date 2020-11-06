@@ -1,5 +1,5 @@
+import 'package:fit_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/screens/home/tab_system.dart';
 import 'package:fit_app/services/auth_service.dart';
 import 'package:fit_app/widgets/provider_widget.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +57,7 @@ class HomeController extends StatelessWidget {
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
-          return signedIn ? TabSystem() : FirstView();
+          return signedIn ? Home() : FirstView();
         }
         return CircularProgressIndicator();
       },

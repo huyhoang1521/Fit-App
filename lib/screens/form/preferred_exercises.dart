@@ -1,8 +1,8 @@
 import 'package:fit_app/algorithms/create_workout.dart';
-import 'package:fit_app/components/constants.dart';
+import 'package:fit_app/components/themes/constants.dart';
 import 'package:flutter/material.dart';
-import '../../components/rounded_preferred_button.dart';
-import '../../components/rounded_button.dart';
+import '../../components/general/buttons/rounded_preferred_button.dart';
+import '../../components/general/buttons/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../widgets/provider_widget.dart';
 import '../../models/fit_user.dart';

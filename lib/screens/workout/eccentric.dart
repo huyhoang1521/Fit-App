@@ -1,25 +1,27 @@
-import 'package:fit_app/screens/home/components/custom_appbar.dart';
+import 'package:fit_app/models/user_workout.dart';
+import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/rest.dart';
-import 'package:fit_app/screens/workout/widgets/buttons.dart';
+import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
-
-class Eccentric extends StatefulWidget {
-  Eccentric() : super();
-  @override
-  _EccentricState createState() => _EccentricState();
-}
-
-@override
-State<StatefulWidget> createState() {
-  return _EccentricState();
-}
 
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;
 bool pressed = false;
 
+class Eccentric extends StatefulWidget {
+  final UserWorkout workout;
+
+  const Eccentric({Key key, this.workout}) : super(key: key);
+
+  @override
+  _EccentricState createState() => new _EccentricState(workout: this.workout);
+}
+
 class _EccentricState extends State<Eccentric> {
+  UserWorkout workout;
+  _EccentricState({this.workout});
+
   @override
   Widget build(BuildContext context) {
     double width = (MediaQuery.of(context).size.width);

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../components/rounded_button.dart';
-import '../../components/custom_press_field.dart';
-import '../../components/custom_number_field.dart';
+import '../../components/general/buttons/rounded_button.dart';
+import '../../components/general/fields/custom_press_field.dart';
+import '../../components/general/fields/custom_number_field.dart';
 import '../../models/fit_user.dart';
 import 'goal.dart';
 

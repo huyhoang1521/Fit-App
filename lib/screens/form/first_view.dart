@@ -1,6 +1,6 @@
 //import 'package:fit_app/screens/form/welcome.dart';
-import 'package:fit_app/components/constants.dart';
-import 'package:fit_app/components/rounded_create_button.dart';
+import 'package:fit_app/components/themes/constants.dart';
+import 'package:fit_app/components/buttons/rounded_create_button.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../../models/fit_user.dart';

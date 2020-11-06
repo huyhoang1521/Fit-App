@@ -1,12 +1,12 @@
-import 'package:fit_app/screens/home/components/custom_appbar.dart';
-import 'package:fit_app/screens/home/components/drawer.dart';
+import 'package:fit_app/components/general/appbar/custom_appbar.dart';
+import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:fit_app/components/constants.dart';
-import 'widgets/recovery_checkBlock.dart';
+import 'package:fit_app/components/themes/constants.dart';
+import '../../components/recovery/recovery_checkBlock.dart';
 import 'package:flutter/animation.dart';
-import 'package:fit_app/components/themes/icons/custom_icons_icons.dart';
+import '../../components/general/icons/custom_icons_icons.dart';
 import 'package:confetti/confetti.dart';
 import 'dart:math';
 

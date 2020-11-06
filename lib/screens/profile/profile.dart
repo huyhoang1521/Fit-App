@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_app/screens/home/components/custom_appbar.dart';
-import '../home/components/drawer.dart';
+import 'package:fit_app/components/general/appbar/custom_appbar.dart';
+import '../../components/general/drawer/app_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fit_app/components/constants.dart';
-import 'components/edit.dart';
-import 'components/text_field_info.dart';
-import 'components/main_goal.dart';
+import 'package:fit_app/components/themes/constants.dart';
+import 'edit.dart';
+import '../../components/profile/text_field_info.dart';
+import '../../components/profile/main_goal.dart';
 import '../../models/fit_user.dart';
 
 class Profile extends StatefulWidget {

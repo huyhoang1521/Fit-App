@@ -1,27 +1,27 @@
 import 'package:fit_app/components/themes/theme.dart';
-import 'package:fit_app/screens/home/components/custom_appbar.dart';
-import 'package:fit_app/screens/home/components/drawer.dart';
-import 'package:fit_app/screens/home/settings/alarm.dart';
+import 'package:fit_app/components/general/appbar/custom_appbar.dart';
+import 'package:fit_app/components/general/drawer/app_drawer.dart';
+import 'package:fit_app/screens/settings/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:fit_app/components/constants.dart';
+import 'package:fit_app/components/themes/constants.dart';
 
 // Used to Select users workout goals
 bool strength = false;
 bool hypertrophy = false;
 bool weightLoss = false;
 
-class Settings extends StatefulWidget {
+class Setting extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SettingsState();
+    return _SettingState();
   }
 }
 
 bool reminder = false;
 var alarmTime = new DateTime.now();
 
-class _SettingsState extends State<Settings> {
+class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

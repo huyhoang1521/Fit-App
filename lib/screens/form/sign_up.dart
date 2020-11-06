@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../components/rounded_button.dart';
-import '../../components/custom_text_field.dart';
-import '../../components/custom_password.dart';
+import '../../components/general/buttons/rounded_button.dart';
+import '../../components/general/fields/custom_text_field.dart';
+import '../../components/general/fields/custom_password.dart';
 import '../../models/fit_user.dart';
 import 'info.dart';
 
