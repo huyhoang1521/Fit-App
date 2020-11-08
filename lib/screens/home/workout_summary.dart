@@ -3,7 +3,7 @@ import 'package:fit_app/algorithms/progressions.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:fit_app/models/user_workout.dart';
 
-import 'package:fit_app/components/workout/exercise_tab.dart';
+import 'package:fit_app/components/workout/exercise_overiview_item.dart';
 import 'package:flutter/material.dart';
 import '../../algorithms/warmup.dart';
 
@@ -54,7 +54,7 @@ class _WorkoutSummary extends State<WorkoutSummary> {
                     ),
                   );
                 } else {
-                  return new ExerciseTab(
+                  return new ExerciseOverviewItem(
                     name: workoutList[index].values.elementAt(0),
                     img: workoutList[index].values.elementAt(1),
                     time: workoutList[index].values.elementAt(2),

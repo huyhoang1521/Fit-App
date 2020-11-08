@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class ProgressGoal extends StatelessWidget {
+class PercentageButton extends StatelessWidget {
   final String text, percentText;
   final Function press;
   final String image;
   final double percent;
 
-  const ProgressGoal({
+  const PercentageButton({
     Key key,
     this.text,
     this.percent,
