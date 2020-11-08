@@ -1,3 +1,4 @@
+import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/rest.dart';
@@ -10,18 +11,19 @@ IconData button = play;
 bool pressed = false;
 int count = 0;
 
-class WarmUp extends StatefulWidget {
-  final UserWorkout workout;
+class WorkoutWarmup extends StatefulWidget {
+  final UserWarmup userWarmup;
 
-  const WarmUp({Key key, this.workout}) : super(key: key);
+  const WorkoutWarmup({Key key, this.userWarmup}) : super(key: key);
 
   @override
-  _WarmUpState createState() => new _WarmUpState(workout: this.workout);
+  _WorkoutWarmupState createState() =>
+      new _WorkoutWarmupState(userWarmup: this.userWarmup);
 }
 
-class _WarmUpState extends State<WarmUp> {
-  UserWorkout workout;
-  _WarmUpState({this.workout});
+class _WorkoutWarmupState extends State<WorkoutWarmup> {
+  UserWarmup userWarmup;
+  _WorkoutWarmupState({this.userWarmup});
 
   @override
   Widget build(BuildContext context) {
@@ -121,13 +123,13 @@ class _WarmUpState extends State<WarmUp> {
             enabled: pressed,
             rWPressed: () {},
             fFPressed: () {
-              if (count < workout.warmup.length) {
+              /*if (count < workout.warmup.length) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => RestPage()),
                   //MaterialPageRoute(builder: (context) => StartWorkout()),
                 );
-              }
+              }*/
             },
             pPPressed: () {
               setState(() {
