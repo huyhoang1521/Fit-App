@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/algorithms/create_workout.dart';
 import 'package:fit_app/components/general/buttons/rounded_button.dart';
+import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/eccentric.dart';
 import 'package:fit_app/screens/workout/isometric.dart';
 import 'package:fit_app/screens/test/start_workout.dart';
-import 'package:fit_app/screens/workout/warmup.dart';
+import 'package:fit_app/screens/workout/workout_warmup.dart';
 import 'package:flutter/material.dart';
 import '../workout/concentric.dart';
 
@@ -29,6 +30,8 @@ State<StatefulWidget> createState() {
 }
 
 class _TestPageState extends State<TestPage> {
+  UserWarmup userWarmup;
+
   Future<UserWorkout> fetchUserWorkout() =>
       Future.delayed(Duration(seconds: 1), () async {
         debugPrint('Step 2, fetch data');
@@ -98,7 +101,8 @@ class _TestPageState extends State<TestPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => WarmUp(workout: workout)),
+                                builder: (context) =>
+                                    WorkoutWarmup(userWarmup: userWarmup)),
                             //MaterialPageRoute(builder: (context) => StartWorkout()),
                           );
                         },
