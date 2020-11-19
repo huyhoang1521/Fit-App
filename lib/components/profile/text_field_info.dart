@@ -1,6 +1,6 @@
 import '../general/icons/custom_icons_icons.dart';
 import '../general/icons/iconicks_icons.dart';
-import '../../components/general/fields/profile_text_box.dart';
+import 'profile_text_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -33,6 +33,7 @@ class _TextFieldInfo extends State<TextFieldInfo> {
     final dobController = TextEditingController(text: user.dob);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         ProfileTextBox(
           text: 'Name: ',

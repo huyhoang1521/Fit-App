@@ -64,8 +64,7 @@ class _ProfileState extends State<Profile> {
       body: FutureBuilder(
         future: getUserInfo(),
         builder: (context, snapshot) {
-          return ListView(
-            padding: const EdgeInsets.all(4),
+          return Column(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,9 +101,6 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
               TextFieldInfo(user: user, fullName: fullName),
-              SizedBox(height: newSect),
-              //Goals(user: user),
-              SizedBox(height: newSect),
               MainGoal(user: user),
             ],
           );

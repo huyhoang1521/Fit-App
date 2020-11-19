@@ -97,3 +97,5 @@ class _RestPageState extends State<RestPage> {
     );
   }
 }
+
+//Todo Add Anecdotal tip "Cool app features and information"

@@ -15,16 +15,13 @@ class ProfileTextBox extends StatelessWidget {
     this.userData,
     this.press,
     this.controller,
-    //this.controller,
   }) : super(key: key);
-
-  // final controller = TextEditingController(text: 'NickyP');
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 5),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -32,14 +29,6 @@ class ProfileTextBox extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).accentColor,
           borderRadius: BorderRadius.circular(5),
-//            boxShadow: [
-//              BoxShadow(
-//                color: Colors.grey.withOpacity(0.5),
-//                spreadRadius: 2, //2
-//                blurRadius: 3, //2,
-//                offset: Offset(0, 2), // changes position of shadow
-//              ),
-//            ]
         ),
         child: Row(
           children: [
