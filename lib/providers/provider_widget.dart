@@ -1,4 +1,4 @@
-import 'package:fit_app/services/auth_service.dart';
+import 'auth_service.dart';
 import 'package:flutter/material.dart';
 
 class ProviderWidget extends InheritedWidget {

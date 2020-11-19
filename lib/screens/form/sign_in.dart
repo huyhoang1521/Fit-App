@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../components/general/provider/provider_widget.dart';
+import '../../providers/provider_widget.dart';
 import '../../components/general/buttons/rounded_button.dart';
 import '../../components/general/fields/custom_text_field.dart';
 import '../../components/general/fields/custom_password.dart';

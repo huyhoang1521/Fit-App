@@ -1,5 +1,6 @@
 class Exercise {
   String name;
+  int id;
   String description;
   int level;
   String image;
@@ -8,11 +9,12 @@ class Exercise {
   String movement;
   String equipment;
 
-  Exercise(this.name, this.description, this.image, this.equipment, this.type,
-      this.position, this.level, this.movement);
+  Exercise(this.name, this.id, this.description, this.image, this.equipment,
+      this.type, this.position, this.level, this.movement);
 
   Map<String, dynamic> toJson() => {
         'name': name,
+        'id': id,
         'description': description,
         'level': level,
         'image': image,

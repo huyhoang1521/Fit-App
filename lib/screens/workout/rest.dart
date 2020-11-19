@@ -1,27 +1,26 @@
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:fit_app/screens/workout/eccentric.dart';
-import 'package:fit_app/screens/workout/isometric.dart';
+import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/async.dart';
 
-class RestPage extends StatefulWidget {
-  RestPage() : super();
-  @override
-  _RestPageState createState() => _RestPageState();
-}
-
-@override
-State<StatefulWidget> createState() {
-  return _RestPageState();
-}
-
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;
-//bool _pressed = false;
+
+class RestPage extends StatefulWidget {
+  final UserWorkout workout;
+
+  const RestPage({Key key, this.workout}) : super(key: key);
+
+  @override
+  _RestPageState createState() => new _RestPageState(workout: this.workout);
+}
 
 class _RestPageState extends State<RestPage> {
+  UserWorkout workout;
+  _RestPageState({this.workout});
+
   int _start = 10;
   int _current = 10;
   bool _pressed = false;
@@ -46,12 +45,14 @@ class _RestPageState extends State<RestPage> {
 
     //when rest time is complete go to next page
     sub.onDone(() {
-      Navigator.push(
+      print("Done");
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      /*Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Eccentric()),
         //MaterialPageRoute(builder: (context) => StartWorkout()),
-      );
-      print("Done");
+      );*/
+
       sub.cancel();
     });
   }
@@ -76,15 +77,12 @@ class _RestPageState extends State<RestPage> {
             Buttons(
               enabled: _pressed,
               fFPressed: () {
-                //Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Isometric()),
-                  //MaterialPageRoute(builder: (context) => StartWorkout()),
-                );
+                //int count = 0;
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
               rWPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                //Navigator.pop(context);
               },
               pPPressed: () {
                 startTimer();

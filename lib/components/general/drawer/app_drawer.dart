@@ -1,6 +1,6 @@
 import '../icons/custom_icons_icons.dart';
 import '../icons/iconicks_icons.dart';
-import 'package:fit_app/screens/home/home.dart';
+import 'package:fit_app/screens/home/home_picker.dart';
 import 'package:fit_app/screens/progress/progress.dart';
 import 'package:fit_app/screens/profile/profile.dart';
 import 'package:fit_app/screens/recovery/recovery_page.dart';
@@ -36,7 +36,7 @@ class AppDrawer extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => HomePicker()),
                 );
               }),
           DrawerButton(

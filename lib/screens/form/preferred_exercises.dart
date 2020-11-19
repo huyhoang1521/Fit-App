@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../components/general/buttons/rounded_preferred_button.dart';
 import '../../components/general/buttons/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../components/general/provider/provider_widget.dart';
+import '../../providers/provider_widget.dart';
 import '../../models/fit_user.dart';
 
 Future callWorkout() async {

@@ -1,7 +1,6 @@
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:fit_app/screens/workout/eccentric.dart';
-import 'package:fit_app/screens/workout/isometric.dart';
+import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -52,7 +51,7 @@ class _CoolDownState extends State<CoolDown> {
     sub.onDone(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Eccentric()),
+        MaterialPageRoute(builder: (context) => Complete()),
         //MaterialPageRoute(builder: (context) => StartWorkout()),
       );
       print("Done");
@@ -128,12 +127,16 @@ class _CoolDownState extends State<CoolDown> {
                 //Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Isometric()),
+                  MaterialPageRoute(builder: (context) => Complete()),
                   //MaterialPageRoute(builder: (context) => StartWorkout()),
                 );
               },
               rWPressed: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Complete()),
+                  //MaterialPageRoute(builder: (context) => StartWorkout()),
+                );
               },
               pPPressed: () {
                 startTimer();

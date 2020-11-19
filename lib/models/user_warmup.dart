@@ -3,18 +3,22 @@ class UserWarmup {
   int id;
   String category;
   String subCategory;
-  String type;
+  int reps;
+  int sets;
+  int duration;
   String description;
 
-  UserWarmup(this.name, this.id, this.category, this.subCategory, this.type,
-      this.description);
+  UserWarmup(this.name, this.id, this.category, this.subCategory, this.reps,
+      this.sets, this.duration, this.description);
 
   Map<String, dynamic> toJson() => {
         'name': name,
         'description': id,
         'level': category,
         'image': subCategory,
-        'type': type,
+        'reps': reps,
+        'sets': sets,
+        'duration': duration,
         'position': description,
       };
 }

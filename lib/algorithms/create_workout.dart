@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/algorithms/exercises.dart';
-import '../models/workout.dart';
+import '../models/user_workout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'warmup.dart';
@@ -63,8 +63,9 @@ class CreateWorkout {
     }
 
     await Future.delayed(Duration(seconds: 1));
-    final Workout workout = new Workout(uid, userLength, userGoal,
-        exercisesList, warmupList, restTime, coolDown);
+
+    final UserWorkout workout = new UserWorkout(uid, userLength, userGoal,
+        restTime, coolDown, exercisesList, warmupList);
 
     await db.collection("Workouts").doc(uid).set(workout.toJson());
     progressions.updateProgression(userProgressions);

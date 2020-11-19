@@ -6,12 +6,12 @@ import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
-import 'package:fit_app/screens/workout/eccentric.dart';
-import 'package:fit_app/screens/workout/isometric.dart';
+import 'package:fit_app/screens/test/eccentric.dart';
+import 'package:fit_app/screens/test/isometric.dart';
 import 'package:fit_app/screens/test/start_workout.dart';
-import 'package:fit_app/screens/workout/workout_warmup.dart';
+//import 'package:fit_app/screens/workout/exercise_page.dart';
 import 'package:flutter/material.dart';
-import '../workout/concentric.dart';
+import 'concentric.dart';
 
 UserWorkout workout;
 final User user = auth.currentUser;
@@ -98,13 +98,12 @@ class _TestPageState extends State<TestPage> {
                         color: Theme.of(context).buttonColor,
                         //textColor: Colors.white,
                         press: () {
-                          Navigator.push(
+                          /*Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    WorkoutWarmup(userWarmup: userWarmup)),
+                                builder: (context) => WorkoutWarmup()),
                             //MaterialPageRoute(builder: (context) => StartWorkout()),
-                          );
+                          );*/
                         },
                         text: 'Warm Up',
                         //onLongPress: ,

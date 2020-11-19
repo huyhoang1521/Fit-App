@@ -1,4 +1,4 @@
-import 'package:fit_app/components/general/provider/provider_widget.dart';
+import 'package:fit_app/providers/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
