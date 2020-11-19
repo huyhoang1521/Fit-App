@@ -1,6 +1,6 @@
 import 'package:fit_app/algorithms/progressions.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/components/workout/exercise_tab.dart';
+import 'package:fit_app/components/workout/exercise_overiview_item.dart';
 import 'package:flutter/material.dart';
 
 Progressions progressions = new Progressions();
@@ -46,7 +46,7 @@ class _WorkoutSummary extends State<WorkoutSummary> {
             ),
           );
         } else {
-          return new ExerciseTab(
+          return new ExerciseOverviewItem(
             name: exerciseList[index].values.elementAt(0),
             img: 'assets/images/pullup_up.png',
             time: 5,

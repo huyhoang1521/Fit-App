@@ -1,14 +1,13 @@
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 
-class ExerciseTab extends StatelessWidget {
+class ExerciseOverviewItem extends StatelessWidget {
   final Function onPressed;
   final bool enabled;
   final String name;
   final String img;
   final int time;
-  const ExerciseTab({
+  const ExerciseOverviewItem({
     Key key,
     this.name,
     this.img,

@@ -4,17 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class ProgressPage extends StatefulWidget {
+class Stats extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _ProgressPageState();
+    return _StatsState();
   }
 }
 
 double _whateverProg = 1.00;
-Color green1 = const Color.fromRGBO(30, 201, 116, 1.0);
 
-class _ProgressPageState extends State<ProgressPage> {
+class _StatsState extends State<Stats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
