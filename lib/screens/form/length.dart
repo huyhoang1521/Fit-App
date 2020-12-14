@@ -6,9 +6,8 @@ import 'equipment.dart';
 
 class Length extends StatefulWidget {
   final FitUser user;
-  final String password;
 
-  const Length({Key key, this.user, this.password}) : super(key: key);
+  const Length({Key key, this.user}) : super(key: key);
 
   @override
   _Length createState() => new _Length(user: this.user);
@@ -16,8 +15,7 @@ class Length extends StatefulWidget {
 
 class _Length extends State<Length> {
   final FitUser user;
-  final String password;
-  _Length({this.user, this.password});
+  _Length({this.user});
 
   String _length;
   bool strength = false;
@@ -95,8 +93,7 @@ class _Length extends State<Length> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                Equipment(user: user, password: password)),
+                            builder: (context) => Equipment(user: user)),
                       );
                     },
                   ),

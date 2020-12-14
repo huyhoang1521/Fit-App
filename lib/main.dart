@@ -1,12 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fit_app/providers/account_created.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/exercise_counter.dart';
 import 'package:fit_app/providers/workout_in_progress.dart';
+import 'package:fit_app/screens/home/home_page.dart';
 import 'package:fit_app/screens/home/home_picker.dart';
-import 'package:fit_app/screens/workout/workout_navigator.dart';
+import 'package:fit_app/screens/home/json_home.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/providers/auth_service.dart';
 import 'package:fit_app/providers/provider_widget.dart';
 import 'package:provider/provider.dart';
+import 'algorithms/json/json_data.dart';
+import 'algorithms/workout/create_workout.dart';
 import 'components/themes/theme.dart';
 import 'screens/form/first_view.dart';
 import 'screens/form/sign_in.dart';
@@ -33,6 +38,8 @@ class MyApp extends StatelessWidget {
                   create: (_) => WorkoutExercises()),
               ChangeNotifierProvider<ThemeNotifier>(
                   create: (_) => ThemeNotifier()),
+              ChangeNotifierProvider<AccountCreated>(
+                  create: (_) => AccountCreated()),
               ChangeNotifierProvider<WorkoutInProgress>(
                   create: (_) => WorkoutInProgress())
             ],
@@ -46,8 +53,6 @@ class MyApp extends StatelessWidget {
                     routes: <String, WidgetBuilder>{
                       '/signIn': (BuildContext context) => SignIn(),
                       '/home': (BuildContext context) => HomeController(),
-                      '/workoutNavigator': (BuildContext context) =>
-                          WorkoutNavigator(),
                     },
                   );
                 },
@@ -62,16 +67,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeController extends StatelessWidget {
+class HomeController extends StatefulWidget {
+  @override
+  _HomePicker createState() => new _HomePicker();
+}
+
+class _HomePicker extends State<HomeController> {
+  bool workoutInProgress;
+
   @override
   Widget build(BuildContext context) {
     final AuthService auth = ProviderWidget.of(context).auth;
+    JsonData jsonData = new JsonData('workoutData.json');
     return StreamBuilder<String>(
       stream: auth.onAuthStateChanged,
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
-          return signedIn ? HomePicker() : FirstView();
+          if (signedIn) {
+            //final accountCreated = Provider.of<AccountCreated>(context);
+            if (jsonData.getFileExists()) {
+              return JsonHome();
+            } else {
+              return HomePicker();
+            }
+          } else {
+            return FirstView();
+          }
+
+          //return signedIn ? HomePicker() : FirstView();
         }
         return CircularProgressIndicator();
       },

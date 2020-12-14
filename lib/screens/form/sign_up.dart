@@ -1,3 +1,4 @@
+import 'package:fit_app/providers/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../components/general/buttons/rounded_button.dart';
@@ -21,26 +22,27 @@ class _SignUp extends State<SignUp> {
 
   _SignUp({this.user});
 
-  final formKey = GlobalKey<FormState>();
   String _firstName, _lastName, _email, _password;
 
   void setVars() {
     user.firstName = _firstName;
     user.lastName = _lastName;
     user.email = _email;
+    print("Email: " + _email);
+    print("First Name :" + _firstName);
+    print("Last Name: " + _lastName);
   }
 
   void submit() async {
     try {
       setVars();
-      print("Email: " + _email);
-      print("First Name :" + _firstName);
-      print("Last Name: " + _lastName);
+      final auth = ProviderWidget.of(context).auth;
+      await auth.createUserWithEmailAndPassword(
+          user.email, _password, (user.firstName + user.lastName));
 
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => Info(user: user, password: _password)),
+        MaterialPageRoute(builder: (context) => Info(user: user)),
       );
     } catch (error) {
       print(error);
