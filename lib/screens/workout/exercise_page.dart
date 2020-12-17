@@ -5,6 +5,7 @@ import 'package:fit_app/components/workout/buttons.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/screens/workout/rest.dart';
 import 'package:fit_app/providers/exercise_counter.dart';
+import 'package:fit_app/screens/workout/route_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,8 @@ IconData button = play;
 bool pressed = false;
 ExerciseCounter exerciseCounter = new ExerciseCounter();
 WorkoutExercises workoutExercises = new WorkoutExercises();
+Offset start = Offset(1, 0);
+Offset end = Offset.zero;
 
 class ExercisePage extends StatefulWidget {
   const ExercisePage({Key key}) : super(key: key);
@@ -70,10 +73,13 @@ class _ExercisePageState extends State<ExercisePage> {
             enabled: pressed,
             rWPressed: () {},
             fFPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RestPage()),
-              );
+              Navigator.push(context,
+                  RouteTransition(page: RestPage(), start: start, end: end));
+              //Todo Clean up after choosing transition method
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => RestPage()),
+              // );
               exerciseCounter.incrementExerciseCount();
             },
             pPPressed: () {

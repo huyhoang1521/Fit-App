@@ -1,6 +1,6 @@
 import 'package:fit_app/algorithms/progressions.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/components/workout/exercise_overiview_item.dart';
+import 'package:fit_app/components/workout/exercise_overview_item.dart';
 import 'package:flutter/material.dart';
 
 Progressions progressions = new Progressions();

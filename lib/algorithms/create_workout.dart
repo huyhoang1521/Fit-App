@@ -28,7 +28,7 @@ String userDob;
 /* 
   * Creates a workout for the User using the fields provided
   * Finds the user id and uses it to query the database
-  * After the data has been set, a Workout object is inialized with the data
+  * After the data has been set, a Workout object is initialized with the data
   * Stores the information into Firebase, using the object data
   */
 class CreateWorkout {

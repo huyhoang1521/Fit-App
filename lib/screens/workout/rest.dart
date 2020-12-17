@@ -46,7 +46,11 @@ class _RestPageState extends State<RestPage> {
     //when rest time is complete go to next page
     sub.onDone(() {
       print("Done");
+
+      //Todo clean up code after desired transition is chosen
+      //Using push in
       Navigator.of(context).popUntil((route) => route.isFirst);
+      //  Navigator.push(context, RouteTransition(page: ExercisePage()));
       /*Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Eccentric()),
@@ -78,6 +82,7 @@ class _RestPageState extends State<RestPage> {
               enabled: _pressed,
               fFPressed: () {
                 //int count = 0;
+                //  Navigator.push(context, RouteTransition(page: ExercisePage()));
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
               rWPressed: () {
