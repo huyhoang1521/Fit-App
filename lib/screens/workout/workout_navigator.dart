@@ -1,4 +1,3 @@
-import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/exercise_page.dart';
@@ -7,25 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WorkoutNavigator extends StatefulWidget {
-  final UserWorkout workout;
-
-  const WorkoutNavigator({Key key, this.workout}) : super(key: key);
-
   @override
-  _WorkoutNavigatorState createState() =>
-      new _WorkoutNavigatorState(workout: this.workout);
+  _WorkoutNavigatorState createState() => new _WorkoutNavigatorState();
 }
 
 class _WorkoutNavigatorState extends State<WorkoutNavigator> {
-  UserWorkout workout;
-  _WorkoutNavigatorState({this.workout});
+  _WorkoutNavigatorState();
 
   @override
   Widget build(BuildContext context) {
     final exerciseCounter = Provider.of<ExerciseCounter>(context);
-    final exerciseList = Provider.of<WorkoutExercises>(context);
+    final workoutExercises =
+        Provider.of<WorkoutExercises>(context, listen: false);
     // Build the widget with data.
-    if (exerciseCounter.exerciseCount < exerciseList.exercises.length) {
+    if (exerciseCounter.exerciseCount < workoutExercises.exercises.length) {
       return new ExercisePage();
     } else {
       return CoolDown();

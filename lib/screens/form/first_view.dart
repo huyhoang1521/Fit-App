@@ -1,8 +1,10 @@
 //import 'package:fit_app/screens/form/welcome.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:fit_app/components/general/buttons/rounded_create_button.dart';
+import 'package:fit_app/providers/workout_in_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:provider/provider.dart';
 import '../../models/fit_user.dart';
 import 'sign_up.dart';
 
@@ -43,6 +45,9 @@ class FirstView extends StatelessWidget {
                 text: "Create account",
                 textColor: kPrimaryColor,
                 press: () {
+                  final workoutInProgress =
+                      Provider.of<WorkoutInProgress>(context, listen: false);
+                  workoutInProgress.setWorkoutInProgress(false);
                   final FitUser user = new FitUser(null, null, null, null, null,
                       null, null, null, null, null, null, null);
 

@@ -4,11 +4,12 @@ class UserWorkout {
   String length;
   double restTime;
   int coolDown;
-  List<Map<String, int>> exercises;
-  List<int> warmup;
+  List<Map<String, dynamic>> exercises;
+  List<Map<String, dynamic>> progressions;
+  List<Map<String, dynamic>> warmup;
 
   UserWorkout(this.uid, this.goal, this.length, this.restTime, this.coolDown,
-      this.exercises, this.warmup);
+      this.exercises, this.progressions, this.warmup);
 
   Map<String, dynamic> toJson() => {
         'uid': uid,
@@ -17,6 +18,7 @@ class UserWorkout {
         'restTime': restTime,
         'coolDown': coolDown,
         'exercises': exercises,
+        'progressions': progressions,
         'warmup': warmup,
       };
 }

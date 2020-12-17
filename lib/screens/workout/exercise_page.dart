@@ -1,4 +1,4 @@
-import 'package:fit_app/components/workout/exercise_fields_creator.dart';
+import 'package:fit_app/components/workout/exercise_box.dart';
 import 'package:fit_app/components/workout/exercise_title.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/workout/buttons.dart';
@@ -19,23 +19,40 @@ Offset start = Offset(1, 0);
 Offset end = Offset.zero;
 
 class ExercisePage extends StatefulWidget {
-  const ExercisePage({Key key}) : super(key: key);
-
   @override
   _ExercisePageState createState() => new _ExercisePageState();
 }
 
 class _ExercisePageState extends State<ExercisePage> {
+  List<Widget> populateExerciseFields(
+      List<Map<String, dynamic>> exerciseList, int exerciseCount) {
+    List<Widget> exercisesFields = new List();
+    if (exerciseList[exerciseCount].containsKey('subcategory')) {
+      exercisesFields.add(new ExerciseBox(
+          name: "Subcategory",
+          value: exerciseList[exerciseCount]["subcategory"]));
+    }
+    if (exerciseList[exerciseCount].containsKey("reps")) {
+      exercisesFields.add(new ExerciseBox(
+          name: "Reps", value: exerciseList[exerciseCount]["reps"]));
+    }
+    if (exerciseList[exerciseCount].containsKey("sets")) {
+      exercisesFields.add(new ExerciseBox(
+          name: "Sets", value: exerciseList[exerciseCount]["sets"]));
+    }
+    if (exerciseList[exerciseCount].containsKey("duration")) {
+      exercisesFields.add(new ExerciseBox(
+          name: "Duration", value: exerciseList[exerciseCount]["duration"]));
+    }
+    return exercisesFields;
+  }
+
   @override
   Widget build(BuildContext context) {
     workoutExercises = Provider.of<WorkoutExercises>(context);
-
     exerciseCounter = Provider.of<ExerciseCounter>(context, listen: true);
-
-    ExerciseFieldsCreator exerciseFieldsCreator = new ExerciseFieldsCreator();
-    List<Widget> exercisesFields = exerciseFieldsCreator.populateExerciseFields(
+    List<Widget> exercisesFields = populateExerciseFields(
         workoutExercises.exercises, exerciseCounter.exerciseCount);
-
     double width = (MediaQuery.of(context).size.width);
     double height = (MediaQuery.of(context).size.height);
 
@@ -48,6 +65,14 @@ class _ExercisePageState extends State<ExercisePage> {
           ExerciseTitle(
               name: workoutExercises.exercises[exerciseCounter.exerciseCount]
                   ["name"]),
+          Consumer<ExerciseCounter>(
+            builder: (context, notifier, child) => Text(
+              exerciseCounter.exerciseCount.toString() +
+                  "/" +
+                  workoutExercises.exercises.length.toString(),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ),
           Image.asset(
             'assets/images/pullup_up.png',
             width: width * .75,

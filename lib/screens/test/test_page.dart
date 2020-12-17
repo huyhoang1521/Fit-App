@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_app/algorithms/create_workout.dart';
+import 'package:fit_app/algorithms/workout/create_workout.dart';
 import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
@@ -39,16 +39,13 @@ class _TestPageState extends State<TestPage> {
         debugPrint('Step 2, fetch data');
         await workoutDoc.get().then((DocumentSnapshot userData) {
           if (userData.exists) {
-            List<Map<String, int>> exerciseList = new List();
-            List<int> warmupList = new List.from(userData.data()['warmup']);
+            List<Map<String, dynamic>> warmupList =
+                new List.from(userData.data()['warmup']);
+            List<Map<String, dynamic>> exerciseList =
+                new List.from(userData.data()['exercises']);
+            List<Map<String, dynamic>> progressionsList =
+                new List.from(userData.data()['progressions']);
 
-            List<Map<String, int>>.from(
-                userData.data()["exercises"].map((item) {
-              exerciseList.add({
-                "exerciseID": item["exerciseID"],
-                "progressionID": item["progressionID"]
-              });
-            }));
             workout = new UserWorkout(
               userData.data()['uid'],
               userData.data()['length'],
@@ -56,6 +53,7 @@ class _TestPageState extends State<TestPage> {
               userData.data()['restTime'],
               userData.data()['coolDown'],
               exerciseList,
+              progressionsList,
               warmupList,
             );
           }

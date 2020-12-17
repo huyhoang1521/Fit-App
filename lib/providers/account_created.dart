@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class WorkoutInProgress with ChangeNotifier {
-  bool workoutInProgressBool = false;
-  final String key = "workoutInProgress";
+class AccountCreated with ChangeNotifier {
+  bool accountCreatedBool = false;
+
+  final String key = "accountCreatedBool";
   SharedPreferences _prefs;
 
-  WorkoutInProgress() {
+  AccountCreated() {
     _loadFromPrefs();
   }
 
-  void setWorkoutInProgress(bool _workoutInProgressBool) {
-    workoutInProgressBool = _workoutInProgressBool;
+  void setAccountCreated() {
+    accountCreatedBool = true;
+    _saveToPrefs();
+    notifyListeners();
+  }
+
+  void resetAccountCreated() {
+    accountCreatedBool = false;
     _saveToPrefs();
     notifyListeners();
   }
 
   _loadFromPrefs() async {
     await _initPrefs();
-    workoutInProgressBool = _prefs.getBool(key) ?? true;
+    accountCreatedBool = _prefs.getInt(key) ?? false;
     notifyListeners();
   }
 
   _saveToPrefs() async {
     await _initPrefs();
-    _prefs.setBool(key, workoutInProgressBool);
+    _prefs.setBool(key, accountCreatedBool);
   }
 
   _initPrefs() async {

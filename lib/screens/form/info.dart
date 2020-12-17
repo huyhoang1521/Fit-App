@@ -12,17 +12,15 @@ String dobString = "";
 
 class Info extends StatefulWidget {
   final FitUser user;
-  final String password;
 
-  const Info({Key key, this.user, this.password}) : super(key: key);
+  const Info({Key key, this.user}) : super(key: key);
   @override
   _Info createState() => new _Info(user: this.user);
 }
 
 class _Info extends State<Info> {
   final FitUser user;
-  final String password;
-  _Info({this.user, this.password});
+  _Info({this.user});
 
   DateTime _dateTime = DateTime.now();
   var dobController = TextEditingController();
@@ -155,11 +153,12 @@ class _Info extends State<Info> {
                     text: "Next",
                     press: () {
                       setVars();
+                      // create user account
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                Goal(user: user, password: password)),
+                            builder: (context) => Goal(user: user)),
                       );
                     },
                   ),

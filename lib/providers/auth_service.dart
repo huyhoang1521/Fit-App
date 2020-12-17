@@ -20,12 +20,9 @@ class AuthService {
   Future<String> createUserWithEmailAndPassword(
       String email, String password, String name) async {
     final currentUser = await _firebaseAuth
-        .createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    )
+        .createUserWithEmailAndPassword(email: email, password: password)
         .catchError((e) {
-      print(e.details); // code, message, details
+      //print(e.details); // code, message, details
     });
 
     // Update the username
