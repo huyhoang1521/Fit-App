@@ -77,6 +77,7 @@ class _HomePage extends State<HomePage> {
     final workoutExercises = Provider.of<WorkoutExercises>(context);
     final exerciseCounter = Provider.of<ExerciseCounter>(context);
     String workoutButtonText = '';
+
     if (workoutInProgress.workoutInProgressBool == true) {
       workoutButtonText = "Resume workout: " +
           (exerciseCounter.exerciseCount + 1).toString() +
