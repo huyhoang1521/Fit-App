@@ -1,7 +1,7 @@
 import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/components/workout/exercise_overiview_item.dart';
+import 'package:fit_app/providers/exercise_counter.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/workout_in_progress.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +14,77 @@ class HomePage extends StatefulWidget {
   _HomePage createState() => new _HomePage();
 }
 
+Widget exerciseOverviewItem(
+    //Function onPressed,
+    //bool enabled,
+    String name,
+    String img,
+    int time,
+    BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+    child: GestureDetector(
+      //onLongPress: onPressed,
+      child: SizedBox(
+        height: 100,
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.grey))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FittedBox(
+                fit: BoxFit.fitHeight,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
+                      child: Row(
+                        children: [
+                          Text(
+                            time.toString(),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          Text(
+                            '  minutes',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Image.asset(img),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final workoutInProgress = Provider.of<WorkoutInProgress>(context);
     final workoutExercises = Provider.of<WorkoutExercises>(context);
+    final exerciseCounter = Provider.of<ExerciseCounter>(context);
+    String workoutButtonText = '';
+    if (workoutInProgress.workoutInProgressBool == true) {
+      workoutButtonText = "Resume workout: " +
+          (exerciseCounter.exerciseCount + 1).toString() +
+          "/" +
+          workoutExercises.exercises.length.toString();
+    } else {
+      workoutButtonText = 'Start Workout';
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Fit With Nick'),
@@ -69,11 +135,11 @@ class _HomePage extends State<HomePage> {
                   child: ListView.builder(
                     itemCount: workoutExercises.exercises.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return new ExerciseOverviewItem(
-                        name: workoutExercises.exercises[index]['name'],
-                        img: 'assets/images/pullup_up.png',
-                        time: 5,
-                      );
+                      return exerciseOverviewItem(
+                          workoutExercises.exercises[index]['name'],
+                          'assets/images/pullup_up.png',
+                          5,
+                          context);
                     },
                   ),
                 ),
@@ -85,8 +151,10 @@ class _HomePage extends State<HomePage> {
                 color: Theme.of(context).buttonColor,
                 press: () async {
                   workoutInProgress.setWorkoutInProgress(true);
+                  Navigator.pushNamed(context, '/exercisePage');
                 },
-                text: 'Start Workout',
+
+                text: workoutButtonText,
                 //onLongPress: ,
               ),
             ),

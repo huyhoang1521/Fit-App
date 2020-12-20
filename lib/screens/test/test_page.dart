@@ -170,9 +170,7 @@ class _TestPageState extends State<TestPage> {
                         press: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    CoolDown(workout: workout)),
+                            MaterialPageRoute(builder: (context) => CoolDown()),
                             //MaterialPageRoute(builder: (context) => StartWorkout()),
                           );
                         },

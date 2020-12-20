@@ -228,6 +228,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                         });
 
                         await createUserData();
+                        await Future.delayed(Duration(seconds: 2));
                         await callWorkout().whenComplete(
                             () => Future.delayed(Duration(seconds: 5), () {
                                   // 5s over, navigate to a new page

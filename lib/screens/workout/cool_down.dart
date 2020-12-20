@@ -1,4 +1,3 @@
-import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/components/workout/buttons.dart';
@@ -11,18 +10,11 @@ IconData play = Icons.play_circle_filled;
 IconData button = play;
 
 class CoolDown extends StatefulWidget {
-  final UserWorkout workout;
-
-  const CoolDown({Key key, this.workout}) : super(key: key);
-
   @override
-  _CoolDownState createState() => new _CoolDownState(workout: this.workout);
+  _CoolDownState createState() => new _CoolDownState();
 }
 
 class _CoolDownState extends State<CoolDown> {
-  UserWorkout workout;
-  _CoolDownState({this.workout});
-
   int _start = 10;
   int _current = 10;
   bool _pressed = false;
