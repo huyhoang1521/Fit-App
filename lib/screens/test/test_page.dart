@@ -6,6 +6,7 @@ import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/test/progress_test.dart';
+import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/test/eccentric.dart';
 import 'package:fit_app/screens/test/isometric.dart';
@@ -192,6 +193,22 @@ class _TestPageState extends State<TestPage> {
                           );
                         },
                         text: 'Progress Widget',
+                        //onLongPress: ,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: RoundedButton(
+                        color: Theme.of(context).buttonColor,
+                        //textColor: Colors.white,
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Complete()),
+                            //MaterialPageRoute(builder: (context) => StartWorkout()),
+                          );
+                        },
+                        text: 'Complete Page',
                         //onLongPress: ,
                       ),
                     ),

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_app/providers/account_created.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/exercise_counter.dart';
