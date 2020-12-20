@@ -1,8 +1,14 @@
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/workout/buttons.dart';
+import 'package:fit_app/providers/exercise_counter.dart';
+import 'package:fit_app/providers/workout_exercises.dart';
+import 'package:fit_app/screens/workout/exercise_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quiver/async.dart';
+
+import 'cool_down.dart';
 
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
@@ -46,24 +52,26 @@ class _RestPageState extends State<RestPage> {
     //when rest time is complete go to next page
     sub.onDone(() {
       print("Done");
-
-      //Todo clean up code after desired transition is chosen
-      //Using push in
-      Navigator.of(context).popUntil((route) => route.isFirst);
-      //  Navigator.push(context, RouteTransition(page: ExercisePage()));
-      /*Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Eccentric()),
-        //MaterialPageRoute(builder: (context) => StartWorkout()),
-      );*/
-
+      if (exerciseCounter.exerciseCount < workoutExercises.exercises.length) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => ExercisePage()),
+            ModalRoute.withName("/exercisePage"));
+      } else {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => CoolDown()),
+            ModalRoute.withName("/exercisePage"));
+      }
       sub.cancel();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // double width = (MediaQuery.of(context).size.width);
+    final exerciseCounter = Provider.of<ExerciseCounter>(context, listen: true);
+    final workoutExercises =
+        Provider.of<WorkoutExercises>(context, listen: false);
     return Scaffold(
       appBar: CustomAppBar(),
       body: Center(
@@ -81,13 +89,32 @@ class _RestPageState extends State<RestPage> {
             Buttons(
               enabled: _pressed,
               fFPressed: () {
-                //int count = 0;
-                //  Navigator.push(context, RouteTransition(page: ExercisePage()));
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                if (exerciseCounter.exerciseCount <
+                    workoutExercises.exercises.length) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExercisePage()),
+                      ModalRoute.withName("/exercisePage"));
+                } else {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => CoolDown()),
+                      ModalRoute.withName("/exercisePage"));
+                }
               },
               rWPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
-                //Navigator.pop(context);
+                if (exerciseCounter.exerciseCount <
+                    workoutExercises.exercises.length) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExercisePage()),
+                      ModalRoute.withName("/exercisePage"));
+                } else {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => CoolDown()),
+                      ModalRoute.withName("/exercisePage"));
+                }
               },
               pPPressed: () {
                 startTimer();

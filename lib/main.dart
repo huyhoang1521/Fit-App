@@ -4,6 +4,10 @@ import 'package:fit_app/providers/exercise_counter.dart';
 import 'package:fit_app/providers/workout_in_progress.dart';
 import 'package:fit_app/screens/home/home_picker.dart';
 import 'package:fit_app/screens/home/json_home.dart';
+import 'package:fit_app/screens/workout/complete.dart';
+import 'package:fit_app/screens/workout/cool_down.dart';
+import 'package:fit_app/screens/workout/exercise_page.dart';
+import 'package:fit_app/screens/workout/rest.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/providers/auth_service.dart';
 import 'package:fit_app/providers/provider_widget.dart';
@@ -50,8 +54,11 @@ class MyApp extends StatelessWidget {
                     theme: notifier.darkTheme ? dark : light,
                     home: HomeController(),
                     routes: <String, WidgetBuilder>{
-                      '/signIn': (BuildContext context) => SignIn(),
                       '/home': (BuildContext context) => HomeController(),
+                      '/restPage': (BuildContext context) => RestPage(),
+                      '/exercisePage': (BuildContext context) => ExercisePage(),
+                      '/coolDown': (BuildContext context) => CoolDown(),
+                      '/complete': (BuildContext context) => Complete(),
                     },
                   );
                 },
@@ -84,7 +91,6 @@ class _HomePicker extends State<HomeController> {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
           if (signedIn) {
-            //final accountCreated = Provider.of<AccountCreated>(context);
             if (jsonData.getFileExists()) {
               return JsonHome();
             } else {
@@ -93,8 +99,6 @@ class _HomePicker extends State<HomeController> {
           } else {
             return FirstView();
           }
-
-          //return signedIn ? HomePicker() : FirstView();
         }
         return CircularProgressIndicator();
       },

@@ -4,11 +4,8 @@ import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
-import 'package:fit_app/providers/workout_in_progress.dart';
-import 'package:fit_app/screens/workout/workout_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'home_page.dart';
 
 List<Map<String, dynamic>> completeList = new List();
 
@@ -32,7 +29,6 @@ class _HomePicker extends State<HomePicker> {
                   if (document.exists) {userDoc = document}
                 }),
         builder: (context, snapshot) {
-          final workoutInProgress = Provider.of<WorkoutInProgress>(context);
           final workoutExercises =
               Provider.of<WorkoutExercises>(context, listen: false);
           if (snapshot.hasData && userDoc != null) {
@@ -54,28 +50,19 @@ class _HomePicker extends State<HomePicker> {
                 warmupList);
 
             completeList = userWorkout.warmup + userWorkout.progressions;
-
             workoutExercises.setExercises(completeList);
             jsonData.createFile(userWorkout.toJson(), "workoutData.json");
             jsonData.writeToFile(userWorkout.toJson(), "workoutData.json");
-
-            // Build the widget with data.
-            if (!workoutInProgress.workoutInProgressBool) {
-              return HomePage();
-            } else {
-              return WorkoutNavigator();
-            }
-          } else {
-            // We can show the loading view until the data comes back.
-            return Scaffold(
-              appBar: AppBar(
-                title: Text('Fit With Nick'),
-                elevation: 5,
-              ),
-              drawer: AppDrawer(),
-              body: CircularProgressIndicator(),
-            );
           }
+          // We can show the loading view until the data comes back.
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Fit With Nick'),
+              elevation: 5,
+            ),
+            drawer: AppDrawer(),
+            body: CircularProgressIndicator(),
+          );
         },
       );
 }

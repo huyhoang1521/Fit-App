@@ -3,9 +3,8 @@ import 'package:fit_app/components/workout/exercise_title.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
-import 'package:fit_app/screens/workout/rest.dart';
 import 'package:fit_app/providers/exercise_counter.dart';
-import 'package:fit_app/screens/workout/route_transition.dart';
+//import 'package:fit_app/screens/workout/route_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +26,7 @@ class _ExercisePageState extends State<ExercisePage> {
   List<Widget> populateExerciseFields(
       List<Map<String, dynamic>> exerciseList, int exerciseCount) {
     List<Widget> exercisesFields = new List();
+
     if (exerciseList[exerciseCount].containsKey('subcategory')) {
       exercisesFields.add(new ExerciseBox(
           name: "Subcategory",
@@ -49,8 +49,8 @@ class _ExercisePageState extends State<ExercisePage> {
 
   @override
   Widget build(BuildContext context) {
-    workoutExercises = Provider.of<WorkoutExercises>(context);
-    exerciseCounter = Provider.of<ExerciseCounter>(context, listen: true);
+    workoutExercises = Provider.of<WorkoutExercises>(context, listen: false);
+    exerciseCounter = Provider.of<ExerciseCounter>(context, listen: false);
     List<Widget> exercisesFields = populateExerciseFields(
         workoutExercises.exercises, exerciseCounter.exerciseCount);
     double width = (MediaQuery.of(context).size.width);
@@ -65,13 +65,11 @@ class _ExercisePageState extends State<ExercisePage> {
           ExerciseTitle(
               name: workoutExercises.exercises[exerciseCounter.exerciseCount]
                   ["name"]),
-          Consumer<ExerciseCounter>(
-            builder: (context, notifier, child) => Text(
-              exerciseCounter.exerciseCount.toString() +
-                  "/" +
-                  workoutExercises.exercises.length.toString(),
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+          Text(
+            (exerciseCounter.exerciseCount + 1).toString() +
+                "/" +
+                workoutExercises.exercises.length.toString(),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Image.asset(
             'assets/images/pullup_up.png',
@@ -98,14 +96,15 @@ class _ExercisePageState extends State<ExercisePage> {
             enabled: pressed,
             rWPressed: () {},
             fFPressed: () {
-              Navigator.push(context,
-                  RouteTransition(page: RestPage(), start: start, end: end));
+              //Navigator.push(context,
+              //    RouteTransition(page: RestPage(), start: start, end: end));
               //Todo Clean up after choosing transition method
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(builder: (context) => RestPage()),
               // );
               exerciseCounter.incrementExerciseCount();
+              Navigator.pushNamed(context, '/restPage');
             },
             pPPressed: () {
               setState(() {
