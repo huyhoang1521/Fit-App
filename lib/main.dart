@@ -14,6 +14,8 @@ import 'screens/form/first_view.dart';
 import 'screens/form/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'screens/home/home_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

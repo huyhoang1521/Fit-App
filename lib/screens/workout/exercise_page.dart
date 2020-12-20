@@ -119,3 +119,21 @@ class _ExercisePageState extends State<ExercisePage> {
     );
   }
 }
+
+void _descriptionDialog(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          child: Row(children: [
+            Text('Working?'),
+            IconButton(
+              icon: Icon(Icons.cancel),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ]),
+        );
+      });
+}
