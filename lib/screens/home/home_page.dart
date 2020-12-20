@@ -146,6 +146,7 @@ class _HomePage extends State<HomePage> {
                 ),
               ),
             ),
+            // TODO - Set logic to route to coolDown. Since exercise count may be greater than the exercises
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: new RoundedButton(

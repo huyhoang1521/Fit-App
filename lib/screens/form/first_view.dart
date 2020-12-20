@@ -1,6 +1,7 @@
 //import 'package:fit_app/screens/form/welcome.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:fit_app/components/general/buttons/rounded_create_button.dart';
+import 'package:fit_app/providers/exercise_counter.dart';
 import 'package:fit_app/providers/workout_in_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -13,6 +14,7 @@ class FirstView extends StatelessWidget {
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
+    final exerciseCounter = Provider.of<ExerciseCounter>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,6 +47,7 @@ class FirstView extends StatelessWidget {
                 text: "Create account",
                 textColor: kPrimaryColor,
                 press: () {
+                  exerciseCounter.clearCount();
                   final workoutInProgress =
                       Provider.of<WorkoutInProgress>(context, listen: false);
                   workoutInProgress.setWorkoutInProgress(false);
@@ -73,6 +76,7 @@ class FirstView extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                         onPressed: () {
+                          exerciseCounter.clearCount();
                           Navigator.of(context).pushReplacementNamed('/signIn');
                         },
                       ),
