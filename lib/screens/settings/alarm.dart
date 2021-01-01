@@ -1,5 +1,5 @@
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/screens/home/home_picker.dart';
+import 'package:fit_app/screens/home/workout_setter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';
@@ -87,7 +87,7 @@ class _AlarmState extends State<Alarm> {
       debugPrint('Notification payload: $payload');
     }
     await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePicker()));
+        context, MaterialPageRoute(builder: (context) => WorkoutSetter()));
   }
 
   Future onDidReceiveLocalNotification(
@@ -103,8 +103,10 @@ class _AlarmState extends State<Alarm> {
                   child: Text('Ok'),
                   onPressed: () async {
                     Navigator.of(context, rootNavigator: true).pop();
-                    await Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePicker()));
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WorkoutSetter()));
                   },
                 )
               ],

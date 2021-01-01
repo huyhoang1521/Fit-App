@@ -3,8 +3,7 @@ import 'package:fit_app/algorithms/database/update_database.dart';
 import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/models/user_workout.dart';
-import 'package:fit_app/providers/exercise_counter.dart';
-import 'package:fit_app/providers/workout_in_progress.dart';
+import 'package:fit_app/providers/workout_process.dart';
 import 'package:fit_app/screens/progress/progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,8 +28,8 @@ class _CompleteState extends State<Complete> {
   @override
   Widget build(BuildContext context) {
     final workoutInProgress =
-        Provider.of<WorkoutInProgress>(context, listen: false);
-    final exerciseCounter = Provider.of<ExerciseCounter>(context);
+        Provider.of<WorkoutProcess>(context, listen: false);
+    final workoutProcess = Provider.of<WorkoutProcess>(context);
     return Scaffold(
       appBar: CustomAppBar(),
       drawer: AppDrawer(),
@@ -51,7 +50,7 @@ class _CompleteState extends State<Complete> {
                 child: RoundedButton(
                   color: Theme.of(context).buttonColor,
                   press: () {
-                    exerciseCounter.clearCount();
+                    workoutProcess.clearCount();
                     workoutInProgress.setWorkoutInProgress(false);
                     Navigator.push(
                       context,
@@ -71,7 +70,7 @@ class _CompleteState extends State<Complete> {
                 child: RoundedButton(
                   color: Theme.of(context).buttonColor,
                   press: () {
-                    exerciseCounter.clearCount();
+                    workoutProcess.clearCount();
                     workoutInProgress.setWorkoutInProgress(false);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },

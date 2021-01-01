@@ -1,13 +1,16 @@
+import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/providers/exercise_counter.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
-import 'package:fit_app/providers/workout_in_progress.dart';
+import 'package:fit_app/providers/workout_file_data.dart';
+import 'package:fit_app/providers/workout_process.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/providers/auth_service.dart';
 import 'package:fit_app/providers/provider_widget.dart';
 import 'package:provider/provider.dart';
+
+JsonData jsonData = new JsonData('workoutData.json');
 
 class HomePage extends StatefulWidget {
   @override
@@ -71,18 +74,29 @@ Widget exerciseOverviewItem(
 }
 
 class _HomePage extends State<HomePage> {
+  List<Map<String, dynamic>> completeList = new List();
   @override
   Widget build(BuildContext context) {
-    final workoutInProgress = Provider.of<WorkoutInProgress>(context);
+    final workoutProcess = Provider.of<WorkoutProcess>(context);
     final workoutExercises = Provider.of<WorkoutExercises>(context);
-    final exerciseCounter = Provider.of<ExerciseCounter>(context);
+
+    // Get the warmup and progression lists from their respective collections
+    if (jsonData.getFileExists() == true && jsonData.getFileContent() != null) {
+      completeList =
+          List<Map<String, dynamic>>.from(jsonData.getFileContent()['warmup']) +
+              List<Map<String, dynamic>>.from(
+                  jsonData.getFileContent()['progressions']);
+    }
+
+    final workoutFileData =
+        Provider.of<WorkoutFileData>(context, listen: false);
     String workoutButtonText = '';
 
-    if (workoutInProgress.workoutInProgressBool == true) {
+    if (workoutProcess.workoutInProgress == true) {
       workoutButtonText = "Resume workout: " +
-          (exerciseCounter.exerciseCount + 1).toString() +
+          (workoutProcess.exerciseCount + 1).toString() +
           "/" +
-          workoutExercises.exercises.length.toString();
+          completeList.length.toString();
     } else {
       workoutButtonText = 'Start Workout';
     }
@@ -96,6 +110,7 @@ class _HomePage extends State<HomePage> {
             color: Theme.of(context).iconTheme.color,
             onPressed: () async {
               try {
+                workoutFileData.setGetWorkout(false);
                 AuthService auth = ProviderWidget.of(context).auth;
                 await auth.signOut();
                 print("Signed Out!");
@@ -134,13 +149,10 @@ class _HomePage extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
                   child: ListView.builder(
-                    itemCount: workoutExercises.exercises.length,
+                    itemCount: completeList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return exerciseOverviewItem(
-                          workoutExercises.exercises[index]['name'],
-                          'assets/images/pullup_up.png',
-                          5,
-                          context);
+                      return exerciseOverviewItem(completeList[index]['name'],
+                          'assets/images/pullup_up.png', 5, context);
                     },
                   ),
                 ),
@@ -152,7 +164,18 @@ class _HomePage extends State<HomePage> {
               child: new RoundedButton(
                 color: Theme.of(context).buttonColor,
                 press: () async {
-                  workoutInProgress.setWorkoutInProgress(true);
+                  workoutExercises.setExerciseList(
+                      List<Map<String, dynamic>>.from(
+                          jsonData.getFileContent()['exercises']));
+                  workoutExercises.setProgressionList(
+                      List<Map<String, dynamic>>.from(
+                          jsonData.getFileContent()['progressions']));
+                  workoutExercises.setWarmupList(
+                      List<Map<String, dynamic>>.from(
+                          jsonData.getFileContent()['warmup']));
+
+                  workoutProcess.setWorkoutInProgress(true);
+                  workoutExercises.setListsNotSet(true);
                   Navigator.pushNamed(context, '/exercisePage');
                 },
 

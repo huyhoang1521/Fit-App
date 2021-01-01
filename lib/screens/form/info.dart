@@ -25,17 +25,6 @@ class _Info extends State<Info> {
   DateTime _dateTime = DateTime.now();
   var dobController = TextEditingController();
   var heightController = TextEditingController();
-  //String _dob;
-  int _weight;
-
-  void setVars() {
-    user.dob = dobController.text;
-    user.weight = _weight;
-    user.height = heightController.text;
-    print("Date of Birth: " + dobString);
-    print("Height: " + heightController.text);
-    print("Weight: " + _weight.toString());
-  }
 
   void setHeightList() {
     for (int i = 3; i < 8; i++) {
@@ -145,15 +134,18 @@ class _Info extends State<Info> {
               CustomNumberField(
                   hintText: "Weight",
                   keyboard: TextInputType.number,
-                  onChanged: (value) => _weight = int.parse(value)),
+                  onChanged: (value) => user.weight = int.parse(value)),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: RoundedButton(
                     text: "Next",
                     press: () {
-                      setVars();
-                      // create user account
+                      user.dob = dobController.text;
+                      user.height = heightController.text;
+                      print("Date of Birth: " + dobString);
+                      print("Height: " + heightController.text);
+                      print("Weight: " + user.weight.toString());
 
                       Navigator.push(
                         context,

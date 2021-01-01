@@ -4,6 +4,10 @@ import '../../components/general/buttons/rounded_button.dart';
 import 'preferred_exercises.dart';
 import '../../models/fit_user.dart';
 
+bool rings = false;
+bool pullUpBar = false;
+bool weights = false;
+
 class Equipment extends StatefulWidget {
   final FitUser user;
 
@@ -16,16 +20,6 @@ class Equipment extends StatefulWidget {
 class _Equipment extends State<Equipment> {
   final FitUser user;
   _Equipment({this.user});
-
-  String _equipment;
-  bool rings = false;
-  bool pullUpBar = false;
-  bool weights = false;
-
-  void setVars() {
-    user.equipment = _equipment;
-    print("Equipment: " + _equipment);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +55,7 @@ class _Equipment extends State<Equipment> {
                     setState(() {
                       rings = !rings;
                     });
-                    _equipment = "Rings";
+                    user.equipment = "Rings";
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -73,7 +67,7 @@ class _Equipment extends State<Equipment> {
                     setState(() {
                       pullUpBar = !pullUpBar;
                     });
-                    _equipment = "Pull-Up Bar";
+                    user.equipment = "Pull-Up Bar";
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -85,7 +79,7 @@ class _Equipment extends State<Equipment> {
                     setState(() {
                       weights = !weights;
                     });
-                    _equipment = "Weights";
+                    user.equipment = "Weights";
                   }),
               Expanded(
                 child: Align(
@@ -93,7 +87,7 @@ class _Equipment extends State<Equipment> {
                   child: RoundedButton(
                     text: "Next",
                     press: () {
-                      setVars();
+                      print("Equipment: " + user.equipment);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

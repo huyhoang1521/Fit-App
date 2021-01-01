@@ -3,7 +3,7 @@ import 'package:fit_app/components/workout/exercise_title.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
-import 'package:fit_app/providers/exercise_counter.dart';
+import 'package:fit_app/providers/workout_process.dart';
 //import 'package:fit_app/screens/workout/route_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +12,11 @@ IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;
 bool pressed = false;
-ExerciseCounter exerciseCounter = new ExerciseCounter();
+WorkoutProcess workoutProcess = new WorkoutProcess();
 WorkoutExercises workoutExercises = new WorkoutExercises();
 Offset start = Offset(1, 0);
 Offset end = Offset.zero;
+List<Map<String, dynamic>> workoutList = new List();
 
 class ExercisePage extends StatefulWidget {
   @override
@@ -23,26 +24,25 @@ class ExercisePage extends StatefulWidget {
 }
 
 class _ExercisePageState extends State<ExercisePage> {
-  List<Widget> populateExerciseFields(
-      List<Map<String, dynamic>> exerciseList, int exerciseCount) {
+  List<Widget> populateExerciseFields(int exerciseCount) {
     List<Widget> exercisesFields = new List();
 
-    if (exerciseList[exerciseCount].containsKey('subcategory')) {
+    if (workoutList[exerciseCount].containsKey('subcategory')) {
       exercisesFields.add(new ExerciseBox(
           name: "Subcategory",
-          value: exerciseList[exerciseCount]["subcategory"]));
+          value: workoutList[exerciseCount]["subcategory"]));
     }
-    if (exerciseList[exerciseCount].containsKey("reps")) {
+    if (workoutList[exerciseCount].containsKey("reps")) {
       exercisesFields.add(new ExerciseBox(
-          name: "Reps", value: exerciseList[exerciseCount]["reps"]));
+          name: "Reps", value: workoutList[exerciseCount]["reps"]));
     }
-    if (exerciseList[exerciseCount].containsKey("sets")) {
+    if (workoutList[exerciseCount].containsKey("sets")) {
       exercisesFields.add(new ExerciseBox(
-          name: "Sets", value: exerciseList[exerciseCount]["sets"]));
+          name: "Sets", value: workoutList[exerciseCount]["sets"]));
     }
-    if (exerciseList[exerciseCount].containsKey("duration")) {
+    if (workoutList[exerciseCount].containsKey("duration")) {
       exercisesFields.add(new ExerciseBox(
-          name: "Duration", value: exerciseList[exerciseCount]["duration"]));
+          name: "Duration", value: workoutList[exerciseCount]["duration"]));
     }
     return exercisesFields;
   }
@@ -50,9 +50,10 @@ class _ExercisePageState extends State<ExercisePage> {
   @override
   Widget build(BuildContext context) {
     workoutExercises = Provider.of<WorkoutExercises>(context, listen: false);
-    exerciseCounter = Provider.of<ExerciseCounter>(context, listen: false);
-    List<Widget> exercisesFields = populateExerciseFields(
-        workoutExercises.exercises, exerciseCounter.exerciseCount);
+    workoutProcess = Provider.of<WorkoutProcess>(context, listen: false);
+    workoutList = workoutExercises.warmups + workoutExercises.progressions;
+    List<Widget> exercisesFields =
+        populateExerciseFields(workoutProcess.exerciseCount);
     double width = (MediaQuery.of(context).size.width);
     double height = (MediaQuery.of(context).size.height);
 
@@ -63,12 +64,11 @@ class _ExercisePageState extends State<ExercisePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ExerciseTitle(
-              name: workoutExercises.exercises[exerciseCounter.exerciseCount]
-                  ["name"]),
+              name: workoutList[workoutProcess.exerciseCount]["name"]),
           Text(
-            (exerciseCounter.exerciseCount + 1).toString() +
+            (workoutProcess.exerciseCount + 1).toString() +
                 "/" +
-                workoutExercises.exercises.length.toString(),
+                workoutList.length.toString(),
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Image.asset(
@@ -103,7 +103,7 @@ class _ExercisePageState extends State<ExercisePage> {
               //   context,
               //   MaterialPageRoute(builder: (context) => RestPage()),
               // );
-              exerciseCounter.incrementExerciseCount();
+              workoutProcess.incrementExerciseCount();
               Navigator.pushNamed(context, '/restPage');
             },
             pPPressed: () {

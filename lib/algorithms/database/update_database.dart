@@ -8,31 +8,52 @@ final auth = FirebaseAuth.instance;
 final uid = user.uid;
 
 class UpdateDatabase {
-  void createWorkout() async {
+  void updateDatabase() async {
     // warmup
-    await db.collection('Warmups').get().then((docs) {
+    /*await db.collection('Warmups').get().then((docs) {
       docs.docs.forEach((document) async {
         document.reference.update(<String, dynamic>{
           "name": document.reference.id,
           "description": "description"
         });
       });
-    });
+    });*/
     // Exercise
-    await db.collection('Exercises').get().then((docs) {
+    /*await db.collection('Exercises').get().then((docs) {
       docs.docs.forEach((document) async {
         document.reference.update(<String, dynamic>{
           "name": document.reference.id,
           "description": "description"
         });
       });
-    });
+    });*/
     // Progressions
+    /*await db.collection('Progressions').get().then((docs) {
+      docs.docs.forEach((document) async {
+        document.reference.update(<String, dynamic>{
+          "name": document.reference.id,
+          "description": "description"
+        });
+      });
+    });*/
+    List<QueryDocumentSnapshot> progressionsList;
     await db.collection('Progressions').get().then((docs) {
       docs.docs.forEach((document) async {
+        progressionsList = docs.docs;
+      });
+    });
+
+    await db.collection('Exercises').get().then((docs) {
+      docs.docs.forEach((document) async {
+        int count = 0;
+        for (int i = 0; i < progressionsList.length; i++) {
+          if (progressionsList[i].data()['exerciseID'] ==
+              document.data()['id']) {
+            count++;
+          }
+        }
         document.reference.update(<String, dynamic>{
-          "name": document.reference.id,
-          "description": "description"
+          "progressions": count,
         });
       });
     });

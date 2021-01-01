@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../providers/provider_widget.dart';
 import '../../components/general/buttons/rounded_button.dart';
 import '../../components/general/fields/custom_text_field.dart';
 import '../../components/general/fields/custom_password.dart';
 
 class SignIn extends StatefulWidget {
-  final db = FirebaseFirestore.instance;
-
-  SignIn({Key key}) : super(key: key);
-
   @override
   _SignIn createState() => _SignIn();
 }
