@@ -15,10 +15,7 @@ import 'package:provider/provider.dart';
 import 'algorithms/json/json_data.dart';
 import 'components/themes/theme.dart';
 import 'screens/form/first_view.dart';
-import 'screens/form/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'screens/home/home_page.dart';
 
 void main() => runApp(MyApp());
 

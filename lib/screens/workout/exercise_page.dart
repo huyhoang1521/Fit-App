@@ -71,9 +71,31 @@ class _ExercisePageState extends State<ExercisePage> {
                 workoutExercises.exercises.length.toString(),
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          Image.asset(
-            'assets/images/pullup_up.png',
-            width: width * .75,
+          FittedBox(
+            fit: BoxFit.fill,
+            child: Stack(
+              children: [
+                Container(
+                  width: width,
+                  child: Image.asset(
+                    'assets/images/pullup_up.png',
+                  ),
+                ),
+                Positioned(
+                  right: width * 0.05,
+                  child: IconButton(
+                    icon: Icon(Icons.info_outlined),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _descriptionDialog(context),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: Center(
@@ -112,20 +134,25 @@ class _ExercisePageState extends State<ExercisePage> {
   }
 }
 
-void _descriptionDialog(BuildContext context) {
-  showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return Container(
-          child: Row(children: [
-            Text('Working?'),
-            IconButton(
-              icon: Icon(Icons.cancel),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ]),
-        );
-      });
+Widget _descriptionDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Exercise Description'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus libero id odio tincidunt, ut maximus nisi congue. Donec pellentesque elit ex. Ut pulvinar massa ut risus suscipit, eget scelerisque lorem vulputate. Integer eget quam at tellus vulputate varius eget in mi. Nam nec enim maximus, pharetra orci non, ullamcorper nunc. Suspendisse at eleifend enim. Ut vitae augue eleifend, gravida augue sed, dignissim leo. Praesent eget malesuada leo."),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }
