@@ -1,6 +1,5 @@
 import 'package:fit_app/providers/provider_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../components/general/buttons/rounded_button.dart';
 import '../../components/general/fields/custom_text_field.dart';
 import '../../components/general/fields/custom_password.dart';
@@ -8,34 +7,40 @@ import '../../models/fit_user.dart';
 import 'info.dart';
 
 class SignUp extends StatefulWidget {
-  final FitUser user;
-  final db = FirebaseFirestore.instance;
-
-  SignUp({Key key, this.user}) : super(key: key);
-
   @override
-  _SignUp createState() => _SignUp(user: this.user);
+  _SignUp createState() => _SignUp();
 }
 
 class _SignUp extends State<SignUp> {
-  final FitUser user;
-
-  _SignUp({this.user});
-
-  String _firstName, _lastName, _email, _password;
-
-  void setVars() {
-    user.firstName = _firstName;
-    user.lastName = _lastName;
-    user.email = _email;
-    print("Email: " + _email);
-    print("First Name :" + _firstName);
-    print("Last Name: " + _lastName);
-  }
+  String _password;
+  final FitUser user = new FitUser(
+      null, null, null, null, null, null, null, null, null, null, null, [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+  ]);
 
   void submit() async {
     try {
-      setVars();
+      print("Email: " + user.email);
+      print("First Name: " + user.firstName);
+      print("Last Name: " + user.lastName);
       final auth = ProviderWidget.of(context).auth;
       await auth.createUserWithEmailAndPassword(
           user.email, _password, (user.firstName + user.lastName));
@@ -73,12 +78,12 @@ class _SignUp extends State<SignUp> {
               SizedBox(height: _height * .025),
               CustomTextField(
                   hintText: "First Name",
-                  onChanged: (value) => _firstName = value),
+                  onChanged: (value) => user.firstName = value),
               CustomTextField(
                   hintText: "Last Name",
-                  onChanged: (value) => _lastName = value),
+                  onChanged: (value) => user.lastName = value),
               CustomTextField(
-                  hintText: "Email", onChanged: (value) => _email = value),
+                  hintText: "Email", onChanged: (value) => user.email = value),
               CustomPassword(
                   hintText: "Password",
                   onChanged: (value) => _password = value),

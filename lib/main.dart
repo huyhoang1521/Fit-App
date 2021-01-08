@@ -1,9 +1,8 @@
-import 'package:fit_app/providers/account_created.dart';
+import 'package:fit_app/providers/workout_file_data.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
-import 'package:fit_app/providers/exercise_counter.dart';
-import 'package:fit_app/providers/workout_in_progress.dart';
-import 'package:fit_app/screens/home/home_picker.dart';
-import 'package:fit_app/screens/home/json_home.dart';
+import 'package:fit_app/providers/workout_process.dart';
+import 'package:fit_app/screens/home/home_page.dart';
+import 'package:fit_app/screens/home/workout_setter.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/exercise_page.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:fit_app/providers/auth_service.dart';
 import 'package:fit_app/providers/provider_widget.dart';
 import 'package:provider/provider.dart';
-import 'algorithms/json/json_data.dart';
 import 'components/themes/theme.dart';
 import 'screens/form/first_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,16 +30,14 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MultiProvider(
             providers: [
-              ChangeNotifierProvider<ExerciseCounter>(
-                  create: (_) => ExerciseCounter()),
               ChangeNotifierProvider<WorkoutExercises>(
                   create: (_) => WorkoutExercises()),
               ChangeNotifierProvider<ThemeNotifier>(
                   create: (_) => ThemeNotifier()),
-              ChangeNotifierProvider<AccountCreated>(
-                  create: (_) => AccountCreated()),
-              ChangeNotifierProvider<WorkoutInProgress>(
-                  create: (_) => WorkoutInProgress())
+              ChangeNotifierProvider<WorkoutFileData>(
+                  create: (_) => WorkoutFileData()),
+              ChangeNotifierProvider<WorkoutProcess>(
+                  create: (_) => WorkoutProcess())
             ],
             child: ProviderWidget(
               auth: AuthService(),
@@ -81,17 +77,18 @@ class _HomePicker extends State<HomeController> {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = ProviderWidget.of(context).auth;
-    JsonData jsonData = new JsonData('workoutData.json');
+    final workoutFileData = Provider.of<WorkoutFileData>(context);
+
     return StreamBuilder<String>(
       stream: auth.onAuthStateChanged,
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
           if (signedIn) {
-            if (jsonData.getFileExists()) {
-              return JsonHome();
-            } else {
-              return HomePicker();
+            if (workoutFileData.dataWritten == true) {
+              return HomePage();
+            } else if (workoutFileData.getWorkout == true) {
+              return WorkoutSetter();
             }
           } else {
             return FirstView();

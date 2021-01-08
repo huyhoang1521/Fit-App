@@ -1,32 +1,24 @@
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/workout/buttons.dart';
-import 'package:fit_app/providers/exercise_counter.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
+import 'package:fit_app/providers/workout_process.dart';
 import 'package:fit_app/screens/workout/exercise_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiver/async.dart';
-
 import 'cool_down.dart';
 
+List<Map<String, dynamic>> workoutList = new List();
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;
 
 class RestPage extends StatefulWidget {
-  final UserWorkout workout;
-
-  const RestPage({Key key, this.workout}) : super(key: key);
-
   @override
-  _RestPageState createState() => new _RestPageState(workout: this.workout);
+  _RestPageState createState() => new _RestPageState();
 }
 
 class _RestPageState extends State<RestPage> {
-  UserWorkout workout;
-  _RestPageState({this.workout});
-
   int _start = 10;
   int _current = 10;
   bool _pressed = false;
@@ -52,7 +44,7 @@ class _RestPageState extends State<RestPage> {
     //when rest time is complete go to next page
     sub.onDone(() {
       print("Done");
-      if (exerciseCounter.exerciseCount < workoutExercises.exercises.length) {
+      if (workoutProcess.exerciseCount < workoutList.length) {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => ExercisePage()),
@@ -69,9 +61,10 @@ class _RestPageState extends State<RestPage> {
 
   @override
   Widget build(BuildContext context) {
-    final exerciseCounter = Provider.of<ExerciseCounter>(context, listen: true);
+    final workoutProcess = Provider.of<WorkoutProcess>(context, listen: true);
     final workoutExercises =
         Provider.of<WorkoutExercises>(context, listen: false);
+    workoutList = workoutExercises.warmups + workoutExercises.progressions;
     return Scaffold(
       appBar: CustomAppBar(),
       body: Center(
@@ -89,8 +82,7 @@ class _RestPageState extends State<RestPage> {
             Buttons(
               enabled: _pressed,
               fFPressed: () {
-                if (exerciseCounter.exerciseCount <
-                    workoutExercises.exercises.length) {
+                if (workoutProcess.exerciseCount < workoutList.length) {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => ExercisePage()),
@@ -103,8 +95,7 @@ class _RestPageState extends State<RestPage> {
                 }
               },
               rWPressed: () {
-                if (exerciseCounter.exerciseCount <
-                    workoutExercises.exercises.length) {
+                if (workoutProcess.exerciseCount < workoutList.length) {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => ExercisePage()),

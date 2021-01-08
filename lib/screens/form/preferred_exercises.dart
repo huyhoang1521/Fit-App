@@ -1,11 +1,21 @@
 import 'package:fit_app/algorithms/workout/create_workout.dart';
 import 'package:fit_app/components/themes/constants.dart';
+import 'package:fit_app/providers/workout_file_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../components/general/buttons/rounded_preferred_button.dart';
 import '../../components/general/buttons/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../providers/provider_widget.dart';
 import '../../models/fit_user.dart';
+
+bool creatingWorkout = false;
+bool exercise1 = false;
+bool exercise2 = false;
+bool exercise3 = false;
+bool exercise4 = false;
+bool exercise5 = false;
+bool exercise6 = false;
 
 class PreferredExercises extends StatefulWidget {
   final FitUser user;
@@ -20,18 +30,6 @@ class _PreferredExercises extends State<PreferredExercises> {
   final FitUser user;
   _PreferredExercises({this.user});
 
-  String _primaryPushGoal;
-  String _primaryPullGoal;
-  final db = FirebaseFirestore.instance;
-
-  bool exercise1 = false;
-  bool exercise2 = false;
-  bool exercise3 = false;
-  bool exercise4 = false;
-  bool exercise5 = false;
-  bool exercise6 = false;
-  bool creatingWorkout = false;
-
   Future<void> callWorkout() => Future.delayed(Duration(seconds: 1), () async {
         CreateWorkout().createWorkout();
       });
@@ -40,43 +38,18 @@ class _PreferredExercises extends State<PreferredExercises> {
       Future.delayed(Duration(seconds: 1), () async {
         // save user data to firebase
         final uid = await ProviderWidget.of(context).auth.getCurrentUID();
+        final db = FirebaseFirestore.instance;
         await Future.delayed(Duration(seconds: 1));
         await db.collection("Users").doc(uid).set(user.toJson());
       });
-
-  void setVars() {
-    creatingWorkout = true;
-    user.primaryPushGoal = _primaryPushGoal;
-    user.primaryPullGoal = _primaryPullGoal;
-    user.progressions = [
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1,
-      -1
-    ];
-    print("Primary Push Goal: " + _primaryPushGoal);
-    print("Primary Pull Goal: " + _primaryPullGoal);
-  }
 
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
+    final workoutFileData =
+        Provider.of<WorkoutFileData>(context, listen: false);
+
     if (creatingWorkout) {
       return CircularProgressIndicator();
     } else {
@@ -129,7 +102,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 setState(() {
                                   exercise1 = !exercise1;
                                 });
-                                _primaryPushGoal = "One-Arm Push-Up";
+                                user.primaryPushGoal = "One-Arm Push-Up";
                               }),
                           RoundedPreferredButton(
                               text: "Planche",
@@ -143,7 +116,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 setState(() {
                                   exercise2 = !exercise2;
                                 });
-                                _primaryPushGoal = "Planche";
+                                user.primaryPushGoal = "Planche";
                               }),
                           RoundedPreferredButton(
                               text: "Handstand Push-Up",
@@ -157,7 +130,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 setState(() {
                                   exercise3 = !exercise3;
                                 });
-                                _primaryPushGoal = "Handstand Push-Up";
+                                user.primaryPushGoal = "Handstand Push-Up";
                               }),
                         ],
                       ),
@@ -182,7 +155,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 setState(() {
                                   exercise4 = !exercise4;
                                 });
-                                _primaryPullGoal = "One-Arm Chin-Up";
+                                user.primaryPullGoal = "One-Arm Chin-Up";
                               }),
                           RoundedPreferredButton(
                               text: "Front Lever",
@@ -196,7 +169,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 setState(() {
                                   exercise5 = !exercise5;
                                 });
-                                _primaryPullGoal = "Front Lever";
+                                user.primaryPullGoal = "Front Lever";
                               }),
                           RoundedPreferredButton(
                               text: "Back Lever",
@@ -210,7 +183,7 @@ class _PreferredExercises extends State<PreferredExercises> {
                                 setState(() {
                                   exercise6 = !exercise6;
                                 });
-                                _primaryPullGoal = "Back Lever";
+                                user.primaryPullGoal = "Back Lever";
                               }),
                         ],
                       ),
@@ -224,19 +197,21 @@ class _PreferredExercises extends State<PreferredExercises> {
                       text: "Finish",
                       press: () async {
                         setState(() {
-                          setVars();
+                          creatingWorkout = true;
+                          print("Primary Push Goal: " + user.primaryPushGoal);
+                          print("Primary Pull Goal: " + user.primaryPullGoal);
                         });
 
                         await createUserData();
                         await Future.delayed(Duration(seconds: 2));
-                        await callWorkout().whenComplete(
-                            () => Future.delayed(Duration(seconds: 5), () {
-                                  // 5s over, navigate to a new page
-                                  Navigator.of(context)
-                                      .popUntil((route) => route.isFirst);
-                                }));
-
-                        //await Future.delayed(Duration(seconds: 1));
+                        await callWorkout().whenComplete(() =>
+                            Future.delayed(Duration(seconds: 4), () async {
+                              // 5s over, navigate to a new page
+                              await Future.delayed(Duration(seconds: 2));
+                              workoutFileData.setGetWorkout(true);
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                            }));
                       },
                     ),
                   ),

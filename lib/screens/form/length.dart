@@ -4,6 +4,10 @@ import '../../components/general/buttons/rounded_button.dart';
 import '../../models/fit_user.dart';
 import 'equipment.dart';
 
+bool strength = false;
+bool hypertrophy = false;
+bool weightLoss = false;
+
 class Length extends StatefulWidget {
   final FitUser user;
 
@@ -16,16 +20,6 @@ class Length extends StatefulWidget {
 class _Length extends State<Length> {
   final FitUser user;
   _Length({this.user});
-
-  String _length;
-  bool strength = false;
-  bool hypertrophy = false;
-  bool weightLoss = false;
-
-  void setVars() {
-    user.length = _length;
-    print("Length: " + _length);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +61,7 @@ class _Length extends State<Length> {
                       hypertrophy = false;
                       weightLoss = false;
                     });
-                    _length = "Short";
+                    user.length = "Short";
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -81,7 +75,7 @@ class _Length extends State<Length> {
                       strength = false;
                       weightLoss = false;
                     });
-                    _length = "Long";
+                    user.length = "Long";
                   }),
               Expanded(
                 child: Align(
@@ -89,7 +83,7 @@ class _Length extends State<Length> {
                   child: RoundedButton(
                     text: "Next",
                     press: () {
-                      setVars();
+                      print("Length: " + user.length);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

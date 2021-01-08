@@ -4,6 +4,10 @@ import '../../components/general/buttons/rounded_button.dart';
 import '../../models/fit_user.dart';
 import 'length.dart';
 
+bool strength = false;
+bool hypertrophy = false;
+bool weightLoss = false;
+
 class Goal extends StatefulWidget {
   final FitUser user;
 
@@ -16,26 +20,14 @@ class _Goal extends State<Goal> {
   final FitUser user;
   _Goal({this.user});
 
-  String _goal;
-  bool strength = false;
-  bool hypertrophy = false;
-  bool weightLoss = false;
-
-  void setVars() {
-    user.goal = _goal;
-    print("Goal: " + _goal);
-  }
-
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: new AppBar(
-        backgroundColor: Colors.transparent,
-        bottomOpacity: 0.0,
-        elevation: 0.0,
+      appBar: AppBar(
+        elevation: 5,
       ),
       body: Container(
         width: _width,
@@ -68,7 +60,7 @@ class _Goal extends State<Goal> {
                       hypertrophy = false;
                       weightLoss = false;
                     });
-                    _goal = "Strength";
+                    user.goal = "Strength";
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -82,7 +74,7 @@ class _Goal extends State<Goal> {
                       strength = false;
                       weightLoss = false;
                     });
-                    _goal = "Hypertrophy";
+                    user.goal = "Hypertrophy";
                   }),
               SizedBox(height: _height * .01),
               RoundedButton(
@@ -96,7 +88,7 @@ class _Goal extends State<Goal> {
                       strength = false;
                       hypertrophy = false;
                     });
-                    _goal = "Weight Loss";
+                    user.goal = "Weight Loss";
                   }),
               Expanded(
                 child: Align(
@@ -104,7 +96,7 @@ class _Goal extends State<Goal> {
                   child: RoundedButton(
                     text: "Next",
                     press: () {
-                      setVars();
+                      print("Goal: " + user.goal);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -1,12 +1,11 @@
 //import 'package:fit_app/screens/form/welcome.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:fit_app/components/general/buttons/rounded_create_button.dart';
-import 'package:fit_app/providers/exercise_counter.dart';
-import 'package:fit_app/providers/workout_in_progress.dart';
+import 'package:fit_app/providers/workout_file_data.dart';
+import 'package:fit_app/providers/workout_process.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
-import '../../models/fit_user.dart';
 import 'sign_up.dart';
 
 class FirstView extends StatelessWidget {
@@ -14,7 +13,8 @@ class FirstView extends StatelessWidget {
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
-    final exerciseCounter = Provider.of<ExerciseCounter>(context);
+    final workoutFileData = Provider.of<WorkoutFileData>(context);
+    final workoutInProgress = Provider.of<WorkoutProcess>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -47,16 +47,13 @@ class FirstView extends StatelessWidget {
                 text: "Create account",
                 textColor: kPrimaryColor,
                 press: () {
-                  exerciseCounter.clearCount();
-                  final workoutInProgress =
-                      Provider.of<WorkoutInProgress>(context, listen: false);
+                  workoutInProgress.clearCount();
+                  workoutFileData.setDataWritten(false);
                   workoutInProgress.setWorkoutInProgress(false);
-                  final FitUser user = new FitUser(null, null, null, null, null,
-                      null, null, null, null, null, null, null);
 
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUp(user: user)),
+                    MaterialPageRoute(builder: (context) => SignUp()),
                   );
                 },
               ),
@@ -76,7 +73,8 @@ class FirstView extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                         onPressed: () {
-                          exerciseCounter.clearCount();
+                          workoutInProgress.clearCount();
+                          workoutFileData.setDataWritten(false);
                           Navigator.of(context).pushReplacementNamed('/signIn');
                         },
                       ),

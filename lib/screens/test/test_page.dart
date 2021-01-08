@@ -9,13 +9,14 @@ import 'package:fit_app/screens/test/progress_test.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/summary.dart';
 import 'package:flutter/material.dart';
-
 // import 'package:fit_app/screens/workout/complete.dart';
 // import 'package:fit_app/screens/test/eccentric.dart';
 // import 'package:fit_app/screens/test/isometric.dart';
 // import 'package:fit_app/screens/test/start_workout.dart';
 // import 'package:fit_app/screens/workout/exercise_page.dart';
 // import 'concentric.dart';
+import 'package:fit_app/screens/test/start_workout.dart';
+//import 'package:fit_app/screens/workout/exercise_page.dart';
 
 UserWorkout workout;
 final User user = auth.currentUser;
@@ -186,6 +187,41 @@ class _TestPageState extends State<TestPage> {
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
                         color: Theme.of(context).buttonColor,
+
+                        //textColor: Colors.white,
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StartWorkout()),
+                          );
+                        },
+                        text: 'Start Workout (Firebase)',
+                        //onLongPress: ,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: RoundedButton(
+                        color: Theme.of(context).buttonColor,
+                        //textColor: Colors.white,
+                        press: () {
+                          /*Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WorkoutWarmup()),
+                            //MaterialPageRoute(builder: (context) => StartWorkout()),
+                          );*/
+                        },
+                        text: 'Warm Up',
+                        //onLongPress: ,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: RoundedButton(
+                        color: Theme.of(context).buttonColor,
+                        //textColor: Colors.white,
                         press: () {
                           Navigator.push(
                             context,

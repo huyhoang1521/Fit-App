@@ -15,6 +15,7 @@ class JsonData {
       jsonFile = new File(dir.path + "/" + fileName);
       fileExists = jsonFile.existsSync();
       if (fileExists) {
+        print("file exists");
         fileContent = json.decode(jsonFile.readAsStringSync());
       } else {
         print("file does not exist");
@@ -40,7 +41,6 @@ class JsonData {
       jsonFileContent.addAll(model);
       jsonFile.writeAsStringSync(json.encode(jsonFileContent));
     } else {
-      print("File does not exist!");
       createFile(model, fileName);
     }
     fileContent = json.decode(jsonFile.readAsStringSync());
