@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/async.dart';
+import 'dart:async';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 
 IconData pause = Icons.pause_circle_filled;
