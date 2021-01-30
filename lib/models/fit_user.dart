@@ -10,7 +10,6 @@ class FitUser {
   String equipment;
   String primaryPushGoal;
   String primaryPullGoal;
-  List<int> progressions;
 
   FitUser(
       this.firstName,
@@ -23,8 +22,8 @@ class FitUser {
       this.equipment,
       this.primaryPushGoal,
       this.primaryPullGoal,
-      this.height,
-      this.progressions);
+      this.height);
+  //this.progressions);
 
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
@@ -37,7 +36,6 @@ class FitUser {
         'length': length,
         'equipment': equipment,
         'primaryPushGoal': primaryPushGoal,
-        'primaryPullGoal': primaryPullGoal,
-        'progressions': progressions
+        'primaryPullGoal': primaryPullGoal
       };
 }

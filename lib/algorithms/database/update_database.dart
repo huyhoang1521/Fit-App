@@ -36,7 +36,22 @@ class UpdateDatabase {
         });
       });
     });*/
-    List<QueryDocumentSnapshot> progressionsList;
+
+    for (int i = 0; i < 19; i++) {
+      int count = 1;
+      await db
+          .collection('Progressions')
+          .where('exerciseID', isEqualTo: i)
+          .orderBy('id', descending: false)
+          .get()
+          .then((docs) {
+        docs.docs.forEach((document) async {
+          document.reference.update(<String, dynamic>{"level": count});
+          count++;
+        });
+      });
+    }
+    /*List<QueryDocumentSnapshot> progressionsList;
     await db.collection('Progressions').get().then((docs) {
       docs.docs.forEach((document) async {
         progressionsList = docs.docs;
@@ -56,6 +71,6 @@ class UpdateDatabase {
           "progressions": count,
         });
       });
-    });
+    });*/
   }
 }

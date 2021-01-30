@@ -46,8 +46,6 @@ class _TestPageState extends State<TestPage> {
                 new List.from(userData.data()['warmup']);
             List<Map<String, dynamic>> exerciseList =
                 new List.from(userData.data()['exercises']);
-            List<Map<String, dynamic>> progressionsList =
-                new List.from(userData.data()['progressions']);
 
             workout = new UserWorkout(
               userData.data()['uid'],
@@ -56,7 +54,6 @@ class _TestPageState extends State<TestPage> {
               userData.data()['restTime'],
               userData.data()['coolDown'],
               exerciseList,
-              progressionsList,
               warmupList,
             );
           }

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/algorithms/workout/exercises.dart';
+import 'package:fit_app/models/exercise_structures.dart';
 import 'package:fit_app/models/fit_user.dart';
+import 'package:fit_app/models/jsonWorkout.dart';
 import '../../models/user_workout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -15,10 +17,10 @@ import 'progressions.dart';
 */
 
 final User user = auth.currentUser;
-final userDoc = FirebaseFirestore.instance.collection('Users').doc(user.uid);
-final db = FirebaseFirestore.instance;
 final auth = FirebaseAuth.instance;
 final uid = user.uid;
+ExerciseStructures exerciseStructures = new ExerciseStructures();
+List<Map<String, dynamic>> exerciseMap = exerciseStructures.workoutExercisesMap;
 
 class CreateWorkout {
   /* 
@@ -29,23 +31,22 @@ class CreateWorkout {
    * of the data calculated and write to firebase. Update the users'
    * progressions to indicate that they are in work.
   */
-  Future<void> createWorkout() async {
-    List<Map<String, dynamic>> workoutExercises = new List();
-    List<Map<String, dynamic>> workoutProgressions = new List();
-    List<Map<String, dynamic>> workoutWarmups = new List();
-    FitUser fitUser;
+  Future<JsonWorkout> createWorkout(FitUser fitUser) async {
+    print("CREATING WORKOUT");
+    print("User ID: " + uid);
+
     int coolDown = 2;
     double restTime;
     double age;
-
-    await fetchUserData().then((value) => fitUser = value);
     age = getAge(fitUser.dob);
 
-    Exercises exercises =
-        new Exercises(userDoc, uid, fitUser.length, fitUser.progressions);
-    Progressions progressions =
-        new Progressions(userDoc, uid, fitUser.progressions);
+    Exercises exercises = new Exercises(uid, fitUser.length);
+    Progressions progressions = new Progressions(uid);
     Warmup warmup = new Warmup(age);
+
+    List<Map<String, dynamic>> workoutExercises = new List();
+    List<Map<String, dynamic>> workoutProgressions = new List();
+    List<Map<String, dynamic>> workoutWarmups = new List();
 
     workoutExercises = await exercises.setExerciseList();
     workoutWarmups = await warmup.setWarmUpList();
@@ -58,8 +59,27 @@ class CreateWorkout {
       restTime = 1.5;
     }
 
-    await Future.delayed(Duration(seconds: 1));
-    final UserWorkout workout = new UserWorkout(
+    await Future.delayed(Duration(seconds: 2));
+
+    for (int i = 0; i < workoutExercises.length; i++) {
+      // increment selected progressions in workout
+      int maxLevel =
+          await progressions.getMaxLevelProgression(workoutExercises[i]['id']);
+      exerciseMap[workoutExercises[i]['id']]['inWorkout'] = true;
+      exerciseMap[workoutExercises[i]['id']]['progressionLevel']++;
+      exerciseMap[workoutExercises[i]['id']]['maxProgressionLevel'] = maxLevel;
+      exerciseMap[workoutExercises[i]['id']]['subProgressionLevel']++;
+    }
+
+    final UserWorkout userWorkout = new UserWorkout(uid, fitUser.length,
+        fitUser.goal, restTime, coolDown, exerciseMap, workoutWarmups);
+
+    await FirebaseFirestore.instance
+        .collection("Workouts")
+        .doc(uid)
+        .set(userWorkout.toJson());
+
+    final JsonWorkout workout = new JsonWorkout(
         uid,
         fitUser.length,
         fitUser.goal,
@@ -69,39 +89,7 @@ class CreateWorkout {
         workoutProgressions,
         workoutWarmups);
 
-    await db.collection("Workouts").doc(uid).set(workout.toJson());
-    await progressions.updateProgression(fitUser.progressions);
-  }
-
-  /* 
-   * Fetches the user document from firebase using the uid.
-   * Stores the data in a user object that will be used to 
-   * create the workout. Returns the user object
-  */
-  Future<FitUser> fetchUserData() async {
-    FitUser fitUser;
-    print("CREATING WORKOUT");
-    print("User ID: " + uid);
-
-    await userDoc.get().then((DocumentSnapshot userData) {
-      if (userData.exists) {
-        fitUser = new FitUser(
-            userData.data()['firstName'],
-            userData.data()['lastName'],
-            userData.data()['email'],
-            userData.data()['dob'],
-            userData.data()['weight'],
-            userData.data()['goal'],
-            userData.data()['length'],
-            userData.data()['equipment'],
-            userData.data()['primaryPushGoal'],
-            userData.data()['primaryPullGoal'],
-            userData.data()['height'],
-            List.from(userData.data()['progressions']));
-      }
-    });
-
-    return fitUser;
+    return workout;
   }
 
   /* 

@@ -88,8 +88,7 @@ class _HomePage extends State<HomePage> {
                   jsonData.getFileContent()['progressions']);
     }
 
-    final workoutFileData =
-        Provider.of<WorkoutFileData>(context, listen: false);
+    final workoutFileData = Provider.of<WorkoutFileData>(context);
     String workoutButtonText = '';
 
     if (workoutProcess.workoutInProgress == true) {

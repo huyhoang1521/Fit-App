@@ -31,15 +31,11 @@ class _FinishAccountState extends State<FinishAccount> {
             RoundedButton(
               text: "Set User Data",
               press: () {
-                print("pushing");
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => Finished(fitUser: fitUser)),
                 );
-
-                //Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
           ],

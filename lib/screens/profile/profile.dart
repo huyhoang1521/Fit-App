@@ -23,7 +23,7 @@ String uuid;
 String fullName;
 bool editButton = false;
 FitUser user = new FitUser(
-    null, null, null, null, null, null, null, null, null, null, null, null);
+    null, null, null, null, null, null, null, null, null, null, null);
 
 //Pulling from specific user data
 final userData = FirebaseFirestore.instance.collection("Users");

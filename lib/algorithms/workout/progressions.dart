@@ -12,10 +12,9 @@ class Progressions {
   final db = FirebaseFirestore.instance;
   var userDoc;
   var uid;
-  List<int> userProgressions = new List();
 
   // Constructor
-  Progressions([this.userDoc, this.uid, this.userProgressions]);
+  Progressions([this.uid]);
 
   /* 
    * Sets the progression list for the user's workout.
@@ -36,16 +35,10 @@ class Progressions {
             .where((doc) => doc["exerciseID"] == exercisesList[i]['id'])
             .map((category) => category.data())
             .first));
-
-        // increment selected progressions in workout
-        int maxLevel = await getMaxLevelProgression(exercisesList[i]['id']);
-        if (userProgressions[exercisesList[i]['id']] < maxLevel) {
-          userProgressions[exercisesList[i]['id']]++;
-        }
       }
     });
 
-    printProgressionWorkoutList(progressionsList);
+    //printProgressionWorkoutList(progressionsList);
     return progressionsList;
   }
 
@@ -57,7 +50,7 @@ class Progressions {
    * since each time warmup exercises are selected at random.
   */
   Future<int> getMaxLevelProgression(int exerciseID) async {
-    int progressionID;
+    int level;
     await db
         .collection('Progressions')
         .where('exerciseID', isEqualTo: exerciseID)
@@ -66,10 +59,10 @@ class Progressions {
         .get()
         .then((QuerySnapshot docs) {
       if (docs.docs.isNotEmpty) {
-        progressionID = docs.docs[0].data()['id'];
+        level = docs.docs[0].data()['level'];
       }
     });
-    return progressionID;
+    return level;
   }
 
   /* 
@@ -78,9 +71,12 @@ class Progressions {
    * that they are ready to go to the next exercise. Stores 
    * the data in the user's document in firebase
   */
-  Future<void> updateProgression(List<int> progressions) async {
-    await userDoc.update({"progressions": progressions});
-    printProgressionList();
+  Future<void> updateProgression(List<List<int>> progressions) async {
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
+        .update({"progressions": progressions});
+    //printProgressionList();
   }
 
   /* 
@@ -101,29 +97,6 @@ class Progressions {
           str += progressionsList[i]['id'].toString() + "]";
         } else {
           str += progressionsList[i]['id'].toString() + ", ";
-        }
-      }
-      print(str);
-    }
-  }
-
-  /* 
-   * Prints the progression list that will be added to the user's document
-   * Only prints id's of each exercise However, all data from each exercise
-   * is added to the user's document
-  */
-  void printProgressionList() {
-    if (userProgressions.isEmpty) {
-      print('PROGRESSIONS LEVEL LIST IS EMPTY');
-    } else {
-      String str = "PROGRESSIONS LEVEL LIST: ";
-      for (int i = 0; i < userProgressions.length; i++) {
-        if (i == 0) {
-          str += "[" + userProgressions[i].toString() + ", ";
-        } else if (i == userProgressions.length - 1) {
-          str += userProgressions[i].toString() + "]";
-        } else {
-          str += userProgressions[i].toString() + ", ";
         }
       }
       print(str);

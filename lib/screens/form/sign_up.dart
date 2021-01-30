@@ -13,28 +13,20 @@ class SignUp extends StatefulWidget {
 
 class _SignUp extends State<SignUp> {
   String _password;
+
   final FitUser user = new FitUser(
-      null, null, null, null, null, null, null, null, null, null, null, [
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1
-  ]);
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  );
 
   void submit() async {
     try {

@@ -2,7 +2,6 @@ import 'package:fit_app/providers/workout_file_data.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/workout_process.dart';
 import 'package:fit_app/screens/home/home_page.dart';
-import 'package:fit_app/screens/home/workout_setter.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/exercise_page.dart';
@@ -87,8 +86,6 @@ class _HomePicker extends State<HomeController> {
           if (signedIn) {
             if (workoutFileData.dataWritten == true) {
               return HomePage();
-            } else if (workoutFileData.getWorkout == true) {
-              return WorkoutSetter();
             }
           } else {
             return FirstView();

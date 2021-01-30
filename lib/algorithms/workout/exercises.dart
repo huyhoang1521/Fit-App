@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'progressions.dart';
 
 /* 
  * Selects the warmup exercises for the Users's workout.
@@ -8,16 +7,13 @@ import 'progressions.dart';
 */
 
 final db = FirebaseFirestore.instance;
-Progressions progressions;
 QuerySnapshot collection;
 List<Map<String, dynamic>> exerciseList = new List();
 
 class Exercises {
-  var userDoc;
   var uid;
   String length;
-  List<int> userProgressions = new List();
-  Exercises(this.userDoc, this.uid, this.length, this.userProgressions);
+  Exercises(this.uid, this.length);
 
   /* 
    * Sets the exercise list for the user's workout. Gets the exercise 
