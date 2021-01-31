@@ -1,286 +1,341 @@
+import 'dart:ui';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
-import 'package:fit_app/components/progress/percentage_button.dart';
-import 'package:fit_app/components/progress/skill_button.dart';
-import 'package:fit_app/screens/progress/stats.dart';
-import 'package:flutter/material.dart';
 import 'package:fit_app/components/themes/constants.dart';
+import 'package:fit_app/screens/test/exercise_overview.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class ProgressTest extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _ProgressTestState();
-  }
+  _ProgressTestState createState() => new _ProgressTestState();
 }
 
-bool pressed = false;
-bool pressed1 = false;
+bool _visible = true;
+double _contHeight = 250;
+double _contWidth = 175;
+bool _textColor = true;
+bool _imgColor = true;
+const ColorFilter _invert = ColorFilter.matrix(<double>[
+  0.2126,
+  0.7152,
+  0.0722,
+  0,
+  0,
+  0.2126,
+  0.7152,
+  0.0722,
+  0,
+  0,
+  0.2126,
+  0.7152,
+  0.0722,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+]);
 
-bool op1 = false;
-bool op2 = false;
-bool op3 = false;
-
-//Initial Values will be preferred Exercise from Firebase
-String text1;
-String text2;
-//Initial Value should be highest percent of all exercises
-String text3 = 'Back Lever';
-
-String bL = 'Back Lever';
-String fL = 'Front Lever';
-String oAC = 'One Arm Chin Up';
-
-Widget _myAnimatedWidget = PercentageButton(
-  text: 'Back Lever',
-  percentText: '30%',
-  percent: 0.3,
-  image: 'assets/images/BackLever.jpg',
-  press: () {},
-);
-
-class _ProgressTestState extends State<ProgressTest>
-    with SingleTickerProviderStateMixin {
-  @override
+class _ProgressTestState extends State<ProgressTest> {
   Widget build(BuildContext context) {
-    double _fitWidth = MediaQuery.of(context).size.width;
+    double _width = (MediaQuery.of(context).size.width);
     return Scaffold(
       appBar: CustomAppBar(),
       drawer: AppDrawer(),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(children: [
-              PercentageButton(
-                text: 'Back Lever',
-                percentText: '',
-                percent: 0.3,
-                image: 'assets/images/pullup_up.png',
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Stats()),
-                  );
-                },
-              ),
-              AnimatedContainer(
-                color: kPrimaryLightColor,
-                duration: Duration(seconds: 1),
-                width: pressed1 ? .88 * _fitWidth : 0,
-                height: 160,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+              child: Text('Fundamentals',
+                  style: Theme.of(context).textTheme.headline2),
+            ),
+            SizedBox(
+              height: _contHeight,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                physics: ClampingScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  Row(
                     children: [
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.fitHeight,
-                          child: GestureDetector(
-                            child: Container(
-                              height: 30,
-                              width: .75 * _fitWidth,
-                              decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
-                              child: Center(
-                                child: Text(
-                                  'Back Lever',
-                                  style: TextStyle(color: kPrimaryLightColor),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ExerciseOverview()),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).accentColor,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Theme.of(context).shadowColor,
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(
+                                      0, 2), // changes position of shadow
                                 ),
+                              ]),
+                          child: Stack(children: [
+                            Positioned(
+                              bottom: 5,
+                              child: LinearPercentIndicator(
+                                width: _contWidth,
+                                lineHeight: 14.0,
+                                percent: 0.5,
+                                backgroundColor: Colors.grey,
+                                progressColor: kPrimaryColor,
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.fitHeight,
-                          child: GestureDetector(
-                            child: Container(
-                              height: 30,
-                              width: .75 * _fitWidth,
-                              decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
-                              child: Center(
-                                child: Text(
-                                  'Front Lever',
-                                  style: TextStyle(color: kPrimaryLightColor),
-                                ),
+                            Center(
+                              child: Image.asset(
+                                'assets/images/pullup_up.png',
+                                width: _contWidth,
                               ),
                             ),
-                          ),
+                          ]),
                         ),
                       ),
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.fitHeight,
-                          child: GestureDetector(
-                            child: Container(
-                              height: 30,
-                              width: .75 * _fitWidth,
-                              decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
-                              child: Center(
-                                child: Text(
-                                  'One Arm Pull Up',
-                                  style: TextStyle(color: kPrimaryLightColor),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      SizedBox(width: 10),
+                      ExercisePlate(percent: 0.8, visible: true),
+                      SizedBox(width: 10),
+                      ExercisePlate(percent: 0.99, visible: true),
+                      SizedBox(width: 10),
+                      RaisedButton(
+                        onPressed: () {
+                          setState(() {
+                            _visible = !_visible;
+                            _textColor = !_textColor;
+                            _imgColor = !_imgColor;
+                          });
+                        },
                       ),
+                      SizedBox(width: 10),
+                      ExercisePlate(percent: 0.2, visible: true),
                     ],
                   ),
-                ),
+                ],
               ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.more_horiz,
-                    color: Theme.of(context).primaryColor,
+            ),
+            Stack(
+              children: [
+                Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+                        child: Text('Intermediate',
+                            style: TextStyle(
+                                fontSize: 26,
+                                fontFamily: 'Montserrat',
+                                fontStyle: FontStyle.normal,
+                                color: _visible
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.grey)),
+                      ),
+                      SizedBox(
+                        height: _contHeight,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          physics: ClampingScrollPhysics(),
+                          shrinkWrap: true,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.2, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.8, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.99, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.1, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.2, visible: _visible),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+                        child: Text('Expert',
+                            style: TextStyle(
+                                fontSize: 26,
+                                fontFamily: 'Montserrat',
+                                fontStyle: FontStyle.normal,
+                                color: _visible
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.grey)),
+                      ),
+                      SizedBox(
+                        height: _contHeight,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          physics: ClampingScrollPhysics(),
+                          shrinkWrap: true,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.2, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.8, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.99, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.1, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.2, visible: _visible),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+                        child: Text('Pro',
+                            style: TextStyle(
+                                fontSize: 26,
+                                fontFamily: 'Montserrat',
+                                fontStyle: FontStyle.normal,
+                                color: _visible
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.grey)),
+                      ),
+                      SizedBox(
+                        height: _contHeight,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          physics: ClampingScrollPhysics(),
+                          shrinkWrap: true,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.2, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.8, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.99, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.1, visible: _visible),
+                                SizedBox(width: 10),
+                                ExercisePlate(percent: 0.2, visible: _visible),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                // Positioned(
+                //   bottom: 0,
+                //   left: 0,
+                //   child: BackdropFilter(
+                //     filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                //     child: Container(
+                //       height: 100,
+                //       width: 100,
+                //       color: Colors.black.withOpacity(0),
+                //     ),
+                //   ),
+                // ),
+                Positioned(
+                  top: 15,
+                  // left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: AnimatedContainer(
+                    width: _visible ? 0 : _width,
+                    duration: Duration(milliseconds: 0),
+                    child: Container(
+                      color: Colors.grey.withOpacity(.1),
+                      child: Center(
+                          child: Text(
+                        'Fundamentals Required',
+                        style: Theme.of(context).textTheme.headline1,
+                      )),
+                    ),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-                  },
                 ),
-              ),
-            ]),
-            Stack(children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 500),
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  return ScaleTransition(
-                    child: child,
-                    scale: animation,
-                  );
-                },
-                child: _myAnimatedWidget,
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.more_horiz,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                      if (pressed == true) {
-                        _myAnimatedWidget = SkillButton(
-                          option1: oAC,
-                          option2: fL,
-                          option3: bL,
-                          op1: op1,
-                          op2: op2,
-                          op3: op3,
-                          press1: () {
-                            setState(() {
-                              op1 = true;
-                              op2 = false;
-                              op3 = false;
-                              pressed = !pressed;
-                              text3 = oAC;
-                              _myAnimatedWidget = PercentageButton(
-                                text: text3,
-                                percentText: '',
-                                percent: 0.3,
-                                image: 'assets/images/pullup_up.png',
-                                press: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Stats()),
-                                  );
-                                },
-                              );
-                            });
-                          },
-                          press2: () {
-                            setState(() {
-                              op1 = false;
-                              op2 = true;
-                              op3 = false;
-                              pressed = !pressed;
-                              text3 = fL;
-                              _myAnimatedWidget = PercentageButton(
-                                text: text3,
-                                percentText: '',
-                                percent: 0.3,
-                                image: 'assets/images/pullup_up.png',
-                                press: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Stats()),
-                                  );
-                                },
-                              );
-                            });
-                          },
-                          press3: () {
-                            setState(() {
-                              op1 = false;
-                              op2 = false;
-                              op3 = true;
-                              pressed = !pressed;
-                              text3 = bL;
-                              _myAnimatedWidget = PercentageButton(
-                                text: text3,
-                                percentText: '',
-                                percent: 0.3,
-                                image: 'assets/images/pullup_up.png',
-                                press: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Stats()),
-                                  );
-                                },
-                              );
-                            });
-                          },
-                        );
-                      }
-                      if (pressed == false) {
-                        setState(() {
-                          _myAnimatedWidget = PercentageButton(
-                            text: text3,
-                            percentText: '',
-                            percent: 0.3,
-                            image: 'assets/images/pullup_up.png',
-                            press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Stats()),
-                              );
-                            },
-                          );
-                        });
-                      }
-                    });
-                  },
-                ),
-              ),
-            ])
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 }
-//Todo Decide to use or delete
-//Huy if you're reading this just delete this page lol
+
+class ExercisePlate extends StatelessWidget {
+  final double percent;
+  final bool visible;
+  const ExercisePlate({
+    Key key,
+    this.percent,
+    this.visible,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: _contHeight,
+      decoration: BoxDecoration(
+          color: Theme.of(context).accentColor,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).shadowColor,
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: Offset(0, 2), // changes position of shadow
+            ),
+          ]),
+      child: Stack(children: [
+        Positioned(
+          bottom: 5,
+          child:
+              // Text(
+              //   '$percent %',
+              //   style: TextStyle(
+              //       color:
+              //           visible ? kPrimaryLightColor : Colors.grey.withOpacity(.5)),
+              // ),
+              LinearPercentIndicator(
+            width: _contWidth,
+            lineHeight: 14.0,
+            percent: percent,
+            backgroundColor: Colors.grey,
+            progressColor:
+                visible ? kPrimaryColor : Colors.black.withOpacity(0.25),
+          ),
+        ),
+        Center(
+          child: ColorFiltered(
+            colorFilter: visible
+                ? ColorFilter.mode(Colors.transparent, BlendMode.color)
+                : _invert,
+            child: Image.asset(
+              'assets/images/pullup_up.png',
+              width: _contWidth,
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+}
+//Todo Change color of man/Text for locked Icons
+//i.e. grey them out and have a locked symbol next to them
+//Todo Clean up code

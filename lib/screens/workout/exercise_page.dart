@@ -118,13 +118,6 @@ class _ExercisePageState extends State<ExercisePage> {
             enabled: pressed,
             rWPressed: () {},
             fFPressed: () {
-              //Navigator.push(context,
-              //    RouteTransition(page: RestPage(), start: start, end: end));
-              //Todo Clean up after choosing transition method
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => RestPage()),
-              // );
               workoutProcess.incrementExerciseCount();
               Navigator.pushNamed(context, '/restPage');
             },

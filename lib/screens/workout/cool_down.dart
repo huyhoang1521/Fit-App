@@ -1,16 +1,16 @@
+import 'dart:async';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/async.dart';
-import 'dart:async';
-// import 'package:percent_indicator/circular_percent_indicator.dart';
 
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;
 bool _visible = false;
 bool _startText = true;
+bool _info = false;
 
 class CoolDown extends StatefulWidget {
   @override
@@ -181,13 +181,20 @@ class _CoolDownState extends State<CoolDown> {
                     child: IconButton(
                       icon: Icon(Icons.info_outlined),
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              _descriptionDialog(context),
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) =>
+                        //       _descriptionDialog(context),
+                        // );
+                        setState(() {
+                          _info = !_info;
+                        });
                       },
                     ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: DescpriptionDialog(),
                   ),
                 ],
               ),
@@ -267,25 +274,41 @@ class _CoolDownState extends State<CoolDown> {
   }
 }
 
-Widget _descriptionDialog(BuildContext context) {
-  return new AlertDialog(
-    title: const Text('Exercise Description'),
-    content: new Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus libero id odio tincidunt, ut maximus nisi congue. Donec pellentesque elit ex. Ut pulvinar massa ut risus suscipit, eget scelerisque lorem vulputate. Integer eget quam at tellus vulputate varius eget in mi. Nam nec enim maximus, pharetra orci non, ullamcorper nunc. Suspendisse at eleifend enim. Ut vitae augue eleifend, gravida augue sed, dignissim leo. Praesent eget malesuada leo."),
+class DescpriptionDialog extends StatefulWidget {
+  @override
+  _DescpriptionDialogState createState() => new _DescpriptionDialogState();
+}
+
+class _DescpriptionDialogState extends State<DescpriptionDialog> {
+  @override
+  Widget build(BuildContext context) {
+    double _width = (MediaQuery.of(context).size.width);
+    double _height = (MediaQuery.of(context).size.height);
+    return Column(
+      children: [
+        AnimatedContainer(
+          duration: Duration(milliseconds: 750),
+          width: _width,
+          height: _info ? 0 : 0.75 * _height,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus libero id odio tincidunt, ut maximus nisi congue. Donec pellentesque elit ex. Ut pulvinar massa ut risus suscipit, eget scelerisque lorem vulputate. Integer eget quam at tellus vulputate varius eget in mi. Nam nec enim maximus, pharetra orci non, ullamcorper nunc. Suspendisse at eleifend enim. Ut vitae augue eleifend, gravida augue sed, dignissim leo. Praesent eget malesuada leo."),
+              RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    _info = !_info;
+                  });
+                },
+                textColor: Theme.of(context).primaryColor,
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        ),
       ],
-    ),
-    actions: <Widget>[
-      new FlatButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        textColor: Theme.of(context).primaryColor,
-        child: const Text('Close'),
-      ),
-    ],
-  );
+    );
+  }
 }
