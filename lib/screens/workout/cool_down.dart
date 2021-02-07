@@ -22,7 +22,7 @@ class _CoolDownState extends State<CoolDown> {
   int _current = 10;
   int _counter = 5;
   bool _pressed = false;
-  num _elapsedTime = 0;
+  // num _elapsedTime = 0;
 
   void startTimer() {
     CountdownTimer countDownTimer = new CountdownTimer(
@@ -35,7 +35,7 @@ class _CoolDownState extends State<CoolDown> {
       if (_pressed == true) {
         setState(() {
           _current = _start - duration.elapsed.inSeconds;
-          _elapsedTime = duration.elapsed.inSeconds;
+          //        _elapsedTime = duration.elapsed.inSeconds;
         });
       } else {
         sub.pause();
@@ -194,7 +194,7 @@ class _CoolDownState extends State<CoolDown> {
                   ),
                   Positioned(
                     bottom: 0,
-                    child: DescpriptionDialog(),
+                    child: DescriptionDialog(),
                   ),
                 ],
               ),
@@ -274,12 +274,12 @@ class _CoolDownState extends State<CoolDown> {
   }
 }
 
-class DescpriptionDialog extends StatefulWidget {
+class DescriptionDialog extends StatefulWidget {
   @override
-  _DescpriptionDialogState createState() => new _DescpriptionDialogState();
+  _DescriptionDialogState createState() => new _DescriptionDialogState();
 }
 
-class _DescpriptionDialogState extends State<DescpriptionDialog> {
+class _DescriptionDialogState extends State<DescriptionDialog> {
   @override
   Widget build(BuildContext context) {
     double _width = (MediaQuery.of(context).size.width);
