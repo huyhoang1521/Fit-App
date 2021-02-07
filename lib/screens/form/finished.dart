@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/algorithms/workout/create_workout.dart';
 import 'package:fit_app/models/fit_user.dart';
-import 'package:fit_app/models/jsonWorkout.dart';
+import 'package:fit_app/models/json_workout.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/workout_file_data.dart';
 import 'package:flutter/material.dart';

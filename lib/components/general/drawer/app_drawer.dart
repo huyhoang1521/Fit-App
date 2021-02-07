@@ -5,7 +5,7 @@ import 'package:fit_app/screens/progress/progress.dart';
 import 'package:fit_app/screens/profile/profile.dart';
 import 'package:fit_app/screens/recovery/recovery_page.dart';
 import 'package:fit_app/screens/settings/settings.dart';
-import 'package:fit_app/screens/test/test_page.dart';
+import 'package:fit_app/screens/test_screens/test_page.dart';
 import 'package:flutter/material.dart';
 import 'drawer_button.dart';
 

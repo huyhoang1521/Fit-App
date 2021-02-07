@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/algorithms/workout/exercises.dart';
 import 'package:fit_app/models/exercise_structures.dart';
 import 'package:fit_app/models/fit_user.dart';
-import 'package:fit_app/models/jsonWorkout.dart';
+import 'package:fit_app/models/json_workout.dart';
 import '../../models/user_workout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -61,14 +61,17 @@ class CreateWorkout {
 
     await Future.delayed(Duration(seconds: 2));
 
-    for (int i = 0; i < workoutExercises.length; i++) {
+    for (int i = 0; i < exerciseStructures.workoutExercisesMap.length; i++) {
       // increment selected progressions in workout
-      int maxLevel =
-          await progressions.getMaxLevelProgression(workoutExercises[i]['id']);
-      exerciseMap[workoutExercises[i]['id']]['inWorkout'] = true;
-      exerciseMap[workoutExercises[i]['id']]['progressionLevel']++;
-      exerciseMap[workoutExercises[i]['id']]['maxProgressionLevel'] = maxLevel;
-      exerciseMap[workoutExercises[i]['id']]['subProgressionLevel']++;
+      int maxLevel = await progressions.getMaxLevelProgression(i);
+      exerciseMap[i]['maxProgressionLevel'] = maxLevel;
+      for (int j = 0; j < workoutExercises.length; j++) {
+        if (workoutExercises[j]['id'] == i) {
+          exerciseMap[workoutExercises[j]['id']]['inWorkout'] = true;
+          exerciseMap[workoutExercises[j]['id']]['progressionLevel']++;
+          //exerciseMap[workoutExercises[j]['id']]['subProgressionLevel']++;
+        }
+      }
     }
 
     final UserWorkout userWorkout = new UserWorkout(uid, fitUser.length,
@@ -85,6 +88,7 @@ class CreateWorkout {
         fitUser.goal,
         restTime,
         coolDown,
+        exerciseMap,
         workoutExercises,
         workoutProgressions,
         workoutWarmups);

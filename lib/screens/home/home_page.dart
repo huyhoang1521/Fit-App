@@ -80,7 +80,7 @@ class _HomePage extends State<HomePage> {
     final workoutProcess = Provider.of<WorkoutProcess>(context);
     final workoutExercises = Provider.of<WorkoutExercises>(context);
 
-    // Get the warmup and progression lists from their respective collections
+    // Get the warmup and progression lists from file
     if (jsonData.getFileExists() == true && jsonData.getFileContent() != null) {
       completeList =
           List<Map<String, dynamic>>.from(jsonData.getFileContent()['warmup']) +

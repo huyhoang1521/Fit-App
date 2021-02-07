@@ -1,11 +1,20 @@
 import 'dart:ui';
+import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/screens/test/exercise_overview.dart';
+import 'package:fit_app/models/exercise_structures.dart';
+import 'package:fit_app/screens/test_screens/exercise_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+
+JsonData jsonData = new JsonData('workoutData.json');
+List<Map<String, dynamic>> exerciseList = new List();
+List<Map<String, dynamic>> progressionList = new List();
+List<Map<String, dynamic>> exerciseMap = new List();
+ExerciseStructures exerciseStructures = new ExerciseStructures();
+List<int> percentList = new List();
 
 class ProgressTest extends StatefulWidget {
   @override
@@ -17,6 +26,7 @@ double _contHeight = 250;
 double _contWidth = 175;
 bool _textColor = true;
 bool _imgColor = true;
+
 const ColorFilter _invert = ColorFilter.matrix(<double>[
   0.2126,
   0.7152,
@@ -42,6 +52,39 @@ const ColorFilter _invert = ColorFilter.matrix(<double>[
 
 class _ProgressTestState extends State<ProgressTest> {
   Widget build(BuildContext context) {
+    if (jsonData.getFileExists() == true && jsonData.getFileContent() != null) {
+      exerciseList = List<Map<String, dynamic>>.from(
+          jsonData.getFileContent()['exercises']);
+      progressionList = List<Map<String, dynamic>>.from(
+          jsonData.getFileContent()['progressions']);
+      exerciseMap = List<Map<String, dynamic>>.from(
+          jsonData.getFileContent()['exerciseMap']);
+
+      for (int i = 0; i < exerciseMap.length; i++) {
+        /*if (exerciseList[i]['f'] == "concentric") {
+          percentList.add(
+              ((progressionList[i]['level'] / exerciseList[i]['progressions']) *
+                      100)
+                  .floor());
+        } else if (exerciseList[i]['f'] == "eccentric") {
+          percentList.add(
+              ((progressionList[i]['level'] / exerciseList[i]['progressions']) *
+                      100)
+                  .floor());
+        } else {
+          percentList.add(
+              ((progressionList[i]['level'] / exerciseList[i]['progressions']) *
+                      100)
+                  .floor());
+        }*/
+        int length = exerciseStructures.concentricHypertrophy.length + 1;
+        int maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
+        int currentLevel = exerciseMap[i]['progressionLevel'] +
+            exerciseMap[i]['subProgressionLevel'];
+        percentList.add(((currentLevel / maxLevel) * 100).floor());
+      }
+    }
+
     double _width = (MediaQuery.of(context).size.width);
     return Scaffold(
       appBar: CustomAppBar(),

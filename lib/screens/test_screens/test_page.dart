@@ -5,7 +5,7 @@ import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:fit_app/screens/test/progress_test.dart';
+import 'package:fit_app/screens/test_screens/progress_test.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/summary.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 // import 'package:fit_app/screens/test/start_workout.dart';
 // import 'package:fit_app/screens/workout/exercise_page.dart';
 // import 'concentric.dart';
-import 'package:fit_app/screens/test/start_workout.dart';
+import 'package:fit_app/screens/test_screens/start_workout.dart';
 //import 'package:fit_app/screens/workout/exercise_page.dart';
 
 UserWorkout workout;
