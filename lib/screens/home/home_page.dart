@@ -85,7 +85,7 @@ class _HomePage extends State<HomePage> {
       completeList =
           List<Map<String, dynamic>>.from(jsonData.getFileContent()['warmup']) +
               List<Map<String, dynamic>>.from(
-                  jsonData.getFileContent()['progressions']);
+                  jsonData.getFileContent()['exercises']);
     }
 
     final workoutFileData = Provider.of<WorkoutFileData>(context);
@@ -162,17 +162,7 @@ class _HomePage extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: new RoundedButton(
                 color: Theme.of(context).buttonColor,
-                press: () async {
-                  workoutExercises.setExerciseList(
-                      List<Map<String, dynamic>>.from(
-                          jsonData.getFileContent()['exercises']));
-                  workoutExercises.setProgressionList(
-                      List<Map<String, dynamic>>.from(
-                          jsonData.getFileContent()['progressions']));
-                  workoutExercises.setWarmupList(
-                      List<Map<String, dynamic>>.from(
-                          jsonData.getFileContent()['warmup']));
-
+                press: () {
                   workoutProcess.setWorkoutInProgress(true);
                   workoutExercises.setListsNotSet(true);
                   Navigator.pushNamed(context, '/exercisePage');

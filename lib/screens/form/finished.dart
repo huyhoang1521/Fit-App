@@ -64,12 +64,9 @@ class _FinishedState extends State<Finished> {
                   RoundedButton(
                     text: "Finish",
                     press: () async {
-                      workoutExercises.setExerciseList(
+                      workoutExercises.setExercisesList(
                           List<Map<String, dynamic>>.from(
                               snapshot.data.exercises));
-                      workoutExercises.setProgressionList(
-                          List<Map<String, dynamic>>.from(
-                              snapshot.data.progressions));
                       workoutExercises.setWarmupList(
                           List<Map<String, dynamic>>.from(
                               snapshot.data.warmup));

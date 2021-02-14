@@ -51,7 +51,7 @@ class _ExercisePageState extends State<ExercisePage> {
   Widget build(BuildContext context) {
     workoutExercises = Provider.of<WorkoutExercises>(context, listen: false);
     workoutProcess = Provider.of<WorkoutProcess>(context, listen: false);
-    workoutList = workoutExercises.warmups + workoutExercises.progressions;
+    workoutList = workoutExercises.warmups + workoutExercises.exercises;
     List<Widget> exercisesFields =
         populateExerciseFields(workoutProcess.exerciseCount);
     double width = (MediaQuery.of(context).size.width);

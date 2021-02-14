@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_app/algorithms/workout/exercises.dart';
 import 'package:fit_app/models/exercise_structures.dart';
 import 'package:fit_app/models/fit_user.dart';
 import 'package:fit_app/models/json_workout.dart';
@@ -7,7 +6,7 @@ import '../../models/user_workout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'warmup.dart';
-import 'progressions.dart';
+import 'exercises.dart';
 
 /* 
  * Creates a workout for the User using the fields provided. Finds
@@ -19,8 +18,7 @@ import 'progressions.dart';
 final User user = auth.currentUser;
 final auth = FirebaseAuth.instance;
 final uid = user.uid;
-ExerciseStructures exerciseStructures = new ExerciseStructures();
-List<Map<String, dynamic>> exerciseMap = exerciseStructures.workoutExercisesMap;
+List<Map<String, dynamic>> exerciseMap = workoutExercisesMap;
 
 class CreateWorkout {
   /* 
@@ -29,7 +27,7 @@ class CreateWorkout {
    * specific data for each exercise. Calcuate the rest time based
    * on the user's workout goal. Create a workout object with all
    * of the data calculated and write to firebase. Update the users'
-   * progressions to indicate that they are in work.
+   * exercises to indicate that they are in work.
   */
   Future<JsonWorkout> createWorkout(FitUser fitUser) async {
     print("CREATING WORKOUT");
@@ -41,17 +39,13 @@ class CreateWorkout {
     age = getAge(fitUser.dob);
 
     Exercises exercises = new Exercises(uid, fitUser.length);
-    Progressions progressions = new Progressions(uid);
     Warmup warmup = new Warmup(age);
 
     List<Map<String, dynamic>> workoutExercises = new List();
-    List<Map<String, dynamic>> workoutProgressions = new List();
     List<Map<String, dynamic>> workoutWarmups = new List();
 
-    workoutExercises = await exercises.setExerciseList();
     workoutWarmups = await warmup.setWarmUpList();
-    workoutProgressions =
-        await progressions.setProgressionsList(workoutExercises);
+    workoutExercises = await exercises.setExercisesList();
 
     if (fitUser.goal == "Strength") {
       restTime = 3;
@@ -61,14 +55,14 @@ class CreateWorkout {
 
     await Future.delayed(Duration(seconds: 2));
 
-    for (int i = 0; i < exerciseStructures.workoutExercisesMap.length; i++) {
-      // increment selected progressions in workout
-      int maxLevel = await progressions.getMaxLevelProgression(i);
-      exerciseMap[i]['maxProgressionLevel'] = maxLevel;
+    for (int i = 0; i < exerciseMap.length; i++) {
       for (int j = 0; j < workoutExercises.length; j++) {
-        if (workoutExercises[j]['id'] == i) {
-          exerciseMap[workoutExercises[j]['id']]['inWorkout'] = true;
-          exerciseMap[workoutExercises[j]['id']]['progressionLevel']++;
+        if (workoutExercises[j]['progressionID'] == i) {
+          exerciseMap[workoutExercises[j]['progressionID']]['inWorkout'] = true;
+          exerciseMap[workoutExercises[j]['progressionID']]
+              ['progressionLevel'] = workoutExercises[j]['level'];
+          exerciseMap[workoutExercises[j]['progressionID']]
+              ['maxProgressionLevel'] = workoutExercises[j]['maxProgression'];
           //exerciseMap[workoutExercises[j]['id']]['subProgressionLevel']++;
         }
       }
@@ -90,7 +84,6 @@ class CreateWorkout {
         coolDown,
         exerciseMap,
         workoutExercises,
-        workoutProgressions,
         workoutWarmups);
 
     return workout;

@@ -13,8 +13,8 @@ JsonData jsonData = new JsonData('workoutData.json');
 List<Map<String, dynamic>> exerciseList = new List();
 List<Map<String, dynamic>> progressionList = new List();
 List<Map<String, dynamic>> exerciseMap = new List();
-ExerciseStructures exerciseStructures = new ExerciseStructures();
-List<int> percentList = new List();
+String userGoal;
+List<double> percentList = new List();
 
 class ProgressTest extends StatefulWidget {
   @override
@@ -59,29 +59,34 @@ class _ProgressTestState extends State<ProgressTest> {
           jsonData.getFileContent()['progressions']);
       exerciseMap = List<Map<String, dynamic>>.from(
           jsonData.getFileContent()['exerciseMap']);
+      userGoal = jsonData.getFileContent()['userGoal'];
 
       for (int i = 0; i < exerciseMap.length; i++) {
-        /*if (exerciseList[i]['f'] == "concentric") {
-          percentList.add(
-              ((progressionList[i]['level'] / exerciseList[i]['progressions']) *
-                      100)
-                  .floor());
-        } else if (exerciseList[i]['f'] == "eccentric") {
-          percentList.add(
-              ((progressionList[i]['level'] / exerciseList[i]['progressions']) *
-                      100)
-                  .floor());
-        } else {
-          percentList.add(
-              ((progressionList[i]['level'] / exerciseList[i]['progressions']) *
-                      100)
-                  .floor());
-        }*/
-        int length = exerciseStructures.concentricHypertrophy.length + 1;
-        int maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
+        // get current level of the progression
         int currentLevel = exerciseMap[i]['progressionLevel'] +
             exerciseMap[i]['subProgressionLevel'];
-        percentList.add(((currentLevel / maxLevel) * 100).floor());
+        int length;
+        int maxLevel;
+
+        // get max length of the progression
+        if (progressionList[i]['movement'] == "Concentric") {
+          if (userGoal == "Strength") {
+            length = concentricStrength.length + 1;
+            maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
+          } else if (userGoal == "Hypertrophy") {
+            length = concentricHypertrophy.length + 1;
+            maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
+          }
+        } else if (progressionList[i]['movement'] == "Eccentric") {
+          length = eccentric.length + 1;
+          maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
+        } else if (progressionList[i]['movement'] == "Isometric") {
+          length = isometric.length + 1;
+          maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
+        }
+
+        // calcuate percentage done of exercise
+        percentList.add(((currentLevel / maxLevel)));
       }
     }
 

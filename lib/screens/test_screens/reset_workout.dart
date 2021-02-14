@@ -13,9 +13,9 @@ final db = FirebaseFirestore.instance;
 final auth = FirebaseAuth.instance;
 final uid = user.uid;
 
-class ResetAccount extends StatefulWidget {
+class ResetWorkout extends StatefulWidget {
   @override
-  _ResetAccountState createState() => new _ResetAccountState();
+  _ResetWorkoutState createState() => new _ResetWorkoutState();
 }
 
 JsonData jsonData = new JsonData('workoutData.json');
@@ -45,7 +45,7 @@ Future<FitUser> getUserInfo() => Future.delayed(Duration(seconds: 1), () async {
       return fitUser;
     });
 
-class _ResetAccountState extends State<ResetAccount> {
+class _ResetWorkoutState extends State<ResetWorkout> {
   @override
   Widget build(BuildContext context) => FutureBuilder(
       future: getUserInfo(),

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WorkoutExercises with ChangeNotifier {
-  List<Map<String, dynamic>> exercises = new List();
   List<Map<String, dynamic>> warmups = new List();
-  List<Map<String, dynamic>> progressions = new List();
+  List<Map<String, dynamic>> exercises = new List();
   bool listsNotSet = false;
   final String key = "listsNotSet";
   SharedPreferences _prefs;
@@ -13,18 +12,13 @@ class WorkoutExercises with ChangeNotifier {
     _loadFromPrefs();
   }
 
-  void setExerciseList(List<Map<String, dynamic>> _completeList) {
-    exercises = _completeList;
-    notifyListeners();
-  }
-
-  void setProgressionList(List<Map<String, dynamic>> _completeList) {
+  void setExercisesList(List<Map<String, dynamic>> _completeList) {
     warmups = _completeList;
     notifyListeners();
   }
 
   void setWarmupList(List<Map<String, dynamic>> _completeList) {
-    progressions = _completeList;
+    exercises = _completeList;
     notifyListeners();
   }
 

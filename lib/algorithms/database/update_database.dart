@@ -37,7 +37,7 @@ class UpdateDatabase {
       });
     });*/
 
-    for (int i = 0; i < 19; i++) {
+    /*for (int i = 0; i < 19; i++) {
       int count = 1;
       await db
           .collection('Progressions')
@@ -50,7 +50,7 @@ class UpdateDatabase {
           count++;
         });
       });
-    }
+    }*/
     /*List<QueryDocumentSnapshot> progressionsList;
     await db.collection('Progressions').get().then((docs) {
       docs.docs.forEach((document) async {

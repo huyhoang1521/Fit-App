@@ -64,7 +64,7 @@ class _RestPageState extends State<RestPage> {
     final workoutProcess = Provider.of<WorkoutProcess>(context, listen: true);
     final workoutExercises =
         Provider.of<WorkoutExercises>(context, listen: false);
-    workoutList = workoutExercises.warmups + workoutExercises.progressions;
+    workoutList = workoutExercises.warmups + workoutExercises.exercises;
     return Scaffold(
       appBar: CustomAppBar(),
       body: Center(
