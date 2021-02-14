@@ -1,9 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
 
 ThemeData light = ThemeData(
   shadowColor: Colors.grey.withOpacity(0.75),
+  cupertinoOverrideTheme: CupertinoThemeData(
+      textTheme: CupertinoTextThemeData(
+    dateTimePickerTextStyle: TextStyle(
+      color: colorCustom,
+      fontSize: 26,
+    ),
+    pickerTextStyle: TextStyle(
+      color: colorCustom,
+      fontSize: 26,
+    ),
+  )),
   appBarTheme: AppBarTheme(
     color: kPrimaryColor,
     elevation: 10,
@@ -75,6 +87,17 @@ ThemeData light = ThemeData(
 
 ThemeData dark = ThemeData(
   shadowColor: darkBackground,
+  cupertinoOverrideTheme: CupertinoThemeData(
+      textTheme: CupertinoTextThemeData(
+    dateTimePickerTextStyle: TextStyle(
+      color: darkText,
+      fontSize: 26,
+    ),
+    pickerTextStyle: TextStyle(
+      color: darkText,
+      fontSize: 26,
+    ),
+  )),
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(
       color: kPrimaryLightColor,
