@@ -38,3 +38,27 @@ Map<int, Color> lightColor = {
 
 MaterialColor colorCustom = MaterialColor(0xFF6F35A5, color);
 MaterialColor lightColorCustom = MaterialColor(0xFFF1E6FF, lightColor);
+
+//Cover Filter For "Locked"
+const ColorFilter invert = ColorFilter.matrix(<double>[
+  0.5,
+  0.8,
+  0.01,
+  0,
+  0,
+  0.5,
+  0.8,
+  0.01,
+  0,
+  0,
+  0.5,
+  0.8,
+  0.01,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+]);

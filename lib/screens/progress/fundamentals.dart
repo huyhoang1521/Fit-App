@@ -1,8 +1,7 @@
 import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/progress/exercise_percent_item.dart';
-import 'stats.dart';
+import 'fundamentals_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +10,14 @@ List<Map<String, dynamic>> exerciseList = new List();
 List<Map<String, dynamic>> progressionList = new List();
 List<int> percentList = new List();
 
-class Progress extends StatefulWidget {
+class Fundaments extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _ProgressState();
+    return _FundamentsState();
   }
 }
 
-class _ProgressState extends State<Progress>
+class _FundamentsState extends State<Fundaments>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
@@ -33,10 +32,8 @@ class _ProgressState extends State<Progress>
                   100)
               .floor());
     }
-
     return Scaffold(
       appBar: CustomAppBar(),
-      drawer: AppDrawer(),
       body: ListView(
         children: <Widget>[
           Padding(
@@ -47,7 +44,7 @@ class _ProgressState extends State<Progress>
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 25.0),
                 child: Text(
-                  'Main Goals',
+                  'Fundamentals',
                   style: Theme.of(context).textTheme.headline2,
                 ),
               ),
@@ -68,45 +65,7 @@ class _ProgressState extends State<Progress>
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Stats()),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 14, 8, 14),
-            child: Container(
-              decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.grey))),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                child: Text(
-                  'Exercises Progress',
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
-                child: new ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: progressionList.length,
-                  itemBuilder: (context, index) {
-                    return ExercisePercentItem(
-                      name: progressionList[index]['name'],
-                      percent: percentList[index],
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Stats()),
+                          MaterialPageRoute(builder: (context) => FundamentalsOverview()),
                         );
                       },
                     );

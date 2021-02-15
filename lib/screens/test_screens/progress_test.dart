@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:fit_app/algorithms/json/json_data.dart';
-import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:fit_app/models/exercise_structures.dart';
+import 'package:fit_app/screens/progress/fundamentals.dart';
 import 'package:fit_app/screens/test_screens/exercise_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -26,29 +26,10 @@ double _contHeight = 250;
 double _contWidth = 175;
 bool _textColor = true;
 bool _imgColor = true;
-
-const ColorFilter _invert = ColorFilter.matrix(<double>[
-  0.2126,
-  0.7152,
-  0.0722,
-  0,
-  0,
-  0.2126,
-  0.7152,
-  0.0722,
-  0,
-  0,
-  0.2126,
-  0.7152,
-  0.0722,
-  0,
-  0,
-  0,
-  0,
-  0,
-  1,
-  0,
-]);
+// Percent of Fundamentals Completed
+double _fundPercent = 0.75;
+// Converts Decimal to %
+double _fundPercentText = _fundPercent * 100;
 
 class _ProgressTestState extends State<ProgressTest> {
   Widget build(BuildContext context) {
@@ -92,7 +73,22 @@ class _ProgressTestState extends State<ProgressTest> {
 
     double _width = (MediaQuery.of(context).size.width);
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: AppBar(
+        title: Text('Fit With Nick'),
+        elevation: 5,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.invert_colors),
+            onPressed: () {
+              setState(() {
+                _visible = !_visible;
+                _textColor = !_textColor;
+                _imgColor = !_imgColor;
+              });
+            },
+          )
+        ],
+      ),
       drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
@@ -100,82 +96,94 @@ class _ProgressTestState extends State<ProgressTest> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
-              child: Text('Fundamentals',
-                  style: Theme.of(context).textTheme.headline2),
-            ),
-            SizedBox(
-              height: _contHeight,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ExerciseOverview()),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).accentColor,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Theme.of(context).shadowColor,
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  offset: Offset(
-                                      0, 2), // changes position of shadow
+              padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
+              child: Stack(children: [
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Theme.of(context).shadowColor,
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Fundamentals',
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 25,
+                                fontStyle: FontStyle.normal),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: _width * .8,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          'Must be completed first before all other levels. '),
+                                      Text(
+                                          'This is to prevent injury and ensure continual progress. '),
+                                    ],
+                                  ),
                                 ),
-                              ]),
-                          child: Stack(children: [
-                            Positioned(
-                              bottom: 5,
-                              child: LinearPercentIndicator(
-                                width: _contWidth,
-                                lineHeight: 14.0,
-                                percent: 0.5,
-                                backgroundColor: Colors.grey,
-                                progressColor: kPrimaryColor,
-                              ),
+                                Icon(Icons.arrow_forward_ios_outlined),
+                              ],
                             ),
-                            Center(
-                              child: Image.asset(
-                                'assets/images/pullup_up.png',
-                                width: _contWidth,
-                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            child: LinearPercentIndicator(
+                              lineHeight: 15.0,
+                              percent: _fundPercent,
+                              backgroundColor: Colors.grey,
+                              progressColor: kPrimaryColor,
                             ),
-                          ]),
-                        ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 10),
-                      ExercisePlate(percent: 0.8, visible: true),
-                      SizedBox(width: 10),
-                      ExercisePlate(percent: 0.99, visible: true),
-                      SizedBox(width: 10),
-                      RaisedButton(
-                        onPressed: () {
-                          setState(() {
-                            _visible = !_visible;
-                            _textColor = !_textColor;
-                            _imgColor = !_imgColor;
-                          });
-                        },
-                      ),
-                      SizedBox(width: 10),
-                      ExercisePlate(percent: 0.2, visible: true),
-                    ],
+                    ),
                   ),
-                ],
-              ),
+                ),
+                Positioned(
+                    left: 27 + (_fundPercent * _width * 0.8) + 15,
+                    bottom: 18,
+                    child: Text(
+                      '$_fundPercentText%',
+                      style: TextStyle(color: kPrimaryColor),
+                    )),
+                //Route to Fundamentals Page
+                Container(
+                  height: 167,
+                  width: _width,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Fundaments()),
+                      );
+                    },
+                  ),
+                ),
+              ]),
             ),
+            //Each "Max Progression" is displayed in the respected Difficulty
             Stack(
               children: [
                 Column(
@@ -288,36 +296,6 @@ class _ProgressTestState extends State<ProgressTest> {
                         ),
                       ),
                     ]),
-                // Positioned(
-                //   bottom: 0,
-                //   left: 0,
-                //   child: BackdropFilter(
-                //     filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                //     child: Container(
-                //       height: 100,
-                //       width: 100,
-                //       color: Colors.black.withOpacity(0),
-                //     ),
-                //   ),
-                // ),
-                Positioned(
-                  top: 15,
-                  // left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: AnimatedContainer(
-                    width: _visible ? 0 : _width,
-                    duration: Duration(milliseconds: 0),
-                    child: Container(
-                      color: Colors.grey.withOpacity(.1),
-                      child: Center(
-                          child: Text(
-                        'Fundamentals Required',
-                        style: Theme.of(context).textTheme.headline1,
-                      )),
-                    ),
-                  ),
-                ),
               ],
             ),
           ],
@@ -337,53 +315,51 @@ class ExercisePlate extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: _contHeight,
-      decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).shadowColor,
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 2), // changes position of shadow
-            ),
-          ]),
-      child: Stack(children: [
-        Positioned(
-          bottom: 5,
-          child:
-              // Text(
-              //   '$percent %',
-              //   style: TextStyle(
-              //       color:
-              //           visible ? kPrimaryLightColor : Colors.grey.withOpacity(.5)),
-              // ),
-              LinearPercentIndicator(
-            width: _contWidth,
-            lineHeight: 14.0,
-            percent: percent,
-            backgroundColor: Colors.grey,
-            progressColor:
-                visible ? kPrimaryColor : Colors.black.withOpacity(0.25),
-          ),
-        ),
-        Center(
-          child: ColorFiltered(
-            colorFilter: visible
-                ? ColorFilter.mode(Colors.transparent, BlendMode.color)
-                : _invert,
-            child: Image.asset(
-              'assets/images/pullup_up.png',
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ExerciseOverview()),
+        );
+      },
+      child: Container(
+        height: _contHeight,
+        decoration: BoxDecoration(
+            color: Theme.of(context).accentColor,
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).shadowColor,
+                spreadRadius: 2,
+                blurRadius: 4,
+                offset: Offset(0, 2), // changes position of shadow
+              ),
+            ]),
+        child: Stack(children: [
+          Positioned(
+            bottom: 5,
+            child: LinearPercentIndicator(
               width: _contWidth,
+              lineHeight: 14.0,
+              percent: percent,
+              backgroundColor: Colors.grey,
+              progressColor:
+                  visible ? kPrimaryColor : Colors.black.withOpacity(0.25),
             ),
           ),
-        ),
-      ]),
+          Center(
+            child: ColorFiltered(
+              colorFilter: visible
+                  ? ColorFilter.mode(Colors.transparent, BlendMode.color)
+                  : invert,
+              child: Image.asset(
+                'assets/images/pullup_up.png',
+                width: _contWidth,
+              ),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }
-//Todo Change color of man/Text for locked Icons
-//i.e. grey them out and have a locked symbol next to them
-//Todo Clean up code

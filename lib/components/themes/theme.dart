@@ -78,8 +78,9 @@ ThemeData light = ThemeData(
         fontStyle: FontStyle.normal),
     bodyText2: TextStyle(
       color: kPrimaryColor,
-      fontSize: 14.0,
-      fontFamily: 'OpenSans',
+      fontSize: 18.0,
+      height: 1.45,
+      fontFamily: 'Montserrat',
       fontStyle: FontStyle.normal,
     ),
   ),
@@ -165,8 +166,9 @@ ThemeData dark = ThemeData(
           fontStyle: FontStyle.normal),
       bodyText2: TextStyle(
         color: darkText,
-        fontSize: 14.0,
-        fontFamily: 'OpenSans',
+        fontSize: 18.0,
+        height: 1.45,
+        fontFamily: 'Montserrat',
         fontStyle: FontStyle.normal,
       )),
 );

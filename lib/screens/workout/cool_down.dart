@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
+import 'package:fit_app/components/progress/exercise_info.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:quiver/async.dart';
 
 IconData pause = Icons.pause_circle_filled;
@@ -10,7 +12,6 @@ IconData play = Icons.play_circle_filled;
 IconData button = play;
 bool _visible = false;
 bool _startText = true;
-bool _info = false;
 
 class CoolDown extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _CoolDownState extends State<CoolDown> {
       if (_pressed == true) {
         setState(() {
           _current = _start - duration.elapsed.inSeconds;
-          //        _elapsedTime = duration.elapsed.inSeconds;
+    //_elapsedTime = duration.elapsed.inSeconds;
         });
       } else {
         sub.pause();
@@ -89,7 +90,6 @@ class _CoolDownState extends State<CoolDown> {
   }
 
   String stretchName = 'Downward Dog';
-
   @override
   Widget build(BuildContext context) {
     double width = (MediaQuery.of(context).size.width);
@@ -109,206 +109,153 @@ class _CoolDownState extends State<CoolDown> {
           child: CustomAppBar(),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).shadowColor,
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2), // changes position of shadow
-                        ),
-                      ]),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text('$stretchName',
-                          style: Theme.of(context).textTheme.headline2),
-                    ),
-                  )),
-            ),
-            // Flexible(
-            //   child: Image.asset(
-            //     'assets/images/pullup_up.png',
-            //   ),
-            // ),
-            FittedBox(
-              fit: BoxFit.fill,
-              child: Stack(
-                children: [
-                  Container(
-                    width: width,
-                    child: Image.asset(
-                      'assets/images/pullup_up.png',
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: AnimatedOpacity(
-                        opacity: _visible ? 1.0 : 0.0,
-                        duration: Duration(milliseconds: 500),
-                        child: Text(
-                          "$_counter",
-                          style: Theme.of(context).textTheme.headline5,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: AnimatedOpacity(
-                        opacity: _startText ? 0.0 : 1.0,
-                        duration: Duration(milliseconds: 1000),
-                        child: Text(
-                          'Start!',
-                          style: Theme.of(context).textTheme.headline5,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: width * 0.05,
-                    child: IconButton(
-                      icon: Icon(Icons.info_outlined),
-                      onPressed: () {
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (BuildContext context) =>
-                        //       _descriptionDialog(context),
-                        // );
-                        setState(() {
-                          _info = !_info;
-                        });
-                      },
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    child: DescriptionDialog(),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).shadowColor,
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2), // changes position of shadow
-                        ),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Time Left:',
-                            style: Theme.of(context).textTheme.headline2),
-                        Text('$_current seconds',
-                            style: Theme.of(context).textTheme.headline2),
-                      ],
-                    ),
-                  )),
-            ),
-            // CircularPercentIndicator(
-            //   radius: width * 0.3,
-            //   lineWidth: 10.0,
-            //   progressColor: Theme.of(context).primaryColor,
-            //   percent: _elapsedTime / _start,
-            //   center: Text(
-            //     "$_current",
-            //     style: Theme.of(context).textTheme.headline5,
-            //   ),
-            // ),
-            FloatingActionButton(
-              onPressed: () {
-                startCountdown();
-                setState(() {
-                  _visible = !_visible;
-                });
-              },
-            ),
-            Buttons(
-              enabled: _pressed,
-              fFPressed: () {
-                //Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Complete()),
-                );
-              },
-              rWPressed: () {
-                Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => Complete()),
-                // );
-              },
-              pPPressed: () {
-                startTimer();
-                setState(() {
-                  _pressed = !_pressed;
-                });
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DescriptionDialog extends StatefulWidget {
-  @override
-  _DescriptionDialogState createState() => new _DescriptionDialogState();
-}
-
-class _DescriptionDialogState extends State<DescriptionDialog> {
-  @override
-  Widget build(BuildContext context) {
-    double _width = (MediaQuery.of(context).size.width);
-    double _height = (MediaQuery.of(context).size.height);
-    return Column(
-      children: [
-        AnimatedContainer(
-          duration: Duration(milliseconds: 750),
-          width: _width,
-          height: _info ? 0 : 0.75 * _height,
+      body: Stack(children: [
+        Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus libero id odio tincidunt, ut maximus nisi congue. Donec pellentesque elit ex. Ut pulvinar massa ut risus suscipit, eget scelerisque lorem vulputate. Integer eget quam at tellus vulputate varius eget in mi. Nam nec enim maximus, pharetra orci non, ullamcorper nunc. Suspendisse at eleifend enim. Ut vitae augue eleifend, gravida augue sed, dignissim leo. Praesent eget malesuada leo."),
-              RaisedButton(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Theme.of(context).shadowColor,
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ]),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text('$stretchName',
+                            style: Theme.of(context).textTheme.headline2),
+                      ),
+                    )),
+              ),
+              FittedBox(
+                fit: BoxFit.fill,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: width,
+                      child: Image.asset(
+                        'assets/images/pullup_up.png',
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: AnimatedOpacity(
+                          opacity: _visible ? 1.0 : 0.0,
+                          duration: Duration(milliseconds: 500),
+                          child: Text(
+                            "$_counter",
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: AnimatedOpacity(
+                          opacity: _startText ? 0.0 : 1.0,
+                          duration: Duration(milliseconds: 1000),
+                          child: Text(
+                            'Start!',
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: width * 0.05,
+                      child: IconButton(
+                        icon: Icon(Icons.info_outlined),
+                        onPressed: () => _onButtonPressed(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Theme.of(context).shadowColor,
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Time Left:',
+                              style: Theme.of(context).textTheme.headline2),
+                          Text('$_current seconds',
+                              style: Theme.of(context).textTheme.headline2),
+                        ],
+                      ),
+                    )),
+              ),
+            
+              FloatingActionButton(
                 onPressed: () {
+                  startCountdown();
                   setState(() {
-                    _info = !_info;
+                    _visible = !_visible;
                   });
                 },
-                textColor: Theme.of(context).primaryColor,
-                child: const Text('Close'),
+              ),
+              Buttons(
+                enabled: _pressed,
+                fFPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Complete()),
+                  );
+                },
+                rWPressed: () {
+                  Navigator.pop(context);
+                },
+                pPPressed: () {
+                  startTimer();
+                  setState(() {
+                    _pressed = !_pressed;
+                  });
+                },
               ),
             ],
           ),
         ),
-      ],
+      ]),
     );
+  }
+
+  void _onButtonPressed() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        )),
+        context: context,
+        builder: (context) {
+          return Container(
+            child: ExerciseInfo(),
+          );
+        });
   }
 }

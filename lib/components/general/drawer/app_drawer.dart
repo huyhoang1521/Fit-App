@@ -1,7 +1,7 @@
 import 'package:fit_app/screens/home/home_page.dart';
 import '../icons/custom_icons_icons.dart';
 import '../icons/iconicks_icons.dart';
-import 'package:fit_app/screens/progress/progress.dart';
+import 'package:fit_app/screens/progress/fundamentals.dart';
 import 'package:fit_app/screens/profile/profile.dart';
 import 'package:fit_app/screens/recovery/recovery_page.dart';
 import 'package:fit_app/screens/settings/settings.dart';
@@ -56,7 +56,7 @@ class AppDrawer extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Progress()),
+                  MaterialPageRoute(builder: (context) => Fundaments()),
                 );
               }),
           DrawerButton(

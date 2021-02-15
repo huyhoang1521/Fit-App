@@ -4,7 +4,7 @@ import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/providers/workout_process.dart';
-import 'package:fit_app/screens/progress/progress.dart';
+import 'package:fit_app/screens/progress/fundamentals.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +54,7 @@ class _CompleteState extends State<Complete> {
                     workoutInProgress.setWorkoutInProgress(false);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Progress()),
+                      MaterialPageRoute(builder: (context) => Fundaments()),
                       //MaterialPageRoute(builder: (context) => StartWorkout()),
                     );
                   },

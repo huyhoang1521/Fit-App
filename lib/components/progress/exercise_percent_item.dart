@@ -39,8 +39,12 @@ class ExercisePercentItem extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     Text(
-                      '  %',
+                      ' %',
                       style: Theme.of(context).textTheme.headline4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(25.0,0,0,0),
+                      child: Icon(Icons.arrow_forward_ios),
                     ),
                   ],
                 ),
