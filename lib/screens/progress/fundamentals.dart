@@ -10,14 +10,14 @@ List<Map<String, dynamic>> exerciseList = new List();
 List<Map<String, dynamic>> progressionList = new List();
 List<int> percentList = new List();
 
-class Fundaments extends StatefulWidget {
+class Fundamentals extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _FundamentsState();
+    return _FundamentalsState();
   }
 }
 
-class _FundamentsState extends State<Fundaments>
+class _FundamentalsState extends State<Fundamentals>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {

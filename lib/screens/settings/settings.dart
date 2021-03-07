@@ -3,13 +3,9 @@ import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/screens/settings/alarm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:fit_app/components/themes/constants.dart';
-
-// Used to Select users workout goals
-bool strength = false;
-bool hypertrophy = false;
-bool weightLoss = false;
 
 class Setting extends StatefulWidget {
   @override
@@ -51,4 +47,17 @@ class _SettingState extends State<Setting> {
       ),
     );
   }
+}
+
+
+void requestIOSPermissions(
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) {
+  flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>()
+      ?.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
 }

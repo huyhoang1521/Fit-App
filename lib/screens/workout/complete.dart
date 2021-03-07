@@ -54,7 +54,7 @@ class _CompleteState extends State<Complete> {
                     workoutInProgress.setWorkoutInProgress(false);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Fundaments()),
+                      MaterialPageRoute(builder: (context) => Fundamentals()),
                       //MaterialPageRoute(builder: (context) => StartWorkout()),
                     );
                   },

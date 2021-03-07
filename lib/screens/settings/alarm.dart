@@ -29,10 +29,8 @@ class _AlarmState extends State<Alarm> {
   var initializationSettings;
 
   void _showNotification() async {
-    print('before');
     _requestIOSPermissions();
     await _demoNotification();
-    print('after');
   }
 
   void _requestIOSPermissions() {

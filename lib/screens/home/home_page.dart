@@ -1,179 +1,129 @@
-import 'package:fit_app/algorithms/json/json_data.dart';
-import 'package:fit_app/components/general/buttons/rounded_button.dart';
+import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/providers/workout_exercises.dart';
-import 'package:fit_app/providers/workout_file_data.dart';
-import 'package:fit_app/providers/workout_process.dart';
+import 'package:fit_app/screens/test_screens/start_workout.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_app/providers/auth_service.dart';
-import 'package:fit_app/providers/provider_widget.dart';
-import 'package:provider/provider.dart';
-
-JsonData jsonData = new JsonData('workoutData.json');
+import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatefulWidget {
   @override
-  _HomePage createState() => new _HomePage();
+  _HomePageState createState() => new _HomePageState();
 }
 
-Widget exerciseOverviewItem(
-    //Function onPressed,
-    //bool enabled,
-    String name,
-    String img,
-    int time,
-    BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-    child: GestureDetector(
-      //onLongPress: onPressed,
-      child: SizedBox(
-        height: 100,
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.grey))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+CalendarController _calendarController = CalendarController();
+final _selectedDay = DateTime.now();
+
+//     _selectedEvents = _events[_selectedDay] ?? [];
+
+// void _onDaySelected(DateTime day, List events, List holidays) {
+//     print('CALLBACK: _onDaySelected');
+//     setState(() {
+//       _selectedEvents = events;
+//     });
+//   }
+
+class _HomePageState extends State<HomePage>
+    with TickerProviderStateMixin {
+  Map<DateTime, List> _events = {
+    _selectedDay.add(Duration(days: 1)): ['Strength'],
+    _selectedDay.subtract(Duration(days: 1)): ['Hypertrophy'],
+    _selectedDay.subtract(Duration(days: 3)): ['Endurance'],
+  };
+  @override
+  Widget build(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FittedBox(
-                fit: BoxFit.fitHeight,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Let's Do This!",
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 16, 0, 24),
+                child: TableCalendar(
+                  calendarController: _calendarController,
+                  weekendDays: [],
+                  headerVisible: false,
+                  initialCalendarFormat: CalendarFormat.week,
+                  events: _events,
+                  calendarStyle: CalendarStyle(
+                    markersColor: Theme.of(context).primaryColor,
+                    markersPositionBottom: 0,
+                    todayColor: kPrimaryColor,
+                    selectedColor: Theme.of(context).primaryColor,
+                    selectedStyle: TextStyle(color: Colors.black),
+                  ),
+                  daysOfWeekStyle: DaysOfWeekStyle(
+                      weekdayStyle:
+                          TextStyle(color: Theme.of(context).primaryColor)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      name,
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
-                      child: Row(
-                        children: [
-                          Text(
-                            time.toString(),
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          Text(
-                            '  minutes',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        ],
-                      ),
-                    ),
+                    Text('Type of Day:'),
+                    Text('High intensity low volume'),
                   ],
                 ),
               ),
-              Image.asset(img),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
-}
-
-class _HomePage extends State<HomePage> {
-  List<Map<String, dynamic>> completeList = new List();
-  @override
-  Widget build(BuildContext context) {
-    final workoutProcess = Provider.of<WorkoutProcess>(context);
-    final workoutExercises = Provider.of<WorkoutExercises>(context);
-
-    // Get the warmup and progression lists from file
-    if (jsonData.getFileExists() == true && jsonData.getFileContent() != null) {
-      completeList =
-          List<Map<String, dynamic>>.from(jsonData.getFileContent()['warmup']) +
-              List<Map<String, dynamic>>.from(
-                  jsonData.getFileContent()['exercises']);
-    }
-
-    final workoutFileData = Provider.of<WorkoutFileData>(context);
-    String workoutButtonText = '';
-
-    if (workoutProcess.workoutInProgress == true) {
-      workoutButtonText = "Resume workout: " +
-          (workoutProcess.exerciseCount + 1).toString() +
-          "/" +
-          completeList.length.toString();
-    } else {
-      workoutButtonText = 'Start Workout';
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Fit With Nick'),
-        elevation: 5,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.undo),
-            color: Theme.of(context).iconTheme.color,
-            onPressed: () async {
-              try {
-                workoutFileData.setGetWorkout(false);
-                AuthService auth = ProviderWidget.of(context).auth;
-                await auth.signOut();
-                print("Signed Out!");
-              } catch (e) {
-                print(e);
-              }
-            },
-          )
-        ],
-      ),
-      drawer: AppDrawer(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.timer,
-                    color: kPrimaryColor,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "57 minutes",
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Length:'),
+                    Text('45 mins'),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
-                  child: ListView.builder(
-                    itemCount: completeList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return exerciseOverviewItem(completeList[index]['name'],
-                          'assets/images/pullup_up.png', 5, context);
-                    },
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Main Focus:'),
+                    Text('Push Muscles'),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 50),
+                    width: 0.75 * _width,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(29),
+                      child: FlatButton(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                        color: kPrimaryColor,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StartWorkout()),
+                          );
+                        },
+                        child: Text('Start Workout!'),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            // TODO - Set logic to route to coolDown. Since exercise count may be greater than the exercises
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: new RoundedButton(
-                color: Theme.of(context).buttonColor,
-                press: () {
-                  workoutProcess.setWorkoutInProgress(true);
-                  workoutExercises.setListsNotSet(true);
-                  Navigator.pushNamed(context, '/exercisePage');
-                },
-
-                text: workoutButtonText,
-                //onLongPress: ,
-              ),
-            ),
-          ],
-        ),
+            ]),
       ),
     );
   }

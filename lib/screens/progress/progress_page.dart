@@ -4,7 +4,7 @@ import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:fit_app/models/exercise_structures.dart';
 import 'package:fit_app/screens/progress/fundamentals.dart';
-import 'package:fit_app/screens/test_screens/exercise_overview.dart';
+import 'package:fit_app/screens/progress/exercise_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -16,9 +16,9 @@ List<Map<String, dynamic>> exerciseMap = new List();
 String userGoal;
 List<double> percentList = new List();
 
-class ProgressTest extends StatefulWidget {
+class ProgressPage extends StatefulWidget {
   @override
-  _ProgressTestState createState() => new _ProgressTestState();
+  _ProgressPageState createState() => new _ProgressPageState();
 }
 
 bool _visible = true;
@@ -31,7 +31,7 @@ double _fundPercent = 0.75;
 // Converts Decimal to %
 double _fundPercentText = _fundPercent * 100;
 
-class _ProgressTestState extends State<ProgressTest> {
+class _ProgressPageState extends State<ProgressPage> {
   Widget build(BuildContext context) {
     if (jsonData.getFileExists() == true && jsonData.getFileContent() != null) {
       exerciseList = List<Map<String, dynamic>>.from(
@@ -136,7 +136,7 @@ class _ProgressTestState extends State<ProgressTest> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                          'Must be completed first before all other levels. '),
+                                          'Must be completed prior to other levels.'),
                                       Text(
                                           'This is to prevent injury and ensure continual progress. '),
                                     ],
@@ -176,7 +176,7 @@ class _ProgressTestState extends State<ProgressTest> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Fundaments()),
+                            builder: (context) => Fundamentals()),
                       );
                     },
                   ),

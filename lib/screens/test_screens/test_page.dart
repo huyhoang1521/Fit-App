@@ -5,9 +5,10 @@ import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/models/user_warmup.dart';
 import 'package:fit_app/models/user_workout.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:fit_app/screens/test_screens/progress_test.dart';
+import 'package:fit_app/screens/progress/progress_page.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/summary.dart';
+import 'package:fit_app/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
 // import 'package:fit_app/screens/workout/complete.dart';
 // import 'package:fit_app/screens/test/eccentric.dart';
@@ -238,7 +239,7 @@ class _TestPageState extends State<TestPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProgressTest()),
+                                builder: (context) => ProgressPage()),
                             //MaterialPageRoute(builder: (context) => StartWorkout()),
                           );
                         },
@@ -261,6 +262,20 @@ class _TestPageState extends State<TestPage> {
                         //onLongPress: ,
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: RoundedButton(
+                        color: Theme.of(context).buttonColor,
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                            //MaterialPageRoute(builder: (context) => StartWorkout()),
+                          );
+                        },
+                        text: 'Workout Overview',
+                        //onLongPress: ,
+                      ),),
                   ],
                 ),
               ),

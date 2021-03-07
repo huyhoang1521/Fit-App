@@ -53,11 +53,12 @@ ThemeData light = ThemeData(
         fontFamily: 'Montserrat',
         fontStyle: FontStyle.normal,
         color: colorCustom),
+    // hl4 Used for Appbar Name
     headline4: TextStyle(
         fontSize: 20,
         fontFamily: 'Montserrat',
         fontStyle: FontStyle.normal,
-        color: colorCustom),
+        color: Colors.white),
     headline5: TextStyle(
         fontSize: 55,
         fontFamily: 'OpenSans',

@@ -1,11 +1,11 @@
 import 'package:fit_app/providers/workout_file_data.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/workout_process.dart';
-import 'package:fit_app/screens/home/home_page.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/exercise_page.dart';
 import 'package:fit_app/screens/workout/rest.dart';
+import 'package:fit_app/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/providers/auth_service.dart';
 import 'package:fit_app/providers/provider_widget.dart';

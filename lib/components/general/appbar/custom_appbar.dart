@@ -16,7 +16,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Fit With Nick'),
+      title: Text(
+        'Fit With Nick',
+        style: Theme.of(context).textTheme.headline4,
+      ),
       elevation: 5,
     );
   }
