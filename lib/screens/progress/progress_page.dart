@@ -27,9 +27,10 @@ double _contWidth = 175;
 bool _textColor = true;
 bool _imgColor = true;
 // Percent of Fundamentals Completed
-double _fundPercent = 0.75;
+double _fundDecimal = 0.75;
 // Converts Decimal to %
-double _fundPercentText = _fundPercent * 100;
+double _fundPercent = _fundDecimal * 100;
+String _fundPercentText = _fundPercent.toString();
 
 class _ProgressPageState extends State<ProgressPage> {
   Widget build(BuildContext context) {
@@ -66,8 +67,11 @@ class _ProgressPageState extends State<ProgressPage> {
           maxLevel = exerciseMap[i]['maxProgressionLevel'] * length;
         }
 
-        // calcuate percentage done of exercise
-        percentList.add(((currentLevel / maxLevel)));
+        //calcuate percentage done of exercise
+        percentList.add((((currentLevel) / maxLevel)));
+        print(percentList);
+        print(currentLevel);
+        print(maxLevel);
       }
     }
 
@@ -95,209 +99,205 @@ class _ProgressPageState extends State<ProgressPage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
-              child: Stack(children: [
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Theme.of(context).shadowColor,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                            offset: Offset(0, 2), // changes position of shadow
-                          ),
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            'Fundamentals',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 25,
-                                fontStyle: FontStyle.normal),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: _width * .8,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          'Must be completed prior to other levels.'),
-                                      Text(
-                                          'This is to prevent injury and ensure continual progress. '),
-                                    ],
+            //Route to Fundamentals Page
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Fundamentals()),
+                  );
+                },
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(context).shadowColor,
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Fundamentals',
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 25,
+                                  fontStyle: FontStyle.normal),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: _width * .8,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            'Must be completed prior to other levels.'),
+                                        Text(
+                                            'This is to prevent injury and ensure continual progress. '),
+                                      ],
+                                    ),
                                   ),
+                                  Icon(Icons.arrow_forward_ios_outlined),
+                                ],
+                              ),
+                            ),
+                            Stack(children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                child: LinearPercentIndicator(
+                                  lineHeight: 15.0,
+                                  percent: _fundDecimal,
+                                  backgroundColor: Colors.grey,
+                                  progressColor: kPrimaryColor,
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                            child: LinearPercentIndicator(
-                              lineHeight: 15.0,
-                              percent: _fundPercent,
-                              backgroundColor: Colors.grey,
-                              progressColor: kPrimaryColor,
-                            ),
-                          ),
-                        ],
+                              ),
+                              Positioned(
+                                  left: 27 + (_fundDecimal * _width * 0.8) + 15,
+                                  bottom: -3.4,
+                                  child: Text(
+                                    _fundPercentText,
+                                    style: TextStyle(color: kPrimaryColor),
+                                  )),
+                            ]),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Positioned(
-                    left: 27 + (_fundPercent * _width * 0.8) + 15,
-                    bottom: 18,
-                    child: Text(
-                      '$_fundPercentText%',
-                      style: TextStyle(color: kPrimaryColor),
-                    )),
-                //Route to Fundamentals Page
-                Container(
-                  height: 167,
-                  width: _width,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Fundamentals()),
-                      );
-                    },
-                  ),
-                ),
-              ]),
+              ),
             ),
+
             //Each "Max Progression" is displayed in the respected Difficulty
-            Stack(
-              children: [
-                Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
-                        child: Text('Intermediate',
-                            style: TextStyle(
-                                fontSize: 26,
-                                fontFamily: 'Montserrat',
-                                fontStyle: FontStyle.normal,
-                                color: _visible
-                                    ? Theme.of(context).primaryColor
-                                    : Colors.grey)),
-                      ),
-                      SizedBox(
-                        height: _contHeight,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
+            Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+                    child: Text('Intermediate',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'Montserrat',
+                            fontStyle: FontStyle.normal,
+                            color: _visible
+                                ? Theme.of(context).primaryColor
+                                : Colors.grey)),
+                  ),
+                  SizedBox(
+                    height: _contHeight,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      physics: ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.2, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.8, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.99, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.1, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.2, visible: _visible),
-                              ],
-                            ),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.2, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.8, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.99, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.1, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.2, visible: _visible),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
-                        child: Text('Expert',
-                            style: TextStyle(
-                                fontSize: 26,
-                                fontFamily: 'Montserrat',
-                                fontStyle: FontStyle.normal,
-                                color: _visible
-                                    ? Theme.of(context).primaryColor
-                                    : Colors.grey)),
-                      ),
-                      SizedBox(
-                        height: _contHeight,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+                    child: Text('Expert',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'Montserrat',
+                            fontStyle: FontStyle.normal,
+                            color: _visible
+                                ? Theme.of(context).primaryColor
+                                : Colors.grey)),
+                  ),
+                  SizedBox(
+                    height: _contHeight,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      physics: ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.2, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.8, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.99, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.1, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.2, visible: _visible),
-                              ],
-                            ),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.2, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.8, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.99, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.1, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.2, visible: _visible),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
-                        child: Text('Pro',
-                            style: TextStyle(
-                                fontSize: 26,
-                                fontFamily: 'Montserrat',
-                                fontStyle: FontStyle.normal,
-                                color: _visible
-                                    ? Theme.of(context).primaryColor
-                                    : Colors.grey)),
-                      ),
-                      SizedBox(
-                        height: _contHeight,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 15),
+                    child: Text('Pro',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'Montserrat',
+                            fontStyle: FontStyle.normal,
+                            color: _visible
+                                ? Theme.of(context).primaryColor
+                                : Colors.grey)),
+                  ),
+                  SizedBox(
+                    height: _contHeight,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      physics: ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.2, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.8, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.99, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.1, visible: _visible),
-                                SizedBox(width: 10),
-                                ExercisePlate(percent: 0.2, visible: _visible),
-                              ],
-                            ),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.2, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.8, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.99, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.1, visible: _visible),
+                            SizedBox(width: 10),
+                            ExercisePlate(percent: 0.2, visible: _visible),
                           ],
                         ),
-                      ),
-                    ]),
-              ],
-            ),
+                      ],
+                    ),
+                  ),
+                ]),
           ],
         ),
       ),
