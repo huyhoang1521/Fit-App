@@ -271,7 +271,6 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
                     _expandWarmUp = !_expandWarmUp;
                   });
                   _expandWarm();
-                  print(_expandWarmUp);
                 },
                 child: exerciseFolderItem('Warm Up', 10, context)),
             SizeTransition(
@@ -299,7 +298,6 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
                     _expandMain = !_expandMain;
                   });
                   _expandMa();
-                  print(_expandMain);
                 },
                 child: exerciseFolderItem('Main Exercises', 26, context)),
             SizeTransition(
@@ -327,7 +325,6 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
                     _expandCoolDown = !_expandCoolDown;
                   });
                   _expandCool();
-                  print(_expandCoolDown);
                 },
                 child: exerciseFolderItem('Cool Down', 15, context)),
             SizeTransition(

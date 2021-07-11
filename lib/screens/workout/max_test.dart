@@ -19,42 +19,42 @@ Offset start = Offset(1, 0);
 Offset end = Offset.zero;
 List<Map<String, dynamic>> workoutList = new List();
 
-class ExercisePage extends StatefulWidget {
+class MaxTest extends StatefulWidget {
   @override
-  _ExercisePageState createState() => new _ExercisePageState();
+  _MaxTest createState() => new _MaxTest();
 }
 
-class _ExercisePageState extends State<ExercisePage> {
-  List<Widget> populateExerciseFields(int exerciseCount) {
-    List<Widget> exercisesFields = new List();
+class _MaxTest extends State<MaxTest> {
+  // List<Widget> populateExerciseFields(int exerciseCount) {
+  //   List<Widget> exercisesFields = new List();
 
-    if (workoutList[exerciseCount].containsKey('subcategory')) {
-      exercisesFields.add(new ExerciseBox(
-          name: "Subcategory",
-          value: workoutList[exerciseCount]["subcategory"]));
-    }
-    if (workoutList[exerciseCount].containsKey("reps")) {
-      exercisesFields.add(new ExerciseBox(
-          name: "Reps", value: workoutList[exerciseCount]["reps"]));
-    }
-    if (workoutList[exerciseCount].containsKey("sets")) {
-      exercisesFields.add(new ExerciseBox(
-          name: "Sets", value: workoutList[exerciseCount]["sets"]));
-    }
-    if (workoutList[exerciseCount].containsKey("duration")) {
-      exercisesFields.add(new ExerciseBox(
-          name: "Duration", value: workoutList[exerciseCount]["duration"]));
-    }
-    return exercisesFields;
-  }
+  //   if (workoutList[exerciseCount].containsKey('subcategory')) {
+  //     exercisesFields.add(new ExerciseBox(
+  //         name: "Subcategory",
+  //         value: workoutList[exerciseCount]["subcategory"]));
+  //   }
+  //   if (workoutList[exerciseCount].containsKey("reps")) {
+  //     exercisesFields.add(new ExerciseBox(
+  //         name: "Reps", value: workoutList[exerciseCount]["reps"]));
+  //   }
+  //   if (workoutList[exerciseCount].containsKey("sets")) {
+  //     exercisesFields.add(new ExerciseBox(
+  //         name: "Sets", value: workoutList[exerciseCount]["sets"]));
+  //   }
+  //   if (workoutList[exerciseCount].containsKey("duration")) {
+  //     exercisesFields.add(new ExerciseBox(
+  //         name: "Duration", value: workoutList[exerciseCount]["duration"]));
+  //   }
+  //   return exercisesFields;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    workoutExercises = Provider.of<WorkoutExercises>(context, listen: false);
-    workoutProcess = Provider.of<WorkoutProcess>(context, listen: false);
-    workoutList = workoutExercises.warmups + workoutExercises.exercises;
-    List<Widget> exercisesFields =
-        populateExerciseFields(workoutProcess.exerciseCount);
+    // workoutExercises = Provider.of<WorkoutExercises>(context, listen: false);
+    // workoutProcess = Provider.of<WorkoutProcess>(context, listen: false);
+    // workoutList = workoutExercises.warmups + workoutExercises.exercises;
+    // List<Widget> exercisesFields =
+    //     populateExerciseFields(workoutProcess.exerciseCount);
     double width = (MediaQuery.of(context).size.width);
     double height = (MediaQuery.of(context).size.height);
 
@@ -92,23 +92,23 @@ class _ExercisePageState extends State<ExercisePage> {
               ],
             ),
           ),
-          Expanded(
-            child: Center(
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
-                  child: new ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: exercisesFields.length,
-                    itemBuilder: (context, index) {
-                      return exercisesFields[index];
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: Center(
+          //     child: Container(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+          //         child: new ListView.builder(
+          //           shrinkWrap: true,
+          //           physics: const NeverScrollableScrollPhysics(),
+          //           itemCount: exercisesFields.length,
+          //           itemBuilder: (context, index) {
+          //             return exercisesFields[index];
+          //           },
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Buttons(
             enabled: pressed,
             rWPressed: () {},

@@ -1,7 +1,7 @@
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
-import 'package:fit_app/screens/test_screens/start_workout.dart';
+import 'package:fit_app/screens/workout/workout_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage>
                   calendarController: _calendarController,
                   weekendDays: [],
                   headerVisible: false,
-                  initialCalendarFormat: CalendarFormat.week,
+                  initialCalendarFormat: CalendarFormat.twoWeeks,
                   events: _events,
                   calendarStyle: CalendarStyle(
                     markersColor: Theme.of(context).primaryColor,
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StartWorkout()),
+                                builder: (context) => WorkoutOverview()),
                           );
                         },
                         child: Text('Start Workout!'),

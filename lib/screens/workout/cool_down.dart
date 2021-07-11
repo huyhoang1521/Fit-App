@@ -36,7 +36,7 @@ class _CoolDownState extends State<CoolDown> {
       if (_pressed == true) {
         setState(() {
           _current = _start - duration.elapsed.inSeconds;
-    //_elapsedTime = duration.elapsed.inSeconds;
+          //_elapsedTime = duration.elapsed.inSeconds;
         });
       } else {
         sub.pause();
@@ -49,9 +49,7 @@ class _CoolDownState extends State<CoolDown> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Complete()),
-        //MaterialPageRoute(builder: (context) => StartWorkout()),
       );
-      print("Done");
       sub.cancel();
     });
   }
@@ -77,14 +75,17 @@ class _CoolDownState extends State<CoolDown> {
     sub.onDone(() {
       setState(() {
         _visible = !_visible;
-        _startText = !_startText;
-        Timer(Duration(seconds: 1), () {
+        Timer(Duration(milliseconds: 500), () {
           setState(() {
             _startText = !_startText;
+            Timer(Duration(milliseconds: 750), () {
+              setState(() {
+                _startText = !_startText;
+              });
+            });
           });
         });
       });
-      print("Done");
       sub.cancel();
     });
   }
@@ -136,51 +137,48 @@ class _CoolDownState extends State<CoolDown> {
                       ),
                     )),
               ),
-              FittedBox(
-                fit: BoxFit.fill,
-                child: Stack(
-                  children: [
-                    Container(
-                      width: width,
-                      child: Image.asset(
-                        'assets/images/pullup_up.png',
-                      ),
+              Stack(
+                children: [
+                  Container(
+                    width: width,
+                    child: Image.asset(
+                      'assets/images/pullup_up.png',
                     ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: AnimatedOpacity(
-                          opacity: _visible ? 1.0 : 0.0,
-                          duration: Duration(milliseconds: 500),
-                          child: Text(
-                            "$_counter",
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: AnimatedOpacity(
+                        opacity: _visible ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 500),
+                        child: Text(
+                          "$_counter",
+                          style: Theme.of(context).textTheme.headline5,
                         ),
                       ),
                     ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: AnimatedOpacity(
-                          opacity: _startText ? 0.0 : 1.0,
-                          duration: Duration(milliseconds: 1000),
-                          child: Text(
-                            'Start!',
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: AnimatedOpacity(
+                        opacity: _startText ? 0.0 : 1.0,
+                        duration: Duration(milliseconds: 1000),
+                        child: Text(
+                          'Start!',
+                          style: Theme.of(context).textTheme.headline5,
                         ),
                       ),
                     ),
-                    Positioned(
-                      right: width * 0.05,
-                      child: IconButton(
-                        icon: Icon(Icons.info_outlined),
-                        onPressed: () => _onButtonPressed(),
-                      ),
+                  ),
+                  Positioned(
+                    right: width * 0.05,
+                    child: IconButton(
+                      icon: Icon(Icons.info_outlined),
+                      onPressed: () => _onButtonPressed(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -209,7 +207,6 @@ class _CoolDownState extends State<CoolDown> {
                       ),
                     )),
               ),
-            
               FloatingActionButton(
                 onPressed: () {
                   startCountdown();
@@ -243,6 +240,10 @@ class _CoolDownState extends State<CoolDown> {
     );
   }
 
+//Remove when Pull in real description
+  String _descr =
+      "Start in plank postion with arms straight and hands shoulder width apart and rings turned out with palms facing forward. Slowly lower body down by bending one arm while keeping the other arm as straight as possible. Lower until chest reaches hands and then push explosively until in starting position. Repeat and switch roles of arms. Keep body as straight as possible for duration of exercise by squezing glutes and keeping core engaged. ";
+
   void _onButtonPressed() {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -254,7 +255,13 @@ class _CoolDownState extends State<CoolDown> {
         context: context,
         builder: (context) {
           return Container(
-            child: ExerciseInfo(),
+            child: ExerciseInfo(
+              tier: 'Fundamentals',
+              exerciseType: 'Push',
+              movementType: 'Concentric',
+              position: 'vertical',
+              description: _descr,
+            ),
           );
         });
   }
