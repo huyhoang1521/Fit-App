@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ExerciseFieldsCreator {
   List<Widget> populateExerciseFields(
       List<Map<String, dynamic>> exerciseList, int exerciseCount) {
-    List<Widget> exercisesFields = new List();
+    List<Widget> exercisesFields = [];
     if (exerciseList[exerciseCount]["subcategory"] != null) {
       exercisesFields.add(new ExerciseBox(
           name: "Subcategory",

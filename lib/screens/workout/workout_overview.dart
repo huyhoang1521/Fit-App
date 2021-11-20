@@ -194,9 +194,9 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
     _coolDownController.dispose();
   }
 
-  List<Map<String, dynamic>> completeList = new List();
-  List<Map<String, dynamic>> warmupList = new List();
-  List<Map<String, dynamic>> mainList = new List();
+  List<Map<String, dynamic>> completeList = [];
+  List<Map<String, dynamic>> warmupList = [];
+  List<Map<String, dynamic>> mainList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +271,6 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
                     _expandWarmUp = !_expandWarmUp;
                   });
                   _expandWarm();
-                  print(_expandWarmUp);
                 },
                 child: exerciseFolderItem('Warm Up', 10, context)),
             SizeTransition(
@@ -299,7 +298,6 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
                     _expandMain = !_expandMain;
                   });
                   _expandMa();
-                  print(_expandMain);
                 },
                 child: exerciseFolderItem('Main Exercises', 26, context)),
             SizeTransition(
@@ -327,7 +325,6 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
                     _expandCoolDown = !_expandCoolDown;
                   });
                   _expandCool();
-                  print(_expandCoolDown);
                 },
                 child: exerciseFolderItem('Cool Down', 15, context)),
             SizeTransition(
@@ -369,7 +366,7 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: new RoundedButton(
-                color: Theme.of(context).buttonColor,
+                //color: Theme.of(context).buttonColor,
                 press: () {
                   workoutProcess.setWorkoutInProgress(true);
                   workoutExercises.setListsNotSet(true);

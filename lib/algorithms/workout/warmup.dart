@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 */
 
 final db = FirebaseFirestore.instance;
-List<Map<String, dynamic>> warmupList = new List();
+List<Map<String, dynamic>> warmupList = [];
 
 class Warmup {
   double age;
@@ -23,9 +23,9 @@ class Warmup {
    * to calculate how much of each exercise to put in the workout.
   */
   Future<List<Map<String, dynamic>>> setWarmUpList() async {
-    List<dynamic> bloodFlowList = new List();
-    List<dynamic> mobilityList = new List();
-    List<dynamic> coreList = new List();
+    List<dynamic> bloodFlowList = [];
+    List<dynamic> mobilityList = [];
+    List<dynamic> coreList = [];
     int amountOfExercises;
     int length = (10 + age / 4).round();
     print("length is " + length.toString());
@@ -103,7 +103,7 @@ class Warmup {
    * Picks random exercises by shuffling the list prior to picking.
   */
   Future<void> addToList(List<dynamic> categoryList, int amount) async {
-    List<int> shuffledList = new List();
+    List<int> shuffledList = [];
     for (int i = 0; i < amount; i++) {
       if (!shuffledList.contains(categoryList[i].toInt())) {
         shuffledList.add(categoryList[i].toInt());

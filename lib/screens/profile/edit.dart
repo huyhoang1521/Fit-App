@@ -5,7 +5,6 @@ import 'package:fit_app/components/general/buttons/rounded_button.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../../components/general/fields/custom_text_field.dart';
 import '../../models/fit_user.dart';
 
@@ -33,7 +32,7 @@ class _Edit extends State<Edit> {
   TextEditingController lengthText = new TextEditingController();
   TextEditingController equipmentText = new TextEditingController();
   TextEditingController emailText = new TextEditingController();
-  List<Widget> heightList = new List();
+  List<Widget> heightList = [];
   List<Widget> lengthList = [
     Center(child: Text("Short")),
     Center(child: Text("Long"))
@@ -61,7 +60,7 @@ class _Edit extends State<Edit> {
     Center(child: Text("Hypertrophy")),
     Center(child: Text("Weight Loss"))
   ];
-  List<String> heightStringList = new List();
+  List<String> heightStringList = [];
   List<String> lengthStringList = ['Short', 'Long'];
   List<String> equipmentStringList = ['Rings', 'Pull-Up Bar', 'Weights'];
   List<String> pushGoalStringList = [

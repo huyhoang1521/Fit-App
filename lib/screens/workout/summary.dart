@@ -37,7 +37,7 @@ class _SummaryState extends State<Summary> {
               padding: const EdgeInsets.all(8.0),
               child: RoundedButton(
                 text: 'Lets Do it!',
-                color: Theme.of(context).buttonColor,
+                //color: Theme.of(context).buttonColor,
                 press: () {
                   Navigator.push(
                     context,

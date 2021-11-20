@@ -55,7 +55,7 @@ class _ExerciseOverviewState extends State<ExerciseOverview> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -122,7 +122,7 @@ class _ExerciseOverviewState extends State<ExerciseOverview> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -189,6 +189,8 @@ class _ExerciseOverviewState extends State<ExerciseOverview> {
     );
   }
 
+String _descr =
+      "Start in plank postion with arms straight and hands shoulder width apart and rings turned out with palms facing forward. Slowly lower body down by bending one arm while keeping the other arm as straight as possible. Lower until chest reaches hands and then push explosively until in starting position. Repeat and switch roles of arms. Keep body as straight as possible for duration of exercise by squezing glutes and keeping core engaged. ";
 // function that calls Exercise info 
   void _onButtonPressed() {
     showModalBottomSheet(
@@ -201,7 +203,12 @@ class _ExerciseOverviewState extends State<ExerciseOverview> {
         context: context,
         builder: (context) {
           return Container(
-            child: ExerciseInfo(),
+            child: ExerciseInfo(tier: 'Fundamentals',
+              exerciseType: 'Push',
+              movementType: 'Concentric',
+              position: 'vertical',
+              description: _descr,
+            ),
           );
         });
   }

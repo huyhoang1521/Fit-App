@@ -13,7 +13,7 @@ class ExerciseSheetsData extends StatefulWidget {
 class _ExerciseSheetsDataState extends State<ExerciseSheetsData> {
   Future<List<ExercisesSheets>> getSheetsItems() =>
       Future.delayed(Duration(seconds: 8), () async {
-        List<ExercisesSheets> sheetsItems = new List();
+        List<ExercisesSheets> sheetsItems = [];
         ExerciseDataController().getSheetsList().then((newSheetsItems) {
           sheetsItems = newSheetsItems;
         });

@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
  class ExerciseInfo extends StatelessWidget {
+  final String tier,exerciseType,movementType,position,description;
+
+  const ExerciseInfo({
+    Key key,
+    this.tier,
+    this.exerciseType,
+    this.movementType,
+    this.position,
+    this.description,
+  }) : super(key: key);
+
    @override
    Widget build(BuildContext context) {
     double _height = (MediaQuery.of(context).size.height);
@@ -22,7 +33,7 @@ import 'package:flutter/material.dart';
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   Text(
-                    'Fundamental',
+                    tier,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
@@ -38,7 +49,7 @@ import 'package:flutter/material.dart';
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   Text(
-                    'Pull',
+                    exerciseType,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
@@ -54,7 +65,7 @@ import 'package:flutter/material.dart';
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   Text(
-                    'Concentric',
+                    movementType,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
@@ -70,7 +81,7 @@ import 'package:flutter/material.dart';
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   Text(
-                    'Vertical',
+                    position,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
@@ -96,7 +107,7 @@ import 'package:flutter/material.dart';
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Start in plank postion with arms straight and hands shoulder width apart and rings turned out with palms facing forward. Slowly lower body down by bending one arm while keeping the other arm as straight as possible. Lower until chest reaches hands and then push explosively until in starting position. Repeat and switch roles of arms. Keep body as straight as possible for duration of exercise by squezing glutes and keeping core engaged. ",
+                description,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ),

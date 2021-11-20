@@ -2,13 +2,12 @@ import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/progress/exercise_percent_item.dart';
 import 'fundamentals_overview.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 JsonData jsonData = new JsonData('workoutData.json');
-List<Map<String, dynamic>> exerciseList = new List();
-List<Map<String, dynamic>> progressionList = new List();
-List<int> percentList = new List();
+List<Map<String, dynamic>> exerciseList = [];
+List<Map<String, dynamic>> progressionList = [];
+List<int> percentList = [];
 
 class Fundamentals extends StatefulWidget {
   @override

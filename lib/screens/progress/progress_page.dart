@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:fit_app/algorithms/json/json_data.dart';
 import 'package:fit_app/components/general/drawer/app_drawer.dart';
 import 'package:fit_app/components/themes/constants.dart';
@@ -6,15 +5,14 @@ import 'package:fit_app/models/exercise_structures.dart';
 import 'package:fit_app/screens/progress/fundamentals.dart';
 import 'package:fit_app/screens/progress/exercise_overview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 JsonData jsonData = new JsonData('workoutData.json');
-List<Map<String, dynamic>> exerciseList = new List();
-List<Map<String, dynamic>> progressionList = new List();
-List<Map<String, dynamic>> exerciseMap = new List();
+List<Map<String, dynamic>> exerciseList = [];
+List<Map<String, dynamic>> progressionList = [];
+List<Map<String, dynamic>> exerciseMap = [];
 String userGoal;
-List<double> percentList = new List();
+List<double> percentList = [];
 
 class ProgressPage extends StatefulWidget {
   @override
@@ -113,7 +111,7 @@ class _ProgressPageState extends State<ProgressPage> {
                     padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
@@ -325,7 +323,7 @@ class ExercisePlate extends StatelessWidget {
       child: Container(
         height: _contHeight,
         decoration: BoxDecoration(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(5),
             boxShadow: [
               BoxShadow(

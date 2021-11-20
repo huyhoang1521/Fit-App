@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 class RoundedImageButton extends StatelessWidget {
   final String text;

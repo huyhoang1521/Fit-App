@@ -28,7 +28,7 @@ class SkillButton extends StatelessWidget {
         height: size.height * .25,
         width: size.width,
         decoration: BoxDecoration(
-            color: Colors.grey[400], //Theme.of(context).accentColor,
+            color: Colors.grey[400], //Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
@@ -52,7 +52,7 @@ class SkillButton extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: op1
                           ? Theme.of(context).primaryColor
-                          : Theme.of(context).accentColor,
+                          : Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       boxShadow: [
                         BoxShadow(
@@ -67,7 +67,7 @@ class SkillButton extends StatelessWidget {
                       option1,
                       style: TextStyle(
                           color: op1
-                              ? Theme.of(context).accentColor
+                              ? Theme.of(context).colorScheme.secondary
                               : Theme.of(context).primaryColor),
                     ),
                   ),
@@ -81,7 +81,7 @@ class SkillButton extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: op2
                           ? Theme.of(context).primaryColor
-                          : Theme.of(context).accentColor,
+                          : Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       boxShadow: [
                         BoxShadow(
@@ -96,7 +96,7 @@ class SkillButton extends StatelessWidget {
                       option2,
                       style: TextStyle(
                         color: op2
-                            ? Theme.of(context).accentColor
+                            ? Theme.of(context).colorScheme.secondary
                             : Theme.of(context).primaryColor,
                       ),
                     ),
@@ -111,7 +111,7 @@ class SkillButton extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: op3
                           ? Theme.of(context).primaryColor
-                          : Theme.of(context).accentColor,
+                          : Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       boxShadow: [
                         BoxShadow(
@@ -126,7 +126,7 @@ class SkillButton extends StatelessWidget {
                       option3,
                       style: TextStyle(
                           color: op3
-                              ? Theme.of(context).accentColor
+                              ? Theme.of(context).colorScheme.secondary
                               : Theme.of(context).primaryColor),
                     ),
                   ),

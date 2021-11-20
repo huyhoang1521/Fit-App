@@ -6,8 +6,8 @@ import '../../components/general/fields/custom_number_field.dart';
 import '../../models/fit_user.dart';
 import 'goal.dart';
 
-List<Widget> heightList = new List();
-List<String> heightStringList = new List();
+List<Widget> heightList = [];
+List<String> heightStringList = [];
 String dobString = "";
 
 class Info extends StatefulWidget {

@@ -67,16 +67,16 @@ class FirstView extends StatelessWidget {
                         "Already have an account?",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      FlatButton(
-                        child: Text(
-                          "Sign In",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
+                      TextButton(
                         onPressed: () {
                           workoutInProgress.clearCount();
                           workoutFileData.setDataWritten(false);
                           Navigator.of(context).pushReplacementNamed('/signIn');
                         },
+                        child: Text(
+                          "Sign In",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                       ),
                     ],
                   ),
