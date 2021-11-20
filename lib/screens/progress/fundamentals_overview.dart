@@ -1,5 +1,4 @@
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -58,7 +57,7 @@ class _FundamentalsOverviewState extends State<FundamentalsOverview> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(

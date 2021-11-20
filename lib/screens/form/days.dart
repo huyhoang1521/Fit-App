@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:flutter/material.dart';
 import '../../components/general/buttons/rounded_button.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WorkoutExercises with ChangeNotifier {
-  List<Map<String, dynamic>> warmups = new List();
-  List<Map<String, dynamic>> exercises = new List();
+  List<Map<String, dynamic>> warmups = [];
+  List<Map<String, dynamic>> exercises = [];
   bool listsNotSet = false;
   final String key = "listsNotSet";
   SharedPreferences _prefs;

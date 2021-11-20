@@ -55,7 +55,7 @@ class _ExerciseOverviewState extends State<ExerciseOverview> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -122,7 +122,7 @@ class _ExerciseOverviewState extends State<ExerciseOverview> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(

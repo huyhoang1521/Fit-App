@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import '../../components/general/drawer/app_drawer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fit_app/components/themes/constants.dart';
 import 'edit.dart';
 import '../../components/profile/text_field_info.dart';
@@ -73,8 +71,7 @@ class _ProfileState extends State<Profile> {
                       style: Theme.of(context).textTheme.headline1),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
-                      elevation: 2,
+                    child: ElevatedButton(
                       child: Text(
                         edit,
                         style: TextStyle(
@@ -83,11 +80,16 @@ class _ProfileState extends State<Profile> {
                               : Theme.of(context).primaryColor,
                         ),
                       ),
-                      color: editButton
-                          ? kPrimaryColor
-                          : Theme.of(context)
-                              .accentColor, //Theme.of(context).accentColor,
-                      disabledColor: Theme.of(context).primaryColor,
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed))
+                              return kPrimaryColor;
+                            return Theme.of(context).colorScheme.secondary;
+                          },
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.push(
                           context,

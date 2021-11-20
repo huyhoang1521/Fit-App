@@ -106,10 +106,20 @@ class _HomePageState extends State<HomePage>
                     width: 0.75 * _width,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(29),
-                      child: FlatButton(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: kPrimaryColor,
+                      // child: FlatButton(
+                      //   padding:
+                      //       EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                      //   color: kPrimaryColor,
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => WorkoutOverview()),
+                      //     );
+                      //   },
+                      //   child: Text('Start Workout!'),
+                      // ),
+                      child: TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -117,6 +127,11 @@ class _HomePageState extends State<HomePage>
                                 builder: (context) => WorkoutOverview()),
                           );
                         },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 40),
+                          primary: kPrimaryColor,
+                        ),
                         child: Text('Start Workout!'),
                       ),
                     ),

@@ -22,18 +22,29 @@ class RoundedPreferredButton extends StatelessWidget {
       height: size.height * 0.085,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
-        child: FlatButton(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-          color: color,
-          onPressed: press,
-          child: Center(
+        // child: FlatButton(
+        //   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        //   color: color,
+        //   onPressed: press,
+        //   child: Center(
+        //     child: Text(
+        //       text,
+        //       style: TextStyle(color: textColor),
+        //       textAlign: TextAlign.center,
+        //     ),
+        //   ),
+        // ),
+        child: TextButton(
+            onPressed: press,
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+              primary: color,
+            ),
             child: Text(
               text,
               style: TextStyle(color: textColor),
-              textAlign: TextAlign.center,
             ),
           ),
-        ),
       ),
     );
   }

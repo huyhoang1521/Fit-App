@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:fit_app/components/themes/constants.dart';
 import 'package:flutter/material.dart';
 import '../../components/general/buttons/rounded_button.dart';
@@ -128,20 +127,37 @@ class _Experience extends State<Experience> {
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(29),
-                      child: FlatButton(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: no ? kPrimaryColor : kPrimaryLightColor,
-                        onPressed: () {
+                      // child: FlatButton(
+                      //   padding:
+                      //       EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                      //   color: no ? kPrimaryColor : kPrimaryLightColor,
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       no = true;
+                      //       yes = false;
+                      //     });
+                      //   },
+                      //   child: Text('No',
+                      //       style: TextStyle(
+                      //         color: no ? Colors.white : kPrimaryColor,
+                      //       )),
+                      // ),
+                      child: TextButton(
+                        onPressed:  () {
                           setState(() {
                             no = true;
                             yes = false;
                           });
                         },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 40),
+                          primary:  no ? kPrimaryColor : kPrimaryLightColor,
+                        ),
                         child: Text('No',
                             style: TextStyle(
                               color: no ? Colors.white : kPrimaryColor,
-                            )),
+                            ),),
                       ),
                     ),
                   ),
@@ -149,21 +165,38 @@ class _Experience extends State<Experience> {
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(29),
-                      child: FlatButton(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: yes ? kPrimaryColor : kPrimaryLightColor,
-                        onPressed: () {
+                      // child: FlatButton(
+                      //   padding:
+                      //       EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                      //   color: yes ? kPrimaryColor : kPrimaryLightColor,
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       no = false;
+                      //       yes = true;
+                      //     });
+                      //   },
+                      //   child: Text('Yes',
+                      //       style: TextStyle(
+                      //         color: yes ? Colors.white : kPrimaryColor,
+                      //       )),
+                      // ),
+                      child: TextButton(
+                          onPressed:  () {
                           setState(() {
                             no = false;
                             yes = true;
                           });
                         },
-                        child: Text('Yes',
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 40),
+                            primary:  yes ? kPrimaryColor : kPrimaryLightColor,
+                          ),
+                          child: Text('Yes',
                             style: TextStyle(
                               color: yes ? Colors.white : kPrimaryColor,
                             )),
-                      ),
+                        ),
                     ),
                   ),
                 ],

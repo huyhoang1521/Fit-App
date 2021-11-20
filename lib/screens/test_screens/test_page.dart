@@ -74,7 +74,7 @@ class _TestPageState extends State<TestPage> {
                     Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
-                        color: Theme.of(context).buttonColor,
+                        //color: Theme.of(context).buttonColor,
                         press: () {
                           Navigator.push(
                             context,
@@ -89,7 +89,7 @@ class _TestPageState extends State<TestPage> {
                       Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
-                        color: Theme.of(context).buttonColor,
+                        //color: Theme.of(context).buttonColor,
                         press: () {
                           Navigator.push(
                             context,
@@ -101,7 +101,7 @@ class _TestPageState extends State<TestPage> {
                        Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
-                        color: Theme.of(context).buttonColor,
+                        //color: Theme.of(context).buttonColor,
                         press: () {
                           Navigator.push(
                             context,
@@ -113,7 +113,7 @@ class _TestPageState extends State<TestPage> {
                       Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
-                        color: Theme.of(context).buttonColor,
+                        //color: Theme.of(context).buttonColor,
                         press: () {
                           Navigator.push(
                             context,

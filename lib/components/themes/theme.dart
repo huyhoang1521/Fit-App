@@ -23,17 +23,25 @@ ThemeData light = ThemeData(
       color: Color(0xfff1f1f1),
     ),
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 2,
+    ),
+  ),
   iconTheme: IconThemeData(
     color: Color(0xfff1f1f1),
   ),
   brightness: Brightness.light,
   primaryColor: colorCustom,
-  primarySwatch: colorCustom,
-  accentColor: Colors.white, //kPrimaryLightColor,
+  //primarySwatch: colorCustom,
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: colorCustom,
+  ).copyWith(
+    secondary: Colors.white,
+  ),
   scaffoldBackgroundColor: Color(0xfff1f1f1),
   canvasColor: Color(0xfff1f1f1), //Colors.white,
   unselectedWidgetColor: Colors.black,
-  buttonColor: kPrimaryColor,
   buttonTheme: ButtonThemeData(
     buttonColor: kPrimaryColor,
     textTheme:
@@ -106,19 +114,25 @@ ThemeData dark = ThemeData(
     ),
     color: darkBackground, //Color(0xFF272727),
     elevation: 10,
-    textTheme: TextTheme(
-      headline6: TextStyle(
-          fontSize: 20,
-          fontFamily: 'Montserrat',
-          fontStyle: FontStyle.normal,
-          color: darkText),
+    toolbarTextStyle: TextStyle(
+        fontSize: 20,
+        fontFamily: 'Montserrat',
+        fontStyle: FontStyle.normal,
+        color: darkText),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 2,
     ),
   ),
-  elevatedButtonTheme: ElevatedButtonThemeData(),
   primaryColor: kPrimaryLightColor,
   brightness: Brightness.dark,
   primarySwatch: colorCustom,
-  accentColor: Color(0xFF272727), //Color(0xFF191919), //darkPrimaryColor,
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: colorCustom,
+  ).copyWith(
+    secondary: Color(0xFF272727),
+  ),
   canvasColor: Color(0xFF272727), //Colors.black87,
   scaffoldBackgroundColor: darkBackground, //Colors.black12,
   //shadowColor: darkBackground,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class FitnessGoal extends StatelessWidget {
   final String text;
@@ -27,7 +26,9 @@ class FitnessGoal extends StatelessWidget {
         decoration: BoxDecoration(
             color: goal
                 ? Theme.of(context).primaryColor
-                : Theme.of(context).accentColor,
+                : Theme.of(context)
+                    .colorScheme
+                    .secondary, //Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadiusDirectional.circular(5),
             boxShadow: [
               BoxShadow(
@@ -47,7 +48,7 @@ class FitnessGoal extends StatelessWidget {
               icon,
               size: 40,
               color: goal
-                  ? Theme.of(context).accentColor
+                  ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).primaryColor,
             ),
           ),
@@ -59,7 +60,8 @@ class FitnessGoal extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   text,
-                  style: TextStyle(color: Theme.of(context).accentColor),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.secondary),
                 ),
               ),
             ),

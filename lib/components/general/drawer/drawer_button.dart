@@ -18,11 +18,31 @@ class DrawerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 0),
-      child: FlatButton(
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-        color: color,
-        onPressed: press,
-        child: Row(
+      // child: FlatButton(
+      //   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+      //   color: color,
+      //   onPressed: press,
+      //   child: Row(
+      //     children: [
+      //       Icon(
+      //         icon,
+      //         color: Theme.of(context).primaryColor,
+      //       ),
+      //       SizedBox(width: 40),
+      //       Text(
+      //         text,
+      //         style: Theme.of(context).textTheme.button,
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      child: TextButton(
+          onPressed: press,
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+            primary: color,
+          ),
+          child: Row(
           children: [
             Icon(
               icon,
@@ -35,7 +55,7 @@ class DrawerButton extends StatelessWidget {
             ),
           ],
         ),
-      ),
+        )
     );
   }
 }

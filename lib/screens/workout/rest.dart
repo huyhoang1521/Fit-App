@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:quiver/async.dart';
 import 'cool_down.dart';
 
-List<Map<String, dynamic>> workoutList = new List();
+List<Map<String, dynamic>> workoutList = [];
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
 IconData button = play;

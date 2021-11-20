@@ -17,7 +17,7 @@ WorkoutProcess workoutProcess = new WorkoutProcess();
 WorkoutExercises workoutExercises = new WorkoutExercises();
 Offset start = Offset(1, 0);
 Offset end = Offset.zero;
-List<Map<String, dynamic>> workoutList = new List();
+List<Map<String, dynamic>> workoutList = [];
 
 class ExercisePage extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class ExercisePage extends StatefulWidget {
 
 class _ExercisePageState extends State<ExercisePage> {
   List<Widget> populateExerciseFields(int exerciseCount) {
-    List<Widget> exercisesFields = new List();
+    List<Widget> exercisesFields = [];
 
     if (workoutList[exerciseCount].containsKey('subcategory')) {
       exercisesFields.add(new ExerciseBox(

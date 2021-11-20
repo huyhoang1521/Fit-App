@@ -27,7 +27,7 @@ class ProfileTextBox extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         width: size.width * 0.8,
         decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(5),
         ),
         child: Row(

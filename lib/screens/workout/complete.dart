@@ -48,7 +48,7 @@ class _CompleteState extends State<Complete> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: RoundedButton(
-                  color: Theme.of(context).buttonColor,
+                  //color: Theme.of(context).buttonColor,
                   press: () {
                     workoutProcess.clearCount();
                     workoutInProgress.setWorkoutInProgress(false);
@@ -68,7 +68,7 @@ class _CompleteState extends State<Complete> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: RoundedButton(
-                  color: Theme.of(context).buttonColor,
+                  //color: Theme.of(context).buttonColor,
                   press: () {
                     workoutProcess.clearCount();
                     workoutInProgress.setWorkoutInProgress(false);

@@ -4,7 +4,6 @@ import 'package:fit_app/components/progress/exercise_info.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/components/workout/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:quiver/async.dart';
 
 IconData pause = Icons.pause_circle_filled;
@@ -119,7 +118,7 @@ class _CoolDownState extends State<CoolDown> {
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(
@@ -184,7 +183,7 @@ class _CoolDownState extends State<CoolDown> {
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: [
                           BoxShadow(

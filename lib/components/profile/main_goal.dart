@@ -1,9 +1,7 @@
 import '../general/icons/iconicks_icons.dart';
 import 'package:fit_app/models/fit_user.dart';
 import 'fitness_goal.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fit_app/components/themes/constants.dart';
 
 class MainGoal extends StatefulWidget {

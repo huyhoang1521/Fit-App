@@ -1,9 +1,7 @@
 import '../general/icons/custom_icons_icons.dart';
 import '../general/icons/iconicks_icons.dart';
 import 'profile_text_box.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../../models/fit_user.dart';
 
 class TextFieldInfo extends StatefulWidget {

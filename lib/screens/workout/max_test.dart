@@ -1,5 +1,4 @@
 import 'package:fit_app/components/progress/exercise_info.dart';
-import 'package:fit_app/components/workout/exercise_box.dart';
 import 'package:fit_app/components/workout/exercise_title.dart';
 import 'package:fit_app/components/general/appbar/custom_appbar.dart';
 import 'package:fit_app/components/workout/buttons.dart';
@@ -7,7 +6,6 @@ import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/workout_process.dart';
 //import 'package:fit_app/screens/workout/route_transition.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 IconData pause = Icons.pause_circle_filled;
 IconData play = Icons.play_circle_filled;
@@ -17,7 +15,7 @@ WorkoutProcess workoutProcess = new WorkoutProcess();
 WorkoutExercises workoutExercises = new WorkoutExercises();
 Offset start = Offset(1, 0);
 Offset end = Offset.zero;
-List<Map<String, dynamic>> workoutList = new List();
+List<Map<String, dynamic>> workoutList = [];
 
 class MaxTest extends StatefulWidget {
   @override

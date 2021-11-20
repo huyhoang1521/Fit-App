@@ -27,7 +27,7 @@ class PercentageButton extends StatelessWidget {
         child: Container(
           //width: size.width,
           decoration: BoxDecoration(
-              color: Theme.of(context).accentColor, //kPrimaryLightColor,
+              color: Theme.of(context).colorScheme.secondary, //kPrimaryLightColor,
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(

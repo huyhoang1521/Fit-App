@@ -41,8 +41,8 @@ class CreateWorkout {
     Exercises exercises = new Exercises(uid, fitUser.length);
     Warmup warmup = new Warmup(age);
 
-    List<Map<String, dynamic>> workoutExercises = new List();
-    List<Map<String, dynamic>> workoutWarmups = new List();
+    List<Map<String, dynamic>> workoutExercises = [];
+    List<Map<String, dynamic>> workoutWarmups = [];
 
     workoutWarmups = await warmup.setWarmUpList();
     workoutExercises = await exercises.setExercisesList();

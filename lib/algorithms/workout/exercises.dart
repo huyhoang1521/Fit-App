@@ -18,7 +18,7 @@ class Exercises {
   Exercises([this.uid, this.length]);
 
   Future<List<Map<String, dynamic>>> setExercisesList() async {
-    List<Map<String, dynamic>> exercisesList = new List();
+    List<Map<String, dynamic>> exercisesList = [];
     await db
         .collection('Exercises')
         .orderBy('id', descending: false)

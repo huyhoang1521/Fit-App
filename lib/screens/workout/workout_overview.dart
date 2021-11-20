@@ -194,9 +194,9 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
     _coolDownController.dispose();
   }
 
-  List<Map<String, dynamic>> completeList = new List();
-  List<Map<String, dynamic>> warmupList = new List();
-  List<Map<String, dynamic>> mainList = new List();
+  List<Map<String, dynamic>> completeList = [];
+  List<Map<String, dynamic>> warmupList = [];
+  List<Map<String, dynamic>> mainList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -366,7 +366,7 @@ class _HomePage extends State<WorkoutOverview> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: new RoundedButton(
-                color: Theme.of(context).buttonColor,
+                //color: Theme.of(context).buttonColor,
                 press: () {
                   workoutProcess.setWorkoutInProgress(true);
                   workoutExercises.setListsNotSet(true);
