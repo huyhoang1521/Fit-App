@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
         // Check for errors
-        if (snapshot.hasError) {}
+        if (snapshot.hasError) {
+          print("error");
+        }
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MultiProvider(
