@@ -1,6 +1,7 @@
 import 'package:fit_app/providers/workout_file_data.dart';
 import 'package:fit_app/providers/workout_exercises.dart';
 import 'package:fit_app/providers/workout_process.dart';
+import 'package:fit_app/screens/test_screens/test_page.dart';
 import 'package:fit_app/screens/workout/complete.dart';
 import 'package:fit_app/screens/workout/cool_down.dart';
 import 'package:fit_app/screens/workout/exercise_page.dart';
@@ -11,7 +12,6 @@ import 'package:fit_app/providers/auth_service.dart';
 import 'package:fit_app/providers/provider_widget.dart';
 import 'package:provider/provider.dart';
 import 'components/themes/theme.dart';
-import 'screens/form/first_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() => runApp(MyApp());
@@ -90,7 +90,9 @@ class _HomePicker extends State<HomeController> {
               return HomePage();
             }
           } else {
-            return FirstView();
+            //return FirstView();
+            return TestPage();
+
           }
         }
         return CircularProgressIndicator();
