@@ -15,10 +15,12 @@ class ExerciseDataController {
   void submitForm(
       ExercisesSheets feedbackForm, void Function(String) callback) async {
     try {
-      await http.post(URL, body: feedbackForm.toJson()).then((response) async {
+      await http
+          .post(Uri.parse(URL), body: feedbackForm.toJson())
+          .then((response) async {
         if (response.statusCode == 302) {
           var url = response.headers['location'];
-          await http.get(url).then((response) {
+          await http.get(Uri.parse(url)).then((response) {
             callback(convert.jsonDecode(response.body)['status']);
           });
         } else {
@@ -32,7 +34,7 @@ class ExerciseDataController {
 
   /// Async function which loads feedback from endpoint URL and returns List.
   Future<List<ExercisesSheets>> getSheetsList() async {
-    return await http.get(URL).then((response) {
+    return await http.get(Uri.parse(URL)).then((response) {
       var jsonFeedback = convert.jsonDecode(response.body) as List;
       return jsonFeedback
           .map((json) => ExercisesSheets.fromJson(json))

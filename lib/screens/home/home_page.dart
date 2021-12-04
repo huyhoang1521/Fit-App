@@ -10,7 +10,6 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => new _HomePageState();
 }
 
-CalendarController _calendarController = CalendarController();
 final _selectedDay = DateTime.now();
 
 //     _selectedEvents = _events[_selectedDay] ?? [];
@@ -22,8 +21,7 @@ final _selectedDay = DateTime.now();
 //     });
 //   }
 
-class _HomePageState extends State<HomePage>
-    with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Map<DateTime, List> _events = {
     _selectedDay.add(Duration(days: 1)): ['Strength'],
     _selectedDay.subtract(Duration(days: 1)): ['Hypertrophy'],
@@ -51,31 +49,15 @@ class _HomePageState extends State<HomePage>
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 16, 0, 24),
                 child: TableCalendar(
-                  calendarController: _calendarController,
+                  firstDay: DateTime.utc(2010, 10, 16),
+                  lastDay: DateTime.utc(2030, 3, 14),
+                  focusedDay: DateTime.now(),
                   weekendDays: [],
                   headerVisible: false,
-                  initialCalendarFormat: CalendarFormat.twoWeeks,
-                  events: _events,
-                  calendarStyle: CalendarStyle(
-                    markersColor: Theme.of(context).primaryColor,
-                    markersPositionBottom: 0,
-                    todayColor: kPrimaryColor,
-                    selectedColor: Theme.of(context).primaryColor,
-                    selectedStyle: TextStyle(color: Colors.black),
-                  ),
+                  calendarFormat: CalendarFormat.twoWeeks,
                   daysOfWeekStyle: DaysOfWeekStyle(
                       weekdayStyle:
                           TextStyle(color: Theme.of(context).primaryColor)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Type of Day:'),
-                    Text('High intensity low volume'),
-                  ],
                 ),
               ),
               Padding(

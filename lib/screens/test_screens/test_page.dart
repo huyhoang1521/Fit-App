@@ -36,16 +36,16 @@ class _TestPageState extends State<TestPage> {
         await workoutDoc.get().then((DocumentSnapshot userData) {
           if (userData.exists) {
             List<Map<String, dynamic>> warmupList =
-                new List.from(userData.data()['warmup']);
+                new List.from(userData.get('warmup'));
             List<Map<String, dynamic>> exerciseList =
-                new List.from(userData.data()['exercises']);
+                new List.from(userData.get('exercises'));
 
             workout = new UserWorkout(
-              userData.data()['uid'],
-              userData.data()['length'],
-              userData.data()['goal'],
-              userData.data()['restTime'],
-              userData.data()['coolDown'],
+              userData.get('uid'),
+              userData.get('length'),
+              userData.get('goal'),
+              userData.get('restTime'),
+              userData.get('coolDown'),
               exerciseList,
               warmupList,
             );
@@ -70,7 +70,7 @@ class _TestPageState extends State<TestPage> {
                       style: Theme.of(context).textTheme.headline1,
                     ),
                     //ToDo Delete Test pages not needed
-                    
+
                     Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
@@ -86,7 +86,7 @@ class _TestPageState extends State<TestPage> {
                         //onLongPress: ,
                       ),
                     ),
-                      Padding(
+                    Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
                         //color: Theme.of(context).buttonColor,
@@ -97,20 +97,23 @@ class _TestPageState extends State<TestPage> {
                           );
                         },
                         text: 'Days',
-                      ),),
-                       Padding(
+                      ),
+                    ),
+                    Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
                         //color: Theme.of(context).buttonColor,
                         press: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Experience()),
+                            MaterialPageRoute(
+                                builder: (context) => Experience()),
                           );
                         },
                         text: 'Experience',
-                      ),),
-                      Padding(
+                      ),
+                    ),
+                    Padding(
                       padding: EdgeInsets.all(2.0),
                       child: RoundedButton(
                         //color: Theme.of(context).buttonColor,
@@ -121,7 +124,8 @@ class _TestPageState extends State<TestPage> {
                           );
                         },
                         text: 'Max Test',
-                      ),),
+                      ),
+                    ),
                   ],
                 ),
               ),

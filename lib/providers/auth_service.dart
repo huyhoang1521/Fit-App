@@ -4,16 +4,18 @@ class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Stream<String> get onAuthStateChanged => _firebaseAuth.authStateChanges().map(
-        (User user) => user?.uid,
+        (User user) => user.uid,
       );
 
   // GET UID
   Future<String> getCurrentUID() async {
-    return _firebaseAuth.currentUser.uid;
+    User user = _firebaseAuth.currentUser;
+    return user.uid;
   }
 
   Future<String> getCurrentName() async {
-    return _firebaseAuth.currentUser.displayName;
+    User user = _firebaseAuth.currentUser;
+    return user.displayName;
   }
 
   // Email & Password Sign Up
@@ -31,7 +33,7 @@ class AuthService {
   }
 
   Future updateUserName(String name, User currentUser) async {
-    await currentUser.updateProfile(displayName: name);
+    await currentUser.updateDisplayName(name);
     await currentUser.reload();
   }
 
@@ -56,7 +58,7 @@ class AuthService {
 
   Future convertUserWithEmail(
       String email, String password, String name) async {
-    final currentUser = _firebaseAuth.currentUser;
+    User currentUser = _firebaseAuth.currentUser;
 
     final credential =
         EmailAuthProvider.credential(email: email, password: password);

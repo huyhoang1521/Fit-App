@@ -50,14 +50,13 @@ class _AlarmState extends State<Alarm> {
 
   Future<void> _demoNotification() async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'channel_ID', 'channel name', 'channel description',
-        importance: Importance.Max,
-        priority: Priority.High,
+        'channel_ID', 'channel name',
+        importance: Importance.max,
+        priority: Priority.high,
         ticker: 'test ticker');
 
     var iOSChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSChannelSpecifics);
+    var platformChannelSpecifics = NotificationDetails();
 
     await flutterLocalNotificationsPlugin.show(0, 'Hello, buddy',
         'A message from flutter buddy', platformChannelSpecifics,
@@ -73,8 +72,7 @@ class _AlarmState extends State<Alarm> {
         new AndroidInitializationSettings('app_icon');
     initializationSettingsIOS = new IOSInitializationSettings(
         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
-    initializationSettings = new InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
+    initializationSettings = new InitializationSettings();
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
   }

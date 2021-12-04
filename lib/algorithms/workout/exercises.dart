@@ -86,7 +86,7 @@ class Exercises {
         .get()
         .then((QuerySnapshot docs) {
       if (docs.docs.isNotEmpty) {
-        level = docs.docs[0].data()['level'];
+        level = docs.docs[0].get('level');
       }
     });
     return level;

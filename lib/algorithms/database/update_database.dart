@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-final User user = auth.currentUser;
+User user = auth.currentUser;
 final userDoc = FirebaseFirestore.instance.collection('Users').doc(user.uid);
 final db = FirebaseFirestore.instance;
 final auth = FirebaseAuth.instance;

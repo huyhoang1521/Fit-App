@@ -27,7 +27,7 @@ FitUser user = new FitUser(
 final userData = FirebaseFirestore.instance.collection("Users");
 
 Future<void> getUserInfo() async {
-  var firebaseUser = FirebaseAuth.instance.currentUser;
+  User firebaseUser = FirebaseAuth.instance.currentUser;
   return await FirebaseFirestore.instance
       .collection("Users")
       .doc(firebaseUser.uid)
